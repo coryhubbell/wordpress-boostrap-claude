@@ -403,13 +403,13 @@ We welcome contributions! Here's how:
 
 ## 🗺️ Roadmap
 
-### Version 2.0 (Q2 2025)
+### Version 2.0 (Q4 2025)
 - [ ] Gutenberg block library
 - [ ] Advanced Claude patterns
 - [ ] WooCommerce integration
 - [ ] Multi-language support
 
-### Version 3.0 (Q4 2025)
+### Version 3.0 (Q1 2026)
 - [ ] Visual builder integration
 - [ ] GraphQL support
 - [ ] Headless CMS mode
@@ -448,7 +448,5 @@ This project is licensed under **GPL v2 or later** - same as WordPress.
 **Made with ❤️ by [Cory Hubbell](https://github.com/coryhubbell) and [contributors](https://github.com/coryhubbell/wordpress-boostrap-claude/graphs/contributors)**
 
 *Empowering developers to build WordPress sites at the speed of thought with AI*
-
-![Documentation](https://img.shields.io/badge/docs-complete-success?style=for-the-badge)
 
 </div>
