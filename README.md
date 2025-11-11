@@ -403,13 +403,13 @@ We welcome contributions! Here's how:
 
 ## 🗺️ Roadmap
 
-### Version 2.0 (Q4 2025)
+### Version 2.0 (Q2 2025)
 - [ ] Gutenberg block library
 - [ ] Advanced Claude patterns
 - [ ] WooCommerce integration
 - [ ] Multi-language support
 
-### Version 3.0 (Q1 2026)
+### Version 3.0 (Q4 2025)
 - [ ] Visual builder integration
 - [ ] GraphQL support
 - [ ] Headless CMS mode
