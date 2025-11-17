@@ -1000,9 +1000,9 @@ wpbc batch-translate elementor bootstrap pages/*.json --organize-by-framework
 
 ## 🌉 **Translation Bridge™ - Game Changer**
 
-### **🆕 NEW: WPBakery Support Added!**
+### **Universal Translation Across All WordPress Builders**
 
-**Escape WPBakery Vendor Lock-In!** The Translation Bridge now supports **WPBakery/Visual Composer**, bringing total framework support to **6 major page builders** with **30 translation pairs**.
+**Complete Framework Freedom!** The Translation Bridge supports **all WordPress builders**, providing **10 frameworks** with **90 translation pairs** for complete flexibility and zero vendor lock-in.
 
 ```bash
 # Free yourself from WPBakery limitations
@@ -1026,12 +1026,17 @@ wpbc translate bootstrap elementor optimized-site.html
 
 ```mermaid
 graph TB
-    subgraph "Input Frameworks"
+    subgraph "Input Frameworks (10 Total)"
         B1[Bootstrap HTML]
         D1[DIVI Shortcodes]
         E1[Elementor JSON]
         A1[Avada Fusion]
         BR1[Bricks JSON]
+        WP1[WPBakery Shortcodes]
+        BB1[Beaver Builder PHP]
+        GB1[Gutenberg Blocks]
+        OX1[Oxygen JSON]
+        CL1[Claude AI HTML]
     end
 
     subgraph "Translation Engine"
@@ -1040,23 +1045,27 @@ graph TB
         C[Smart Converter]
     end
 
-    subgraph "Output Frameworks"
+    subgraph "Output Frameworks (10 Total)"
         B2[Bootstrap HTML ⭐]
         D2[DIVI Modules]
         E2[Elementor Widgets]
         A2[Avada Elements]
         BR2[Bricks Components]
-        CF[Custom HTML for Claude]
+        WP2[WPBakery Elements]
+        BB2[Beaver Builder Modules]
+        GB2[Gutenberg Blocks]
+        OX2[Oxygen Elements]
+        CL2[Claude AI HTML 🤖]
     end
 
-    B1 & D1 & E1 & A1 & BR1 --> P
+    B1 & D1 & E1 & A1 & BR1 & WP1 & BB1 & GB1 & OX1 & CL1 --> P
     P --> T
     T --> C
-    C --> B2 & D2 & E2 & A2 & BR2 & CF
+    C --> B2 & D2 & E2 & A2 & BR2 & WP2 & BB2 & GB2 & OX2 & CL2
 
     style T fill:#667eea,stroke:#fff,stroke-width:4px,color:#fff
     style B2 fill:#7c3aed,stroke:#fff,stroke-width:3px,color:#fff
-    style CF fill:#10b981,stroke:#fff,stroke-width:3px,color:#fff
+    style CL2 fill:#10b981,stroke:#fff,stroke-width:3px,color:#fff
 ```
 
 ### **⭐ Bootstrap HTML - The Universal Output**
