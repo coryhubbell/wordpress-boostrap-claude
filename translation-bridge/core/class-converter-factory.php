@@ -16,6 +16,7 @@ use WPBC\TranslationBridge\Converters\WPBC_DIVI_Converter;
 use WPBC\TranslationBridge\Converters\WPBC_Elementor_Converter;
 use WPBC\TranslationBridge\Converters\WPBC_Avada_Converter;
 use WPBC\TranslationBridge\Converters\WPBC_Bricks_Converter;
+use WPBC\TranslationBridge\Converters\WPBC_WPBakery_Converter;
 
 /**
  * Class WPBC_Converter_Factory
@@ -34,7 +35,7 @@ class WPBC_Converter_Factory {
 	/**
 	 * Create converter for specified framework
 	 *
-	 * @param string $framework Framework name (bootstrap, divi, elementor, avada, bricks).
+	 * @param string $framework Framework name (bootstrap, divi, elementor, avada, bricks, wpbakery).
 	 * @return WPBC_Converter_Interface|null Converter instance or null if not found.
 	 * @throws \InvalidArgumentException If framework not supported.
 	 */
@@ -81,6 +82,11 @@ class WPBC_Converter_Factory {
 			case 'bricks':
 				return new WPBC_Bricks_Converter();
 
+			case 'wpbakery':
+			case 'vc':
+			case 'visualcomposer':
+				return new WPBC_WPBakery_Converter();
+
 			default:
 				return null;
 		}
@@ -92,7 +98,7 @@ class WPBC_Converter_Factory {
 	 * @return array<string> Array of framework names.
 	 */
 	public static function get_supported_frameworks(): array {
-		return [ 'bootstrap', 'divi', 'elementor', 'avada', 'bricks' ];
+		return [ 'bootstrap', 'divi', 'elementor', 'avada', 'bricks', 'wpbakery' ];
 	}
 
 	/**

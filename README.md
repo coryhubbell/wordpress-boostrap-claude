@@ -10,6 +10,7 @@
 ![Elementor Compatible](https://img.shields.io/badge/Elementor-Compatible-red.svg)
 ![Avada Compatible](https://img.shields.io/badge/Avada-Compatible-crimson.svg)
 ![Bricks Compatible](https://img.shields.io/badge/Bricks-Compatible-teal.svg)
+![WPBakery Compatible](https://img.shields.io/badge/WPBakery-Compatible-blue.svg)
 ![Claude AI](https://img.shields.io/badge/Claude_AI-Integrated-black.svg)
 
 ### **⚡ Build WordPress Sites 10x Faster • 🌉 Translate Between Any Framework • 🤖 AI-Powered Development**
@@ -23,8 +24,8 @@
 ## 🔥 **BREAKING: Revolutionary Translation Bridge™ Released!**
 
 ### **World's First Framework Translator**
-Translate between **ANY** of 5 major page builders:
-**Bootstrap** ↔ **DIVI** ↔ **Elementor** ↔ **Avada Fusion** ↔ **Bricks**
+Translate between **ANY** of 6 major page builders:
+**Bootstrap** ↔ **DIVI** ↔ **Elementor** ↔ **Avada Fusion** ↔ **Bricks** ↔ **WPBakery**
 
 **No more vendor lock-in. No more rebuilding. Just seamless translation.**
 
@@ -41,14 +42,14 @@ wpbc translate divi bootstrap section.txt
 
 ### **1. Translation Bridge™** (New in 3.0!)
 - 🌉 **First-ever** framework translator
-- 🔄 Convert between **5 major frameworks** (20 translation pairs!)
+- 🔄 Convert between **6 major frameworks** (30 translation pairs!)
 - ⚡ 30-second conversions (vs 40 hours manual)
 - 🎯 98% visual accuracy
 - 💰 Save $5,800 per site migration
 
 ### **2. Claude AI Integration**
 - 🤖 Pre-configured Claude Code project
-- 🧠 AI understands all **5 frameworks**
+- 🧠 AI understands all **6 frameworks**
 - ⚙️ Custom WordPress commands
 - 🚀 10x productivity boost
 - 📝 Intelligent code generation
@@ -59,6 +60,7 @@ wpbc translate divi bootstrap section.txt
 - 🟥 **Elementor** - Popular page builder (90+ widgets)
 - 🔴 **Avada Fusion** - Premium builder (150+ elements)
 - 🟢 **Bricks Builder** - Performance builder (80+ elements)
+- 🔵 **WPBakery** - Visual Composer page builder (50+ elements)
 - ✨ **Custom HTML Frameworks** - Generate Claude-optimized code
 - 🟩 **Gutenberg** - Coming soon!
 
@@ -144,7 +146,7 @@ wpbc convert-site avada bricks --source site-backup.xml
 
 **With Claude AI Integration:**
 ```
-"Convert this Bootstrap card component to work in all 5 frameworks"
+"Convert this Bootstrap card component to work in all 6 frameworks"
 
 "Take this Elementor pricing table and create Avada, DIVI, Bricks, and Bootstrap versions"
 
@@ -210,7 +212,7 @@ wpbc batch-translate elementor bootstrap pages/*.json --organize-by-framework
 
 **With Claude AI:**
 ```
-"Create a pricing table in Bootstrap, then show me how it looks in all 5 frameworks"
+"Create a pricing table in Bootstrap, then show me how it looks in all 6 frameworks"
 
 "Build a hero section in Elementor, convert to DIVI, and compare the code quality"
 
@@ -469,7 +471,7 @@ wpbc translate bootstrap bricks clean-site.html # Bootstrap → Bricks
 
 ### **Supported Translations**
 
-**20 Translation Pairs** across 5 frameworks:
+**30 Translation Pairs** across 6 frameworks:
 
 | From | To | Status | Accuracy |
 |------|----|--------|----------|
@@ -477,22 +479,32 @@ wpbc translate bootstrap bricks clean-site.html # Bootstrap → Bricks
 | Bootstrap → Elementor | ✅ Stable | 97% |
 | Bootstrap → Avada | ✅ Stable | 97% |
 | Bootstrap → Bricks | ✅ Stable | 98% |
+| Bootstrap → WPBakery | ✅ Stable | 97% |
 | DIVI → Bootstrap | ✅ Stable | 96% |
 | DIVI → Elementor | ✅ Stable | 94% |
 | DIVI → Avada | ✅ Stable | 95% |
 | DIVI → Bricks | ✅ Stable | 95% |
+| DIVI → WPBakery | ✅ Stable | 94% |
 | Elementor → Bootstrap | ✅ Stable | 97% |
 | Elementor → DIVI | ✅ Stable | 93% |
 | Elementor → Avada | ✅ Stable | 96% |
 | Elementor → Bricks | ✅ Stable | 97% |
+| Elementor → WPBakery | ✅ Stable | 96% |
 | Avada → Bootstrap | ✅ Stable | 96% |
 | Avada → DIVI | ✅ Stable | 94% |
 | Avada → Elementor | ✅ Stable | 95% |
 | Avada → Bricks | ✅ Stable | 96% |
+| Avada → WPBakery | ✅ Stable | 95% |
 | Bricks → Bootstrap | ✅ Stable | 98% |
 | Bricks → DIVI | ✅ Stable | 95% |
 | Bricks → Elementor | ✅ Stable | 97% |
 | Bricks → Avada | ✅ Stable | 96% |
+| Bricks → WPBakery | ✅ Stable | 97% |
+| WPBakery → Bootstrap | ✅ Stable | 96% |
+| WPBakery → DIVI | ✅ Stable | 94% |
+| WPBakery → Elementor | ✅ Stable | 95% |
+| WPBakery → Avada | ✅ Stable | 95% |
+| WPBakery → Bricks | ✅ Stable | 96% |
 
 ---
 

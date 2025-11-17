@@ -16,6 +16,7 @@ use WPBC\TranslationBridge\Parsers\WPBC_DIVI_Parser;
 use WPBC\TranslationBridge\Parsers\WPBC_Elementor_Parser;
 use WPBC\TranslationBridge\Parsers\WPBC_Avada_Parser;
 use WPBC\TranslationBridge\Parsers\WPBC_Bricks_Parser;
+use WPBC\TranslationBridge\Parsers\WPBC_WPBakery_Parser;
 
 /**
  * Class WPBC_Parser_Factory
@@ -34,7 +35,7 @@ class WPBC_Parser_Factory {
 	/**
 	 * Create parser for specified framework
 	 *
-	 * @param string $framework Framework name (bootstrap, divi, elementor, avada, bricks).
+	 * @param string $framework Framework name (bootstrap, divi, elementor, avada, bricks, wpbakery).
 	 * @return WPBC_Parser_Interface|null Parser instance or null if not found.
 	 * @throws \InvalidArgumentException If framework not supported.
 	 */
@@ -81,6 +82,11 @@ class WPBC_Parser_Factory {
 			case 'bricks':
 				return new WPBC_Bricks_Parser();
 
+			case 'wpbakery':
+			case 'vc':
+			case 'visualcomposer':
+				return new WPBC_WPBakery_Parser();
+
 			default:
 				return null;
 		}
@@ -92,7 +98,7 @@ class WPBC_Parser_Factory {
 	 * @return array<string> Array of framework names.
 	 */
 	public static function get_supported_frameworks(): array {
-		return [ 'bootstrap', 'divi', 'elementor', 'avada', 'bricks' ];
+		return [ 'bootstrap', 'divi', 'elementor', 'avada', 'bricks', 'wpbakery' ];
 	}
 
 	/**
