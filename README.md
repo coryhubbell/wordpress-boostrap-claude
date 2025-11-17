@@ -17,6 +17,11 @@
 
 **[🎥 Watch Demo](https://youtube.com/demo) • [📖 Documentation](docs/) • [💬 Discord](https://discord.gg/wpbc) • [🌟 Star This Repo](#)**
 
+---
+
+### **📚 Quick Navigation**
+**[🚀 Quick Start](#-quick-start)** • **[🎮 Command Reference](#-translation-bridge-commands---quick-reference)** • **[🌉 Translation Bridge](#-translation-bridge-game-changer)** • **[🤖 Claude AI](#-claude-ai-development)** • **[📊 Supported Translations](#supported-translations)** • **[🛠 Installation](#-installation)** • **[🎯 Roadmap](#-roadmap)**
+
 </div>
 
 ---
@@ -101,6 +106,233 @@ wpbc translate bootstrap divi components/hero.html
 
 # Or to Elementor
 wpbc translate bootstrap elementor components/hero.html
+
+# Or to WPBakery
+wpbc translate bootstrap wpbakery components/hero.html
+```
+
+---
+
+## 🎮 **Translation Bridge Commands - Quick Reference**
+
+### **All Supported Frameworks**
+```bash
+bootstrap  # Clean HTML/CSS (Perfect for Claude AI)
+divi       # DIVI Builder
+elementor  # Elementor
+avada      # Avada Fusion Builder
+bricks     # Bricks Builder
+wpbakery   # WPBakery Page Builder (also: vc, visualcomposer)
+```
+
+### **Core Translation Commands**
+
+#### **Single File Translation**
+```bash
+# Syntax: wpbc translate [source-framework] [target-framework] [file]
+
+# Convert Bootstrap to WPBakery
+wpbc translate bootstrap wpbakery components/hero.html
+
+# Convert WPBakery to Bootstrap (escape vendor lock-in!)
+wpbc translate wpbakery bootstrap page-content.txt
+
+# Convert Elementor to WPBakery
+wpbc translate elementor wpbakery landing-page.json
+
+# Convert DIVI to WPBakery
+wpbc translate divi wpbakery section.txt
+
+# Convert Avada to WPBakery
+wpbc translate avada wpbakery homepage.xml
+
+# Convert Bricks to WPBakery
+wpbc translate bricks wpbakery layout.json
+
+# WPBakery aliases (all equivalent)
+wpbc translate vc bootstrap page.txt
+wpbc translate visualcomposer elementor section.txt
+```
+
+#### **Batch Translation**
+```bash
+# Translate entire directory
+wpbc translate-dir bootstrap wpbakery ./components/
+
+# Translate with output directory
+wpbc translate-dir elementor wpbakery ./pages/ --output ./wpbakery-pages/
+
+# Translate all files matching pattern
+wpbc translate-batch divi wpbakery "sections/*.txt"
+```
+
+#### **Multi-Framework Export**
+```bash
+# Export to all 6 frameworks at once
+wpbc translate-all bootstrap hero.html
+
+# Creates:
+# - hero-divi.txt
+# - hero-elementor.json
+# - hero-avada.xml
+# - hero-bricks.json
+# - hero-wpbakery.txt
+
+# Export to specific frameworks only
+wpbc translate-multi bootstrap "wpbakery,elementor,divi" hero.html
+```
+
+#### **Site Migration**
+```bash
+# Full site conversion
+wpbc convert-site elementor wpbakery --source site-export.xml
+
+# Migrate from WPBakery to any framework
+wpbc convert-site wpbakery bootstrap --source site-backup.xml
+
+# Migrate with preview
+wpbc convert-site wpbakery elementor --source backup.xml --preview
+```
+
+### **Validation & Analysis**
+
+```bash
+# Validate source content
+wpbc validate wpbakery page-content.txt
+
+# Analyze conversion compatibility
+wpbc analyze elementor wpbakery landing-page.json
+
+# Preview conversion without saving
+wpbc translate bootstrap wpbakery hero.html --preview
+
+# Get conversion confidence score
+wpbc confidence-score avada wpbakery section.xml
+```
+
+### **WPBakery-Specific Commands**
+
+```bash
+# Parse WPBakery shortcodes to JSON
+wpbc parse wpbakery page.txt --output page.json
+
+# Convert Bootstrap to WPBakery with specific settings
+wpbc translate bootstrap wpbakery hero.html --preserve-ids --keep-classes
+
+# Extract WPBakery elements
+wpbc extract wpbakery page.txt --element-type vc_row
+
+# Optimize WPBakery output
+wpbc translate elementor wpbakery page.json --optimize
+```
+
+### **Common Workflows**
+
+#### **Workflow 1: Escape WPBakery Vendor Lock-In**
+```bash
+# Step 1: Export your WPBakery site
+# (Use WordPress export or page content)
+
+# Step 2: Convert to clean Bootstrap HTML
+wpbc convert-site wpbakery bootstrap --source wpbakery-site.xml
+
+# Step 3: Work with Claude AI on Bootstrap code
+claude-code
+> "Optimize this Bootstrap hero section for mobile"
+> "Add newsletter signup with validation"
+
+# Step 4: Deploy as HTML OR convert back to any builder
+wpbc translate bootstrap elementor optimized-hero.html
+```
+
+#### **Workflow 2: Multi-Framework Client Deliverables**
+```bash
+# Create component in Bootstrap (Claude AI friendly)
+wpbc create component pricing-table
+
+# Test in all 6 frameworks
+wpbc translate-all bootstrap pricing-table.html
+
+# Review outputs
+ls -la pricing-table-*
+# pricing-table-divi.txt
+# pricing-table-elementor.json
+# pricing-table-avada.xml
+# pricing-table-bricks.json
+# pricing-table-wpbakery.txt
+
+# Deliver to client in their preferred format
+```
+
+#### **Workflow 3: Framework Comparison**
+```bash
+# Create in one framework
+wpbc create component hero
+
+# Convert to all frameworks
+wpbc translate-all bootstrap hero.html
+
+# Analyze which framework performs best
+wpbc analyze-performance hero-*.{html,json,txt,xml}
+
+# Compare file sizes
+wpbc compare-size bootstrap wpbakery hero.html
+```
+
+### **Advanced Options**
+
+```bash
+# Translation with custom mapping
+wpbc translate bootstrap wpbakery hero.html --mapping custom-map.json
+
+# Preserve metadata
+wpbc translate elementor wpbakery page.json --preserve-meta
+
+# Fallback handling
+wpbc translate avada wpbakery section.xml --fallback-strategy text
+
+# Quality mode (slower but higher accuracy)
+wpbc translate divi wpbakery page.txt --quality-mode high
+
+# Performance mode (faster, 90% accuracy)
+wpbc translate bricks wpbakery layout.json --quality-mode speed
+```
+
+### **Translation Statistics**
+
+```bash
+# View translation history
+wpbc stats
+
+# Framework usage statistics
+wpbc stats --by-framework
+
+# Success rate by translation pair
+wpbc stats --accuracy
+
+# Recent translations
+wpbc history --limit 10
+```
+
+### **Help & Documentation**
+
+```bash
+# General help
+wpbc --help
+
+# Command-specific help
+wpbc translate --help
+wpbc convert-site --help
+
+# List all supported frameworks
+wpbc frameworks
+
+# Check version
+wpbc --version
+
+# View supported element types for a framework
+wpbc elements wpbakery
+wpbc elements elementor
 ```
 
 ---
@@ -231,6 +463,7 @@ wpbc batch-translate elementor bootstrap pages/*.json --organize-by-framework
 - 🟥 **Elementor** → Best for third-party integrations and plugins
 - 🔴 **Avada** → Best for advanced animations and effects
 - 🟢 **Bricks** → Best for performance and clean code
+- 🔵 **WPBakery** → Legacy support, widely used, convert to modern frameworks
 
 **Smart Conversion Strategies:**
 ```
@@ -243,11 +476,35 @@ wpbc batch-translate elementor bootstrap pages/*.json --organize-by-framework
 "Transform Avada designs to Bootstrap HTML for performance and maintainability"
 
 "Use Bricks for design, convert to Bootstrap HTML for Claude-assisted optimization"
+
+"Migrate WPBakery sites to Bootstrap for modern, AI-assisted development"
+
+"Convert legacy Visual Composer sites to Elementor or any modern builder"
 ```
 
 ---
 
 ## 🌉 **Translation Bridge™ - Game Changer**
+
+### **🆕 NEW: WPBakery Support Added!**
+
+**Escape WPBakery Vendor Lock-In!** The Translation Bridge now supports **WPBakery/Visual Composer**, bringing total framework support to **6 major page builders** with **30 translation pairs**.
+
+```bash
+# Free yourself from WPBakery limitations
+wpbc translate wpbakery bootstrap my-site.xml
+
+# Work with Claude AI on clean Bootstrap HTML
+# Then convert back to ANY framework (or deploy as pure HTML)
+wpbc translate bootstrap elementor optimized-site.html
+```
+
+**Why This Matters:**
+- 🔓 **No More Vendor Lock-In** - Convert WPBakery sites to any other framework
+- ⚡ **Modernize Legacy Sites** - Update old Visual Composer sites to modern builders
+- 🎯 **Clean Code Access** - Get Bootstrap HTML from WPBakery shortcodes
+- 🔄 **Bi-Directional** - Convert TO and FROM WPBakery seamlessly
+- 🤖 **Claude AI Compatible** - Work with AI on clean code, convert back when done
 
 ### **How It Works**
 
