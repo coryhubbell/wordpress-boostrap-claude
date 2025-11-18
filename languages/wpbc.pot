@@ -1,0 +1,229 @@
+# Copyright (C) 2025 WordPress Bootstrap Claude
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WordPress Bootstrap Claude 3.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/coryhubbell/wordpress-bootstrap-claude/issues\n"
+"POT-Creation-Date: 2025-01-18 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Manual\n"
+"X-Domain: wpbc\n"
+
+#: functions.php:45
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:46
+msgid "Footer Menu"
+msgstr ""
+
+#: functions.php:82
+msgid "Sidebar"
+msgstr ""
+
+#: functions.php:83
+msgid "Main sidebar widget area"
+msgstr ""
+
+#: functions.php:88
+msgid "Footer"
+msgstr ""
+
+#: functions.php:89
+msgid "Footer widget area"
+msgstr ""
+
+#: functions.php:106
+msgid "Translation Bridge"
+msgstr ""
+
+#: functions.php:107
+msgid "WPBC Translation"
+msgstr ""
+
+#: functions.php:119
+msgid "Translate Content"
+msgstr ""
+
+#: functions.php:120
+msgid "Translate"
+msgstr ""
+
+#: functions.php:133
+msgid "Frameworks"
+msgstr ""
+
+#: functions.php:147
+msgid "Settings"
+msgstr ""
+
+#: functions.php:161
+msgid "Documentation"
+msgstr ""
+
+#: functions.php:162
+msgid "Docs"
+msgstr ""
+
+#: functions.php:177
+msgid "Translation Bridge™"
+msgstr ""
+
+#: functions.php:180
+msgid "Universal page builder translation system with AI optimization."
+msgstr ""
+
+#: functions.php:182
+msgid "Quick Start"
+msgstr ""
+
+#: functions.php:183
+msgid "Use the wpbc CLI command to translate between frameworks:"
+msgstr ""
+
+#: functions.php:192
+msgid "Supported Frameworks"
+msgstr ""
+
+#: functions.php:201
+msgid "System Status"
+msgstr ""
+
+#: functions.php:215
+msgid "CLI Commands"
+msgstr ""
+
+#: functions.php:220
+msgid "Command"
+msgstr ""
+
+#: functions.php:221
+msgid "Description"
+msgstr ""
+
+#: functions.php:226
+msgid "Translate between two frameworks"
+msgstr ""
+
+#: functions.php:230
+msgid "Translate to all frameworks (6 files)"
+msgstr ""
+
+#: functions.php:234
+msgid "List all supported frameworks"
+msgstr ""
+
+#: functions.php:238
+msgid "Validate a framework file"
+msgstr ""
+
+#: functions.php:242
+msgid "Show help and usage information"
+msgstr ""
+
+#: functions.php:355
+msgid "Claude API Key"
+msgstr ""
+
+#: functions.php:361
+msgid "Optional: Add Claude API key for direct AI editing in web interface."
+msgstr ""
+
+#: functions.php:362
+msgid "Leave empty to use CLI-only mode."
+msgstr ""
+
+#: functions.php:367
+msgid "Default Source Framework"
+msgstr ""
+
+#: functions.php:380
+msgid "Enable Logging"
+msgstr ""
+
+#: functions.php:386
+msgid "Log all translation operations"
+msgstr ""
+
+#: functions.php:408
+msgid "Getting Started"
+msgstr ""
+
+#: functions.php:410
+msgid "Install and activate the WordPress Bootstrap Claude theme"
+msgstr ""
+
+#: functions.php:411
+msgid "Open terminal and navigate to the theme directory"
+msgstr ""
+
+#: functions.php:412
+msgid "Use the wpbc CLI command to translate content"
+msgstr ""
+
+#: functions.php:415
+msgid "CLI Documentation"
+msgstr ""
+
+#: functions.php:416
+msgid "Full documentation available in:"
+msgstr ""
+
+#: functions.php:418
+msgid "Project overview and features"
+msgstr ""
+
+#: functions.php:419
+msgid "Quick start guide"
+msgstr ""
+
+#: functions.php:420
+msgid "Complete CLI reference"
+msgstr ""
+
+#: functions.php:421
+msgid "Architecture documentation"
+msgstr ""
+
+#: functions.php:422
+msgid "Conversion examples"
+msgstr ""
+
+#: index.php:42
+msgid "Nothing Found"
+msgstr ""
+
+#: index.php:43
+msgid "It seems we can't find what you're looking for. Perhaps searching can help."
+msgstr ""
+
+#: index.php:55
+msgid "Search"
+msgstr ""
+
+#: index.php:85
+msgid "Posted in %s"
+msgstr ""
+
+#: index.php:95
+msgid "Tagged %s"
+msgstr ""
+
+#: index.php:106
+msgid "Posted on"
+msgstr ""
+
+#: index.php:109
+msgid "by"
+msgstr ""
+
+#: core/functions.php:15
+msgid "Primary Menu"
+msgstr ""

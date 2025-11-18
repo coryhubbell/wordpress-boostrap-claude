@@ -460,19 +460,22 @@ wordpress-bootstrap-claude/
 
 ## 🔄 Translation Pairs Supported
 
-All 30 translation pairs are now fully accessible via CLI:
+All 90 translation pairs are now fully accessible via CLI:
 
-| From ↓ To → | Bootstrap | DIVI | Elementor | Avada | Bricks | WPBakery | Claude |
-|-------------|-----------|------|-----------|-------|--------|----------|--------|
-| **Bootstrap** | - | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **DIVI** | ✅ | - | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Elementor** | ✅ | ✅ | - | ✅ | ✅ | ✅ | ✅ |
-| **Avada** | ✅ | ✅ | ✅ | - | ✅ | ✅ | ✅ |
-| **Bricks** | ✅ | ✅ | ✅ | ✅ | - | ✅ | ✅ |
-| **WPBakery** | ✅ | ✅ | ✅ | ✅ | ✅ | - | ✅ |
-| **Claude** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | - |
+| From ↓ To → | Bootstrap | DIVI | Elementor | Avada | Bricks | WPBakery | Beaver | Gutenberg | Oxygen | Claude |
+|-------------|-----------|------|-----------|-------|--------|----------|--------|-----------|--------|--------|
+| **Bootstrap** | - | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **DIVI** | ✅ | - | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Elementor** | ✅ | ✅ | - | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Avada** | ✅ | ✅ | ✅ | - | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Bricks** | ✅ | ✅ | ✅ | ✅ | - | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **WPBakery** | ✅ | ✅ | ✅ | ✅ | ✅ | - | ✅ | ✅ | ✅ | ✅ |
+| **Beaver** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | - | ✅ | ✅ | ✅ |
+| **Gutenberg** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | - | ✅ | ✅ |
+| **Oxygen** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | - | ✅ |
+| **Claude** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | - |
 
-**Total:** 30 active translation pairs
+**Total:** 90 active translation pairs
 
 ---
 
@@ -487,7 +490,7 @@ To verify the CLI works correctly:
 
 ### Basic Tests
 - [ ] `./wpbc --version` shows version info
-- [ ] `./wpbc list-frameworks` shows all 7 frameworks
+- [ ] `./wpbc list-frameworks` shows all 10 frameworks
 - [ ] `./wpbc --help` shows help information
 
 ### Translation Tests
@@ -648,7 +651,7 @@ All planned CLI features have been successfully implemented:
 - ✅ Comprehensive documentation (1,600+ lines)
 - ✅ Example files
 
-The WordPress Bootstrap Claude CLI is **ready for use**. Once PHP is installed, users can immediately start translating between all 7 frameworks using the powerful Translation Bridge™ system.
+The WordPress Bootstrap Claude CLI is **ready for use**. Once PHP is installed, users can immediately start translating between all 10 frameworks using the powerful Translation Bridge™ system.
 
 ---
 

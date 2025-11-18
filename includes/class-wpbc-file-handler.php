@@ -286,9 +286,22 @@ class WPBC_File_Handler {
      * @return bool True if safe
      */
     public function is_safe_path($path) {
+        // Normalize the path to handle URL encoding and various traversal techniques
+        $path = urldecode($path);
+
+        // Check for various directory traversal patterns
+        if (preg_match('/\.\.|%2e%2e|%252e%252e/i', $path)) {
+            return false;
+        }
+
+        // Check for null bytes
+        if (strpos($path, "\0") !== false) {
+            return false;
+        }
+
         $real_path = realpath($path);
 
-        // Path doesn't exist yet (for new files)
+        // Path doesn't exist yet (for new files) - check parent directory
         if ($real_path === false) {
             $real_path = realpath(dirname($path));
             if ($real_path === false) {
@@ -296,8 +309,10 @@ class WPBC_File_Handler {
             }
         }
 
-        // Check for directory traversal attempts
-        if (strpos($path, '..') !== false) {
+        // Verify the resolved path is within the expected base directory
+        // This prevents symlink attacks and ensures files stay within project
+        $base_dir = realpath(WPBC_ROOT);
+        if ($base_dir && strpos($real_path, $base_dir) !== 0) {
             return false;
         }
 

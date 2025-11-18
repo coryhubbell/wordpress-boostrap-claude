@@ -3,7 +3,7 @@ Theme Name: WordPress Bootstrap Claude
 Theme URI: https://github.com/coryhubbell/wordpress-bootstrap-claude
 Author: Cory Hubbell
 Author URI: https://github.com/coryhubbell
-Description: WordPress Bootstrap Claude™ - The world's first universal page builder translation system. Seamlessly convert between Bootstrap 5.3.3, DIVI, Elementor, Avada Fusion, Bricks, WPBakery, and Claude AI-Optimized formats. Featuring the Translation Bridge™ architecture with 98% visual accuracy, 30-second conversion times, and comprehensive AI integration for modern WordPress development.
+Description: WordPress Bootstrap Claude™ - The world's first universal page builder translation system. Seamlessly convert between Bootstrap 5.3.3, DIVI, Elementor, Avada Fusion, Bricks, WPBakery, Beaver Builder, Gutenberg, Oxygen, and Claude AI-Optimized formats. Featuring the Translation Bridge™ architecture with 98% visual accuracy, 30-second conversion times, and comprehensive AI integration for modern WordPress development.
 Version: 3.1.0
 Requires at least: 5.8
 Tested up to: 6.4
@@ -20,11 +20,14 @@ WordPress Bootstrap Claude is a revolutionary theme that enables seamless transl
 - Avada Fusion Builder (HTML)
 - Bricks Builder (JSON)
 - WPBakery Page Builder (shortcodes)
+- Beaver Builder (JSON)
+- Gutenberg Block Editor (HTML)
+- Oxygen Builder (JSON)
 - Claude AI-Optimized Framework (HTML)
 
 Key Features:
 - Translation Bridge™ architecture
-- 30 translation pairs (any framework to any other)
+- 90 translation pairs (any framework to any other)
 - 98% visual accuracy in conversions
 - 30-second conversion times
 - Deep Claude AI integration

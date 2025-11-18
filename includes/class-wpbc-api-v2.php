@@ -172,7 +172,24 @@ class WPBC_API_V2 {
         try {
             // Initialize translator
             require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php';
-            $translator = new Translator();
+
+            try {
+                $translator = new \WPBC\TranslationBridge\Core\WPBC_Translator();
+            } catch (\Exception $e) {
+                return new WP_Error(
+                    'translator_init_failed',
+                    'Failed to initialize translator: ' . $e->getMessage(),
+                    ['status' => 500]
+                );
+            }
+
+            if (!$translator || !is_object($translator)) {
+                return new WP_Error(
+                    'translator_invalid',
+                    'Translator instance is invalid',
+                    ['status' => 500]
+                );
+            }
 
             // Perform translation
             $start_time = microtime(true);
@@ -260,7 +277,24 @@ class WPBC_API_V2 {
             $start_time = microtime(true);
 
             require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php';
-            $translator = new Translator();
+
+            try {
+                $translator = new \WPBC\TranslationBridge\Core\WPBC_Translator();
+            } catch (\Exception $e) {
+                return new WP_Error(
+                    'translator_init_failed',
+                    'Failed to initialize translator: ' . $e->getMessage(),
+                    ['status' => 500]
+                );
+            }
+
+            if (!$translator || !is_object($translator)) {
+                return new WP_Error(
+                    'translator_invalid',
+                    'Translator instance is invalid',
+                    ['status' => 500]
+                );
+            }
 
             foreach ($targets as $target) {
                 if (!in_array($target, $this->frameworks)) {
@@ -774,6 +808,26 @@ class WPBC_API_V2 {
      */
     public function create_api_key($request) {
         $user_id = get_current_user_id();
+
+        // Apply strict rate limiting for key creation (prevents enumeration attacks)
+        $identifier = $user_id . '_' . ($_SERVER['REMOTE_ADDR'] ?? 'unknown');
+        $rate_limit = $this->rate_limiter->check_limit($identifier, 'key_creation');
+
+        if (!$rate_limit['allowed']) {
+            return new WP_Error(
+                'rate_limit_exceeded',
+                sprintf(
+                    'API key creation rate limit exceeded. You can create %d keys per hour. Please try again in %d seconds.',
+                    $rate_limit['limits']['hourly']['limit'],
+                    $rate_limit['retry_after']
+                ),
+                ['status' => 429, 'retry_after' => $rate_limit['retry_after']]
+            );
+        }
+
+        // Record the request for rate limiting
+        $this->rate_limiter->record_request($identifier);
+
         $name = $request->get_param('name') ?: 'API Key';
         $permissions = $request->get_param('permissions') ?: ['read', 'write'];
         $tier = $request->get_param('tier') ?: 'free';

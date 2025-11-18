@@ -25,10 +25,21 @@ class WPBC_Auth {
 	private $key_prefix = 'wpbc_';
 
 	/**
+	 * Encryption utility
+	 *
+	 * @var WPBC_Encryption
+	 */
+	private $encryption;
+
+	/**
 	 * Constructor
 	 */
 	public function __construct() {
 		$this->logger = new WPBC_Logger();
+
+		// Load encryption class
+		require_once __DIR__ . '/class-wpbc-encryption.php';
+		$this->encryption = new WPBC_Encryption();
 	}
 
 	/**
@@ -174,17 +185,15 @@ class WPBC_Auth {
 			return $matches[1];
 		}
 
-		// Check X-API-Key header
+		// Check X-API-Key header (only secure method allowed)
 		$api_key_header = $request->get_header( 'X-API-Key' );
 		if ( $api_key_header ) {
 			return $api_key_header;
 		}
 
-		// Check query parameter
-		$api_key_param = $request->get_param( 'api_key' );
-		if ( $api_key_param ) {
-			return $api_key_param;
-		}
+		// API keys in query parameters are disabled for security
+		// Query parameters are logged in server logs and browser history
+		// Always use the X-API-Key header instead
 
 		return null;
 	}
@@ -220,7 +229,7 @@ class WPBC_Auth {
 	}
 
 	/**
-	 * Store API key in database
+	 * Store API key in database (with encryption)
 	 *
 	 * @param string $key      API key.
 	 * @param array  $key_data Key data.
@@ -229,13 +238,19 @@ class WPBC_Auth {
 		$option_name = 'wpbc_api_keys';
 		$keys = get_option( $option_name, [] );
 
-		$keys[ $key ] = $key_data;
+		// Encrypt sensitive key data before storing
+		$encrypted_data = $key_data;
+		if (isset($encrypted_data['key'])) {
+			$encrypted_data['key'] = $this->encryption->encrypt($encrypted_data['key']);
+		}
+
+		$keys[ $key ] = $encrypted_data;
 
 		update_option( $option_name, $keys );
 	}
 
 	/**
-	 * Get API key data
+	 * Get API key data (with decryption)
 	 *
 	 * @param string $key API key.
 	 * @return array|null Key data or null.
@@ -244,7 +259,14 @@ class WPBC_Auth {
 		$option_name = 'wpbc_api_keys';
 		$keys = get_option( $option_name, [] );
 
-		return $keys[ $key ] ?? null;
+		$key_data = $keys[ $key ] ?? null;
+
+		if ($key_data && isset($key_data['key'])) {
+			// Decrypt the key if it's encrypted
+			$key_data['key'] = $this->encryption->decrypt($key_data['key']);
+		}
+
+		return $key_data;
 	}
 
 	/**
@@ -399,5 +421,77 @@ class WPBC_Auth {
 		}
 
 		return $stats;
+	}
+
+	/**
+	 * Migrate existing API keys to encrypted format
+	 *
+	 * This function encrypts any unencrypted API keys in the database.
+	 * Safe to run multiple times - already encrypted keys are skipped.
+	 *
+	 * @return array Migration results
+	 */
+	public function migrate_keys_to_encrypted(): array {
+		$option_name = 'wpbc_api_keys';
+		$keys = get_option( $option_name, [] );
+
+		$results = [
+			'total' => count($keys),
+			'migrated' => 0,
+			'already_encrypted' => 0,
+			'errors' => 0,
+		];
+
+		if (empty($keys)) {
+			return $results;
+		}
+
+		$updated_keys = [];
+
+		foreach ($keys as $key_id => $key_data) {
+			// Skip if key data is missing
+			if (!isset($key_data['key'])) {
+				$updated_keys[$key_id] = $key_data;
+				continue;
+			}
+
+			// Check if already encrypted
+			if ($this->encryption->is_encrypted($key_data['key'])) {
+				$results['already_encrypted']++;
+				$updated_keys[$key_id] = $key_data;
+				continue;
+			}
+
+			// Encrypt the key
+			$encrypted_key = $this->encryption->encrypt($key_data['key']);
+
+			if ($encrypted_key === false) {
+				// Encryption failed - keep original
+				$results['errors']++;
+				$updated_keys[$key_id] = $key_data;
+				error_log("WPBC: Failed to encrypt API key: $key_id");
+				continue;
+			}
+
+			// Update with encrypted version
+			$key_data['key'] = $encrypted_key;
+			$key_data['encrypted'] = true;
+			$key_data['encrypted_at'] = current_time('mysql');
+			$updated_keys[$key_id] = $key_data;
+			$results['migrated']++;
+		}
+
+		// Save updated keys
+		update_option($option_name, $updated_keys);
+
+		$this->logger->info(sprintf(
+			'API key encryption migration complete. Total: %d, Migrated: %d, Already encrypted: %d, Errors: %d',
+			$results['total'],
+			$results['migrated'],
+			$results['already_encrypted'],
+			$results['errors']
+		));
+
+		return $results;
 	}
 }

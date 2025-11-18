@@ -43,6 +43,11 @@ class WPBC_Rate_Limiter {
 			'requests_per_minute' => 500,
 			'burst_limit'         => 50,
 		],
+		'key_creation' => [
+			'requests_per_hour'   => 5,    // Strict: only 5 keys per hour
+			'requests_per_minute' => 2,    // Max 2 keys per minute
+			'burst_limit'         => 1,    // One at a time
+		],
 	];
 
 	/**

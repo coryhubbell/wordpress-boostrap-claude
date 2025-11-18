@@ -46,7 +46,8 @@ function wpbc_theme_setup() {
         'footer'  => __('Footer Menu', 'wpbc'),
     ]);
 
-    // Set content width
+    // Set content width (WordPress global)
+    global $content_width;
     if (!isset($content_width)) {
         $content_width = 1200;
     }
@@ -271,19 +272,22 @@ function wpbc_frameworks_page() {
 
         <div class="card">
             <h2>Translation Matrix</h2>
-            <p>The Translation Bridge™ supports conversion between all 7 frameworks:</p>
-
             <?php
             $frameworks = [
-                'bootstrap' => 'Bootstrap 5.3.3',
-                'divi'      => 'DIVI Builder',
-                'elementor' => 'Elementor',
-                'avada'     => 'Avada Fusion',
-                'bricks'    => 'Bricks Builder',
-                'wpbakery'  => 'WPBakery',
-                'claude'    => 'Claude AI',
+                'bootstrap'      => 'Bootstrap 5.3.3',
+                'divi'           => 'DIVI Builder',
+                'elementor'      => 'Elementor',
+                'avada'          => 'Avada Fusion Builder',
+                'bricks'         => 'Bricks Builder',
+                'wpbakery'       => 'WPBakery Page Builder',
+                'beaver-builder' => 'Beaver Builder',
+                'gutenberg'      => 'Gutenberg Block Editor',
+                'oxygen'         => 'Oxygen Builder',
+                'claude'         => 'Claude AI-Optimized',
             ];
+            $framework_count = count($frameworks);
             ?>
+            <p>The Translation Bridge™ supports conversion between all <?php echo $framework_count; ?> frameworks:</p>
 
             <table class="widefat">
                 <thead>

@@ -228,7 +228,17 @@ class WPBC_CLI {
             require_once WPBC_TRANSLATION_BRIDGE . '/core/class-parser-factory.php';
             require_once WPBC_TRANSLATION_BRIDGE . '/core/class-converter-factory.php';
 
-            $translator = new Translator();
+            try {
+                $translator = new \WPBC\TranslationBridge\Core\WPBC_Translator();
+            } catch (\Exception $e) {
+                $this->error("Failed to initialize Translation Bridge: " . $e->getMessage());
+                return 1;
+            }
+
+            if (!$translator || !is_object($translator)) {
+                $this->error("Failed to create translator instance");
+                return 1;
+            }
 
             // Perform translation
             $this->info("⚙️  Translating {$source} → {$target}...");
@@ -431,8 +441,9 @@ class WPBC_CLI {
      * List all supported frameworks
      */
     private function command_list_frameworks() {
+        $count = count($this->frameworks);
         $this->info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-        $this->info("  Supported Frameworks (7 Total)");
+        $this->info("  Supported Frameworks ({$count} Total)");
         $this->info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         echo PHP_EOL;
 
@@ -442,8 +453,9 @@ class WPBC_CLI {
         }
 
         echo PHP_EOL;
+        $pairs = $count * ($count - 1);
         $this->info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-        $this->info("Translation Pairs: 30 (any framework to any other)");
+        $this->info("Translation Pairs: {$pairs} (any framework to any other)");
         $this->info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         echo PHP_EOL;
 

@@ -563,7 +563,7 @@ After installation:
 2. **Try Quick Start**: `QUICK_START.md`
 3. **Explore Examples**: `/examples` directory
 4. **Check Documentation**: `/docs` directory
-5. **Run Test Translations**: Try all 30 translation pairs
+5. **Run Test Translations**: Try all 90 translation pairs
 
 ---
 

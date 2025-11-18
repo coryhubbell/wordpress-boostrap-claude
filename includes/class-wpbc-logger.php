@@ -19,6 +19,12 @@ class WPBC_Logger {
     const LEVEL_ERROR   = 'ERROR';
 
     /**
+     * Log file rotation settings
+     */
+    const MAX_FILE_SIZE = 10485760; // 10MB in bytes
+    const MAX_FILES     = 5;         // Number of rotated log files to keep
+
+    /**
      * Log directory
      *
      * @var string
@@ -51,14 +57,14 @@ class WPBC_Logger {
      *
      * @var int
      */
-    private $max_file_size = 10485760; // 10MB
+    private $max_file_size = self::MAX_FILE_SIZE;
 
     /**
      * Number of rotated log files to keep
      *
      * @var int
      */
-    private $max_files = 5;
+    private $max_files = self::MAX_FILES;
 
     /**
      * Constructor

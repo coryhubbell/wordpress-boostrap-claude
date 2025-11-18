@@ -198,7 +198,7 @@ wpbc list-frameworks
 **Output:**
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Supported Frameworks (7 Total)
+  Supported Frameworks (10 Total)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   bootstrap
@@ -219,11 +219,20 @@ wpbc list-frameworks
   wpbakery
     WPBakery Page Builder
 
+  beaver-builder
+    Beaver Builder
+
+  gutenberg
+    Gutenberg Block Editor
+
+  oxygen
+    Oxygen Builder
+
   claude
     Claude AI-Optimized
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Translation Pairs: 30 (any framework to any other)
+Translation Pairs: 90 (any framework to any other)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 

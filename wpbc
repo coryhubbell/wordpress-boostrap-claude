@@ -4,7 +4,7 @@
  * WPBC - WordPress Bootstrap Claude CLI
  *
  * Command-line interface for the Translation Bridge™
- * Converts between 7 page builder frameworks with AI optimization
+ * Converts between 10 page builder frameworks with AI optimization
  *
  * @package    WordPress_Bootstrap_Claude
  * @subpackage CLI

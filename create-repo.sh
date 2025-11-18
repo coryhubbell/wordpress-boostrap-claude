@@ -76,7 +76,7 @@ function wpbc_setup() {
     add_theme_support( 'custom-logo' );
     
     register_nav_menus( array(
-        'primary' => __( 'Primary Menu', 'wp-bootstrap-claude' ),
+        'primary' => __( 'Primary Menu', 'wpbc' ),
     ) );
 }
 add_action( 'after_setup_theme', 'wpbc_setup' );
