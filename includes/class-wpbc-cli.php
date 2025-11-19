@@ -9,7 +9,8 @@
  * @version    3.1.0
  */
 
-class WPBC_CLI {
+class WPBC_CLI
+{
     /**
      * Command line arguments
      *
@@ -44,16 +45,16 @@ class WPBC_CLI {
      * @var array
      */
     private $frameworks = [
-        'bootstrap'      => 'Bootstrap 5.3.3',
-        'divi'           => 'DIVI Builder',
-        'elementor'      => 'Elementor',
-        'avada'          => 'Avada Fusion Builder',
-        'bricks'         => 'Bricks Builder',
-        'wpbakery'       => 'WPBakery Page Builder',
+        'bootstrap' => 'Bootstrap 5.3.3',
+        'divi' => 'DIVI Builder',
+        'elementor' => 'Elementor',
+        'avada' => 'Avada Fusion Builder',
+        'bricks' => 'Bricks Builder',
+        'wpbakery' => 'WPBakery Page Builder',
         'beaver-builder' => 'Beaver Builder',
-        'gutenberg'      => 'Gutenberg Block Editor',
-        'oxygen'         => 'Oxygen Builder',
-        'claude'         => 'Claude AI-Optimized',
+        'gutenberg' => 'Gutenberg Block Editor',
+        'oxygen' => 'Oxygen Builder',
+        'claude' => 'Claude AI-Optimized',
     ];
 
     /**
@@ -75,7 +76,8 @@ class WPBC_CLI {
      *
      * @param array $args Command line arguments
      */
-    public function __construct($args) {
+    public function __construct($args)
+    {
         $this->args = $args;
         $this->logger = new WPBC_Logger();
         $this->file_handler = new WPBC_File_Handler();
@@ -85,7 +87,8 @@ class WPBC_CLI {
     /**
      * Parse command line arguments
      */
-    private function parse_arguments() {
+    private function parse_arguments()
+    {
         $positional = [];
         $i = 0;
         $count = count($this->args);
@@ -136,7 +139,8 @@ class WPBC_CLI {
      *
      * @return int Exit code (0 = success, non-zero = error)
      */
-    public function execute() {
+    public function execute()
+    {
         // Handle global options first
         if ($this->has_option('version', 'v')) {
             return $this->show_version();
@@ -164,7 +168,8 @@ class WPBC_CLI {
      * Translate from one framework to another
      * Usage: wpbc translate <source-framework> <target-framework> <input-file> [options]
      */
-    private function command_translate() {
+    private function command_translate()
+    {
         if (count($this->params) < 3) {
             $this->error("Insufficient arguments for 'translate' command");
             $this->info("Usage: wpbc translate <source-framework> <target-framework> <input-file> [options]");
@@ -330,7 +335,8 @@ class WPBC_CLI {
      * Translate to all frameworks
      * Usage: wpbc translate-all <source-framework> <input-file> [options]
      */
-    private function command_translate_all() {
+    private function command_translate_all()
+    {
         if (count($this->params) < 2) {
             $this->error("Insufficient arguments for 'translate-all' command");
             $this->info("Usage: wpbc translate-all <source-framework> <input-file> [options]");
@@ -440,7 +446,8 @@ class WPBC_CLI {
      *
      * List all supported frameworks
      */
-    private function command_list_frameworks() {
+    private function command_list_frameworks()
+    {
         $count = count($this->frameworks);
         $this->info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         $this->info("  Supported Frameworks ({$count} Total)");
@@ -467,7 +474,8 @@ class WPBC_CLI {
      *
      * Validate a framework file
      */
-    private function command_validate() {
+    private function command_validate()
+    {
         if (count($this->params) < 2) {
             $this->error("Insufficient arguments for 'validate' command");
             $this->info("Usage: wpbc validate <framework> <input-file>");
@@ -535,9 +543,65 @@ class WPBC_CLI {
     }
 
     /**
+     * Command: antigravity
+     *
+     * Run the Antigravity Agentic Loop
+     * Usage: wpbc antigravity <url> --target=<framework>
+     */
+    private function command_antigravity()
+    {
+        if (count($this->params) < 1) {
+            $this->error("Insufficient arguments for 'antigravity' command");
+            $this->info("Usage: wpbc antigravity <url> --target=<framework>");
+            return 1;
+        }
+
+        $url = $this->params[0];
+        $target = $this->get_option('target', 't');
+
+        if (!$target) {
+            $this->error("Target framework is required (--target=<framework>)");
+            return 1;
+        }
+
+        if (!isset($this->frameworks[$target])) {
+            $this->error("Unknown target framework: {$target}");
+            $this->list_frameworks();
+            return 1;
+        }
+
+        $this->info("🚀 Initializing Antigravity Agent...");
+        $this->info("Target: {$this->frameworks[$target]}");
+        $this->info("URL:    {$url}");
+        echo PHP_EOL;
+
+        require_once WPBC_INCLUDES . '/class-wpbc-antigravity-agent.php';
+        require_once WPBC_TRANSLATION_BRIDGE . '/core/class-translator.php';
+
+        // Initialize dependencies
+        try {
+            $translator = new \WPBC\TranslationBridge\Core\WPBC_Translator();
+        } catch (\Exception $e) {
+            $this->error("Failed to initialize Translator: " . $e->getMessage());
+            return 1;
+        }
+
+        $agent = new WPBC_Antigravity_Agent($translator, $this->logger);
+
+        if ($agent->run($url, $target)) {
+            $this->success("✨ Antigravity mission successful!");
+            return 0;
+        } else {
+            $this->error("💥 Antigravity mission failed.");
+            return 1;
+        }
+    }
+
+    /**
      * Show version information
      */
-    private function show_version() {
+    private function show_version()
+    {
         echo $this->bold("WPBC - WordPress Bootstrap Claude") . PHP_EOL;
         echo "Version: " . WPBC_VERSION . PHP_EOL;
         echo "Translation Bridge™ - Universal Framework Translator" . PHP_EOL;
@@ -551,7 +615,8 @@ class WPBC_CLI {
     /**
      * Show help information
      */
-    private function show_help() {
+    private function show_help()
+    {
         $command = !empty($this->params) ? $this->params[0] : null;
 
         if ($command) {
@@ -576,6 +641,9 @@ class WPBC_CLI {
         echo PHP_EOL;
         echo "  " . $this->bold("validate") . " <framework> <file>" . PHP_EOL;
         echo "    Validate a framework file" . PHP_EOL;
+        echo PHP_EOL;
+        echo "  " . $this->bold("antigravity") . " <url> --target=<framework>" . PHP_EOL;
+        echo "    Run the Antigravity Agentic Loop" . PHP_EOL;
         echo PHP_EOL;
         echo "  " . $this->bold("help") . " [command]" . PHP_EOL;
         echo "    Show help for a specific command" . PHP_EOL;
@@ -610,7 +678,8 @@ class WPBC_CLI {
      *
      * @param string $command Command name
      */
-    private function show_command_help($command) {
+    private function show_command_help($command)
+    {
         // Command-specific help would go here
         $this->info("Help for command: {$command}");
         $this->info("(Detailed help coming soon)");
@@ -620,7 +689,8 @@ class WPBC_CLI {
     /**
      * List available frameworks
      */
-    private function list_frameworks() {
+    private function list_frameworks()
+    {
         $this->info("Available frameworks:");
         foreach ($this->frameworks as $key => $name) {
             $this->info("  - {$key} ({$name})");
@@ -634,7 +704,8 @@ class WPBC_CLI {
      * @param string $short Short option name
      * @return bool
      */
-    private function has_option($long, $short = null) {
+    private function has_option($long, $short = null)
+    {
         return isset($this->options[$long]) || ($short && isset($this->options[$short]));
     }
 
@@ -645,7 +716,8 @@ class WPBC_CLI {
      * @param string $short Short option name
      * @return mixed Option value or null
      */
-    private function get_option($long, $short = null) {
+    private function get_option($long, $short = null)
+    {
         if (isset($this->options[$long])) {
             return $this->options[$long];
         }
@@ -661,7 +733,8 @@ class WPBC_CLI {
      * @param int $bytes Bytes
      * @return string Formatted string
      */
-    private function format_bytes($bytes) {
+    private function format_bytes($bytes)
+    {
         $units = ['B', 'KB', 'MB', 'GB'];
         $i = 0;
         while ($bytes >= 1024 && $i < count($units) - 1) {
@@ -673,36 +746,42 @@ class WPBC_CLI {
 
     // Output formatting methods
 
-    private function success($message) {
+    private function success($message)
+    {
         if (!$this->has_option('quiet', 'q')) {
             echo "\033[32m{$message}\033[0m" . PHP_EOL;
         }
     }
 
-    private function error($message) {
+    private function error($message)
+    {
         fwrite(STDERR, "\033[31m{$message}\033[0m" . PHP_EOL);
     }
 
-    private function warning($message) {
+    private function warning($message)
+    {
         if (!$this->has_option('quiet', 'q')) {
             echo "\033[33m{$message}\033[0m" . PHP_EOL;
         }
     }
 
-    private function info($message) {
+    private function info($message)
+    {
         if (!$this->has_option('quiet', 'q')) {
             echo $message . PHP_EOL;
         }
     }
 
-    private function dim($message) {
+    private function dim($message)
+    {
         if (!$this->has_option('quiet', 'q')) {
             return "\033[2m{$message}\033[0m";
         }
         return $message;
     }
 
-    private function bold($message) {
+    private function bold($message)
+    {
         return "\033[1m{$message}\033[0m";
     }
 }

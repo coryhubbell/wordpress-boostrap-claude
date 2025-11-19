@@ -17,6 +17,7 @@ if (!defined('ABSPATH')) {
 
 // Define theme constants
 define('WPBC_THEME_VERSION', '3.1.0');
+define('WPBC_ROOT', get_template_directory());
 define('WPBC_THEME_DIR', get_template_directory());
 define('WPBC_THEME_URL', get_template_directory_uri());
 define('WPBC_TRANSLATION_BRIDGE_DIR', WPBC_THEME_DIR . '/translation-bridge');
@@ -119,6 +120,8 @@ function wpbc_init_translation_bridge() {
         require_once WPBC_INCLUDES_DIR . '/class-wpbc-file-handler.php';
         require_once WPBC_INCLUDES_DIR . '/class-wpbc-logger.php';
         require_once WPBC_INCLUDES_DIR . '/class-wpbc-claude-api.php';
+        require_once WPBC_INCLUDES_DIR . '/class-wpbc-auth.php';
+        require_once WPBC_INCLUDES_DIR . '/class-wpbc-rate-limiter.php';
     }
 
     // Load API v2
@@ -129,6 +132,17 @@ function wpbc_init_translation_bridge() {
     // Load Job Queue (for async batch processing)
     if (file_exists(WPBC_INCLUDES_DIR . '/class-wpbc-job-queue.php')) {
         require_once WPBC_INCLUDES_DIR . '/class-wpbc-job-queue.php';
+    }
+
+    // Load Visual Interface
+    if (file_exists(WPBC_INCLUDES_DIR . '/class-wpbc-visual-interface.php')) {
+        require_once WPBC_INCLUDES_DIR . '/class-wpbc-visual-interface.php';
+        new WPBC_Visual_Interface();
+    }
+
+    // Load Antigravity Agent (agentic workflow)
+    if (file_exists(WPBC_INCLUDES_DIR . '/class-wpbc-antigravity-agent.php')) {
+        require_once WPBC_INCLUDES_DIR . '/class-wpbc-antigravity-agent.php';
     }
 }
 add_action('after_setup_theme', 'wpbc_init_translation_bridge');

@@ -1,0 +1,37 @@
+# Node modules
+node_modules/
+admin/node_modules/
+admin/dist/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+tests/
+
+# Build artifacts
+*.tar.gz
+*.zip
+
+# Documentation (WordPress doesn't need these)
+docs/
+*.md
+!README.md
+
+# Development files
+.env.local
+.env.*.local

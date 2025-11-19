@@ -168,8 +168,8 @@ class WPBC_Logger {
         // Write to file
         file_put_contents($this->log_file, $log_line, FILE_APPEND | LOCK_EX);
 
-        // Also write errors to stderr
-        if ($level === self::LEVEL_ERROR) {
+        // Also write errors to stderr (CLI only)
+        if ($level === self::LEVEL_ERROR && defined('STDERR')) {
             fwrite(STDERR, $log_line);
         }
     }
