@@ -3,12 +3,11 @@
  * Top application toolbar with actions and settings
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useEditorStore } from '@/store/editorStore';
 
 function Toolbar() {
-  const { editor, translateCode, isTranslating, reset, preferences, updatePreferences } =
-    useEditorStore();
+  const { editor, translateCode, isTranslating, reset } = useEditorStore();
   const [showSettings, setShowSettings] = useState(false);
 
   const handleSave = () => {

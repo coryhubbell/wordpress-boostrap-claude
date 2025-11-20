@@ -6,7 +6,6 @@
 import { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import SideBySideEditor from '@components/SideBySideEditor';
-import { useEditorStore } from '@/store/editorStore';
 
 // Create React Query client
 const queryClient = new QueryClient({

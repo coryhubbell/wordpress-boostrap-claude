@@ -3,7 +3,6 @@
  * Dropdown for selecting source/target framework
  */
 
-import React from 'react';
 import type { Framework } from '@/types';
 
 interface FrameworkSelectorProps {

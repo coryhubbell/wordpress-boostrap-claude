@@ -3,7 +3,7 @@
  * Renders live preview of translated code in an iframe
  */
 
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 
 interface PreviewPaneProps {
   code: string;
