@@ -262,7 +262,34 @@ class WPBC_Visual_Interface {
 				<script type="module" src="http://localhost:<?php echo $vite_port; ?>/src/main.tsx"></script>
 			<?php else : ?>
 				<!-- Production Mode: Built Assets -->
-				<?php do_action( 'admin_print_footer_scripts' ); ?>
+				<?php
+			$dist_path = get_template_directory() . '/admin/dist';
+			$dist_url  = get_template_directory_uri() . '/admin/dist';
+			$manifest_file = $dist_path . '/.vite/manifest.json';
+
+			if ( file_exists( $manifest_file ) ) {
+				$manifest = json_decode( file_get_contents( $manifest_file ), true );
+				$main_entry = $manifest['index.html'] ?? null;
+
+				if ( $main_entry ) {
+					// Load CSS
+					if ( isset( $main_entry['css'] ) ) {
+						foreach ( $main_entry['css'] as $css_file ) {
+							echo '<link rel="stylesheet" href="' . esc_url( $dist_url . '/' . $css_file ) . '">' . "\n";
+						}
+					}
+
+					// Load JS
+					if ( isset( $main_entry['file'] ) ) {
+						echo '<script type="module" src="' . esc_url( $dist_url . '/' . $main_entry['file'] ) . '"></script>' . "\n";
+					}
+				} else {
+					error_log( 'WPBC Visual Interface: Main entry not found in manifest' );
+				}
+			} else {
+				error_log( 'WPBC Visual Interface: Manifest file not found at ' . $manifest_file );
+			}
+			?>
 			<?php endif; ?>
 		</body>
 		</html>
