@@ -604,4 +604,52 @@ class WPBC_Beaver_Builder_Parser implements WPBC_Parser_Interface {
 
 		return false;
 	}
+
+	/**
+	 * Get framework name
+	 *
+	 * @return string Framework name.
+	 */
+	public function get_framework(): string {
+		return 'beaver-builder';
+	}
+
+	/**
+	 * Validate content (alias for interface compliance)
+	 *
+	 * @param mixed $content Content to validate.
+	 * @return bool True if valid.
+	 */
+	public function is_valid_content( $content ): bool {
+		return $this->validate( $content );
+	}
+
+	/**
+	 * Get supported component types
+	 *
+	 * @return array Supported types.
+	 */
+	public function get_supported_types(): array {
+		return [ 'container', 'row', 'column', 'heading', 'text', 'button', 'image', 'video', 'html' ];
+	}
+
+	/**
+	 * Parse single element
+	 *
+	 * @param mixed $element Element to parse.
+	 * @return WPBC_Component|null Parsed component or null.
+	 */
+	public function parse_element( $element ): ?WPBC_Component {
+		if ( is_string( $element ) ) {
+			$components = $this->parse( $element );
+			return $components[0] ?? null;
+		}
+
+		if ( is_object( $element ) || is_array( $element ) ) {
+			$components = $this->parse( [ $element ] );
+			return $components[0] ?? null;
+		}
+
+		return null;
+	}
 }

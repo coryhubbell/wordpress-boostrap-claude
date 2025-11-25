@@ -93,7 +93,7 @@ class WPBC_Oxygen_Parser implements WPBC_Parser_Interface {
 
 		$components = [];
 		foreach ( $root_elements as $element ) {
-			$component = $this->parse_element( $element, $elements_by_id );
+			$component = $this->parse_oxygen_element( $element, $elements_by_id );
 			if ( $component ) {
 				$components[] = $component;
 			}
@@ -167,7 +167,7 @@ class WPBC_Oxygen_Parser implements WPBC_Parser_Interface {
 	 * @param array $all_elements All elements indexed by ID.
 	 * @return WPBC_Component|null Parsed component or null.
 	 */
-	private function parse_element( array $element, array $all_elements ): ?WPBC_Component {
+	private function parse_oxygen_element( array $element, array $all_elements ): ?WPBC_Component {
 		$element_name = $element['name'] ?? '';
 
 		if ( empty( $element_name ) ) {
@@ -202,7 +202,7 @@ class WPBC_Oxygen_Parser implements WPBC_Parser_Interface {
 		// Parse child elements
 		$children = $this->get_child_elements( $ct_id, $all_elements );
 		foreach ( $children as $child ) {
-			$child_component = $this->parse_element( $child, $all_elements );
+			$child_component = $this->parse_oxygen_element( $child, $all_elements );
 			if ( $child_component ) {
 				$component->add_child( $child_component );
 			}
@@ -465,5 +465,55 @@ class WPBC_Oxygen_Parser implements WPBC_Parser_Interface {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Get framework name
+	 *
+	 * @return string Framework name.
+	 */
+	public function get_framework(): string {
+		return 'oxygen';
+	}
+
+	/**
+	 * Validate content (alias for interface compliance)
+	 *
+	 * @param mixed $content Content to validate.
+	 * @return bool True if valid.
+	 */
+	public function is_valid_content( $content ): bool {
+		return $this->validate( $content );
+	}
+
+	/**
+	 * Get supported component types
+	 *
+	 * @return array Supported types.
+	 */
+	public function get_supported_types(): array {
+		return [ 'section', 'div', 'heading', 'text', 'button', 'image', 'link', 'code' ];
+	}
+
+	/**
+	 * Parse single element (public interface method)
+	 *
+	 * @param mixed $element Element to parse.
+	 * @return WPBC_Component|null Parsed component or null.
+	 */
+	public function parse_element( $element ): ?WPBC_Component {
+		if ( is_string( $element ) ) {
+			$components = $this->parse( $element );
+			return $components[0] ?? null;
+		}
+
+		if ( is_array( $element ) ) {
+			// For array elements, parse them directly
+			// Note: This won't have full context of $all_elements, but it's needed for interface compliance
+			$components = $this->parse( json_encode( [ $element ] ) );
+			return $components[0] ?? null;
+		}
+
+		return null;
 	}
 }

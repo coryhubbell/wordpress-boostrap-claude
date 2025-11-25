@@ -67,8 +67,7 @@ function MonacoEditor({
 
     // Add custom commands
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
-      // Trigger save
-      console.log('Save triggered');
+      // Trigger save - placeholder for future save functionality
     });
   };
 

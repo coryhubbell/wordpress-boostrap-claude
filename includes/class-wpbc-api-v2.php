@@ -596,7 +596,10 @@ class WPBC_API_V2 {
         }
 
         // Fall back to WordPress user authentication
-        if (!is_user_logged_in()) {
+        // For REST API requests, check if user has valid nonce
+        $user_id = get_current_user_id();
+
+        if (!$user_id) {
             return new WP_Error(
                 'wpbc_auth_required',
                 'Authentication required. Provide an API key or log in.',

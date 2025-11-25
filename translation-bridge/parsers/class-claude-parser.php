@@ -103,7 +103,7 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 			$body = $dom->getElementsByTagName( 'body' )->item( 0 );
 			foreach ( $body->childNodes as $node ) {
 				if ( $node->nodeType === XML_ELEMENT_NODE ) {
-					$component = $this->parse_element( $node );
+					$component = $this->parse_dom_element( $node );
 					if ( $component ) {
 						$components[] = $component;
 					}
@@ -138,7 +138,7 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 	 * @param \DOMElement $element DOM element.
 	 * @return WPBC_Component|null Parsed component.
 	 */
-	private function parse_element( \DOMElement $element ): ?WPBC_Component {
+	private function parse_dom_element( \DOMElement $element ): ?WPBC_Component {
 		// Check for data-claude-editable attribute
 		$editable_type = $element->getAttribute( 'data-claude-editable' );
 
@@ -360,7 +360,7 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 		// Parse children
 		foreach ( $element->childNodes as $child ) {
 			if ( $child->nodeType === XML_ELEMENT_NODE ) {
-				$child_component = $this->parse_element( $child );
+				$child_component = $this->parse_dom_element( $child );
 				if ( $child_component ) {
 					$component->add_child( $child_component );
 				}
@@ -389,7 +389,7 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 		// Parse children (columns)
 		foreach ( $element->childNodes as $child ) {
 			if ( $child->nodeType === XML_ELEMENT_NODE ) {
-				$child_component = $this->parse_element( $child );
+				$child_component = $this->parse_dom_element( $child );
 				if ( $child_component ) {
 					$component->add_child( $child_component );
 				}
@@ -426,7 +426,7 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 		// Parse children
 		foreach ( $element->childNodes as $child ) {
 			if ( $child->nodeType === XML_ELEMENT_NODE ) {
-				$child_component = $this->parse_element( $child );
+				$child_component = $this->parse_dom_element( $child );
 				if ( $child_component ) {
 					$component->add_child( $child_component );
 				}
@@ -481,7 +481,7 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 		// Parse children if any
 		foreach ( $element->childNodes as $child ) {
 			if ( $child->nodeType === XML_ELEMENT_NODE ) {
-				$child_component = $this->parse_element( $child );
+				$child_component = $this->parse_dom_element( $child );
 				if ( $child_component ) {
 					$component->add_child( $child_component );
 				}
@@ -538,7 +538,7 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 	 */
 	public function parse_element( $element ): ?WPBC_Component {
 		if ( $element instanceof \DOMElement ) {
-			return $this->parse_element( $element );
+			return $this->parse_dom_element( $element );
 		}
 
 		if ( is_string( $element ) ) {

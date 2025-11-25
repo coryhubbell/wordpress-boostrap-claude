@@ -201,12 +201,6 @@ export const useEditorStore = create<EditorStoreState>()(
           set({ isTranslating: true });
 
           try {
-            console.log('Translation request:', {
-              source: sourceFramework,
-              target: targetFramework,
-              content: sourceCode.substring(0, 100) + '...',
-            });
-
             // Call WordPress REST API
             const response = await fetch('/wp-json/wpbc/v2/translate', {
               method: 'POST',
@@ -221,12 +215,8 @@ export const useEditorStore = create<EditorStoreState>()(
               }),
             });
 
-            console.log('Response status:', response.status, response.statusText);
-            console.log('Response headers:', Object.fromEntries(response.headers.entries()));
-
             // Get response text first
             const responseText = await response.text();
-            console.log('Response text:', responseText.substring(0, 500));
 
             // Check if response is JSON
             let data;
@@ -239,8 +229,6 @@ export const useEditorStore = create<EditorStoreState>()(
             if (!response.ok) {
               throw new Error(data.message || data.error || `HTTP ${response.status}: ${response.statusText}`);
             }
-
-            console.log('Translation response:', data);
 
             if (!data.result && !data.translated_code) {
               throw new Error('Translation succeeded but no result was returned');

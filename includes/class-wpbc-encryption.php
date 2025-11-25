@@ -51,7 +51,6 @@ class WPBC_Encryption {
 
         // Check if openssl is available
         if (!function_exists('openssl_encrypt')) {
-            error_log('WPBC Encryption: OpenSSL extension not available');
             return $data; // Return unencrypted if OpenSSL not available
         }
 
@@ -72,7 +71,6 @@ class WPBC_Encryption {
             );
 
             if ($encrypted === false) {
-                error_log('WPBC Encryption: Encryption failed');
                 return false;
             }
 
@@ -82,7 +80,6 @@ class WPBC_Encryption {
             return $result;
 
         } catch (Exception $e) {
-            error_log('WPBC Encryption error: ' . $e->getMessage());
             return false;
         }
     }
@@ -100,7 +97,6 @@ class WPBC_Encryption {
 
         // Check if openssl is available
         if (!function_exists('openssl_decrypt')) {
-            error_log('WPBC Encryption: OpenSSL extension not available');
             return $encrypted_data; // Return as-is if OpenSSL not available
         }
 
@@ -136,7 +132,6 @@ class WPBC_Encryption {
             return $decrypted;
 
         } catch (Exception $e) {
-            error_log('WPBC Decryption error: ' . $e->getMessage());
             return false;
         }
     }

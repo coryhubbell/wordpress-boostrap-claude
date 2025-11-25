@@ -626,4 +626,39 @@ class WPBC_Gutenberg_Parser implements WPBC_Parser_Interface {
 		// Check for Gutenberg block delimiters
 		return strpos( $content, '<!-- wp:' ) !== false;
 	}
+
+	/**
+	 * Get framework name
+	 */
+	public function get_framework(): string {
+		return 'gutenberg';
+	}
+
+	/**
+	 * Validate content
+	 */
+	public function is_valid_content( $content ): bool {
+		if ( is_array( $content ) ) {
+			$content = implode( "\n", $content );
+		}
+		return is_string( $content ) && ( strpos( $content, '<!-- wp:' ) !== false || strpos( $content, 'wp-block-' ) !== false );
+	}
+
+	/**
+	 * Get supported types
+	 */
+	public function get_supported_types(): array {
+		return [ 'paragraph', 'heading', 'button', 'image', 'list', 'quote', 'code', 'separator', 'spacer', 'columns', 'group' ];
+	}
+
+	/**
+	 * Parse single element
+	 */
+	public function parse_element( $element ): ?WPBC_Component {
+		if ( is_string( $element ) ) {
+			$components = $this->parse( $element );
+			return $components[0] ?? null;
+		}
+		return null;
+	}
 }

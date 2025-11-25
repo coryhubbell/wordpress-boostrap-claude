@@ -108,8 +108,37 @@ add_action('widgets_init', 'wpbc_register_sidebars');
  * Initialize Translation Bridge
  */
 function wpbc_init_translation_bridge() {
+    // Load Translation Bridge utils (must load first)
+    foreach (glob(WPBC_TRANSLATION_BRIDGE_DIR . '/utils/*.php') as $util_file) {
+        require_once $util_file;
+    }
+
+    // Load Translation Bridge interfaces
+    if (file_exists(WPBC_TRANSLATION_BRIDGE_DIR . '/core/interface-parser.php')) {
+        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/interface-parser.php';
+        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/interface-converter.php';
+    }
+
+    // Load Translation Bridge model classes
+    if (file_exists(WPBC_TRANSLATION_BRIDGE_DIR . '/models/class-component.php')) {
+        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/models/class-component.php';
+        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/models/class-attribute.php';
+        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/models/class-style.php';
+    }
+
+    // Load Translation Bridge parsers
+    foreach (glob(WPBC_TRANSLATION_BRIDGE_DIR . '/parsers/class-*-parser.php') as $parser_file) {
+        require_once $parser_file;
+    }
+
+    // Load Translation Bridge converters
+    foreach (glob(WPBC_TRANSLATION_BRIDGE_DIR . '/converters/class-*-converter.php') as $converter_file) {
+        require_once $converter_file;
+    }
+
     // Load Translation Bridge core classes
     if (file_exists(WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php')) {
+        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-mapping-engine.php';
         require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php';
         require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-parser-factory.php';
         require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-converter-factory.php';
@@ -127,6 +156,7 @@ function wpbc_init_translation_bridge() {
     // Load API v2
     if (file_exists(WPBC_INCLUDES_DIR . '/class-wpbc-api-v2.php')) {
         require_once WPBC_INCLUDES_DIR . '/class-wpbc-api-v2.php';
+        new WPBC_API_V2();
     }
 
     // Load Job Queue (for async batch processing)

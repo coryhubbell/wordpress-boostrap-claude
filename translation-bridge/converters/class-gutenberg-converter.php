@@ -57,7 +57,7 @@ class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
 	 * @param WPBC_Component $component Component to convert.
 	 * @return string Gutenberg block markup.
 	 */
-	private function convert_component( WPBC_Component $component ): string {
+	public function convert_component( WPBC_Component $component ): string {
 		$type = $component->type;
 
 		// Convert based on component type
@@ -521,5 +521,33 @@ class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
 		}
 
 		return $component instanceof WPBC_Component;
+	}
+
+	/**
+	 * Get framework name
+	 */
+	public function get_framework(): string {
+		return 'gutenberg';
+	}
+
+	/**
+	 * Get supported types
+	 */
+	public function get_supported_types(): array {
+		return [ 'paragraph', 'heading', 'button', 'image', 'list', 'quote', 'code', 'separator', 'spacer', 'columns', 'group' ];
+	}
+
+	/**
+	 * Check if type is supported
+	 */
+	public function supports_type( string $type ): bool {
+		return in_array( $type, $this->get_supported_types(), true );
+	}
+
+	/**
+	 * Get fallback conversion
+	 */
+	public function get_fallback( WPBC_Component $component ) {
+		return '<!-- wp:html -->' . "\n" . ( $component->content ?? '' ) . "\n" . '<!-- /wp:html -->';
 	}
 }

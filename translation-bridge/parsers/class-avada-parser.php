@@ -284,7 +284,7 @@ class WPBC_Avada_Parser implements WPBC_Parser_Interface {
 	 * @param array $element Element data.
 	 * @return WPBC_Component|null Parsed element component.
 	 */
-	private function parse_element( array $element ): ?WPBC_Component {
+	public function parse_element( $element ): ?WPBC_Component {
 		$tag = $element['tag'] ?? '';
 
 		// Remove fusion_ prefix to get element type
@@ -600,24 +600,5 @@ class WPBC_Avada_Parser implements WPBC_Parser_Interface {
 	 */
 	public function get_supported_types(): array {
 		return $this->supported_types;
-	}
-
-	/**
-	 * Parse single element
-	 *
-	 * @param mixed $element Avada shortcode or element data.
-	 * @return WPBC_Component|null Parsed component or null.
-	 */
-	public function parse_element( $element ): ?WPBC_Component {
-		if ( is_string( $element ) ) {
-			$components = $this->parse( $element );
-			return $components[0] ?? null;
-		}
-
-		if ( is_array( $element ) && isset( $element['tag'] ) ) {
-			return $this->parse_element( $element );
-		}
-
-		return null;
 	}
 }

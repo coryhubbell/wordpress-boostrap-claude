@@ -12,7 +12,6 @@ function Toolbar() {
 
   const handleSave = () => {
     // TODO: Implement save functionality
-    console.log('Save triggered');
   };
 
   const handleExport = () => {

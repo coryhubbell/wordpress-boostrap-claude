@@ -2,3 +2,9 @@ node_modules/
 .DS_Store
 *.log
 .env
+
+# Session and test files
+SESSION-*.md
+TEST-*.html
+**/clear-storage.html
+*DEBUG_NOTES.md

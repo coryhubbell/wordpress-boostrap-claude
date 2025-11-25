@@ -230,8 +230,6 @@ class WPBC_Visual_Interface {
 		$is_dev = defined( 'WP_DEBUG' ) && WP_DEBUG;
 		$vite_port = 3000;
 
-		// Log that we're rendering
-		error_log( 'WPBC Visual Interface: render_page() called, is_dev=' . ( $is_dev ? 'true' : 'false' ) );
 		?>
 		<!DOCTYPE html>
 		<html <?php language_attributes(); ?>>
@@ -283,11 +281,7 @@ class WPBC_Visual_Interface {
 					if ( isset( $main_entry['file'] ) ) {
 						echo '<script type="module" src="' . esc_url( $dist_url . '/' . $main_entry['file'] ) . '"></script>' . "\n";
 					}
-				} else {
-					error_log( 'WPBC Visual Interface: Main entry not found in manifest' );
 				}
-			} else {
-				error_log( 'WPBC Visual Interface: Manifest file not found at ' . $manifest_file );
 			}
 			?>
 			<?php endif; ?>

@@ -110,8 +110,19 @@ class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
 		foreach ( $component->children as $child ) {
 			if ( $child->type === 'column' ) {
 				$element['elements'][] = $this->convert_column( $child );
+			} elseif ( $child->type === 'row' ) {
+				// Row children: process the row's columns directly
+				foreach ( $child->children as $row_child ) {
+					if ( $row_child->type === 'column' ) {
+						$element['elements'][] = $this->convert_column( $row_child );
+					} else {
+						// Wrap non-column children in a column
+						$column = $this->create_column( [ $row_child ] );
+						$element['elements'][] = $column;
+					}
+				}
 			} else {
-				// Wrap non-column children in a column
+				// Wrap non-column, non-row children in a column
 				$column = $this->create_column( [ $child ] );
 				$element['elements'][] = $column;
 			}

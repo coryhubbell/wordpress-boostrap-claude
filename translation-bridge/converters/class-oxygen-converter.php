@@ -77,7 +77,7 @@ class WPBC_Oxygen_Converter implements WPBC_Converter_Interface {
 	 * @param int            $parent_id Parent element ID.
 	 * @return int Element ID of created element.
 	 */
-	private function convert_component( WPBC_Component $component, int $parent_id ): int {
+	public function convert_component( WPBC_Component $component, int $parent_id = 0 ) {
 		$type = $component->type;
 
 		// Map universal type to Oxygen element
@@ -353,5 +353,41 @@ class WPBC_Oxygen_Converter implements WPBC_Converter_Interface {
 		}
 
 		return $component instanceof WPBC_Component;
+	}
+
+	/**
+	 * Get framework name
+	 */
+	public function get_framework(): string {
+		return 'oxygen';
+	}
+
+	/**
+	 * Get supported types
+	 */
+	public function get_supported_types(): array {
+		return [ 'section', 'div', 'heading', 'text', 'button', 'image', 'link', 'code' ];
+	}
+
+	/**
+	 * Check if type is supported
+	 */
+	public function supports_type( string $type ): bool {
+		return in_array( $type, $this->get_supported_types(), true );
+	}
+
+	/**
+	 * Get fallback conversion
+	 */
+	public function get_fallback( WPBC_Component $component ) {
+		// Return as code block for unsupported types
+		return [
+			'id' => ++$this->current_id,
+			'name' => 'ct_code_block',
+			'options' => [
+				'code' => $component->content ?? '',
+			],
+			'children' => [],
+		];
 	}
 }

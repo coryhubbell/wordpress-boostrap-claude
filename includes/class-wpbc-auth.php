@@ -469,7 +469,6 @@ class WPBC_Auth {
 				// Encryption failed - keep original
 				$results['errors']++;
 				$updated_keys[$key_id] = $key_data;
-				error_log("WPBC: Failed to encrypt API key: $key_id");
 				continue;
 			}
 

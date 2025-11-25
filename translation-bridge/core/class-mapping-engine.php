@@ -669,20 +669,11 @@ class WPBC_Mapping_Engine {
 	 * @return array Fallback match.
 	 */
 	private function get_fallback_match( WPBC_Component $component, string $target_framework ): array {
-		// Intelligent fallback based on category
-		$fallback_types = [
-			'layout'      => 'container',
-			'content'     => 'text',
-			'media'       => 'div',
-			'interactive' => 'div',
-			'navigation'  => 'div',
-		];
-
-		$fallback_type = $fallback_types[ $component->category ] ?? 'div';
-
+		// When no mapping exists, preserve the original type
+		// This allows converters to handle type-specific logic
 		return [
 			'mapping'    => [
-				'universal_type' => $fallback_type,
+				'universal_type' => $component->type, // Preserve original type
 				'category'       => $component->category,
 				'fallback'       => true,
 			],

@@ -48,9 +48,10 @@ class WPBC_HTML_Helper {
 		}
 
 		// Load HTML with UTF-8 encoding
+		// Remove LIBXML_HTML_NOIMPLIED to allow proper body wrapping
 		$success = $dom->loadHTML(
 			'<?xml encoding="UTF-8">' . $html,
-			LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+			LIBXML_HTML_NODEFDTD
 		);
 
 		if ( $suppress_errors ) {

@@ -1044,16 +1044,6 @@ wpbc translate claude bootstrap hero-claude.html
 
 ---
 
-### **📚 CLI Documentation**
-
-For complete CLI documentation, see:
-
-- **[CLI_GUIDE.md](CLI_GUIDE.md)** - Complete command reference
-- **[INSTALLATION.md](INSTALLATION.md)** - Installation for all platforms
-- **[CLI_IMPLEMENTATION_SUMMARY.md](CLI_IMPLEMENTATION_SUMMARY.md)** - Technical details
-
----
-
 ### **🎯 CLI Features**
 
 ✅ **Production Quality**

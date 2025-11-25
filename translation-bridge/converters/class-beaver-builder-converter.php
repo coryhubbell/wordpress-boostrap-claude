@@ -77,7 +77,7 @@ class WPBC_Beaver_Builder_Converter implements WPBC_Converter_Interface {
 	 * @param int            $position Position within parent.
 	 * @return string Node ID of created node.
 	 */
-	private function convert_component( WPBC_Component $component, ?string $parent_id = null, int $position = 0 ): string {
+	public function convert_component( WPBC_Component $component, ?string $parent_id = null, int $position = 0 ) {
 		$type = $component->type;
 
 		// Convert based on component type
@@ -552,5 +552,34 @@ class WPBC_Beaver_Builder_Converter implements WPBC_Converter_Interface {
 		}
 
 		return $component instanceof WPBC_Component;
+	}
+
+	/**
+	 * Get framework name
+	 */
+	public function get_framework(): string {
+		return 'beaver-builder';
+	}
+
+	/**
+	 * Get supported types
+	 */
+	public function get_supported_types(): array {
+		return [ 'container', 'row', 'column', 'heading', 'text', 'button', 'image', 'video', 'html' ];
+	}
+
+	/**
+	 * Check if type is supported
+	 */
+	public function supports_type( string $type ): bool {
+		return in_array( $type, $this->get_supported_types(), true );
+	}
+
+	/**
+	 * Get fallback conversion
+	 */
+	public function get_fallback( WPBC_Component $component ) {
+		// Return raw HTML as fallback
+		return $component->content ?? '';
 	}
 }
