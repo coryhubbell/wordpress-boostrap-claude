@@ -1,7 +1,14 @@
 node_modules/
+vendor/
 .DS_Store
 *.log
 .env
+
+# Composer
+composer.phar
+
+# PHPUnit
+.phpunit.result.cache
 
 # Session and test files
 SESSION-*.md
