@@ -4,7 +4,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-3.2.2-blue.svg)
+![Version](https://img.shields.io/badge/version-3.2.3-blue.svg)
 ![CI](https://img.shields.io/github/actions/workflow/status/coryhubbell/wordpress-bootstrap-claude/ci.yml?label=CI)
 ![CLI](https://img.shields.io/badge/CLI-Production_Ready-success.svg)
 ![API](https://img.shields.io/badge/REST_API_v2-Live-success.svg)
@@ -68,6 +68,159 @@ make docker-up
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contributor guide.
+
+---
+
+## 🧠 **How It Works: The Complete Picture**
+
+WordPress Bootstrap Claude solves three fundamental problems in WordPress development:
+
+1. **Framework Lock-In**: You build a site in DIVI, client wants Elementor = 40 hours of rebuilding
+2. **Tedious UI Work**: Every style change requires clicking through menus and settings
+3. **No AI Integration**: Traditional page builders can't be edited with natural language
+
+**Our solution**: A universal translation engine + AI-optimized HTML format that enables a revolutionary workflow.
+
+### The Translation Bridge Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        TRANSLATION BRIDGE                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│  ┌──────────────┐     ┌──────────────┐     ┌──────────────────────┐    │
+│  │   SOURCE     │     │  UNIVERSAL   │     │      TARGET          │    │
+│  │  FRAMEWORK   │────▶│  COMPONENT   │────▶│     FRAMEWORK        │    │
+│  │              │     │    MODEL     │     │                      │    │
+│  └──────────────┘     └──────────────┘     └──────────────────────┘    │
+│                                                                          │
+│  Supported:           Internal Format:      Output Options:             │
+│  • Bootstrap HTML     • Sections            • Bootstrap HTML            │
+│  • DIVI Shortcodes    • Rows/Columns        • DIVI Modules              │
+│  • Elementor JSON     • Components          • Elementor Widgets         │
+│  • Avada Fusion       • Styles              • Avada Elements            │
+│  • Bricks JSON        • Content             • Bricks Components         │
+│  • WPBakery           • Settings            • WPBakery Elements         │
+│  • Beaver Builder                           • Beaver Modules            │
+│  • Gutenberg Blocks                         • Gutenberg Blocks          │
+│  • Oxygen JSON                              • Oxygen Elements           │
+│  • Claude AI HTML                           • Claude AI HTML            │
+│                                                                          │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+**How it works:**
+
+1. **Parser** reads your source file (DIVI shortcodes, Elementor JSON, etc.)
+2. **Universal Model** normalizes all elements to a common structure
+3. **Converter** generates output in your target framework's format
+
+**Result**: Any framework to any framework in ~30 seconds. 90 possible combinations.
+
+### The AI Workflow (Bootstrap → Claude → Edit → Deploy)
+
+This is the key innovation. The "Claude" framework is the 10th framework—it outputs HTML with special `data-claude-editable` attributes:
+
+```html
+<!-- Standard Bootstrap -->
+<section class="hero bg-primary py-5">
+  <h1>Welcome</h1>
+  <p>Your tagline here</p>
+</section>
+
+<!-- Claude-Optimized HTML -->
+<section class="hero bg-primary py-5" data-claude-editable="hero-section">
+  <h1 data-claude-editable="hero-title" data-claude-type="heading">Welcome</h1>
+  <p data-claude-editable="hero-text" data-claude-type="text">Your tagline here</p>
+</section>
+```
+
+**Why this matters:** Claude AI can now understand and modify specific elements by name. You can say:
+- *"Change hero-title to 'Transform Your Business'"* → Done instantly
+- *"Make hero-section background a gradient"* → Done instantly
+- *"Add a contact form below hero-text"* → Done instantly
+
+**The workflow:**
+```bash
+# Step 1: Convert ANY framework to Claude-optimized HTML
+./wpbc translate elementor claude landing-page.json
+
+# Step 2: Edit with natural language (using Claude Code or API)
+# "Add a pricing table with 3 tiers below the features section"
+
+# Step 3: Convert back to ANY framework
+./wpbc translate claude elementor updated-page.html
+./wpbc translate claude divi updated-page.html
+./wpbc translate claude bootstrap updated-page.html
+```
+
+---
+
+## 🚀 **Getting Started: Choose Your Path**
+
+### **Path A: CLI User (Translation Only)**
+
+*"I just want to convert between page builders. No WordPress needed."*
+
+```bash
+# Prerequisites: PHP 7.4+ only
+git clone https://github.com/coryhubbell/wordpress-bootstrap-claude.git
+cd wordpress-bootstrap-claude
+./setup.sh
+
+# Start translating immediately
+./wpbc translate bootstrap elementor my-page.html
+./wpbc translate divi wpbakery my-section.txt
+./wpbc translate-all bootstrap my-page.html  # All 9 frameworks
+```
+
+**What you get**: Command-line tool for instant framework translations.
+
+### **Path B: Contributor/Developer**
+
+*"I want to contribute, run tests, or build on this framework."*
+
+```bash
+# Prerequisites: PHP 7.4+, Composer 2.0+
+git clone https://github.com/coryhubbell/wordpress-bootstrap-claude.git
+cd wordpress-bootstrap-claude
+./setup.sh  # Installs dependencies, generates keys
+
+# Run the test suite
+make test
+
+# Start Docker development environment (optional)
+make docker-up
+# WordPress: http://localhost:8080
+# phpMyAdmin: http://localhost:8081
+
+# Start the Visual Interface dev server
+make admin-dev
+```
+
+**What you get**: Full development stack with PHPUnit tests, Docker, and React admin interface.
+
+### **Path C: API Integration**
+
+*"I want to integrate translation into my app or service."*
+
+```bash
+# Get API status
+curl https://yoursite.com/wp-json/wpbc/v2/status
+
+# List all frameworks
+curl https://yoursite.com/wp-json/wpbc/v2/frameworks
+
+# Translate content
+curl -X POST https://yoursite.com/wp-json/wpbc/v2/translate \
+  -H "X-API-Key: your_api_key" \
+  -H "Content-Type: application/json" \
+  -d '{"source": "bootstrap", "target": "elementor", "content": "<div>...</div>"}'
+```
+
+**What you get**: REST API with authentication, rate limiting, async batch processing.
+
+See [API Documentation](docs/api-v2.md) for full endpoint reference.
 
 ---
 
