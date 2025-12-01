@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Bootstrap Claude">
-	<description>WordPress Coding Standards for WPBC</description>
+<ruleset name="DevelopmentTranslation Bridge">
+	<description>WordPress Coding Standards for DEVTB</description>
 
 	<!-- What to scan -->
 	<file>includes/</file>
@@ -42,8 +42,8 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="wpbc"/>
-				<element value="wordpress-bootstrap-claude"/>
+				<element value="devtb"/>
+				<element value="development-translation-bridge"/>
 			</property>
 		</properties>
 	</rule>

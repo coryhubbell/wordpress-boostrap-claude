@@ -1,19 +1,19 @@
 <?php
 /**
- * WPBC Authentication Handler
+ * DEVTB Authentication Handler
  *
  * Manages API key generation, validation, and token-based authentication
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage API
  * @version    3.2.0
  */
 
-class WPBC_Auth {
+class DEVTB_Auth {
 	/**
 	 * Logger instance
 	 *
-	 * @var WPBC_Logger
+	 * @var DEVTB_Logger
 	 */
 	private $logger;
 
@@ -22,12 +22,12 @@ class WPBC_Auth {
 	 *
 	 * @var string
 	 */
-	private $key_prefix = 'wpbc_';
+	private $key_prefix = 'devtb_';
 
 	/**
 	 * Encryption utility
 	 *
-	 * @var WPBC_Encryption
+	 * @var DEVTB_Encryption
 	 */
 	private $encryption;
 
@@ -35,11 +35,11 @@ class WPBC_Auth {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->logger = new WPBC_Logger();
+		$this->logger = new DEVTB_Logger();
 
 		// Load encryption class
-		require_once __DIR__ . '/class-wpbc-encryption.php';
-		$this->encryption = new WPBC_Encryption();
+		require_once __DIR__ . '/class-devtb-encryption.php';
+		$this->encryption = new DEVTB_Encryption();
 	}
 
 	/**
@@ -209,7 +209,7 @@ class WPBC_Auth {
 
 		if ( ! $api_key ) {
 			return new WP_Error(
-				'wpbc_auth_missing_key',
+				'devtb_auth_missing_key',
 				'API key is required',
 				[ 'status' => 401 ]
 			);
@@ -219,7 +219,7 @@ class WPBC_Auth {
 
 		if ( ! $key_data ) {
 			return new WP_Error(
-				'wpbc_auth_invalid_key',
+				'devtb_auth_invalid_key',
 				'Invalid or expired API key',
 				[ 'status' => 401 ]
 			);
@@ -235,7 +235,7 @@ class WPBC_Auth {
 	 * @param array  $key_data Key data.
 	 */
 	private function store_api_key( string $key, array $key_data ) {
-		$option_name = 'wpbc_api_keys';
+		$option_name = 'devtb_api_keys';
 		$keys = get_option( $option_name, [] );
 
 		// Encrypt sensitive key data before storing
@@ -256,7 +256,7 @@ class WPBC_Auth {
 	 * @return array|null Key data or null.
 	 */
 	private function get_api_key( string $key ): ?array {
-		$option_name = 'wpbc_api_keys';
+		$option_name = 'devtb_api_keys';
 		$keys = get_option( $option_name, [] );
 
 		$key_data = $keys[ $key ] ?? null;
@@ -290,7 +290,7 @@ class WPBC_Auth {
 	 * @return array API keys.
 	 */
 	public function get_user_api_keys( int $user_id ): array {
-		$option_name = 'wpbc_api_keys';
+		$option_name = 'devtb_api_keys';
 		$all_keys = get_option( $option_name, [] );
 
 		$user_keys = [];
@@ -315,7 +315,7 @@ class WPBC_Auth {
 	 * @return int Number of keys removed.
 	 */
 	public function cleanup_old_keys( int $days = 30 ): int {
-		$option_name = 'wpbc_api_keys';
+		$option_name = 'devtb_api_keys';
 		$keys = get_option( $option_name, [] );
 
 		$cutoff = strtotime( "-{$days} days" );
@@ -352,7 +352,7 @@ class WPBC_Auth {
 	 * @param int $ttl     Time to live in seconds.
 	 * @return string Token.
 	 */
-	public function generate_temp_token( int $user_id, int $ttl = WPBC_Config::TOKEN_TTL_DEFAULT ): string {
+	public function generate_temp_token( int $user_id, int $ttl = DEVTB_Config::TOKEN_TTL_DEFAULT ): string {
 		$token = bin2hex( random_bytes( 32 ) );
 
 		$token_data = [
@@ -361,7 +361,7 @@ class WPBC_Auth {
 			'expires_at' => time() + $ttl,
 		];
 
-		set_transient( 'wpbc_temp_token_' . $token, $token_data, $ttl );
+		set_transient( 'devtb_temp_token_' . $token, $token_data, $ttl );
 
 		return $token;
 	}
@@ -373,7 +373,7 @@ class WPBC_Auth {
 	 * @return int|false User ID or false if invalid.
 	 */
 	public function validate_temp_token( string $token ) {
-		$token_data = get_transient( 'wpbc_temp_token_' . $token );
+		$token_data = get_transient( 'devtb_temp_token_' . $token );
 
 		if ( ! $token_data ) {
 			return false;
@@ -381,7 +381,7 @@ class WPBC_Auth {
 
 		// Check expiration
 		if ( time() > $token_data['expires_at'] ) {
-			delete_transient( 'wpbc_temp_token_' . $token );
+			delete_transient( 'devtb_temp_token_' . $token );
 			return false;
 		}
 
@@ -394,7 +394,7 @@ class WPBC_Auth {
 	 * @return array Statistics.
 	 */
 	public function get_stats(): array {
-		$option_name = 'wpbc_api_keys';
+		$option_name = 'devtb_api_keys';
 		$keys = get_option( $option_name, [] );
 
 		$stats = [
@@ -432,7 +432,7 @@ class WPBC_Auth {
 	 * @return array Migration results
 	 */
 	public function migrate_keys_to_encrypted(): array {
-		$option_name = 'wpbc_api_keys';
+		$option_name = 'devtb_api_keys';
 		$keys = get_option( $option_name, [] );
 
 		$results = [

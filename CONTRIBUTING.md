@@ -1,13 +1,13 @@
-# Contributing to WordPress Bootstrap Claude
+# Contributing to DevelopmentTranslation Bridge
 
-Thank you for your interest in contributing to WordPress Bootstrap Claude! This guide will help you get set up and contributing in under 5 minutes.
+Thank you for your interest in contributing to DevelopmentTranslation Bridge! This guide will help you get set up and contributing in under 5 minutes.
 
 ## Quick Start
 
 ```bash
 # Clone the repository
-git clone https://github.com/coryhubbell/wordpress-bootstrap-claude.git
-cd wordpress-bootstrap-claude
+git clone https://github.com/coryhubbell/development-translation-bridge.git
+cd development-translation-bridge
 
 # Run the setup script (installs dependencies, configures environment)
 ./setup.sh
@@ -18,7 +18,7 @@ make setup
 make test
 
 # Try a translation
-./wpbc translate bootstrap divi examples/hero-bootstrap.html
+./devtb translate bootstrap divi examples/hero-bootstrap.html
 ```
 
 That's it! You're ready to contribute.
@@ -49,7 +49,7 @@ If you just want to work on the translation engine or CLI:
 ```bash
 ./setup.sh
 make test
-./wpbc list-frameworks
+./devtb list-frameworks
 ```
 
 No WordPress or Docker needed!
@@ -79,7 +79,7 @@ composer install
 cp .env.example .env
 
 # Make CLI executable
-chmod +x wpbc
+chmod +x devtb
 
 # Run tests
 composer test
@@ -124,7 +124,7 @@ vendor/bin/phpunit --stop-on-failure
 ## Project Structure
 
 ```
-wordpress-bootstrap-claude/
+development-translation-bridge/
 ├── translation-bridge/          # Core translation engine
 │   ├── core/                    # Translation orchestration
 │   ├── parsers/                 # 10 framework parsers
@@ -133,8 +133,8 @@ wordpress-bootstrap-claude/
 │   └── utils/                   # Helper utilities
 │
 ├── includes/                    # WordPress integration
-│   ├── class-wpbc-cli.php       # CLI commands
-│   ├── class-wpbc-api-v2.php    # REST API v2
+│   ├── class-devtb-cli.php       # CLI commands
+│   ├── class-devtb-api-v2.php    # REST API v2
 │   ├── class-translator.php     # Main translator
 │   └── ...
 │
@@ -151,7 +151,7 @@ wordpress-bootstrap-claude/
 │
 ├── docs/                        # Documentation
 ├── examples/                    # Example files
-├── wpbc                         # CLI entry point
+├── devtb                         # CLI entry point
 ├── functions.php                # Theme entry point
 └── composer.json                # PHP dependencies
 ```
@@ -288,8 +288,8 @@ The Translation Bridge supports 10 page builder frameworks:
 
 ## Getting Help
 
-- **Issues**: [GitHub Issues](https://github.com/coryhubbell/wordpress-bootstrap-claude/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/coryhubbell/wordpress-bootstrap-claude/discussions)
+- **Issues**: [GitHub Issues](https://github.com/coryhubbell/development-translation-bridge/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/coryhubbell/development-translation-bridge/discussions)
 - **Documentation**: See `/docs/` directory
 
 ## License
@@ -298,4 +298,4 @@ By contributing, you agree that your contributions will be licensed under the GP
 
 ---
 
-Thank you for contributing to WordPress Bootstrap Claude!
+Thank you for contributing to DevelopmentTranslation Bridge!

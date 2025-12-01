@@ -2,11 +2,11 @@
 /**
  * Rate Limiter Unit Tests
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Tests
  */
 
-namespace WPBC\Tests\Unit;
+namespace DEVTB\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
@@ -18,8 +18,8 @@ class RateLimiterTest extends TestCase {
         parent::setUp();
 
         // Load the Rate Limiter class
-        require_once WPBC_INCLUDES . '/class-wpbc-rate-limiter.php';
-        $this->rate_limiter = new \WPBC_Rate_Limiter();
+        require_once DEVTB_INCLUDES . '/class-devtb-rate-limiter.php';
+        $this->rate_limiter = new \DEVTB_Rate_Limiter();
     }
 
     protected function tearDown(): void {

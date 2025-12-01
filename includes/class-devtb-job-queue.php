@@ -1,20 +1,20 @@
 <?php
 /**
- * WPBC Job Queue
+ * DEVTB Job Queue
  *
  * Handles async batch translation processing
  * Uses WordPress transients for job storage and WP Cron for scheduling
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage API
  * @version    3.2.0
  */
 
-class WPBC_Job_Queue {
+class DEVTB_Job_Queue {
     /**
      * Logger instance
      *
-     * @var WPBC_Logger
+     * @var DEVTB_Logger
      */
     private $logger;
 
@@ -29,17 +29,17 @@ class WPBC_Job_Queue {
      * Constructor
      */
     public function __construct() {
-        $this->logger = new WPBC_Logger();
+        $this->logger = new DEVTB_Logger();
 
         // Register cron hook for processing jobs
-        add_action('wpbc_process_batch_job', [$this, 'process_batch_job']);
+        add_action('devtb_process_batch_job', [$this, 'process_batch_job']);
 
         // Register cleanup hook
-        add_action('wpbc_cleanup_old_jobs', [$this, 'cleanup_old_jobs']);
+        add_action('devtb_cleanup_old_jobs', [$this, 'cleanup_old_jobs']);
 
         // Schedule cleanup if not already scheduled
-        if (!wp_next_scheduled('wpbc_cleanup_old_jobs')) {
-            wp_schedule_event(time(), 'daily', 'wpbc_cleanup_old_jobs');
+        if (!wp_next_scheduled('devtb_cleanup_old_jobs')) {
+            wp_schedule_event(time(), 'daily', 'devtb_cleanup_old_jobs');
         }
     }
 
@@ -53,7 +53,7 @@ class WPBC_Job_Queue {
      * @return string Job ID
      */
     public function create_job($source, $targets, $content, $options = []) {
-        $job_id = 'wpbc_' . uniqid() . '_' . time();
+        $job_id = 'devtb_' . uniqid() . '_' . time();
 
         $job_data = [
             'job_id'     => $job_id,
@@ -75,10 +75,10 @@ class WPBC_Job_Queue {
         ];
 
         // Store job data
-        set_transient('wpbc_job_' . $job_id, $job_data, $this->job_ttl);
+        set_transient('devtb_job_' . $job_id, $job_data, $this->job_ttl);
 
         // Schedule immediate processing
-        wp_schedule_single_event(time(), 'wpbc_process_batch_job', [$job_id]);
+        wp_schedule_single_event(time(), 'devtb_process_batch_job', [$job_id]);
 
         $this->logger->info('Batch job created', [
             'job_id'  => $job_id,
@@ -95,7 +95,7 @@ class WPBC_Job_Queue {
      * @param string $job_id Job ID
      */
     public function process_batch_job($job_id) {
-        $job = get_transient('wpbc_job_' . $job_id);
+        $job = get_transient('devtb_job_' . $job_id);
 
         if (!$job) {
             $this->logger->error('Job not found', ['job_id' => $job_id]);
@@ -114,7 +114,7 @@ class WPBC_Job_Queue {
 
         try {
             // Load translator
-            require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php';
+            require_once DEVTB_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php';
             $translator = new Translator();
 
             $start_time = microtime(true);
@@ -203,7 +203,7 @@ class WPBC_Job_Queue {
      * @return array|false Job data or false if not found
      */
     public function get_job($job_id) {
-        return get_transient('wpbc_job_' . $job_id);
+        return get_transient('devtb_job_' . $job_id);
     }
 
     /**
@@ -213,7 +213,7 @@ class WPBC_Job_Queue {
      * @param array  $job_data Job data
      */
     private function update_job($job_id, $job_data) {
-        set_transient('wpbc_job_' . $job_id, $job_data, $this->job_ttl);
+        set_transient('devtb_job_' . $job_id, $job_data, $this->job_ttl);
     }
 
     /**
@@ -299,11 +299,11 @@ class WPBC_Job_Queue {
     public function get_all_jobs($limit = 50) {
         global $wpdb;
 
-        // Get all WPBC job transients
+        // Get all DEVTB job transients
         $transients = $wpdb->get_results(
             "SELECT option_name, option_value
              FROM {$wpdb->options}
-             WHERE option_name LIKE '_transient_wpbc_job_%'
+             WHERE option_name LIKE '_transient_devtb_job_%'
              ORDER BY option_id DESC
              LIMIT {$limit}"
         );
@@ -361,8 +361,8 @@ class WPBC_Job_Queue {
                  WHERE option_name LIKE %s
                  AND option_name NOT LIKE %s
                  AND option_value < %d",
-                '_transient_timeout_wpbc_job_%',
-                '_transient_wpbc_job_%',
+                '_transient_timeout_devtb_job_%',
+                '_transient_devtb_job_%',
                 $cutoff
             )
         );
@@ -378,9 +378,9 @@ class WPBC_Job_Queue {
      * @param array $job Job data
      */
     private function trigger_webhook($job) {
-        // Use WPBC_Webhook class for secure webhook delivery
-        if (class_exists('WPBC_Webhook')) {
-            $webhook = new WPBC_Webhook();
+        // Use DEVTB_Webhook class for secure webhook delivery
+        if (class_exists('DEVTB_Webhook')) {
+            $webhook = new DEVTB_Webhook();
 
             // Prepare webhook payload
             $payload = [
@@ -429,6 +429,6 @@ class WPBC_Job_Queue {
 }
 
 // Initialize job queue
-if (class_exists('WPBC_Logger')) {
-    new WPBC_Job_Queue();
+if (class_exists('DEVTB_Logger')) {
+    new DEVTB_Job_Queue();
 }

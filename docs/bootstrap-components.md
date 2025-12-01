@@ -1,6 +1,6 @@
 # 📕 Bootstrap Components Guide
 
-Complete guide to using Bootstrap 5 components with WordPress Bootstrap Claude framework.
+Complete guide to using Bootstrap 5 components with DevelopmentTranslation Bridge framework.
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -17,7 +17,7 @@ Complete guide to using Bootstrap 5 components with WordPress Bootstrap Claude f
 
 ## Introduction
 
-WordPress Bootstrap Claude seamlessly integrates Bootstrap 5 components with WordPress functionality, providing:
+DevelopmentTranslation Bridge seamlessly integrates Bootstrap 5 components with WordPress functionality, providing:
 
 - **WordPress-aware components** - Integrated with WP data
 - **Reusable templates** - DRY principle
@@ -33,14 +33,14 @@ WordPress Bootstrap Claude seamlessly integrates Bootstrap 5 components with Wor
 
 ```php
 // Basic component usage
-wpbc_component('card', [
+devtb_component('card', [
     'title' => 'Card Title',
     'content' => 'Card content goes here',
     'link' => 'https://example.com'
 ]);
 
 // Component with WordPress data
-wpbc_component('post-card', [
+devtb_component('post-card', [
     'post' => get_post(),
     'show_excerpt' => true,
     'thumbnail_size' => 'medium'
@@ -120,12 +120,12 @@ $args = wp_parse_args($args, $defaults);
 
 // WordPress Loop with grid
 <?php
-$loop = new WPBC_Loop(['posts_per_page' => 9]);
+$loop = new DEVTB_Loop(['posts_per_page' => 9]);
 if ($loop->have_posts()) : ?>
     <div class="row">
         <?php while ($loop->have_posts()) : $loop->the_post(); ?>
             <div class="col-md-4 mb-4">
-                <?php wpbc_component('card'); ?>
+                <?php devtb_component('card'); ?>
             </div>
         <?php endwhile; ?>
     </div>
@@ -164,7 +164,7 @@ if ($loop->have_posts()) : ?>
 
 ```php
 // Basic card
-wpbc_component('card', [
+devtb_component('card', [
     'title' => get_the_title(),
     'content' => get_the_excerpt(),
     'image' => get_the_post_thumbnail_url(),
@@ -191,7 +191,7 @@ wpbc_component('card', [
     <ul class="list-group list-group-flush">
         <?php wp_list_categories([
             'title_li' => '',
-            'walker' => new WPBC_Bootstrap_Walker()
+            'walker' => new DEVTB_Bootstrap_Walker()
         ]); ?>
     </ul>
 </div>
@@ -202,7 +202,7 @@ wpbc_component('card', [
 ```php
 // FAQ Accordion
 <?php
-$faqs = new WPBC_Loop([
+$faqs = new DEVTB_Loop([
     'post_type' => 'faq',
     'posts_per_page' => -1
 ]);
@@ -378,7 +378,7 @@ $faqs = new WPBC_Loop([
                 'theme_location' => 'primary',
                 'menu_class' => 'navbar-nav ms-auto',
                 'container' => false,
-                'walker' => new WPBC_Bootstrap_Nav_Walker()
+                'walker' => new DEVTB_Bootstrap_Nav_Walker()
             ]);
             ?>
         </div>
@@ -390,7 +390,7 @@ $faqs = new WPBC_Loop([
 
 ```php
 // WordPress breadcrumb with Bootstrap styling
-function wpbc_breadcrumb() {
+function devtb_breadcrumb() {
     if (!is_home()) {
         echo '<nav aria-label="breadcrumb">';
         echo '<ol class="breadcrumb">';
@@ -425,7 +425,7 @@ function wpbc_breadcrumb() {
 
 ```php
 // Bootstrap pagination for WordPress
-function wpbc_pagination($query = null) {
+function devtb_pagination($query = null) {
     global $wp_query;
     $query = $query ?: $wp_query;
     
@@ -485,7 +485,7 @@ function wpbc_pagination($query = null) {
         <?php comments_template(); ?>
     </div>
     <div class="tab-pane fade" id="related">
-        <?php wpbc_related_posts(); ?>
+        <?php devtb_related_posts(); ?>
     </div>
 </div>
 ```
@@ -533,7 +533,7 @@ function wpbc_pagination($query = null) {
 ```php
 // Featured posts carousel
 <?php
-$featured = new WPBC_Loop([
+$featured = new DEVTB_Loop([
     'meta_key' => 'featured',
     'meta_value' => 'yes',
     'posts_per_page' => 5
@@ -591,7 +591,7 @@ $featured->reset();
         <i class="bi bi-person"></i> <?php the_author(); ?>
     </span>
     <span data-bs-toggle="tooltip" title="Reading Time">
-        <i class="bi bi-clock"></i> <?php echo wpbc_reading_time(); ?>
+        <i class="bi bi-clock"></i> <?php echo devtb_reading_time(); ?>
     </span>
 </div>
 
@@ -656,7 +656,7 @@ $args = wp_parse_args($args, $defaults);
 
 ```php
 // Display testimonials
-$testimonials = new WPBC_Loop([
+$testimonials = new DEVTB_Loop([
     'post_type' => 'testimonial',
     'posts_per_page' => 3
 ]);
@@ -665,7 +665,7 @@ if ($testimonials->have_posts()) : ?>
     <div class="row">
         <?php while ($testimonials->have_posts()) : $testimonials->the_post(); ?>
             <div class="col-md-4 mb-4">
-                <?php wpbc_component('testimonial', [
+                <?php devtb_component('testimonial', [
                     'author' => get_the_title(),
                     'company' => get_field('company'),
                     'content' => get_the_content(),
@@ -736,7 +736,7 @@ if ($testimonials->have_posts()) : ?>
 
 // Load components conditionally
 <?php if (is_front_page()) : ?>
-    <?php wpbc_component('hero'); ?>
+    <?php devtb_component('hero'); ?>
 <?php endif; ?>
 
 // Minimize DOM elements
@@ -764,7 +764,7 @@ esc_attr($attribute);    // Escape attributes
 <?php endif; ?>
 
 // Use WordPress hooks
-add_filter('wpbc_card_classes', function($classes) {
+add_filter('devtb_card_classes', function($classes) {
     $classes[] = 'shadow-sm';
     return $classes;
 });
@@ -778,14 +778,14 @@ add_filter('wpbc_card_classes', function($classes) {
 
 | Component | Function | File |
 |-----------|----------|------|
-| Card | `wpbc_component('card', $args)` | `/templates/components/card.php` |
-| Hero | `wpbc_component('hero', $args)` | `/templates/components/hero.php` |
-| CTA | `wpbc_component('cta', $args)` | `/templates/components/cta.php` |
-| Testimonial | `wpbc_component('testimonial', $args)` | `/templates/components/testimonial.php` |
-| Team Member | `wpbc_component('team-member', $args)` | `/templates/components/team-member.php` |
-| Pricing Table | `wpbc_component('pricing', $args)` | `/templates/components/pricing.php` |
-| Timeline | `wpbc_component('timeline', $args)` | `/templates/components/timeline.php` |
-| Stats Counter | `wpbc_component('stats', $args)` | `/templates/components/stats.php` |
+| Card | `devtb_component('card', $args)` | `/templates/components/card.php` |
+| Hero | `devtb_component('hero', $args)` | `/templates/components/hero.php` |
+| CTA | `devtb_component('cta', $args)` | `/templates/components/cta.php` |
+| Testimonial | `devtb_component('testimonial', $args)` | `/templates/components/testimonial.php` |
+| Team Member | `devtb_component('team-member', $args)` | `/templates/components/team-member.php` |
+| Pricing Table | `devtb_component('pricing', $args)` | `/templates/components/pricing.php` |
+| Timeline | `devtb_component('timeline', $args)` | `/templates/components/timeline.php` |
+| Stats Counter | `devtb_component('stats', $args)` | `/templates/components/stats.php` |
 
 ---
 

@@ -4,11 +4,11 @@
  *
  * Tests full translation workflows across multiple frameworks
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Tests
  */
 
-namespace WPBC\Tests\Integration;
+namespace DEVTB\Tests\Integration;
 
 use PHPUnit\Framework\TestCase;
 
@@ -20,8 +20,8 @@ class TranslationBridgeIntegrationTest extends TestCase {
         parent::setUp();
 
         // Load the Translation Bridge
-        require_once WPBC_TRANSLATION_BRIDGE . '/core/class-translator.php';
-        $this->translator = new \WPBC\TranslationBridge\Core\WPBC_Translator();
+        require_once DEVTB_TRANSLATION_BRIDGE . '/core/class-translator.php';
+        $this->translator = new \DEVTB\TranslationBridge\Core\DEVTB_Translator();
     }
 
     /**
@@ -131,7 +131,7 @@ class TranslationBridgeIntegrationTest extends TestCase {
      * Test translation from fixture file
      */
     public function test_translation_from_fixture_file() {
-        $fixture_path = WPBC_ROOT . '/tests/fixtures/bootstrap/simple-page.html';
+        $fixture_path = DEVTB_ROOT . '/tests/fixtures/bootstrap/simple-page.html';
 
         if (!file_exists($fixture_path)) {
             $this->markTestSkipped('Fixture file not found');
@@ -148,7 +148,7 @@ class TranslationBridgeIntegrationTest extends TestCase {
      * Test Elementor JSON fixture translation
      */
     public function test_elementor_json_fixture_translation() {
-        $fixture_path = WPBC_ROOT . '/tests/fixtures/elementor/simple-page.json';
+        $fixture_path = DEVTB_ROOT . '/tests/fixtures/elementor/simple-page.json';
 
         if (!file_exists($fixture_path)) {
             $this->markTestSkipped('Elementor fixture file not found');

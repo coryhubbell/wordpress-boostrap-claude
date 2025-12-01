@@ -1,15 +1,15 @@
 <?php
 /**
- * WPBC CLI Command Handler
+ * DEVTB CLI Command Handler
  *
  * Routes and executes CLI commands for the Translation Bridge
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage CLI
  * @version    3.2.1
  */
 
-class WPBC_CLI {
+class DEVTB_CLI {
 
 	/**
 	 * Command line arguments
@@ -42,7 +42,7 @@ class WPBC_CLI {
 	/**
 	 * Supported frameworks
 	 *
-	 * Uses WPBC_Config if available, otherwise falls back to local array.
+	 * Uses DEVTB_Config if available, otherwise falls back to local array.
 	 *
 	 * @var array
 	 */
@@ -62,16 +62,16 @@ class WPBC_CLI {
 	/**
 	 * Logger instance
 	 *
-	 * @var WPBC_Logger
+	 * @var DEVTB_Logger
 	 */
-	private WPBC_Logger $logger;
+	private DEVTB_Logger $logger;
 
 	/**
 	 * File handler instance
 	 *
-	 * @var WPBC_File_Handler
+	 * @var DEVTB_File_Handler
 	 */
-	private WPBC_File_Handler $file_handler;
+	private DEVTB_File_Handler $file_handler;
 
 	/**
 	 * Constructor
@@ -80,8 +80,8 @@ class WPBC_CLI {
 	 */
 	public function __construct( array $args ) {
 		$this->args         = $args;
-		$this->logger       = new WPBC_Logger();
-		$this->file_handler = new WPBC_File_Handler();
+		$this->logger       = new DEVTB_Logger();
+		$this->file_handler = new DEVTB_File_Handler();
 		$this->parse_arguments();
 	}
 
@@ -218,7 +218,7 @@ class WPBC_CLI {
 		}
 
 		$this->error( "Unknown command: {$this->command}" );
-		$this->info( "Run 'wpbc help' to see available commands." );
+		$this->info( "Run 'devtb help' to see available commands." );
 		return 1;
 	}
 
@@ -226,15 +226,15 @@ class WPBC_CLI {
 	 * Command: translate
 	 *
 	 * Translate from one framework to another.
-	 * Usage: wpbc translate <source-framework> <target-framework> <input-file> [options]
+	 * Usage: devtb translate <source-framework> <target-framework> <input-file> [options]
 	 *
 	 * @return int Exit code.
 	 */
 	private function command_translate(): int {
 		if ( count( $this->params ) < 3 ) {
 			$this->error( "Insufficient arguments for 'translate' command" );
-			$this->info( 'Usage: wpbc translate <source-framework> <target-framework> <input-file> [options]' );
-			$this->info( 'Example: wpbc translate bootstrap divi hero.html' );
+			$this->info( 'Usage: devtb translate <source-framework> <target-framework> <input-file> [options]' );
+			$this->info( 'Example: devtb translate bootstrap divi hero.html' );
 			return 1;
 		}
 
@@ -285,12 +285,12 @@ class WPBC_CLI {
 
             // Initialize Translation Bridge
             $this->info("🔄 Initializing Translation Bridge...");
-            require_once WPBC_TRANSLATION_BRIDGE . '/core/class-translator.php';
-            require_once WPBC_TRANSLATION_BRIDGE . '/core/class-parser-factory.php';
-            require_once WPBC_TRANSLATION_BRIDGE . '/core/class-converter-factory.php';
+            require_once DEVTB_TRANSLATION_BRIDGE . '/core/class-translator.php';
+            require_once DEVTB_TRANSLATION_BRIDGE . '/core/class-parser-factory.php';
+            require_once DEVTB_TRANSLATION_BRIDGE . '/core/class-converter-factory.php';
 
             try {
-                $translator = new \WPBC\TranslationBridge\Core\WPBC_Translator();
+                $translator = new \DEVTB\TranslationBridge\Core\DEVTB_Translator();
             } catch (\Exception $e) {
                 $this->error("Failed to initialize Translation Bridge: " . $e->getMessage());
                 return 1;
@@ -365,7 +365,7 @@ class WPBC_CLI {
                 $this->info("      • \"Make the heading larger and blue\"");
                 $this->info("      • \"Add a newsletter signup form\"");
                 $this->info("   3. Convert back to {$source}:");
-                $this->info("      wpbc translate claude {$source} {$output_file}");
+                $this->info("      devtb translate claude {$source} {$output_file}");
                 $this->info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
             }
 
@@ -389,15 +389,15 @@ class WPBC_CLI {
 	 * Command: translate-all
 	 *
 	 * Translate to all frameworks.
-	 * Usage: wpbc translate-all <source-framework> <input-file> [options]
+	 * Usage: devtb translate-all <source-framework> <input-file> [options]
 	 *
 	 * @return int Exit code.
 	 */
 	private function command_translate_all(): int {
 		if ( count( $this->params ) < 2 ) {
 			$this->error( "Insufficient arguments for 'translate-all' command" );
-			$this->info( 'Usage: wpbc translate-all <source-framework> <input-file> [options]' );
-			$this->info( 'Example: wpbc translate-all bootstrap hero.html' );
+			$this->info( 'Usage: devtb translate-all <source-framework> <input-file> [options]' );
+			$this->info( 'Example: devtb translate-all bootstrap hero.html' );
 			return 1;
 		}
 
@@ -458,8 +458,8 @@ class WPBC_CLI {
                 $input_content = $this->file_handler->read_file($input_file, $source);
 
                 // Translate
-                require_once WPBC_TRANSLATION_BRIDGE . '/core/class-translator.php';
-                $translator = new \WPBC\TranslationBridge\Core\WPBC_Translator();
+                require_once DEVTB_TRANSLATION_BRIDGE . '/core/class-translator.php';
+                $translator = new \DEVTB\TranslationBridge\Core\DEVTB_Translator();
                 $result = $translator->translate($input_content, $source, $target);
 
                 if ($result) {
@@ -534,8 +534,8 @@ class WPBC_CLI {
 	private function command_validate(): int {
 		if ( count( $this->params ) < 2 ) {
 			$this->error( "Insufficient arguments for 'validate' command" );
-			$this->info( 'Usage: wpbc validate <framework> <input-file>' );
-			$this->info( 'Example: wpbc validate bootstrap hero.html' );
+			$this->info( 'Usage: devtb validate <framework> <input-file>' );
+			$this->info( 'Example: devtb validate bootstrap hero.html' );
 			return 1;
 		}
 
@@ -560,8 +560,8 @@ class WPBC_CLI {
             // Read and parse
             $input_content = $this->file_handler->read_file($input_file, $framework);
 
-            require_once WPBC_TRANSLATION_BRIDGE . '/core/class-parser-factory.php';
-            $parser = \WPBC\TranslationBridge\Core\WPBC_Parser_Factory::create($framework);
+            require_once DEVTB_TRANSLATION_BRIDGE . '/core/class-parser-factory.php';
+            $parser = \DEVTB\TranslationBridge\Core\DEVTB_Parser_Factory::create($framework);
             $components = $parser->parse($input_content);
 
             if (empty($components)) {
@@ -603,8 +603,8 @@ class WPBC_CLI {
         $framework_count = count($this->frameworks);
         $translation_pairs = $framework_count * ($framework_count - 1);
 
-        echo $this->bold("WPBC - WordPress Bootstrap Claude") . PHP_EOL;
-        echo "Version: " . WPBC_VERSION . PHP_EOL;
+        echo $this->bold("DEVTB - DevelopmentTranslation Bridge") . PHP_EOL;
+        echo "Version: " . DEVTB_VERSION . PHP_EOL;
         echo "Translation Bridge™ - Universal Framework Translator" . PHP_EOL;
         echo PHP_EOL;
         echo "Supported Frameworks: {$framework_count}" . PHP_EOL;
@@ -624,11 +624,11 @@ class WPBC_CLI {
             return $this->show_command_help($command);
         }
 
-        echo $this->bold("WPBC - WordPress Bootstrap Claude CLI") . PHP_EOL;
+        echo $this->bold("DEVTB - DevelopmentTranslation Bridge CLI") . PHP_EOL;
         echo "Translation Bridge™ - Universal Framework Translator" . PHP_EOL;
         echo PHP_EOL;
         echo $this->bold("USAGE:") . PHP_EOL;
-        echo "  wpbc <command> [arguments] [options]" . PHP_EOL;
+        echo "  devtb <command> [arguments] [options]" . PHP_EOL;
         echo PHP_EOL;
         echo $this->bold("COMMANDS:") . PHP_EOL;
         echo "  " . $this->bold("translate") . " <source> <target> <file>" . PHP_EOL;
@@ -654,18 +654,18 @@ class WPBC_CLI {
         echo PHP_EOL;
         echo $this->bold("EXAMPLES:") . PHP_EOL;
         echo "  # Translate Bootstrap to DIVI" . PHP_EOL;
-        echo "  wpbc translate bootstrap divi hero.html" . PHP_EOL;
+        echo "  devtb translate bootstrap divi hero.html" . PHP_EOL;
         echo PHP_EOL;
         echo "  # Translate to all frameworks" . PHP_EOL;
-        echo "  wpbc translate-all bootstrap hero.html" . PHP_EOL;
+        echo "  devtb translate-all bootstrap hero.html" . PHP_EOL;
         echo PHP_EOL;
         echo "  # Convert to Claude AI-optimized HTML" . PHP_EOL;
-        echo "  wpbc translate elementor claude page.json" . PHP_EOL;
+        echo "  devtb translate elementor claude page.json" . PHP_EOL;
         echo PHP_EOL;
         echo "  # Validate a file" . PHP_EOL;
-        echo "  wpbc validate bootstrap hero.html" . PHP_EOL;
+        echo "  devtb validate bootstrap hero.html" . PHP_EOL;
         echo PHP_EOL;
-        echo "For more information: wpbc help <command>" . PHP_EOL;
+        echo "For more information: devtb help <command>" . PHP_EOL;
         echo PHP_EOL;
 
         return 0;

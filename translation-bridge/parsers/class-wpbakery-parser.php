@@ -10,24 +10,24 @@
  * - Responsive settings parsing
  * - Animation and styling support
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Parsers;
+namespace DEVTB\TranslationBridge\Parsers;
 
-use WPBC\TranslationBridge\Core\WPBC_Parser_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_Shortcode_Helper;
-use WPBC\TranslationBridge\Utils\WPBC_CSS_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Parser_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_Shortcode_Helper;
+use DEVTB\TranslationBridge\Utils\DEVTB_CSS_Helper;
 
 /**
- * Class WPBC_WPBakery_Parser
+ * Class DEVTB_WPBakery_Parser
  *
  * Parse WPBakery Page Builder shortcodes into universal components.
  */
-class WPBC_WPBakery_Parser implements WPBC_Parser_Interface {
+class DEVTB_WPBakery_Parser implements DEVTB_Parser_Interface {
 
 	/**
 	 * Supported WPBakery element types (50+ elements)
@@ -134,7 +134,7 @@ class WPBC_WPBakery_Parser implements WPBC_Parser_Interface {
 	 * Parse WPBakery shortcode content into universal components
 	 *
 	 * @param string|array $content WPBakery shortcode content.
-	 * @return WPBC_Component[] Array of parsed components.
+	 * @return DEVTB_Component[] Array of parsed components.
 	 */
 	public function parse( $content ): array {
 		if ( is_array( $content ) ) {
@@ -186,12 +186,12 @@ class WPBC_WPBakery_Parser implements WPBC_Parser_Interface {
 	 *
 	 * @param array  $attrs Row attributes.
 	 * @param string $inner Inner content.
-	 * @return WPBC_Component|null Parsed row component.
+	 * @return DEVTB_Component|null Parsed row component.
 	 */
-	private function parse_row( array $attrs, string $inner ): ?WPBC_Component {
+	private function parse_row( array $attrs, string $inner ): ?DEVTB_Component {
 		$attributes = $this->normalize_attributes( $attrs );
 
-		$row = new WPBC_Component([
+		$row = new DEVTB_Component([
 			'type'       => 'row',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -225,12 +225,12 @@ class WPBC_WPBakery_Parser implements WPBC_Parser_Interface {
 	 *
 	 * @param array  $attrs Section attributes.
 	 * @param string $inner Inner content.
-	 * @return WPBC_Component|null Parsed section component.
+	 * @return DEVTB_Component|null Parsed section component.
 	 */
-	private function parse_section( array $attrs, string $inner ): ?WPBC_Component {
+	private function parse_section( array $attrs, string $inner ): ?DEVTB_Component {
 		$attributes = $this->normalize_attributes( $attrs );
 
-		$section = new WPBC_Component([
+		$section = new DEVTB_Component([
 			'type'       => 'section',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -264,16 +264,16 @@ class WPBC_WPBakery_Parser implements WPBC_Parser_Interface {
 	 *
 	 * @param array  $attrs Column attributes.
 	 * @param string $inner Inner content.
-	 * @return WPBC_Component|null Parsed column component.
+	 * @return DEVTB_Component|null Parsed column component.
 	 */
-	private function parse_column( array $attrs, string $inner ): ?WPBC_Component {
+	private function parse_column( array $attrs, string $inner ): ?DEVTB_Component {
 		$attributes = $this->normalize_attributes( $attrs );
 
 		// Extract column width (1/1, 1/2, 1/3, etc.)
 		$width = $attrs['width'] ?? '1/1';
 		$attributes['width'] = $this->convert_vc_width( $width );
 
-		$column = new WPBC_Component([
+		$column = new DEVTB_Component([
 			'type'       => 'column',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -314,9 +314,9 @@ class WPBC_WPBakery_Parser implements WPBC_Parser_Interface {
 	 * @param string $tag       Element tag.
 	 * @param array  $attrs     Element attributes.
 	 * @param string $content   Element content.
-	 * @return WPBC_Component|null Parsed element component.
+	 * @return DEVTB_Component|null Parsed element component.
 	 */
-	private function parse_element_by_tag( string $tag, array $attrs, string $content ): ?WPBC_Component {
+	private function parse_element_by_tag( string $tag, array $attrs, string $content ): ?DEVTB_Component {
 		// Map WPBakery element type to universal type
 		$universal_type = $this->map_element_type( $tag );
 
@@ -329,7 +329,7 @@ class WPBC_WPBakery_Parser implements WPBC_Parser_Interface {
 		// Process content (remove nested shortcodes if needed)
 		$processed_content = do_shortcode( $content );
 
-		$component = new WPBC_Component([
+		$component = new DEVTB_Component([
 			'type'       => $universal_type,
 			'category'   => $this->get_category( $universal_type ),
 			'attributes' => $attributes,
@@ -352,11 +352,11 @@ class WPBC_WPBakery_Parser implements WPBC_Parser_Interface {
 	/**
 	 * Parse nested elements (tabs, accordion sections, etc.)
 	 *
-	 * @param WPBC_Component $parent  Parent component.
+	 * @param DEVTB_Component $parent  Parent component.
 	 * @param string         $content Content with nested shortcodes.
 	 * @param string         $parent_tag Parent shortcode tag.
 	 */
-	private function parse_nested_elements( WPBC_Component $parent, string $content, string $parent_tag ): void {
+	private function parse_nested_elements( DEVTB_Component $parent, string $content, string $parent_tag ): void {
 		// Determine child tag based on parent
 		$child_tags = [
 			'vc_tabs'          => 'vc_tab',
@@ -391,9 +391,9 @@ class WPBC_WPBakery_Parser implements WPBC_Parser_Interface {
 	 * Parse direct element (content without row/column structure)
 	 *
 	 * @param string $content Shortcode content.
-	 * @return WPBC_Component|null Parsed component.
+	 * @return DEVTB_Component|null Parsed component.
 	 */
-	private function parse_direct_element( string $content ): ?WPBC_Component {
+	private function parse_direct_element( string $content ): ?DEVTB_Component {
 		preg_match( '/' . get_shortcode_regex() . '/s', $content, $match );
 
 		if ( empty( $match ) ) {
@@ -683,9 +683,9 @@ class WPBC_WPBakery_Parser implements WPBC_Parser_Interface {
 	 * Parse single element
 	 *
 	 * @param mixed $element WPBakery shortcode or element data.
-	 * @return WPBC_Component|null Parsed component or null.
+	 * @return DEVTB_Component|null Parsed component or null.
 	 */
-	public function parse_element( $element ): ?WPBC_Component {
+	public function parse_element( $element ): ?DEVTB_Component {
 		if ( is_string( $element ) ) {
 			$components = $this->parse( $element );
 			return $components[0] ?? null;

@@ -4,35 +4,35 @@
  *
  * Creates appropriate parser instances based on framework name.
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Core;
+namespace DEVTB\TranslationBridge\Core;
 
-use WPBC\TranslationBridge\Parsers\WPBC_Bootstrap_Parser;
-use WPBC\TranslationBridge\Parsers\WPBC_DIVI_Parser;
-use WPBC\TranslationBridge\Parsers\WPBC_Elementor_Parser;
-use WPBC\TranslationBridge\Parsers\WPBC_Avada_Parser;
-use WPBC\TranslationBridge\Parsers\WPBC_Bricks_Parser;
-use WPBC\TranslationBridge\Parsers\WPBC_WPBakery_Parser;
-use WPBC\TranslationBridge\Parsers\WPBC_Beaver_Builder_Parser;
-use WPBC\TranslationBridge\Parsers\WPBC_Gutenberg_Parser;
-use WPBC\TranslationBridge\Parsers\WPBC_Oxygen_Parser;
-use WPBC\TranslationBridge\Parsers\WPBC_Claude_Parser;
+use DEVTB\TranslationBridge\Parsers\DEVTB_Bootstrap_Parser;
+use DEVTB\TranslationBridge\Parsers\DEVTB_DIVI_Parser;
+use DEVTB\TranslationBridge\Parsers\DEVTB_Elementor_Parser;
+use DEVTB\TranslationBridge\Parsers\DEVTB_Avada_Parser;
+use DEVTB\TranslationBridge\Parsers\DEVTB_Bricks_Parser;
+use DEVTB\TranslationBridge\Parsers\DEVTB_WPBakery_Parser;
+use DEVTB\TranslationBridge\Parsers\DEVTB_Beaver_Builder_Parser;
+use DEVTB\TranslationBridge\Parsers\DEVTB_Gutenberg_Parser;
+use DEVTB\TranslationBridge\Parsers\DEVTB_Oxygen_Parser;
+use DEVTB\TranslationBridge\Parsers\DEVTB_Claude_Parser;
 
 /**
- * Class WPBC_Parser_Factory
+ * Class DEVTB_Parser_Factory
  *
  * Factory for creating framework-specific parsers.
  */
-class WPBC_Parser_Factory {
+class DEVTB_Parser_Factory {
 
 	/**
 	 * Registered parsers
 	 *
-	 * @var array<string, WPBC_Parser_Interface>
+	 * @var array<string, DEVTB_Parser_Interface>
 	 */
 	private static array $parsers = [];
 
@@ -40,10 +40,10 @@ class WPBC_Parser_Factory {
 	 * Create parser for specified framework
 	 *
 	 * @param string $framework Framework name (bootstrap, divi, elementor, avada, bricks, wpbakery, claude).
-	 * @return WPBC_Parser_Interface|null Parser instance or null if not found.
+	 * @return DEVTB_Parser_Interface|null Parser instance or null if not found.
 	 * @throws \InvalidArgumentException If framework not supported.
 	 */
-	public static function create( string $framework ): ?WPBC_Parser_Interface {
+	public static function create( string $framework ): ?DEVTB_Parser_Interface {
 		$framework = strtolower( trim( $framework ) );
 
 		// Return cached parser if exists
@@ -66,49 +66,49 @@ class WPBC_Parser_Factory {
 	 * Create parser instance for framework
 	 *
 	 * @param string $framework Framework name.
-	 * @return WPBC_Parser_Interface|null
+	 * @return DEVTB_Parser_Interface|null
 	 */
-	private static function create_parser_instance( string $framework ): ?WPBC_Parser_Interface {
+	private static function create_parser_instance( string $framework ): ?DEVTB_Parser_Interface {
 		switch ( $framework ) {
 			case 'bootstrap':
-				return new WPBC_Bootstrap_Parser();
+				return new DEVTB_Bootstrap_Parser();
 
 			case 'divi':
-				return new WPBC_DIVI_Parser();
+				return new DEVTB_DIVI_Parser();
 
 			case 'elementor':
-				return new WPBC_Elementor_Parser();
+				return new DEVTB_Elementor_Parser();
 
 			case 'avada':
 			case 'fusion':
-				return new WPBC_Avada_Parser();
+				return new DEVTB_Avada_Parser();
 
 			case 'bricks':
-				return new WPBC_Bricks_Parser();
+				return new DEVTB_Bricks_Parser();
 
 			case 'wpbakery':
 			case 'vc':
 			case 'visualcomposer':
-				return new WPBC_WPBakery_Parser();
+				return new DEVTB_WPBakery_Parser();
 
 			case 'beaver':
 			case 'beaverbuilder':
 			case 'beaver-builder':
-				return new WPBC_Beaver_Builder_Parser();
+				return new DEVTB_Beaver_Builder_Parser();
 
 			case 'gutenberg':
 			case 'blocks':
 			case 'block-editor':
-				return new WPBC_Gutenberg_Parser();
+				return new DEVTB_Gutenberg_Parser();
 
 			case 'oxygen':
 			case 'oxygen-builder':
-				return new WPBC_Oxygen_Parser();
+				return new DEVTB_Oxygen_Parser();
 
 			case 'claude':
 			case 'claude-ai':
 			case 'ai':
-				return new WPBC_Claude_Parser();
+				return new DEVTB_Claude_Parser();
 
 			default:
 				return null;
@@ -138,10 +138,10 @@ class WPBC_Parser_Factory {
 	 * Register custom parser
 	 *
 	 * @param string                 $framework Framework name.
-	 * @param WPBC_Parser_Interface $parser Parser instance.
+	 * @param DEVTB_Parser_Interface $parser Parser instance.
 	 * @return void
 	 */
-	public static function register( string $framework, WPBC_Parser_Interface $parser ): void {
+	public static function register( string $framework, DEVTB_Parser_Interface $parser ): void {
 		self::$parsers[ strtolower( trim( $framework ) ) ] = $parser;
 	}
 
@@ -157,7 +157,7 @@ class WPBC_Parser_Factory {
 	/**
 	 * Get all registered parsers
 	 *
-	 * @return array<string, WPBC_Parser_Interface>
+	 * @return array<string, DEVTB_Parser_Interface>
 	 */
 	public static function get_all_parsers(): array {
 		// Ensure all parsers are instantiated

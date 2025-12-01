@@ -1,6 +1,6 @@
 # 📗 Claude Integration Guide
 
-Master the art of AI-powered WordPress development with Claude and the WordPress Bootstrap Claude framework.
+Master the art of AI-powered WordPress development with Claude and the DevelopmentTranslation Bridge framework.
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -15,7 +15,7 @@ Master the art of AI-powered WordPress development with Claude and the WordPress
 
 ## Introduction
 
-WordPress Bootstrap Claude is specifically designed to work seamlessly with Claude AI, allowing you to describe what you want in natural language and receive production-ready WordPress code.
+DevelopmentTranslation Bridge is specifically designed to work seamlessly with Claude AI, allowing you to describe what you want in natural language and receive production-ready WordPress code.
 
 ### Why Claude?
 
@@ -45,10 +45,10 @@ graph LR
 ### Framework Awareness
 
 Claude recognizes these framework features:
-- `WPBC_Loop` - Advanced loop implementation
-- `wpbc_component()` - Bootstrap component renderer
-- `wpbc_ajax()` - AJAX handler registration
-- `wpbc_api_route()` - REST API endpoints
+- `DEVTB_Loop` - Advanced loop implementation
+- `devtb_component()` - Bootstrap component renderer
+- `devtb_ajax()` - AJAX handler registration
+- `devtb_api_route()` - REST API endpoints
 - Framework file structure
 
 ---
@@ -58,28 +58,28 @@ Claude recognizes these framework features:
 ### The Perfect Prompt Formula
 
 ```
-"Using WordPress Bootstrap Claude, [action] [what] with [features] using [Bootstrap components]"
+"Using DevelopmentTranslation Bridge, [action] [what] with [features] using [Bootstrap components]"
 ```
 
 ### Examples of Good Prompts
 
 ✅ **Specific and Clear:**
 ```
-"Using WordPress Bootstrap Claude, create a Products custom post type 
+"Using DevelopmentTranslation Bridge, create a Products custom post type 
 with price, SKU, and gallery fields. Display in a Bootstrap card grid 
 with filtering by category and AJAX load more button."
 ```
 
 ✅ **References Framework Features:**
 ```
-"Using WordPress Bootstrap Claude's WPBC_Loop, create a featured posts 
+"Using DevelopmentTranslation Bridge's DEVTB_Loop, create a featured posts 
 section showing 3 posts with thumbnails in Bootstrap cards, ordered by 
 a custom 'priority' meta field."
 ```
 
 ✅ **Includes Technical Details:**
 ```
-"Using WordPress Bootstrap Claude, add an AJAX contact form with nonce 
+"Using DevelopmentTranslation Bridge, add an AJAX contact form with nonce 
 verification, honeypot field, and email validation. Show success/error 
 messages using Bootstrap alerts."
 ```
@@ -109,7 +109,7 @@ messages using Bootstrap alerts."
 
 **Prompt Template:**
 ```
-"Using WordPress Bootstrap Claude, create a [name] custom post type with 
+"Using DevelopmentTranslation Bridge, create a [name] custom post type with 
 [fields]. Include [taxonomies] and display using [Bootstrap component]."
 ```
 
@@ -125,7 +125,7 @@ messages using Bootstrap alerts."
 
 **Prompt Template:**
 ```
-"Using WordPress Bootstrap Claude, add AJAX [action] that [does what] 
+"Using DevelopmentTranslation Bridge, add AJAX [action] that [does what] 
 with [security measures] and [feedback]."
 ```
 
@@ -141,7 +141,7 @@ with [security measures] and [feedback]."
 
 **Prompt Template:**
 ```
-"Using WordPress Bootstrap Claude, create a Gutenberg block for [purpose] 
+"Using DevelopmentTranslation Bridge, create a Gutenberg block for [purpose] 
 with [controls] that outputs [Bootstrap component]."
 ```
 
@@ -157,7 +157,7 @@ with [controls] that outputs [Bootstrap component]."
 
 **Prompt Template:**
 ```
-"Using WordPress Bootstrap Claude, create a REST API endpoint at [route] 
+"Using DevelopmentTranslation Bridge, create a REST API endpoint at [route] 
 that [action] with [authentication] and returns [data]."
 ```
 
@@ -179,7 +179,7 @@ Break complex features into steps:
 
 **Step 1:** Create the foundation
 ```
-"Using WordPress Bootstrap Claude, create an Events custom post type 
+"Using DevelopmentTranslation Bridge, create an Events custom post type 
 with date, time, and location fields."
 ```
 
@@ -200,7 +200,7 @@ with loading animations."
 Combine multiple components:
 
 ```
-"Using WordPress Bootstrap Claude, create a hero section combining:
+"Using DevelopmentTranslation Bridge, create a hero section combining:
 - Bootstrap carousel for backgrounds
 - Overlay with heading and text
 - Call-to-action buttons
@@ -222,7 +222,7 @@ plugin that works with any theme, maintaining Bootstrap compatibility."
 
 ### 1. Always Reference the Framework
 
-Start prompts with "Using WordPress Bootstrap Claude" to ensure Claude uses framework patterns.
+Start prompts with "Using DevelopmentTranslation Bridge" to ensure Claude uses framework patterns.
 
 ### 2. Be Specific About Requirements
 
@@ -265,7 +265,7 @@ Start simple, then enhance:
 
 **Prompt:**
 ```
-"Using WordPress Bootstrap Claude, create a Portfolio system with:
+"Using DevelopmentTranslation Bridge, create a Portfolio system with:
 - Project custom post type
 - Categories for filtering
 - Custom fields: client, date, technologies used
@@ -287,7 +287,7 @@ Start simple, then enhance:
 
 **Prompt:**
 ```
-"Using WordPress Bootstrap Claude, create a testimonials feature:
+"Using DevelopmentTranslation Bridge, create a testimonials feature:
 - Testimonial CPT with author, company, rating
 - Bootstrap carousel display
 - Schema markup for SEO
@@ -306,7 +306,7 @@ Start simple, then enhance:
 
 **Prompt:**
 ```
-"Using WordPress Bootstrap Claude, create an advanced search:
+"Using DevelopmentTranslation Bridge, create an advanced search:
 - Search multiple post types
 - Filter by categories, tags, custom fields
 - AJAX live search results
@@ -333,7 +333,7 @@ For complex applications, break down into modules:
 
 ```
 "Let's build a membership site. Start with:
-1. User registration system using WordPress Bootstrap Claude"
+1. User registration system using DevelopmentTranslation Bridge"
 
 Then:
 "2. Add member dashboard with Bootstrap components"
@@ -381,7 +381,7 @@ Ask for clarification:
 
 Remind about the framework:
 ```
-"Please use WordPress Bootstrap Claude's WPBC_Loop class instead of WP_Query"
+"Please use DevelopmentTranslation Bridge's DEVTB_Loop class instead of WP_Query"
 ```
 
 ### If Missing Security

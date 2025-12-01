@@ -1,4 +1,4 @@
-# 🚀 WordPress Bootstrap Claude v3.0.0 - Translation Bridge™
+# 🚀 DevelopmentTranslation Bridge v3.0.0 - Translation Bridge™
 
 ## **World's First 5-Framework WordPress Translator**
 
@@ -154,20 +154,20 @@ README.md                                                    (5-framework update
 
 ### Installation
 ```bash
-git clone https://github.com/coryhubbell/wordpress-bootstrap-claude.git
-cd wordpress-bootstrap-claude
+git clone https://github.com/coryhubbell/development-translation-bridge.git
+cd development-translation-bridge
 ```
 
 ### Your First Translation
 ```bash
 # Convert Bootstrap to Elementor
-wpbc translate bootstrap elementor components/hero.html
+devtb translate bootstrap elementor components/hero.html
 
 # Convert DIVI to Avada
-wpbc translate divi avada sections/pricing.txt
+devtb translate divi avada sections/pricing.txt
 
 # Convert Elementor to Bricks
-wpbc translate elementor bricks widgets/testimonial.json
+devtb translate elementor bricks widgets/testimonial.json
 ```
 
 ### With Claude AI
@@ -251,9 +251,9 @@ ROI:                        2,900%
 - [docs/PLUGIN_CONVERSION.md](docs/PLUGIN_CONVERSION.md) - Plugin creation
 
 ### **Community**
-- 💬 Discord: [discord.gg/wpbc](https://discord.gg/wpbc)
-- 🐦 Twitter: [@WPBCFramework](https://twitter.com/WPBCFramework)
-- 📧 Email: support@wpbc.io
+- 💬 Discord: [discord.gg/devtb](https://discord.gg/devtb)
+- 🐦 Twitter: [@DEVTBFramework](https://twitter.com/DEVTBFramework)
+- 📧 Email: support@devtb.io
 
 ---
 
@@ -312,7 +312,7 @@ ROI:                        2,900%
 
 GPL v2.0 or later
 
-Translation Bridge™ is a trademark of WordPress Bootstrap Claude.
+Translation Bridge™ is a trademark of DevelopmentTranslation Bridge.
 
 ---
 
@@ -320,7 +320,7 @@ Translation Bridge™ is a trademark of WordPress Bootstrap Claude.
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/coryhubbell/wordpress-bootstrap-claude.git
+   git clone https://github.com/coryhubbell/development-translation-bridge.git
    ```
 
 2. **Read QUICK_START.md**
@@ -330,7 +330,7 @@ Translation Bridge™ is a trademark of WordPress Bootstrap Claude.
 
 3. **Run your first translation**
    ```bash
-   wpbc translate bootstrap elementor your-component.html
+   devtb translate bootstrap elementor your-component.html
    ```
 
 4. **Join the community**
@@ -342,13 +342,13 @@ Translation Bridge™ is a trademark of WordPress Bootstrap Claude.
 
 <div align="center">
 
-## **WordPress Bootstrap Claude v3.0.0**
+## **DevelopmentTranslation Bridge v3.0.0**
 
 ### **The Framework That Changes Everything**
 
 **5 Frameworks • 20 Translation Pairs • 98% Accuracy • 30-Second Conversions**
 
-**[⭐ Star on GitHub](https://github.com/coryhubbell/wordpress-bootstrap-claude) • [📖 Read Docs](docs/) • [💬 Get Support](https://discord.gg/wpbc)**
+**[⭐ Star on GitHub](https://github.com/coryhubbell/development-translation-bridge) • [📖 Read Docs](docs/) • [💬 Get Support](https://discord.gg/devtb)**
 
 Built with ❤️ by the WordPress community
 

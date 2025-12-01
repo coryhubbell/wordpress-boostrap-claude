@@ -1,19 +1,19 @@
 <?php
 /**
- * WPBC Visual Interface
+ * DEVTB Visual Interface
  *
  * Integrates the React-based visual editor into WordPress admin
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage Admin
  * @version    3.2.1
  */
 
-class WPBC_Visual_Interface {
+class DEVTB_Visual_Interface {
 	/**
 	 * Logger instance
 	 *
-	 * @var WPBC_Logger
+	 * @var DEVTB_Logger
 	 */
 	private $logger;
 
@@ -21,7 +21,7 @@ class WPBC_Visual_Interface {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->logger = new WPBC_Logger();
+		$this->logger = new DEVTB_Logger();
 
 		// Add admin menu
 		add_action( 'admin_menu', [ $this, 'add_admin_menu' ] );
@@ -39,13 +39,13 @@ class WPBC_Visual_Interface {
 	 */
 	public function maybe_render_page() {
 		// Check if we're on the Visual Interface page
-		if ( ! isset( $_GET['page'] ) || $_GET['page'] !== 'wpbc-visual-interface' ) {
+		if ( ! isset( $_GET['page'] ) || $_GET['page'] !== 'devtb-visual-interface' ) {
 			return;
 		}
 
 		// Check user permissions
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( __( 'You do not have permission to access this page.', 'wpbc' ) );
+			wp_die( __( 'You do not have permission to access this page.', 'devtb' ) );
 		}
 
 		// Render the page and exit before WordPress admin template loads
@@ -57,10 +57,10 @@ class WPBC_Visual_Interface {
 	 */
 	public function add_admin_menu() {
 		add_menu_page(
-			__( 'Visual Interface', 'wpbc' ),
-			__( 'Visual Interface', 'wpbc' ),
+			__( 'Visual Interface', 'devtb' ),
+			__( 'Visual Interface', 'devtb' ),
 			'manage_options',
-			'wpbc-visual-interface',
+			'devtb-visual-interface',
 			[ $this, 'render_page' ],
 			'dashicons-editor-code',
 			30
@@ -76,7 +76,7 @@ class WPBC_Visual_Interface {
 	 */
 	public function enqueue_scripts( $hook ) {
 		// Only load on our page
-		if ( $hook !== 'toplevel_page_wpbc-visual-interface' ) {
+		if ( $hook !== 'toplevel_page_devtb-visual-interface' ) {
 			return;
 		}
 
@@ -92,15 +92,15 @@ class WPBC_Visual_Interface {
 
 			// Localize script with WordPress data (production only)
 			wp_localize_script(
-				'wpbc-visual-interface',
-				'wpbcData',
+				'devtb-visual-interface',
+				'devtbData',
 				[
-					'restUrl'   => rest_url( 'wpbc/v2/' ),
+					'restUrl'   => rest_url( 'devtb/v2/' ),
 					'nonce'     => wp_create_nonce( 'wp_rest' ),
 					'userId'    => get_current_user_id(),
 					'siteUrl'   => get_site_url(),
 					'adminUrl'  => admin_url(),
-					'version'   => WPBC_THEME_VERSION,
+					'version'   => DEVTB_THEME_VERSION,
 				]
 			);
 		}
@@ -112,8 +112,8 @@ class WPBC_Visual_Interface {
 	 * @return int Vite dev server port.
 	 */
 	private function get_vite_port(): int {
-		if ( defined( 'WPBC_VITE_PORT' ) ) {
-			return (int) WPBC_VITE_PORT;
+		if ( defined( 'DEVTB_VITE_PORT' ) ) {
+			return (int) DEVTB_VITE_PORT;
 		}
 		return 3000;
 	}
@@ -125,7 +125,7 @@ class WPBC_Visual_Interface {
 	 */
 	private function get_vite_hosts(): array {
 		// Check if running in Docker mode
-		$docker_mode = defined( 'WPBC_VITE_DOCKER_MODE' ) && WPBC_VITE_DOCKER_MODE;
+		$docker_mode = defined( 'DEVTB_VITE_DOCKER_MODE' ) && DEVTB_VITE_DOCKER_MODE;
 
 		if ( $docker_mode ) {
 			// Docker mode: Try host.docker.internal first (macOS/Windows Docker Desktop)
@@ -144,7 +144,7 @@ class WPBC_Visual_Interface {
 	 */
 	private function get_vite_url(): string {
 		$port = $this->get_vite_port();
-		$host = defined( 'WPBC_VITE_HMR_HOST' ) ? WPBC_VITE_HMR_HOST : 'localhost';
+		$host = defined( 'DEVTB_VITE_HMR_HOST' ) ? DEVTB_VITE_HMR_HOST : 'localhost';
 		return "http://{$host}:{$port}";
 	}
 
@@ -181,23 +181,23 @@ class WPBC_Visual_Interface {
 
 		// Vite client
 		wp_enqueue_script(
-			'wpbc-vite-client',
+			'devtb-vite-client',
 			"{$vite_url}/@vite/client",
 			[],
 			null,
 			false
 		);
-		wp_script_add_data( 'wpbc-vite-client', 'type', 'module' );
+		wp_script_add_data( 'devtb-vite-client', 'type', 'module' );
 
 		// Main entry point
 		wp_enqueue_script(
-			'wpbc-visual-interface',
+			'devtb-visual-interface',
 			"{$vite_url}/src/main.tsx",
-			[ 'wpbc-vite-client' ],
+			[ 'devtb-vite-client' ],
 			null,
 			false
 		);
-		wp_script_add_data( 'wpbc-visual-interface', 'type', 'module' );
+		wp_script_add_data( 'devtb-visual-interface', 'type', 'module' );
 	}
 
 	/**
@@ -236,7 +236,7 @@ class WPBC_Visual_Interface {
 		if ( isset( $main_entry['css'] ) ) {
 			foreach ( $main_entry['css'] as $index => $css_file ) {
 				wp_enqueue_style(
-					"wpbc-visual-interface-{$index}",
+					"devtb-visual-interface-{$index}",
 					$dist_url . '/' . $css_file,
 					[],
 					null
@@ -247,13 +247,13 @@ class WPBC_Visual_Interface {
 		// Enqueue JS
 		if ( isset( $main_entry['file'] ) ) {
 			wp_enqueue_script(
-				'wpbc-visual-interface',
+				'devtb-visual-interface',
 				$dist_url . '/' . $main_entry['file'],
 				[],
 				null,
 				true
 			);
-			wp_script_add_data( 'wpbc-visual-interface', 'type', 'module' );
+			wp_script_add_data( 'devtb-visual-interface', 'type', 'module' );
 		}
 
 		$this->logger->info( 'Production scripts enqueued', [
@@ -280,21 +280,21 @@ class WPBC_Visual_Interface {
 		<head>
 			<meta charset="<?php bloginfo( 'charset' ); ?>">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title><?php _e( 'Visual Interface', 'wpbc' ); ?> - <?php bloginfo( 'name' ); ?></title>
+			<title><?php _e( 'Visual Interface', 'devtb' ); ?> - <?php bloginfo( 'name' ); ?></title>
 			<?php do_action( 'admin_print_styles' ); ?>
 		</head>
-		<body class="wpbc-visual-interface">
+		<body class="devtb-visual-interface">
 			<div id="root"></div>
 
 			<!-- WordPress Data -->
 			<script>
-				window.wpbcData = <?php echo json_encode( [
-					'restUrl'   => rest_url( 'wpbc/v2/' ),
+				window.devtbData = <?php echo json_encode( [
+					'restUrl'   => rest_url( 'devtb/v2/' ),
 					'nonce'     => wp_create_nonce( 'wp_rest' ),
 					'userId'    => get_current_user_id(),
 					'siteUrl'   => get_site_url(),
 					'adminUrl'  => admin_url(),
-					'version'   => defined( 'WPBC_THEME_VERSION' ) ? WPBC_THEME_VERSION : '3.2.2',
+					'version'   => defined( 'DEVTB_THEME_VERSION' ) ? DEVTB_THEME_VERSION : '3.2.2',
 				] ); ?>;
 			</script>
 

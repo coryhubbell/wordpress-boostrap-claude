@@ -10,24 +10,24 @@
  * - ID generation (brxeXXXXX format)
  * - Dynamic content support
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Converters;
+namespace DEVTB\TranslationBridge\Converters;
 
-use WPBC\TranslationBridge\Core\WPBC_Converter_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_JSON_Helper;
-use WPBC\TranslationBridge\Utils\WPBC_CSS_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Converter_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_JSON_Helper;
+use DEVTB\TranslationBridge\Utils\DEVTB_CSS_Helper;
 
 /**
- * Class WPBC_Bricks_Converter
+ * Class DEVTB_Bricks_Converter
  *
  * Convert universal components to Bricks JSON.
  */
-class WPBC_Bricks_Converter implements WPBC_Converter_Interface {
+class DEVTB_Bricks_Converter implements DEVTB_Converter_Interface {
 
 	/**
 	 * Element ID counter for unique IDs
@@ -39,7 +39,7 @@ class WPBC_Bricks_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert universal component to Bricks JSON
 	 *
-	 * @param WPBC_Component|array $component Component to convert.
+	 * @param DEVTB_Component|array $component Component to convert.
 	 * @return string|array Bricks JSON string or array.
 	 */
 	public function convert( $component ) {
@@ -52,7 +52,7 @@ class WPBC_Bricks_Converter implements WPBC_Converter_Interface {
 		$elements = [];
 
 		foreach ( $components as $comp ) {
-			if ( $comp instanceof WPBC_Component ) {
+			if ( $comp instanceof DEVTB_Component ) {
 				$element = $this->convert_component( $comp );
 				if ( $element ) {
 					$elements[] = $element;
@@ -66,10 +66,10 @@ class WPBC_Bricks_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert single component to Bricks element
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return array|null Bricks element array.
 	 */
-	public function convert_component( WPBC_Component $component ): ?array {
+	public function convert_component( DEVTB_Component $component ): ?array {
 		$type = $component->type;
 
 		// Map universal type to Bricks element
@@ -289,7 +289,7 @@ class WPBC_Bricks_Converter implements WPBC_Converter_Interface {
 
 		foreach ( $styles as $property => $value ) {
 			// Convert CSS property names to Bricks camelCase
-			$bricks_key = WPBC_CSS_Helper::convert_property_case( $property, 'camel' );
+			$bricks_key = DEVTB_CSS_Helper::convert_property_case( $property, 'camel' );
 
 			// Add to settings
 			$settings[ $bricks_key ] = $value;
@@ -305,7 +305,7 @@ class WPBC_Bricks_Converter implements WPBC_Converter_Interface {
 	 */
 	private function generate_id(): string {
 		$this->id_counter++;
-		return WPBC_JSON_Helper::generate_bricks_id( $this->id_counter );
+		return DEVTB_JSON_Helper::generate_bricks_id( $this->id_counter );
 	}
 
 	/**
@@ -363,10 +363,10 @@ class WPBC_Bricks_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Validate component can be converted
 	 *
-	 * @param WPBC_Component $component Component to validate.
+	 * @param DEVTB_Component $component Component to validate.
 	 * @return bool True if can be converted.
 	 */
-	public function can_convert( WPBC_Component $component ): bool {
+	public function can_convert( DEVTB_Component $component ): bool {
 		$supported = $this->get_supported_types();
 		return in_array( $component->type, $supported, true );
 	}
@@ -374,10 +374,10 @@ class WPBC_Bricks_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Get conversion confidence score
 	 *
-	 * @param WPBC_Component $component Component to evaluate.
+	 * @param DEVTB_Component $component Component to evaluate.
 	 * @return float Confidence score (0.0-1.0).
 	 */
-	public function get_confidence( WPBC_Component $component ): float {
+	public function get_confidence( DEVTB_Component $component ): float {
 		if ( ! $this->can_convert( $component ) ) {
 			return 0.0;
 		}
@@ -411,10 +411,10 @@ class WPBC_Bricks_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Get fallback conversion for unsupported component types
 	 *
-	 * @param WPBC_Component $component Unsupported component.
+	 * @param DEVTB_Component $component Unsupported component.
 	 * @return array Fallback Bricks element.
 	 */
-	public function get_fallback( WPBC_Component $component ) {
+	public function get_fallback( DEVTB_Component $component ) {
 		// Create a basic text element as fallback
 		$content = $component->content ? $component->content : 'Unsupported component type: ' . $component->type;
 

@@ -534,13 +534,13 @@ Real examples of converting components between the 5 supported frameworks.
 
 ```bash
 # Clone these examples
-git clone https://github.com/coryhubbell/wpbc-examples
-cd wpbc-examples
+git clone https://github.com/coryhubbell/devtb-examples
+cd devtb-examples
 
 # Try conversion
-wpbc translate bootstrap divi examples/hero.html
-wpbc translate elementor bricks examples/pricing.json
-wpbc translate avada bootstrap examples/testimonial.txt
+devtb translate bootstrap divi examples/hero.html
+devtb translate elementor bricks examples/pricing.json
+devtb translate avada bootstrap examples/testimonial.txt
 ```
 
 ---

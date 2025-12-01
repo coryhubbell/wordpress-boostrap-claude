@@ -2,11 +2,11 @@
 /**
  * Auth Class Unit Tests
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Tests
  */
 
-namespace WPBC\Tests\Unit;
+namespace DEVTB\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
@@ -18,8 +18,8 @@ class AuthTest extends TestCase {
         parent::setUp();
 
         // Load the Auth class
-        require_once WPBC_INCLUDES . '/class-wpbc-auth.php';
-        $this->auth = new \WPBC_Auth();
+        require_once DEVTB_INCLUDES . '/class-devtb-auth.php';
+        $this->auth = new \DEVTB_Auth();
     }
 
     /**
@@ -30,7 +30,7 @@ class AuthTest extends TestCase {
 
         $this->assertIsString($key);
         $this->assertGreaterThan(20, strlen($key));
-        $this->assertStringStartsWith('wpbc_', $key);
+        $this->assertStringStartsWith('devtb_', $key);
     }
 
     public function test_generate_api_key_creates_unique_keys() {
@@ -87,12 +87,12 @@ class AuthTest extends TestCase {
      */
     public function test_validate_api_key_format() {
         $valid_keys = [
-            'wpbc_1234567890abcdef',
-            'wpbc_' . bin2hex(random_bytes(24)),
+            'devtb_1234567890abcdef',
+            'devtb_' . bin2hex(random_bytes(24)),
         ];
 
         foreach ($valid_keys as $key) {
-            $this->assertStringStartsWith('wpbc_', $key);
+            $this->assertStringStartsWith('devtb_', $key);
             $this->assertGreaterThan(20, strlen($key));
         }
     }
@@ -106,7 +106,7 @@ class AuthTest extends TestCase {
         $result = $this->auth->authenticate_request($request);
 
         $this->assertInstanceOf(\WP_Error::class, $result);
-        $this->assertEquals('wpbc_auth_missing_key', $result->get_error_code());
+        $this->assertEquals('devtb_auth_missing_key', $result->get_error_code());
     }
 
     /**

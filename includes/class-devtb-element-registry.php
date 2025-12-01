@@ -1,16 +1,16 @@
 <?php
 /**
- * WPBC Element Registry
+ * DEVTB Element Registry
  *
  * Manages custom and third-party WPBakery elements
  * Allows dynamic registration of element types and their mappings
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage WPBakery
  * @version    3.2.0
  */
 
-class WPBC_Element_Registry {
+class DEVTB_Element_Registry {
 	/**
 	 * Registered custom elements
 	 *
@@ -28,7 +28,7 @@ class WPBC_Element_Registry {
 	/**
 	 * Logger instance
 	 *
-	 * @var WPBC_Logger
+	 * @var DEVTB_Logger
 	 */
 	private $logger;
 
@@ -36,7 +36,7 @@ class WPBC_Element_Registry {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->logger = new WPBC_Logger();
+		$this->logger = new DEVTB_Logger();
 		$this->register_default_addons();
 	}
 
@@ -330,6 +330,6 @@ class WPBC_Element_Registry {
 }
 
 // Initialize element registry
-if ( class_exists( 'WPBC_Logger' ) ) {
-	new WPBC_Element_Registry();
+if ( class_exists( 'DEVTB_Logger' ) ) {
+	new DEVTB_Element_Registry();
 }

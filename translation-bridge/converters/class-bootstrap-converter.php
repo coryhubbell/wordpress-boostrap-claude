@@ -10,29 +10,29 @@
  * - Clean, semantic HTML
  * - Accessibility support
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Converters;
+namespace DEVTB\TranslationBridge\Converters;
 
-use WPBC\TranslationBridge\Core\WPBC_Converter_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_HTML_Helper;
-use WPBC\TranslationBridge\Utils\WPBC_CSS_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Converter_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_HTML_Helper;
+use DEVTB\TranslationBridge\Utils\DEVTB_CSS_Helper;
 
 /**
- * Class WPBC_Bootstrap_Converter
+ * Class DEVTB_Bootstrap_Converter
  *
  * Convert universal components to Bootstrap 5.3.3 HTML.
  */
-class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
+class DEVTB_Bootstrap_Converter implements DEVTB_Converter_Interface {
 
 	/**
 	 * Convert universal component(s) to Bootstrap HTML
 	 *
-	 * @param WPBC_Component|WPBC_Component[] $component Component(s) to convert.
+	 * @param DEVTB_Component|DEVTB_Component[] $component Component(s) to convert.
 	 * @return string Bootstrap HTML output.
 	 */
 	public function convert( $component ): string {
@@ -52,10 +52,10 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert single component to Bootstrap HTML
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string Bootstrap HTML.
 	 */
-	public function convert_component( WPBC_Component $component ): string {
+	public function convert_component( DEVTB_Component $component ): string {
 		$type = $component->type;
 
 		// Route to specific converter based on type
@@ -72,10 +72,10 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert button component
 	 *
-	 * @param WPBC_Component $component Button component.
+	 * @param DEVTB_Component $component Button component.
 	 * @return string Button HTML.
 	 */
-	private function convert_button( WPBC_Component $component ): string {
+	private function convert_button( DEVTB_Component $component ): string {
 		$classes = [ 'btn' ];
 
 		// Variant
@@ -120,10 +120,10 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 
 		// Add inline styles if present
 		if ( ! empty( $component->styles ) ) {
-			$attributes['style'] = WPBC_CSS_Helper::to_inline( $component->styles );
+			$attributes['style'] = DEVTB_CSS_Helper::to_inline( $component->styles );
 		}
 
-		return WPBC_HTML_Helper::build_element(
+		return DEVTB_HTML_Helper::build_element(
 			$tag,
 			$attributes,
 			$component->content
@@ -133,10 +133,10 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert card component
 	 *
-	 * @param WPBC_Component $component Card component.
+	 * @param DEVTB_Component $component Card component.
 	 * @return string Card HTML.
 	 */
-	private function convert_card( WPBC_Component $component ): string {
+	private function convert_card( DEVTB_Component $component ): string {
 		$classes = [ 'card' ];
 
 		// Color variant
@@ -182,10 +182,10 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert container component
 	 *
-	 * @param WPBC_Component $component Container component.
+	 * @param DEVTB_Component $component Container component.
 	 * @return string Container HTML.
 	 */
-	private function convert_container( WPBC_Component $component ): string {
+	private function convert_container( DEVTB_Component $component ): string {
 		$grid = $component->get_attribute( 'grid', [] );
 
 		$classes = [];
@@ -213,7 +213,7 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 
 		// Add inline styles
 		if ( ! empty( $component->styles ) ) {
-			$attributes['style'] = WPBC_CSS_Helper::to_inline( $component->styles );
+			$attributes['style'] = DEVTB_CSS_Helper::to_inline( $component->styles );
 		}
 
 		// Convert children
@@ -222,16 +222,16 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 			$inner_html .= $this->convert_component( $child );
 		}
 
-		return WPBC_HTML_Helper::build_element( 'div', $attributes, $inner_html );
+		return DEVTB_HTML_Helper::build_element( 'div', $attributes, $inner_html );
 	}
 
 	/**
 	 * Convert row component
 	 *
-	 * @param WPBC_Component $component Row component.
+	 * @param DEVTB_Component $component Row component.
 	 * @return string Row HTML.
 	 */
-	private function convert_row( WPBC_Component $component ): string {
+	private function convert_row( DEVTB_Component $component ): string {
 		$classes = [ 'row' ];
 
 		// Add utilities
@@ -254,16 +254,16 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 			$inner_html .= $this->convert_component( $child );
 		}
 
-		return WPBC_HTML_Helper::build_element( 'div', $attributes, $inner_html );
+		return DEVTB_HTML_Helper::build_element( 'div', $attributes, $inner_html );
 	}
 
 	/**
 	 * Convert column component
 	 *
-	 * @param WPBC_Component $component Column component.
+	 * @param DEVTB_Component $component Column component.
 	 * @return string Column HTML.
 	 */
-	private function convert_column( WPBC_Component $component ): string {
+	private function convert_column( DEVTB_Component $component ): string {
 		$classes = [];
 
 		// Grid configuration
@@ -306,16 +306,16 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 			$inner_html .= $this->convert_component( $child );
 		}
 
-		return WPBC_HTML_Helper::build_element( 'div', $attributes, $inner_html );
+		return DEVTB_HTML_Helper::build_element( 'div', $attributes, $inner_html );
 	}
 
 	/**
 	 * Convert heading component
 	 *
-	 * @param WPBC_Component $component Heading component.
+	 * @param DEVTB_Component $component Heading component.
 	 * @return string Heading HTML.
 	 */
-	private function convert_heading( WPBC_Component $component ): string {
+	private function convert_heading( DEVTB_Component $component ): string {
 		$level = $component->get_attribute( 'level', 2 );
 		$tag = 'h' . min( 6, max( 1, $level ) );
 
@@ -340,10 +340,10 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 
 		// Add inline styles
 		if ( ! empty( $component->styles ) ) {
-			$attributes['style'] = WPBC_CSS_Helper::to_inline( $component->styles );
+			$attributes['style'] = DEVTB_CSS_Helper::to_inline( $component->styles );
 		}
 
-		return WPBC_HTML_Helper::build_element(
+		return DEVTB_HTML_Helper::build_element(
 			$tag,
 			$attributes,
 			esc_html( $component->content )
@@ -353,10 +353,10 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert text/paragraph component
 	 *
-	 * @param WPBC_Component $component Text component.
+	 * @param DEVTB_Component $component Text component.
 	 * @return string Text HTML.
 	 */
-	private function convert_text( WPBC_Component $component ): string {
+	private function convert_text( DEVTB_Component $component ): string {
 		$classes = [];
 
 		// Alignment
@@ -378,10 +378,10 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 
 		// Add inline styles
 		if ( ! empty( $component->styles ) ) {
-			$attributes['style'] = WPBC_CSS_Helper::to_inline( $component->styles );
+			$attributes['style'] = DEVTB_CSS_Helper::to_inline( $component->styles );
 		}
 
-		return WPBC_HTML_Helper::build_element(
+		return DEVTB_HTML_Helper::build_element(
 			'p',
 			$attributes,
 			wp_kses_post( $component->content )
@@ -391,10 +391,10 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert image component
 	 *
-	 * @param WPBC_Component $component Image component.
+	 * @param DEVTB_Component $component Image component.
 	 * @return string Image HTML.
 	 */
-	private function convert_image( WPBC_Component $component ): string {
+	private function convert_image( DEVTB_Component $component ): string {
 		$classes = [ 'img-fluid' ]; // Responsive by default
 
 		$attributes = [
@@ -409,16 +409,16 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 			$attributes['title'] = $title;
 		}
 
-		return WPBC_HTML_Helper::build_element( 'img', $attributes, '', true );
+		return DEVTB_HTML_Helper::build_element( 'img', $attributes, '', true );
 	}
 
 	/**
 	 * Convert alert component
 	 *
-	 * @param WPBC_Component $component Alert component.
+	 * @param DEVTB_Component $component Alert component.
 	 * @return string Alert HTML.
 	 */
-	private function convert_alert( WPBC_Component $component ): string {
+	private function convert_alert( DEVTB_Component $component ): string {
 		$classes = [ 'alert' ];
 
 		// Variant
@@ -451,10 +451,10 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert divider component
 	 *
-	 * @param WPBC_Component $component Divider component.
+	 * @param DEVTB_Component $component Divider component.
 	 * @return string Divider HTML.
 	 */
-	private function convert_divider( WPBC_Component $component ): string {
+	private function convert_divider( DEVTB_Component $component ): string {
 		$classes = [];
 
 		// Add any utility classes
@@ -472,16 +472,16 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 			$attributes['class'] = implode( ' ', $classes );
 		}
 
-		return WPBC_HTML_Helper::build_element( 'hr', $attributes, '', true );
+		return DEVTB_HTML_Helper::build_element( 'hr', $attributes, '', true );
 	}
 
 	/**
 	 * Generic component conversion
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string HTML output.
 	 */
-	private function convert_generic( WPBC_Component $component ): string {
+	private function convert_generic( DEVTB_Component $component ): string {
 		$tag = $component->get_metadata( 'original_tag', 'div' );
 
 		$attributes = [];
@@ -494,7 +494,7 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 
 		// Add inline styles
 		if ( ! empty( $component->styles ) ) {
-			$attributes['style'] = WPBC_CSS_Helper::to_inline( $component->styles );
+			$attributes['style'] = DEVTB_CSS_Helper::to_inline( $component->styles );
 		}
 
 		// Convert children
@@ -503,7 +503,7 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 			$inner_html .= $this->convert_component( $child );
 		}
 
-		return WPBC_HTML_Helper::build_element( $tag, $attributes, $inner_html );
+		return DEVTB_HTML_Helper::build_element( $tag, $attributes, $inner_html );
 	}
 
 	/**
@@ -578,13 +578,13 @@ class WPBC_Bootstrap_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Get fallback HTML for unsupported component
 	 *
-	 * @param WPBC_Component $component Unsupported component.
+	 * @param DEVTB_Component $component Unsupported component.
 	 * @return string Fallback HTML.
 	 */
-	public function get_fallback( WPBC_Component $component ): string {
+	public function get_fallback( DEVTB_Component $component ): string {
 		// Fallback to div with content
 		return sprintf(
-			'<div class="wpbc-fallback" data-original-type="%s">%s</div>',
+			'<div class="devtb-fallback" data-original-type="%s">%s</div>',
 			esc_attr( $component->type ),
 			wp_kses_post( $component->content )
 		);

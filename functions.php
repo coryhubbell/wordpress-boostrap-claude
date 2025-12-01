@@ -1,11 +1,11 @@
 <?php
 /**
- * WordPress Bootstrap Claude Theme Functions
+ * DevelopmentTranslation Bridge Theme Functions
  *
- * Registers the Translation Bridge™ with WordPress and provides
+ * Registers the Translation Bridge with WordPress and provides
  * admin interface integration.
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @version    3.3.0
  * @license    GPL-2.0+
  */
@@ -16,17 +16,17 @@ if (!defined('ABSPATH')) {
 }
 
 // Define theme constants
-define('WPBC_THEME_VERSION', '3.3.0');
-define('WPBC_ROOT', get_template_directory());
-define('WPBC_THEME_DIR', get_template_directory());
-define('WPBC_THEME_URL', get_template_directory_uri());
-define('WPBC_TRANSLATION_BRIDGE_DIR', WPBC_THEME_DIR . '/translation-bridge');
-define('WPBC_INCLUDES_DIR', WPBC_THEME_DIR . '/includes');
+define('DEVTB_THEME_VERSION', '3.3.0');
+define('DEVTB_ROOT', get_template_directory());
+define('DEVTB_THEME_DIR', get_template_directory());
+define('DEVTB_THEME_URL', get_template_directory_uri());
+define('DEVTB_TRANSLATION_BRIDGE_DIR', DEVTB_THEME_DIR . '/translation-bridge');
+define('DEVTB_INCLUDES_DIR', DEVTB_THEME_DIR . '/includes');
 
 /**
  * Theme Setup
  */
-function wpbc_theme_setup() {
+function devtb_theme_setup() {
     // Add theme support
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
@@ -43,8 +43,8 @@ function wpbc_theme_setup() {
 
     // Register navigation menus
     register_nav_menus([
-        'primary' => __('Primary Menu', 'wpbc'),
-        'footer'  => __('Footer Menu', 'wpbc'),
+        'primary' => __('Primary Menu', 'devtb'),
+        'footer'  => __('Footer Menu', 'devtb'),
     ]);
 
     // Set content width (WordPress global)
@@ -53,39 +53,39 @@ function wpbc_theme_setup() {
         $content_width = 1200;
     }
 }
-add_action('after_setup_theme', 'wpbc_theme_setup');
+add_action('after_setup_theme', 'devtb_theme_setup');
 
 /**
  * Enqueue Scripts and Styles
  */
-function wpbc_enqueue_assets() {
+function devtb_enqueue_assets() {
     // Theme stylesheet
     wp_enqueue_style(
-        'wpbc-style',
+        'devtb-style',
         get_stylesheet_uri(),
         [],
-        WPBC_THEME_VERSION
+        DEVTB_THEME_VERSION
     );
 
     // Theme script (if needed)
     // wp_enqueue_script(
-    //     'wpbc-script',
-    //     WPBC_THEME_URL . '/assets/js/main.js',
+    //     'devtb-script',
+    //     DEVTB_THEME_URL . '/assets/js/main.js',
     //     ['jquery'],
-    //     WPBC_THEME_VERSION,
+    //     DEVTB_THEME_VERSION,
     //     true
     // );
 }
-add_action('wp_enqueue_scripts', 'wpbc_enqueue_assets');
+add_action('wp_enqueue_scripts', 'devtb_enqueue_assets');
 
 /**
  * Register Widget Areas
  */
-function wpbc_register_sidebars() {
+function devtb_register_sidebars() {
     register_sidebar([
-        'name'          => __('Sidebar', 'wpbc'),
+        'name'          => __('Sidebar', 'devtb'),
         'id'            => 'sidebar-1',
-        'description'   => __('Main sidebar widget area', 'wpbc'),
+        'description'   => __('Main sidebar widget area', 'devtb'),
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<h3 class="widget-title">',
@@ -93,180 +93,180 @@ function wpbc_register_sidebars() {
     ]);
 
     register_sidebar([
-        'name'          => __('Footer', 'wpbc'),
+        'name'          => __('Footer', 'devtb'),
         'id'            => 'footer-1',
-        'description'   => __('Footer widget area', 'wpbc'),
+        'description'   => __('Footer widget area', 'devtb'),
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<h3 class="widget-title">',
         'after_title'   => '</h3>',
     ]);
 }
-add_action('widgets_init', 'wpbc_register_sidebars');
+add_action('widgets_init', 'devtb_register_sidebars');
 
 /**
  * Initialize Translation Bridge
  */
-function wpbc_init_translation_bridge() {
+function devtb_init_translation_bridge() {
     // Load Translation Bridge utils (must load first)
-    foreach (glob(WPBC_TRANSLATION_BRIDGE_DIR . '/utils/*.php') as $util_file) {
+    foreach (glob(DEVTB_TRANSLATION_BRIDGE_DIR . '/utils/*.php') as $util_file) {
         require_once $util_file;
     }
 
     // Load Translation Bridge interfaces
-    if (file_exists(WPBC_TRANSLATION_BRIDGE_DIR . '/core/interface-parser.php')) {
-        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/interface-parser.php';
-        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/interface-converter.php';
+    if (file_exists(DEVTB_TRANSLATION_BRIDGE_DIR . '/core/interface-parser.php')) {
+        require_once DEVTB_TRANSLATION_BRIDGE_DIR . '/core/interface-parser.php';
+        require_once DEVTB_TRANSLATION_BRIDGE_DIR . '/core/interface-converter.php';
     }
 
     // Load Translation Bridge model classes
-    if (file_exists(WPBC_TRANSLATION_BRIDGE_DIR . '/models/class-component.php')) {
-        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/models/class-component.php';
-        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/models/class-attribute.php';
-        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/models/class-style.php';
+    if (file_exists(DEVTB_TRANSLATION_BRIDGE_DIR . '/models/class-component.php')) {
+        require_once DEVTB_TRANSLATION_BRIDGE_DIR . '/models/class-component.php';
+        require_once DEVTB_TRANSLATION_BRIDGE_DIR . '/models/class-attribute.php';
+        require_once DEVTB_TRANSLATION_BRIDGE_DIR . '/models/class-style.php';
     }
 
     // Load Translation Bridge parsers
-    foreach (glob(WPBC_TRANSLATION_BRIDGE_DIR . '/parsers/class-*-parser.php') as $parser_file) {
+    foreach (glob(DEVTB_TRANSLATION_BRIDGE_DIR . '/parsers/class-*-parser.php') as $parser_file) {
         require_once $parser_file;
     }
 
     // Load Translation Bridge converters
-    foreach (glob(WPBC_TRANSLATION_BRIDGE_DIR . '/converters/class-*-converter.php') as $converter_file) {
+    foreach (glob(DEVTB_TRANSLATION_BRIDGE_DIR . '/converters/class-*-converter.php') as $converter_file) {
         require_once $converter_file;
     }
 
     // Load Translation Bridge core classes
-    if (file_exists(WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php')) {
-        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-mapping-engine.php';
-        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php';
-        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-parser-factory.php';
-        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-converter-factory.php';
+    if (file_exists(DEVTB_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php')) {
+        require_once DEVTB_TRANSLATION_BRIDGE_DIR . '/core/class-mapping-engine.php';
+        require_once DEVTB_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php';
+        require_once DEVTB_TRANSLATION_BRIDGE_DIR . '/core/class-parser-factory.php';
+        require_once DEVTB_TRANSLATION_BRIDGE_DIR . '/core/class-converter-factory.php';
     }
 
     // Load theme includes
-    if (file_exists(WPBC_INCLUDES_DIR . '/class-wpbc-file-handler.php')) {
-        require_once WPBC_INCLUDES_DIR . '/class-wpbc-file-handler.php';
-        require_once WPBC_INCLUDES_DIR . '/class-wpbc-logger.php';
-        require_once WPBC_INCLUDES_DIR . '/class-wpbc-claude-api.php';
-        require_once WPBC_INCLUDES_DIR . '/class-wpbc-auth.php';
-        require_once WPBC_INCLUDES_DIR . '/class-wpbc-rate-limiter.php';
+    if (file_exists(DEVTB_INCLUDES_DIR . '/class-devtb-file-handler.php')) {
+        require_once DEVTB_INCLUDES_DIR . '/class-devtb-file-handler.php';
+        require_once DEVTB_INCLUDES_DIR . '/class-devtb-logger.php';
+        require_once DEVTB_INCLUDES_DIR . '/class-devtb-claude-api.php';
+        require_once DEVTB_INCLUDES_DIR . '/class-devtb-auth.php';
+        require_once DEVTB_INCLUDES_DIR . '/class-devtb-rate-limiter.php';
     }
 
     // Load config class
-    if (file_exists(WPBC_INCLUDES_DIR . '/class-wpbc-config.php')) {
-        require_once WPBC_INCLUDES_DIR . '/class-wpbc-config.php';
+    if (file_exists(DEVTB_INCLUDES_DIR . '/class-devtb-config.php')) {
+        require_once DEVTB_INCLUDES_DIR . '/class-devtb-config.php';
     }
 
     // Load encryption class
-    if (file_exists(WPBC_INCLUDES_DIR . '/class-wpbc-encryption.php')) {
-        require_once WPBC_INCLUDES_DIR . '/class-wpbc-encryption.php';
+    if (file_exists(DEVTB_INCLUDES_DIR . '/class-devtb-encryption.php')) {
+        require_once DEVTB_INCLUDES_DIR . '/class-devtb-encryption.php';
     }
 
     // Load persistence class
-    if (file_exists(WPBC_INCLUDES_DIR . '/class-wpbc-persistence.php')) {
-        require_once WPBC_INCLUDES_DIR . '/class-wpbc-persistence.php';
+    if (file_exists(DEVTB_INCLUDES_DIR . '/class-devtb-persistence.php')) {
+        require_once DEVTB_INCLUDES_DIR . '/class-devtb-persistence.php';
     }
 
     // Load corrections class
-    if (file_exists(WPBC_INCLUDES_DIR . '/class-wpbc-corrections.php')) {
-        require_once WPBC_INCLUDES_DIR . '/class-wpbc-corrections.php';
+    if (file_exists(DEVTB_INCLUDES_DIR . '/class-devtb-corrections.php')) {
+        require_once DEVTB_INCLUDES_DIR . '/class-devtb-corrections.php';
     }
 
     // Load API v2
-    if (file_exists(WPBC_INCLUDES_DIR . '/class-wpbc-api-v2.php')) {
-        require_once WPBC_INCLUDES_DIR . '/class-wpbc-api-v2.php';
-        new WPBC_API_V2();
+    if (file_exists(DEVTB_INCLUDES_DIR . '/class-devtb-api-v2.php')) {
+        require_once DEVTB_INCLUDES_DIR . '/class-devtb-api-v2.php';
+        new DEVTB_API_V2();
     }
 
     // Load Job Queue (for async batch processing)
-    if (file_exists(WPBC_INCLUDES_DIR . '/class-wpbc-job-queue.php')) {
-        require_once WPBC_INCLUDES_DIR . '/class-wpbc-job-queue.php';
+    if (file_exists(DEVTB_INCLUDES_DIR . '/class-devtb-job-queue.php')) {
+        require_once DEVTB_INCLUDES_DIR . '/class-devtb-job-queue.php';
     }
 
     // Load Visual Interface
-    if (file_exists(WPBC_INCLUDES_DIR . '/class-wpbc-visual-interface.php')) {
-        require_once WPBC_INCLUDES_DIR . '/class-wpbc-visual-interface.php';
-        new WPBC_Visual_Interface();
+    if (file_exists(DEVTB_INCLUDES_DIR . '/class-devtb-visual-interface.php')) {
+        require_once DEVTB_INCLUDES_DIR . '/class-devtb-visual-interface.php';
+        new DEVTB_Visual_Interface();
     }
 }
-add_action('after_setup_theme', 'wpbc_init_translation_bridge');
+add_action('after_setup_theme', 'devtb_init_translation_bridge');
 
 /**
  * Add Translation Bridge Admin Menu
  */
-function wpbc_add_admin_menu() {
+function devtb_add_admin_menu() {
     add_menu_page(
-        __('Translation Bridge', 'wpbc'),
-        __('WPBC Translation', 'wpbc'),
+        __('Translation Bridge', 'devtb'),
+        __('DEVTB Translation', 'devtb'),
         'manage_options',
-        'wpbc-translation',
-        'wpbc_admin_page',
+        'devtb-translation',
+        'devtb_admin_page',
         'dashicons-translation',
         30
     );
 
     add_submenu_page(
-        'wpbc-translation',
-        __('Translate Content', 'wpbc'),
-        __('Translate', 'wpbc'),
+        'devtb-translation',
+        __('Translate Content', 'devtb'),
+        __('Translate', 'devtb'),
         'manage_options',
-        'wpbc-translation',
-        'wpbc_admin_page'
+        'devtb-translation',
+        'devtb_admin_page'
     );
 
     add_submenu_page(
-        'wpbc-translation',
-        __('Frameworks', 'wpbc'),
-        __('Frameworks', 'wpbc'),
+        'devtb-translation',
+        __('Frameworks', 'devtb'),
+        __('Frameworks', 'devtb'),
         'manage_options',
-        'wpbc-frameworks',
-        'wpbc_frameworks_page'
+        'devtb-frameworks',
+        'devtb_frameworks_page'
     );
 
     add_submenu_page(
-        'wpbc-translation',
-        __('Settings', 'wpbc'),
-        __('Settings', 'wpbc'),
+        'devtb-translation',
+        __('Settings', 'devtb'),
+        __('Settings', 'devtb'),
         'manage_options',
-        'wpbc-settings',
-        'wpbc_settings_page'
+        'devtb-settings',
+        'devtb_settings_page'
     );
 
     add_submenu_page(
-        'wpbc-translation',
-        __('Documentation', 'wpbc'),
-        __('Docs', 'wpbc'),
+        'devtb-translation',
+        __('Documentation', 'devtb'),
+        __('Docs', 'devtb'),
         'manage_options',
-        'wpbc-docs',
-        'wpbc_docs_page'
+        'devtb-docs',
+        'devtb_docs_page'
     );
 }
-add_action('admin_menu', 'wpbc_add_admin_menu');
+add_action('admin_menu', 'devtb_add_admin_menu');
 
 /**
  * Admin Page: Translation
  */
-function wpbc_admin_page() {
+function devtb_admin_page() {
     ?>
     <div class="wrap">
-        <h1><?php _e('Translation Bridge™', 'wpbc'); ?></h1>
+        <h1><?php _e('Translation Bridge', 'devtb'); ?></h1>
 
-        <div class="wpbc-admin-notice">
-            <strong>WordPress Bootstrap Claude v<?php echo WPBC_THEME_VERSION; ?></strong>
-            <p><?php _e('Universal page builder translation system with AI optimization.', 'wpbc'); ?></p>
+        <div class="devtb-admin-notice">
+            <strong>DevelopmentTranslation Bridge v<?php echo DEVTB_THEME_VERSION; ?></strong>
+            <p><?php _e('Universal page builder translation system with AI optimization.', 'devtb'); ?></p>
         </div>
 
         <div class="card">
-            <h2><?php _e('Quick Start', 'wpbc'); ?></h2>
-            <p><?php _e('Use the wpbc CLI command to translate between frameworks:', 'wpbc'); ?></p>
-            <pre><code>wpbc translate bootstrap divi input.html</code></pre>
-            <pre><code>wpbc translate elementor claude page.json</code></pre>
-            <pre><code>wpbc translate-all bootstrap hero.html</code></pre>
+            <h2><?php _e('Quick Start', 'devtb'); ?></h2>
+            <p><?php _e('Use the devtb CLI command to translate between frameworks:', 'devtb'); ?></p>
+            <pre><code>devtb translate bootstrap divi input.html</code></pre>
+            <pre><code>devtb translate elementor claude page.json</code></pre>
+            <pre><code>devtb translate-all bootstrap hero.html</code></pre>
         </div>
 
         <div class="card">
-            <h2><?php _e('Supported Frameworks', 'wpbc'); ?></h2>
+            <h2><?php _e('Supported Frameworks', 'devtb'); ?></h2>
             <ul>
                 <li><strong>Bootstrap</strong> - Bootstrap 5.3.3 HTML/CSS</li>
                 <li><strong>DIVI</strong> - DIVI Builder shortcodes</li>
@@ -283,39 +283,39 @@ function wpbc_admin_page() {
         </div>
 
         <div class="card">
-            <h2><?php _e('System Status', 'wpbc'); ?></h2>
-            <?php wpbc_show_system_status(); ?>
+            <h2><?php _e('System Status', 'devtb'); ?></h2>
+            <?php devtb_show_system_status(); ?>
         </div>
 
         <div class="card">
-            <h2><?php _e('CLI Commands', 'wpbc'); ?></h2>
+            <h2><?php _e('CLI Commands', 'devtb'); ?></h2>
             <table class="widefat">
                 <thead>
                     <tr>
-                        <th><?php _e('Command', 'wpbc'); ?></th>
-                        <th><?php _e('Description', 'wpbc'); ?></th>
+                        <th><?php _e('Command', 'devtb'); ?></th>
+                        <th><?php _e('Description', 'devtb'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><code>wpbc translate &lt;source&gt; &lt;target&gt; &lt;file&gt;</code></td>
-                        <td><?php _e('Translate between two frameworks', 'wpbc'); ?></td>
+                        <td><code>devtb translate &lt;source&gt; &lt;target&gt; &lt;file&gt;</code></td>
+                        <td><?php _e('Translate between two frameworks', 'devtb'); ?></td>
                     </tr>
                     <tr>
-                        <td><code>wpbc translate-all &lt;source&gt; &lt;file&gt;</code></td>
-                        <td><?php _e('Translate to all frameworks (9 files)', 'wpbc'); ?></td>
+                        <td><code>devtb translate-all &lt;source&gt; &lt;file&gt;</code></td>
+                        <td><?php _e('Translate to all frameworks (9 files)', 'devtb'); ?></td>
                     </tr>
                     <tr>
-                        <td><code>wpbc list-frameworks</code></td>
-                        <td><?php _e('List all supported frameworks', 'wpbc'); ?></td>
+                        <td><code>devtb list-frameworks</code></td>
+                        <td><?php _e('List all supported frameworks', 'devtb'); ?></td>
                     </tr>
                     <tr>
-                        <td><code>wpbc validate &lt;framework&gt; &lt;file&gt;</code></td>
-                        <td><?php _e('Validate a framework file', 'wpbc'); ?></td>
+                        <td><code>devtb validate &lt;framework&gt; &lt;file&gt;</code></td>
+                        <td><?php _e('Validate a framework file', 'devtb'); ?></td>
                     </tr>
                     <tr>
-                        <td><code>wpbc --help</code></td>
-                        <td><?php _e('Show help and usage information', 'wpbc'); ?></td>
+                        <td><code>devtb --help</code></td>
+                        <td><?php _e('Show help and usage information', 'devtb'); ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -327,10 +327,10 @@ function wpbc_admin_page() {
 /**
  * Admin Page: Frameworks
  */
-function wpbc_frameworks_page() {
+function devtb_frameworks_page() {
     ?>
     <div class="wrap">
-        <h1><?php _e('Supported Frameworks', 'wpbc'); ?></h1>
+        <h1><?php _e('Supported Frameworks', 'devtb'); ?></h1>
 
         <div class="card">
             <h2>Translation Matrix</h2>
@@ -349,7 +349,7 @@ function wpbc_frameworks_page() {
             ];
             $framework_count = count($frameworks);
             ?>
-            <p>The Translation Bridge™ supports conversion between all <?php echo $framework_count; ?> frameworks:</p>
+            <p>The Translation Bridge supports conversion between all <?php echo $framework_count; ?> frameworks:</p>
 
             <table class="widefat">
                 <thead>
@@ -400,38 +400,38 @@ function wpbc_frameworks_page() {
 /**
  * Admin Page: Settings
  */
-function wpbc_settings_page() {
+function devtb_settings_page() {
     ?>
     <div class="wrap">
-        <h1><?php _e('Settings', 'wpbc'); ?></h1>
+        <h1><?php _e('Settings', 'devtb'); ?></h1>
 
         <form method="post" action="options.php">
             <?php
-            settings_fields('wpbc_settings');
-            do_settings_sections('wpbc_settings');
+            settings_fields('devtb_settings');
+            do_settings_sections('devtb_settings');
             ?>
 
             <table class="form-table">
                 <tr>
-                    <th scope="row"><?php _e('Claude API Key', 'wpbc'); ?></th>
+                    <th scope="row"><?php _e('Claude API Key', 'devtb'); ?></th>
                     <td>
                         <input type="text"
-                               name="wpbc_claude_api_key"
-                               value="<?php echo esc_attr(get_option('wpbc_claude_api_key', '')); ?>"
+                               name="devtb_claude_api_key"
+                               value="<?php echo esc_attr(get_option('devtb_claude_api_key', '')); ?>"
                                class="regular-text"
                                placeholder="sk-ant-...">
                         <p class="description">
-                            <?php _e('Optional: Add Claude API key for direct AI editing in web interface.', 'wpbc'); ?>
+                            <?php _e('Optional: Add Claude API key for direct AI editing in web interface.', 'devtb'); ?>
                             <br>
-                            <?php _e('Leave empty to use CLI-only mode.', 'wpbc'); ?>
+                            <?php _e('Leave empty to use CLI-only mode.', 'devtb'); ?>
                         </p>
                     </td>
                 </tr>
 
                 <tr>
-                    <th scope="row"><?php _e('Default Source Framework', 'wpbc'); ?></th>
+                    <th scope="row"><?php _e('Default Source Framework', 'devtb'); ?></th>
                     <td>
-                        <select name="wpbc_default_source">
+                        <select name="devtb_default_source">
                             <option value="bootstrap">Bootstrap</option>
                             <option value="divi">DIVI</option>
                             <option value="elementor">Elementor</option>
@@ -444,11 +444,11 @@ function wpbc_settings_page() {
                 </tr>
 
                 <tr>
-                    <th scope="row"><?php _e('Enable Logging', 'wpbc'); ?></th>
+                    <th scope="row"><?php _e('Enable Logging', 'devtb'); ?></th>
                     <td>
                         <label>
-                            <input type="checkbox" name="wpbc_enable_logging" value="1" checked>
-                            <?php _e('Log all translation operations', 'wpbc'); ?>
+                            <input type="checkbox" name="devtb_enable_logging" value="1" checked>
+                            <?php _e('Log all translation operations', 'devtb'); ?>
                         </label>
                     </td>
                 </tr>
@@ -463,37 +463,37 @@ function wpbc_settings_page() {
 /**
  * Admin Page: Documentation
  */
-function wpbc_docs_page() {
+function devtb_docs_page() {
     ?>
     <div class="wrap">
-        <h1><?php _e('Documentation', 'wpbc'); ?></h1>
+        <h1><?php _e('Documentation', 'devtb'); ?></h1>
 
         <div class="card">
-            <h2><?php _e('Getting Started', 'wpbc'); ?></h2>
+            <h2><?php _e('Getting Started', 'devtb'); ?></h2>
             <ol>
-                <li><?php _e('Install and activate the WordPress Bootstrap Claude theme', 'wpbc'); ?></li>
-                <li><?php _e('Open terminal and navigate to the theme directory', 'wpbc'); ?></li>
-                <li><?php _e('Use the wpbc CLI command to translate content', 'wpbc'); ?></li>
+                <li><?php _e('Install and activate the DevelopmentTranslation Bridge theme', 'devtb'); ?></li>
+                <li><?php _e('Open terminal and navigate to the theme directory', 'devtb'); ?></li>
+                <li><?php _e('Use the devtb CLI command to translate content', 'devtb'); ?></li>
             </ol>
         </div>
 
         <div class="card">
-            <h2><?php _e('CLI Documentation', 'wpbc'); ?></h2>
-            <p><?php _e('Full documentation available in:', 'wpbc'); ?></p>
+            <h2><?php _e('CLI Documentation', 'devtb'); ?></h2>
+            <p><?php _e('Full documentation available in:', 'devtb'); ?></p>
             <ul>
-                <li><code>README.md</code> - <?php _e('Project overview and features', 'wpbc'); ?></li>
-                <li><code>QUICK_START.md</code> - <?php _e('Quick start guide', 'wpbc'); ?></li>
-                <li><code>TERMINAL_COMMANDS.md</code> - <?php _e('Complete CLI reference', 'wpbc'); ?></li>
-                <li><code>docs/TRANSLATION_BRIDGE.md</code> - <?php _e('Architecture documentation', 'wpbc'); ?></li>
-                <li><code>docs/CONVERSION_EXAMPLES.md</code> - <?php _e('Conversion examples', 'wpbc'); ?></li>
+                <li><code>README.md</code> - <?php _e('Project overview and features', 'devtb'); ?></li>
+                <li><code>QUICK_START.md</code> - <?php _e('Quick start guide', 'devtb'); ?></li>
+                <li><code>TERMINAL_COMMANDS.md</code> - <?php _e('Complete CLI reference', 'devtb'); ?></li>
+                <li><code>docs/TRANSLATION_BRIDGE.md</code> - <?php _e('Architecture documentation', 'devtb'); ?></li>
+                <li><code>docs/CONVERSION_EXAMPLES.md</code> - <?php _e('Conversion examples', 'devtb'); ?></li>
             </ul>
         </div>
 
         <div class="card">
-            <h2><?php _e('Resources', 'wpbc'); ?></h2>
+            <h2><?php _e('Resources', 'devtb'); ?></h2>
             <ul>
-                <li><a href="https://github.com/coryhubbell/wordpress-bootstrap-claude" target="_blank"><?php _e('GitHub Repository', 'wpbc'); ?></a></li>
-                <li><a href="https://claude.ai" target="_blank"><?php _e('Claude AI', 'wpbc'); ?></a></li>
+                <li><a href="https://github.com/coryhubbell/development-translation-bridge" target="_blank"><?php _e('GitHub Repository', 'devtb'); ?></a></li>
+                <li><a href="https://claude.ai" target="_blank"><?php _e('Claude AI', 'devtb'); ?></a></li>
             </ul>
         </div>
     </div>
@@ -503,35 +503,35 @@ function wpbc_docs_page() {
 /**
  * Show System Status
  */
-function wpbc_show_system_status() {
+function devtb_show_system_status() {
     ?>
     <table class="widefat">
         <tr>
-            <th><?php _e('Theme Version', 'wpbc'); ?></th>
-            <td><?php echo WPBC_THEME_VERSION; ?></td>
+            <th><?php _e('Theme Version', 'devtb'); ?></th>
+            <td><?php echo DEVTB_THEME_VERSION; ?></td>
         </tr>
         <tr>
-            <th><?php _e('PHP Version', 'wpbc'); ?></th>
+            <th><?php _e('PHP Version', 'devtb'); ?></th>
             <td><?php echo PHP_VERSION; ?> <?php echo version_compare(PHP_VERSION, '7.4.0', '>=') ? '✓' : '✗ (7.4+ required)'; ?></td>
         </tr>
         <tr>
-            <th><?php _e('Translation Bridge', 'wpbc'); ?></th>
-            <td><?php echo file_exists(WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php') ? '✓ Installed' : '✗ Not found'; ?></td>
+            <th><?php _e('Translation Bridge', 'devtb'); ?></th>
+            <td><?php echo file_exists(DEVTB_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php') ? '✓ Installed' : '✗ Not found'; ?></td>
         </tr>
         <tr>
-            <th><?php _e('CLI Executable', 'wpbc'); ?></th>
-            <td><?php echo file_exists(WPBC_THEME_DIR . '/wpbc') ? '✓ Available' : '✗ Not found'; ?></td>
+            <th><?php _e('CLI Executable', 'devtb'); ?></th>
+            <td><?php echo file_exists(DEVTB_THEME_DIR . '/devtb') ? '✓ Available' : '✗ Not found'; ?></td>
         </tr>
         <tr>
-            <th><?php _e('Claude API', 'wpbc'); ?></th>
-            <td><?php echo get_option('wpbc_claude_api_key') ? '✓ Configured' : '○ Not configured (CLI mode only)'; ?></td>
+            <th><?php _e('Claude API', 'devtb'); ?></th>
+            <td><?php echo get_option('devtb_claude_api_key') ? '✓ Configured' : '○ Not configured (CLI mode only)'; ?></td>
         </tr>
         <tr>
-            <th><?php _e('Supported Frameworks', 'wpbc'); ?></th>
+            <th><?php _e('Supported Frameworks', 'devtb'); ?></th>
             <td>10 (Bootstrap, DIVI, Elementor, Avada, Bricks, WPBakery, Beaver Builder, Gutenberg, Oxygen, Claude)</td>
         </tr>
         <tr>
-            <th><?php _e('Translation Pairs', 'wpbc'); ?></th>
+            <th><?php _e('Translation Pairs', 'devtb'); ?></th>
             <td>90</td>
         </tr>
     </table>
@@ -541,11 +541,11 @@ function wpbc_show_system_status() {
 /**
  * Add admin notices
  */
-function wpbc_admin_notices() {
+function devtb_admin_notices() {
     $screen = get_current_screen();
 
-    // Only show on WPBC pages
-    if (strpos($screen->id, 'wpbc') === false) {
+    // Only show on DEVTB pages
+    if (strpos($screen->id, 'devtb') === false) {
         return;
     }
 
@@ -553,38 +553,38 @@ function wpbc_admin_notices() {
     if (version_compare(PHP_VERSION, '7.4.0', '<')) {
         ?>
         <div class="notice notice-error">
-            <p><strong><?php _e('WordPress Bootstrap Claude requires PHP 7.4 or higher.', 'wpbc'); ?></strong></p>
-            <p><?php printf(__('You are running PHP %s. Please upgrade to use this theme.', 'wpbc'), PHP_VERSION); ?></p>
+            <p><strong><?php _e('DevelopmentTranslation Bridge requires PHP 7.4 or higher.', 'devtb'); ?></strong></p>
+            <p><?php printf(__('You are running PHP %s. Please upgrade to use this theme.', 'devtb'), PHP_VERSION); ?></p>
         </div>
         <?php
     }
 
     // Check if CLI is executable
-    $wpbc_cli = WPBC_THEME_DIR . '/wpbc';
-    if (file_exists($wpbc_cli) && !is_executable($wpbc_cli)) {
+    $devtb_cli = DEVTB_THEME_DIR . '/devtb';
+    if (file_exists($devtb_cli) && !is_executable($devtb_cli)) {
         ?>
         <div class="notice notice-warning">
-            <p><strong><?php _e('WPBC CLI is not executable.', 'wpbc'); ?></strong></p>
-            <p><?php _e('Run:', 'wpbc'); ?> <code>chmod +x <?php echo esc_html($wpbc_cli); ?></code></p>
+            <p><strong><?php _e('DEVTB CLI is not executable.', 'devtb'); ?></strong></p>
+            <p><?php _e('Run:', 'devtb'); ?> <code>chmod +x <?php echo esc_html($devtb_cli); ?></code></p>
         </div>
         <?php
     }
 }
-add_action('admin_notices', 'wpbc_admin_notices');
+add_action('admin_notices', 'devtb_admin_notices');
 
 /**
  * Custom theme support and features
  */
-function wpbc_custom_features() {
+function devtb_custom_features() {
     // Add support for Claude-editable content in the editor
-    add_filter('the_content', 'wpbc_preserve_claude_attributes');
+    add_filter('the_content', 'devtb_preserve_claude_attributes');
 }
-add_action('init', 'wpbc_custom_features');
+add_action('init', 'devtb_custom_features');
 
 /**
  * Preserve data-claude-editable attributes in content
  */
-function wpbc_preserve_claude_attributes($content) {
+function devtb_preserve_claude_attributes($content) {
     // Allow data-claude-editable attribute in content
     return $content;
 }
@@ -592,7 +592,7 @@ function wpbc_preserve_claude_attributes($content) {
 /**
  * Allow data-claude-editable in KSES
  */
-function wpbc_allowed_html($tags, $context) {
+function devtb_allowed_html($tags, $context) {
     if ($context === 'post') {
         foreach ($tags as $tag => $rules) {
             $tags[$tag]['data-claude-editable'] = true;
@@ -600,7 +600,7 @@ function wpbc_allowed_html($tags, $context) {
     }
     return $tags;
 }
-add_filter('wp_kses_allowed_html', 'wpbc_allowed_html', 10, 2);
+add_filter('wp_kses_allowed_html', 'devtb_allowed_html', 10, 2);
 
 /**
  * Theme Activation - Install database tables
@@ -608,22 +608,22 @@ add_filter('wp_kses_allowed_html', 'wpbc_allowed_html', 10, 2);
  * Creates necessary database tables for translation persistence
  * and correction tracking when theme is activated.
  */
-function wpbc_theme_activation() {
+function devtb_theme_activation() {
     // Load required classes if not already loaded
-    if (!class_exists('WPBC_Persistence')) {
-        require_once get_template_directory() . '/includes/class-wpbc-config.php';
-        require_once get_template_directory() . '/includes/class-wpbc-logger.php';
-        require_once get_template_directory() . '/includes/class-wpbc-persistence.php';
+    if (!class_exists('DEVTB_Persistence')) {
+        require_once get_template_directory() . '/includes/class-devtb-config.php';
+        require_once get_template_directory() . '/includes/class-devtb-logger.php';
+        require_once get_template_directory() . '/includes/class-devtb-persistence.php';
     }
 
     // Install database tables
-    WPBC_Persistence::install();
+    DEVTB_Persistence::install();
 
     // Log activation
-    $logger = new WPBC_Logger();
-    $logger->info('WPBC theme activated', ['version' => WPBC_THEME_VERSION]);
+    $logger = new DEVTB_Logger();
+    $logger->info('DEVTB theme activated', ['version' => DEVTB_THEME_VERSION]);
 }
-add_action('after_switch_theme', 'wpbc_theme_activation');
+add_action('after_switch_theme', 'devtb_theme_activation');
 
 /**
  * Check and install tables if needed
@@ -631,29 +631,29 @@ add_action('after_switch_theme', 'wpbc_theme_activation');
  * This runs on admin_init to ensure tables exist even if
  * the theme was activated before this version.
  */
-function wpbc_maybe_install_tables() {
+function devtb_maybe_install_tables() {
     // Only run on admin
     if (!is_admin()) {
         return;
     }
 
     // Check if we need to install
-    $installed_version = get_option('wpbc_db_version', '0');
+    $installed_version = get_option('devtb_db_version', '0');
     $current_version = '1.0.0';
 
     if (version_compare($installed_version, $current_version, '<')) {
         // Load required classes
-        if (!class_exists('WPBC_Persistence')) {
-            if (file_exists(WPBC_INCLUDES_DIR . '/class-wpbc-persistence.php')) {
-                require_once WPBC_INCLUDES_DIR . '/class-wpbc-config.php';
-                require_once WPBC_INCLUDES_DIR . '/class-wpbc-logger.php';
-                require_once WPBC_INCLUDES_DIR . '/class-wpbc-persistence.php';
+        if (!class_exists('DEVTB_Persistence')) {
+            if (file_exists(DEVTB_INCLUDES_DIR . '/class-devtb-persistence.php')) {
+                require_once DEVTB_INCLUDES_DIR . '/class-devtb-config.php';
+                require_once DEVTB_INCLUDES_DIR . '/class-devtb-logger.php';
+                require_once DEVTB_INCLUDES_DIR . '/class-devtb-persistence.php';
             }
         }
 
-        if (class_exists('WPBC_Persistence')) {
-            WPBC_Persistence::install();
+        if (class_exists('DEVTB_Persistence')) {
+            DEVTB_Persistence::install();
         }
     }
 }
-add_action('admin_init', 'wpbc_maybe_install_tables');
+add_action('admin_init', 'devtb_maybe_install_tables');

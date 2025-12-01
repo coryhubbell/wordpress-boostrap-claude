@@ -47,13 +47,13 @@ jobs:
 
       - name: Create release package
         run: |
-          mkdir -p release/wordpress-bootstrap-claude
-          cp -r includes release/wordpress-bootstrap-claude/
-          cp -r translation-bridge release/wordpress-bootstrap-claude/
-          cp -r admin/dist release/wordpress-bootstrap-claude/admin-dist/
-          cp functions.php style.css index.php release/wordpress-bootstrap-claude/
-          cp README.md LICENSE release/wordpress-bootstrap-claude/ 2>/dev/null || true
-          cd release && zip -r ../wordpress-bootstrap-claude-${{ steps.version.outputs.version }}.zip wordpress-bootstrap-claude/
+          mkdir -p release/development-translation-bridge
+          cp -r includes release/development-translation-bridge/
+          cp -r translation-bridge release/development-translation-bridge/
+          cp -r admin/dist release/development-translation-bridge/admin-dist/
+          cp functions.php style.css index.php release/development-translation-bridge/
+          cp README.md LICENSE release/development-translation-bridge/ 2>/dev/null || true
+          cd release && zip -r ../development-translation-bridge-${{ steps.version.outputs.version }}.zip development-translation-bridge/
 
       - name: Generate changelog
         id: changelog
@@ -69,7 +69,7 @@ jobs:
         with:
           name: v${{ steps.version.outputs.version }}
           body: |
-            ## WordPress Bootstrap Claude v${{ steps.version.outputs.version }}
+            ## DevelopmentTranslation Bridge v${{ steps.version.outputs.version }}
 
             ${{ steps.changelog.outputs.changelog }}
 
@@ -81,7 +81,7 @@ jobs:
             ### Requirements
             - WordPress 5.8+
             - PHP 7.4+
-          files: wordpress-bootstrap-claude-${{ steps.version.outputs.version }}.zip
+          files: development-translation-bridge-${{ steps.version.outputs.version }}.zip
           draft: false
           prerelease: ${{ contains(github.ref, 'beta') || contains(github.ref, 'alpha') }}
         env:

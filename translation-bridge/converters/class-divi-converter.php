@@ -10,28 +10,28 @@
  * - Nested shortcode handling
  * - Visual Builder compatibility
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Converters;
+namespace DEVTB\TranslationBridge\Converters;
 
-use WPBC\TranslationBridge\Core\WPBC_Converter_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_Shortcode_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Converter_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_Shortcode_Helper;
 
 /**
- * Class WPBC_DIVI_Converter
+ * Class DEVTB_DIVI_Converter
  *
  * Convert universal components to DIVI Builder shortcodes.
  */
-class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
+class DEVTB_DIVI_Converter implements DEVTB_Converter_Interface {
 
 	/**
 	 * Convert universal component(s) to DIVI shortcodes
 	 *
-	 * @param WPBC_Component|WPBC_Component[] $component Component(s) to convert.
+	 * @param DEVTB_Component|DEVTB_Component[] $component Component(s) to convert.
 	 * @return string DIVI shortcode output.
 	 */
 	public function convert( $component ): string {
@@ -51,10 +51,10 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert single component to DIVI shortcode
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string DIVI shortcode.
 	 */
-	public function convert_component( WPBC_Component $component ): string {
+	public function convert_component( DEVTB_Component $component ): string {
 		$type = $component->type;
 
 		// Route to specific converter based on type
@@ -71,13 +71,13 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert container component (DIVI section)
 	 *
-	 * @param WPBC_Component $component Container component.
+	 * @param DEVTB_Component $component Container component.
 	 * @return string Section shortcode.
 	 */
-	private function convert_container( WPBC_Component $component ): string {
+	private function convert_container( DEVTB_Component $component ): string {
 		$attributes = $this->denormalize_attributes( $component->attributes );
 
-		$shortcode = WPBC_Shortcode_Helper::build( 'et_pb_section', $attributes );
+		$shortcode = DEVTB_Shortcode_Helper::build( 'et_pb_section', $attributes );
 
 		// Convert children (rows)
 		$inner = '';
@@ -91,10 +91,10 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert row component
 	 *
-	 * @param WPBC_Component $component Row component.
+	 * @param DEVTB_Component $component Row component.
 	 * @return string Row shortcode.
 	 */
-	private function convert_row( WPBC_Component $component ): string {
+	private function convert_row( DEVTB_Component $component ): string {
 		$attributes = $this->denormalize_attributes( $component->attributes );
 
 		// Convert children (columns)
@@ -103,16 +103,16 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 			$inner .= $this->convert_component( $child );
 		}
 
-		return WPBC_Shortcode_Helper::build( 'et_pb_row', $attributes, $inner );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_row', $attributes, $inner );
 	}
 
 	/**
 	 * Convert column component
 	 *
-	 * @param WPBC_Component $component Column component.
+	 * @param DEVTB_Component $component Column component.
 	 * @return string Column shortcode.
 	 */
-	private function convert_column( WPBC_Component $component ): string {
+	private function convert_column( DEVTB_Component $component ): string {
 		$attributes = $this->denormalize_attributes( $component->attributes );
 
 		// Convert width to DIVI column type
@@ -125,16 +125,16 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 			$inner .= $this->convert_component( $child );
 		}
 
-		return WPBC_Shortcode_Helper::build( 'et_pb_column', $attributes, $inner );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_column', $attributes, $inner );
 	}
 
 	/**
 	 * Convert button component
 	 *
-	 * @param WPBC_Component $component Button component.
+	 * @param DEVTB_Component $component Button component.
 	 * @return string Button module shortcode.
 	 */
-	private function convert_button( WPBC_Component $component ): string {
+	private function convert_button( DEVTB_Component $component ): string {
 		$attributes = [
 			'button_url'  => $component->get_attribute( 'url', '#' ),
 			'button_text' => $component->content ?: $component->get_attribute( 'label', 'Click Here' ),
@@ -158,16 +158,16 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 			$attributes['button_size'] = $size;
 		}
 
-		return WPBC_Shortcode_Helper::build( 'et_pb_button', $attributes );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_button', $attributes );
 	}
 
 	/**
 	 * Convert card component (DIVI blurb)
 	 *
-	 * @param WPBC_Component $component Card component.
+	 * @param DEVTB_Component $component Card component.
 	 * @return string Blurb module shortcode.
 	 */
-	private function convert_card( WPBC_Component $component ): string {
+	private function convert_card( DEVTB_Component $component ): string {
 		$attributes = [];
 
 		// Title
@@ -205,16 +205,16 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 		// Content
 		$content = $component->content;
 
-		return WPBC_Shortcode_Helper::build( 'et_pb_blurb', $attributes, $content );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_blurb', $attributes, $content );
 	}
 
 	/**
 	 * Convert text component
 	 *
-	 * @param WPBC_Component $component Text component.
+	 * @param DEVTB_Component $component Text component.
 	 * @return string Text module shortcode.
 	 */
-	private function convert_text( WPBC_Component $component ): string {
+	private function convert_text( DEVTB_Component $component ): string {
 		$attributes = [];
 
 		// Background color
@@ -238,16 +238,16 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 		// Content
 		$content = $component->content;
 
-		return WPBC_Shortcode_Helper::build( 'et_pb_text', $attributes, $content );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_text', $attributes, $content );
 	}
 
 	/**
 	 * Convert heading component (as text with heading tag)
 	 *
-	 * @param WPBC_Component $component Heading component.
+	 * @param DEVTB_Component $component Heading component.
 	 * @return string Text module with heading.
 	 */
-	private function convert_heading( WPBC_Component $component ): string {
+	private function convert_heading( DEVTB_Component $component ): string {
 		$attributes = [];
 
 		// Text alignment
@@ -266,16 +266,16 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 		$level = $component->get_attribute( 'level', 2 );
 		$content = sprintf( '<h%d>%s</h%d>', $level, esc_html( $component->content ), $level );
 
-		return WPBC_Shortcode_Helper::build( 'et_pb_text', $attributes, $content );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_text', $attributes, $content );
 	}
 
 	/**
 	 * Convert image component
 	 *
-	 * @param WPBC_Component $component Image component.
+	 * @param DEVTB_Component $component Image component.
 	 * @return string Image module shortcode.
 	 */
-	private function convert_image( WPBC_Component $component ): string {
+	private function convert_image( DEVTB_Component $component ): string {
 		$attributes = [
 			'src' => $component->get_attribute( 'image_url', '' ),
 			'alt' => $component->get_attribute( 'alt_text', '' ),
@@ -299,16 +299,16 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 			$attributes['align'] = $alignment;
 		}
 
-		return WPBC_Shortcode_Helper::build( 'et_pb_image', $attributes );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_image', $attributes );
 	}
 
 	/**
 	 * Convert video component
 	 *
-	 * @param WPBC_Component $component Video component.
+	 * @param DEVTB_Component $component Video component.
 	 * @return string Video module shortcode.
 	 */
-	private function convert_video( WPBC_Component $component ): string {
+	private function convert_video( DEVTB_Component $component ): string {
 		$attributes = [];
 
 		// Video URL
@@ -323,16 +323,16 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 			$attributes['image_src'] = $thumbnail;
 		}
 
-		return WPBC_Shortcode_Helper::build( 'et_pb_video', $attributes );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_video', $attributes );
 	}
 
 	/**
 	 * Convert accordion component
 	 *
-	 * @param WPBC_Component $component Accordion component.
+	 * @param DEVTB_Component $component Accordion component.
 	 * @return string Accordion module shortcode.
 	 */
-	private function convert_accordion( WPBC_Component $component ): string {
+	private function convert_accordion( DEVTB_Component $component ): string {
 		$attributes = [];
 
 		// Convert children (accordion items)
@@ -342,23 +342,23 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 				'title' => $child->get_attribute( 'title', 'Item' ),
 			];
 
-			$inner .= WPBC_Shortcode_Helper::build(
+			$inner .= DEVTB_Shortcode_Helper::build(
 				'et_pb_accordion_item',
 				$item_attrs,
 				$child->content
 			);
 		}
 
-		return WPBC_Shortcode_Helper::build( 'et_pb_accordion', $attributes, $inner );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_accordion', $attributes, $inner );
 	}
 
 	/**
 	 * Convert tabs component
 	 *
-	 * @param WPBC_Component $component Tabs component.
+	 * @param DEVTB_Component $component Tabs component.
 	 * @return string Tabs module shortcode.
 	 */
-	private function convert_tabs( WPBC_Component $component ): string {
+	private function convert_tabs( DEVTB_Component $component ): string {
 		$attributes = [];
 
 		// Convert children (tab items)
@@ -368,23 +368,23 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 				'title' => $child->get_attribute( 'title', 'Tab' ),
 			];
 
-			$inner .= WPBC_Shortcode_Helper::build(
+			$inner .= DEVTB_Shortcode_Helper::build(
 				'et_pb_tab',
 				$item_attrs,
 				$child->content
 			);
 		}
 
-		return WPBC_Shortcode_Helper::build( 'et_pb_tabs', $attributes, $inner );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_tabs', $attributes, $inner );
 	}
 
 	/**
 	 * Convert divider component
 	 *
-	 * @param WPBC_Component $component Divider component.
+	 * @param DEVTB_Component $component Divider component.
 	 * @return string Divider module shortcode.
 	 */
-	private function convert_divider( WPBC_Component $component ): string {
+	private function convert_divider( DEVTB_Component $component ): string {
 		$attributes = [];
 
 		// Color
@@ -399,16 +399,16 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 			$attributes['divider_style'] = $style;
 		}
 
-		return WPBC_Shortcode_Helper::build( 'et_pb_divider', $attributes );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_divider', $attributes );
 	}
 
 	/**
 	 * Convert form component
 	 *
-	 * @param WPBC_Component $component Form component.
+	 * @param DEVTB_Component $component Form component.
 	 * @return string Contact form module shortcode.
 	 */
-	private function convert_form( WPBC_Component $component ): string {
+	private function convert_form( DEVTB_Component $component ): string {
 		$attributes = [
 			'email' => $component->get_attribute( 'email', get_option( 'admin_email' ) ),
 		];
@@ -419,26 +419,26 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 			$attributes['title'] = $title;
 		}
 
-		return WPBC_Shortcode_Helper::build( 'et_pb_contact_form', $attributes );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_contact_form', $attributes );
 	}
 
 	/**
 	 * Convert generic component
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string DIVI shortcode.
 	 */
-	private function convert_generic( WPBC_Component $component ): string {
+	private function convert_generic( DEVTB_Component $component ): string {
 		// Try to use original DIVI tag if available
 		$divi_tag = $component->get_metadata( 'divi_tag' );
 		$divi_attrs = $component->get_metadata( 'divi_attributes', [] );
 
 		if ( $divi_tag && ! empty( $divi_attrs ) ) {
-			return WPBC_Shortcode_Helper::build( $divi_tag, $divi_attrs, $component->content );
+			return DEVTB_Shortcode_Helper::build( $divi_tag, $divi_attrs, $component->content );
 		}
 
 		// Fallback to text module
-		return WPBC_Shortcode_Helper::build( 'et_pb_text', [], $component->content );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_text', [], $component->content );
 	}
 
 	/**
@@ -568,10 +568,10 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Get fallback shortcode for unsupported component
 	 *
-	 * @param WPBC_Component $component Unsupported component.
+	 * @param DEVTB_Component $component Unsupported component.
 	 * @return string Fallback shortcode.
 	 */
-	public function get_fallback( WPBC_Component $component ): string {
+	public function get_fallback( DEVTB_Component $component ): string {
 		// Fallback to text module with content
 		$fallback_content = sprintf(
 			'<!-- Unsupported component type: %s -->%s',
@@ -579,6 +579,6 @@ class WPBC_DIVI_Converter implements WPBC_Converter_Interface {
 			$component->content
 		);
 
-		return WPBC_Shortcode_Helper::build( 'et_pb_text', [], $fallback_content );
+		return DEVTB_Shortcode_Helper::build( 'et_pb_text', [], $fallback_content );
 	}
 }

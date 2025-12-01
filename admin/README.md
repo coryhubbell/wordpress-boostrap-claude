@@ -1,4 +1,4 @@
-# WordPress Bootstrap Claude - Visual Interface
+# DevelopmentTranslation Bridge - Visual Interface
 
 ## Phase 1: Architecture & Foundation ✅
 
@@ -10,7 +10,7 @@
 
 ## Overview
 
-The Visual Interface is a modern, React-based editor that brings WordPress Bootstrap Claude's Translation Bridge™ into a powerful visual environment. Built with enterprise-grade architecture, this interface provides side-by-side editing, live preview, AI-powered corrections, and intelligent tooltips for seamless page builder translation.
+The Visual Interface is a modern, React-based editor that brings DevelopmentTranslation Bridge's Translation Bridge™ into a powerful visual environment. Built with enterprise-grade architecture, this interface provides side-by-side editing, live preview, AI-powered corrections, and intelligent tooltips for seamless page builder translation.
 
 ## Technology Stack
 
@@ -117,7 +117,7 @@ Uses Zustand for lightweight, performant state:
 
 ### API Integration
 
-REST API base: `/wp-json/wpbc/v2/`
+REST API base: `/wp-json/devtb/v2/`
 
 Endpoints:
 - `POST /translate` - Translate between frameworks
@@ -140,9 +140,9 @@ Endpoints:
 
 ## License
 
-GPL-2.0+ - Same as WordPress Bootstrap Claude
+GPL-2.0+ - Same as DevelopmentTranslation Bridge
 
 ---
 
-**WordPress Bootstrap Claude** - Translation Bridge™ Visual Interface
+**DevelopmentTranslation Bridge** - Translation Bridge™ Visual Interface
 Phase 1 Complete ✅

@@ -10,24 +10,24 @@
  * - Responsive controls parsing
  * - Dynamic content support
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Parsers;
+namespace DEVTB\TranslationBridge\Parsers;
 
-use WPBC\TranslationBridge\Core\WPBC_Parser_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_JSON_Helper;
-use WPBC\TranslationBridge\Utils\WPBC_CSS_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Parser_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_JSON_Helper;
+use DEVTB\TranslationBridge\Utils\DEVTB_CSS_Helper;
 
 /**
- * Class WPBC_Elementor_Parser
+ * Class DEVTB_Elementor_Parser
  *
  * Parse Elementor JSON into universal components.
  */
-class WPBC_Elementor_Parser implements WPBC_Parser_Interface {
+class DEVTB_Elementor_Parser implements DEVTB_Parser_Interface {
 
 	/**
 	 * Supported Elementor widget types
@@ -94,7 +94,7 @@ class WPBC_Elementor_Parser implements WPBC_Parser_Interface {
 	 * Parse Elementor JSON into universal components
 	 *
 	 * @param string|array $content Elementor JSON content.
-	 * @return WPBC_Component[] Array of parsed components.
+	 * @return DEVTB_Component[] Array of parsed components.
 	 */
 	public function parse( $content ): array {
 		// Handle string JSON
@@ -126,9 +126,9 @@ class WPBC_Elementor_Parser implements WPBC_Parser_Interface {
 	 * Parse single Elementor element
 	 *
 	 * @param array $element Elementor element data.
-	 * @return WPBC_Component|null Parsed component or null.
+	 * @return DEVTB_Component|null Parsed component or null.
 	 */
-	public function parse_element( $element ): ?WPBC_Component {
+	public function parse_element( $element ): ?DEVTB_Component {
 		if ( ! is_array( $element ) ) {
 			return null;
 		}
@@ -155,13 +155,13 @@ class WPBC_Elementor_Parser implements WPBC_Parser_Interface {
 	 * Parse Elementor section
 	 *
 	 * @param array $element Section element data.
-	 * @return WPBC_Component|null Parsed section component.
+	 * @return DEVTB_Component|null Parsed section component.
 	 */
-	private function parse_section( array $element ): ?WPBC_Component {
+	private function parse_section( array $element ): ?DEVTB_Component {
 		$settings = $element['settings'] ?? [];
 		$attributes = $this->normalize_settings( $settings );
 
-		$section = new WPBC_Component([
+		$section = new DEVTB_Component([
 			'type'       => 'container',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -190,9 +190,9 @@ class WPBC_Elementor_Parser implements WPBC_Parser_Interface {
 	 * Parse Elementor column
 	 *
 	 * @param array $element Column element data.
-	 * @return WPBC_Component|null Parsed column component.
+	 * @return DEVTB_Component|null Parsed column component.
 	 */
-	private function parse_column( array $element ): ?WPBC_Component {
+	private function parse_column( array $element ): ?DEVTB_Component {
 		$settings = $element['settings'] ?? [];
 		$attributes = $this->normalize_settings( $settings );
 
@@ -200,7 +200,7 @@ class WPBC_Elementor_Parser implements WPBC_Parser_Interface {
 		$width = $settings['_column_size'] ?? 100;
 		$attributes['width'] = $width . '%';
 
-		$column = new WPBC_Component([
+		$column = new DEVTB_Component([
 			'type'       => 'column',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -229,9 +229,9 @@ class WPBC_Elementor_Parser implements WPBC_Parser_Interface {
 	 * Parse Elementor widget
 	 *
 	 * @param array $element Widget element data.
-	 * @return WPBC_Component|null Parsed widget component.
+	 * @return DEVTB_Component|null Parsed widget component.
 	 */
-	private function parse_widget( array $element ): ?WPBC_Component {
+	private function parse_widget( array $element ): ?DEVTB_Component {
 		$widget_type = $element['widgetType'] ?? '';
 		$settings = $element['settings'] ?? [];
 
@@ -243,7 +243,7 @@ class WPBC_Elementor_Parser implements WPBC_Parser_Interface {
 		// Extract content based on widget type
 		$content = $this->extract_widget_content( $widget_type, $settings );
 
-		$component = new WPBC_Component([
+		$component = new DEVTB_Component([
 			'type'       => $universal_type,
 			'category'   => $this->get_category( $universal_type ),
 			'attributes' => $attributes,
@@ -507,7 +507,7 @@ class WPBC_Elementor_Parser implements WPBC_Parser_Interface {
 		}
 
 		// Use JSON helper validation
-		return WPBC_JSON_Helper::is_valid_elementor( $content );
+		return DEVTB_JSON_Helper::is_valid_elementor( $content );
 	}
 
 	/**

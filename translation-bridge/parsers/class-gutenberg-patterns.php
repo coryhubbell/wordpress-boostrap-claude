@@ -4,16 +4,16 @@
  *
  * Manages block patterns, template parts, and reusable blocks
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage Gutenberg
  * @version    3.2.0
  */
 
-class WPBC_Gutenberg_Patterns {
+class DEVTB_Gutenberg_Patterns {
 	/**
 	 * Logger instance
 	 *
-	 * @var WPBC_Logger
+	 * @var DEVTB_Logger
 	 */
 	private $logger;
 
@@ -41,7 +41,7 @@ class WPBC_Gutenberg_Patterns {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->logger = new WPBC_Logger();
+		$this->logger = new DEVTB_Logger();
 	}
 
 	/**
@@ -144,7 +144,7 @@ class WPBC_Gutenberg_Patterns {
 	public function create_pattern_from_components( array $components, string $title, array $options = [] ): array {
 		// Convert components to Gutenberg blocks
 		require_once __DIR__ . '/class-gutenberg-converter.php';
-		$converter = new WPBC_Gutenberg_Converter();
+		$converter = new DEVTB_Gutenberg_Converter();
 
 		$blocks_html = '';
 		foreach ( $components as $component ) {
@@ -198,7 +198,7 @@ class WPBC_Gutenberg_Patterns {
 	 * @param string $namespace   Pattern namespace.
 	 * @return string|false Pattern name or false.
 	 */
-	public function import_pattern( string $json, string $namespace = 'wpbc' ): ?string {
+	public function import_pattern( string $json, string $namespace = 'devtb' ): ?string {
 		$pattern = json_decode( $json, true );
 
 		if ( ! $pattern || ! isset( $pattern['title'] ) ) {
@@ -222,7 +222,7 @@ class WPBC_Gutenberg_Patterns {
 	 */
 	public function get_default_patterns(): array {
 		return [
-			'wpbc/hero-cover' => [
+			'devtb/hero-cover' => [
 				'title'       => 'Hero Section with Cover',
 				'description' => 'Full-width hero section with background image',
 				'categories'  => [ 'hero' ],
@@ -241,7 +241,7 @@ class WPBC_Gutenberg_Patterns {
 <!-- /wp:buttons --></div></div>
 <!-- /wp:cover -->',
 			],
-			'wpbc/three-columns-features' => [
+			'devtb/three-columns-features' => [
 				'title'       => 'Three Column Features',
 				'description' => 'Feature section with three columns',
 				'categories'  => [ 'features' ],
@@ -272,7 +272,7 @@ class WPBC_Gutenberg_Patterns {
 <!-- /wp:column --></div>
 <!-- /wp:columns -->',
 			],
-			'wpbc/call-to-action' => [
+			'devtb/call-to-action' => [
 				'title'       => 'Call to Action',
 				'description' => 'Simple CTA with heading and button',
 				'categories'  => [ 'call-to-action' ],

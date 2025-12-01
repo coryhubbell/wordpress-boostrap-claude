@@ -1,6 +1,6 @@
 /**
  * API Request Type Definitions
- * WordPress Bootstrap Claude - Service Layer
+ * DevelopmentTranslation Bridge - Service Layer
  */
 
 import type { Framework, UserPreferences } from '@/types';

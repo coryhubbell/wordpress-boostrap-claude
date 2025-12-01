@@ -1,5 +1,5 @@
 # =============================================================================
-# WordPress Bootstrap Claude - Docker Compose Configuration
+# DevelopmentTranslation Bridge - Docker Compose Configuration
 # =============================================================================
 # Configuration is read from .env file (copy from .env.example)
 # Run: docker-compose up -d
@@ -13,7 +13,7 @@ services:
   # ---------------------------------------------------------------------------
   db:
     image: mysql:8.0
-    container_name: wpbc-mysql
+    container_name: devtb-mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-wordpress}
@@ -38,7 +38,7 @@ services:
       db:
         condition: service_healthy
     image: wordpress:latest
-    container_name: wpbc-wordpress
+    container_name: devtb-wordpress
     restart: always
     ports:
       - "${WORDPRESS_PORT:-8080}:80"
@@ -54,7 +54,7 @@ services:
       CLAUDE_API_KEY: ${CLAUDE_API_KEY:-}
       WORDPRESS_CONFIG_EXTRA: |
         /* =================================================================
-         * WordPress Bootstrap Claude Configuration
+         * DevelopmentTranslation Bridge Configuration
          * Generated from docker-compose.yml environment
          * ================================================================= */
 
@@ -64,9 +64,9 @@ services:
         define('WP_DEBUG_DISPLAY', ${WP_DEBUG_DISPLAY:-false});
 
         /* Vite Development Server Configuration */
-        define('WPBC_VITE_PORT', '${VITE_PORT:-3000}');
-        define('WPBC_VITE_HMR_HOST', '${VITE_HMR_HOST:-localhost}');
-        define('WPBC_VITE_DOCKER_MODE', ${VITE_DOCKER_MODE:-true});
+        define('DEVTB_VITE_PORT', '${VITE_PORT:-3000}');
+        define('DEVTB_VITE_HMR_HOST', '${VITE_HMR_HOST:-localhost}');
+        define('DEVTB_VITE_DOCKER_MODE', ${VITE_DOCKER_MODE:-true});
 
         /* Security Keys - Read from environment or use defaults */
         define('AUTH_KEY',         '${AUTH_KEY:-put-your-unique-phrase-here}');
@@ -84,7 +84,7 @@ services:
         }
     volumes:
       # Mount the theme directory for live development
-      - ./:/var/www/html/wp-content/themes/wordpress-bootstrap-claude
+      - ./:/var/www/html/wp-content/themes/development-translation-bridge
       # WordPress core files (persistent)
       - wordpress_data:/var/www/html
 
@@ -95,7 +95,7 @@ services:
     depends_on:
       - db
     image: phpmyadmin:latest
-    container_name: wpbc-phpmyadmin
+    container_name: devtb-phpmyadmin
     restart: always
     ports:
       - "${PHPMYADMIN_PORT:-8081}:80"

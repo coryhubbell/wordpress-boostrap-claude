@@ -1,5 +1,5 @@
 {
-    "name": "coryhubbell/wordpress-bootstrap-claude",
+    "name": "coryhubbell/development-translation-bridge",
     "description": "Universal WordPress page builder translation system with AI optimization",
     "type": "wordpress-theme",
     "license": "GPL-2.0-or-later",
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "WPBC\\TranslationBridge\\": "translation-bridge/"
+            "DEVTB\\TranslationBridge\\": "translation-bridge/"
         },
         "classmap": [
             "includes/"
@@ -28,7 +28,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "WPBC\\Tests\\": "tests/"
+            "DEVTB\\Tests\\": "tests/"
         }
     },
     "scripts": {

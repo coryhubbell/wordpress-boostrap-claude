@@ -10,19 +10,19 @@
  * - Minification and optimization
  * - Framework-specific adaptations
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Utils;
+namespace DEVTB\TranslationBridge\Utils;
 
 /**
- * Class WPBC_CSS_Helper
+ * Class DEVTB_CSS_Helper
  *
  * Advanced CSS processing and manipulation utilities.
  */
-class WPBC_CSS_Helper {
+class DEVTB_CSS_Helper {
 
 	/**
 	 * Parse inline CSS string to array

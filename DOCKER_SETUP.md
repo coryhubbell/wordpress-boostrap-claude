@@ -1,4 +1,4 @@
-# WordPress Bootstrap Claude - Local Development Setup
+# DevelopmentTranslation Bridge - Local Development Setup
 
 ## Quick Start with Docker
 
@@ -37,7 +37,7 @@ This will start:
 4. Database info is pre-configured, click **Submit**
 5. Click **Run the installation**
 6. Fill in site information:
-   - Site Title: `WordPress Bootstrap Claude Dev`
+   - Site Title: `DevelopmentTranslation Bridge Dev`
    - Username: `admin` (or your choice)
    - Password: Create a strong password
    - Email: Your email
@@ -47,7 +47,7 @@ This will start:
 ### 3. Activate the Theme
 
 1. Go to **Appearance** → **Themes**
-2. Find **WordPress Bootstrap Claude**
+2. Find **DevelopmentTranslation Bridge**
 3. Click **Activate**
 
 ### 4. Start the Visual Interface Dev Server
@@ -92,7 +92,7 @@ npm run dev
 | WP Admin | http://localhost:8080/wp-admin | Admin dashboard |
 | Visual Interface | WP Admin → Visual Interface | React app with HMR |
 | phpMyAdmin | http://localhost:8081 | Database management |
-| REST API | http://localhost:8080/wp-json/wpbc/v2/ | API endpoints |
+| REST API | http://localhost:8080/wp-json/devtb/v2/ | API endpoints |
 
 ---
 
@@ -121,20 +121,20 @@ docker-compose down -v
 
 ```bash
 # Access MySQL directly
-docker exec -it wpbc-mysql mysql -u wordpress -pwordpress wordpress
+docker exec -it devtb-mysql mysql -u wordpress -pwordpress wordpress
 
 # Backup database
-docker exec wpbc-mysql mysqldump -u wordpress -pwordpress wordpress > backup.sql
+docker exec devtb-mysql mysqldump -u wordpress -pwordpress wordpress > backup.sql
 
 # Restore database
-docker exec -i wpbc-mysql mysql -u wordpress -pwordpress wordpress < backup.sql
+docker exec -i devtb-mysql mysql -u wordpress -pwordpress wordpress < backup.sql
 ```
 
 ### WordPress CLI (WP-CLI)
 
 ```bash
 # Access WordPress container
-docker exec -it wpbc-wordpress bash
+docker exec -it devtb-wordpress bash
 
 # Inside container, use WP-CLI
 wp --allow-root plugin list
@@ -151,7 +151,7 @@ The theme is **mounted** into the WordPress container:
 ```
 Local: /Users/coryhubbell/Desktop/Code Projects/Wordpress-bootstrap-claude/
          ↓ (mounted to)
-Container: /var/www/html/wp-content/themes/wordpress-bootstrap-claude/
+Container: /var/www/html/wp-content/themes/development-translation-bridge/
 ```
 
 **This means:**
@@ -208,9 +208,9 @@ lsof -i :3306  # MySQL
 
 ```bash
 # Check theme is mounted
-docker exec -it wpbc-wordpress ls -la /var/www/html/wp-content/themes/
+docker exec -it devtb-wordpress ls -la /var/www/html/wp-content/themes/
 
-# Should see: wordpress-bootstrap-claude/
+# Should see: development-translation-bridge/
 ```
 
 ### Translation not working
@@ -220,7 +220,7 @@ docker exec -it wpbc-wordpress ls -la /var/www/html/wp-content/themes/
 docker-compose logs -f wordpress
 
 # Check if REST API is accessible
-curl http://localhost:8080/wp-json/wpbc/v2/frameworks
+curl http://localhost:8080/wp-json/devtb/v2/frameworks
 ```
 
 ### Visual Interface shows blank page
@@ -240,7 +240,7 @@ To start completely fresh:
 docker-compose down -v
 
 # Remove all volumes (this deletes the database!)
-docker volume rm $(docker volume ls -q | grep wpbc)
+docker volume rm $(docker volume ls -q | grep devtb)
 
 # Start fresh
 docker-compose up -d
@@ -276,5 +276,5 @@ npm run build
 
 ---
 
-**WordPress Bootstrap Claude** - Local Development Environment
+**DevelopmentTranslation Bridge** - Local Development Environment
 Ready to build! 💪

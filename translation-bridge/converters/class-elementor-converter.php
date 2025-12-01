@@ -10,24 +10,24 @@
  * - ID generation (8-char hex)
  * - Dynamic content support
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Converters;
+namespace DEVTB\TranslationBridge\Converters;
 
-use WPBC\TranslationBridge\Core\WPBC_Converter_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_JSON_Helper;
-use WPBC\TranslationBridge\Utils\WPBC_CSS_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Converter_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_JSON_Helper;
+use DEVTB\TranslationBridge\Utils\DEVTB_CSS_Helper;
 
 /**
- * Class WPBC_Elementor_Converter
+ * Class DEVTB_Elementor_Converter
  *
  * Convert universal components to Elementor JSON.
  */
-class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
+class DEVTB_Elementor_Converter implements DEVTB_Converter_Interface {
 
 	/**
 	 * Element ID counter for unique IDs
@@ -39,7 +39,7 @@ class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert universal component to Elementor JSON
 	 *
-	 * @param WPBC_Component|array $component Component to convert.
+	 * @param DEVTB_Component|array $component Component to convert.
 	 * @return string|array Elementor JSON string or array.
 	 */
 	public function convert( $component ) {
@@ -52,7 +52,7 @@ class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
 		$elements = [];
 
 		foreach ( $components as $comp ) {
-			if ( $comp instanceof WPBC_Component ) {
+			if ( $comp instanceof DEVTB_Component ) {
 				$element = $this->convert_component( $comp );
 				if ( $element ) {
 					$elements[] = $element;
@@ -66,10 +66,10 @@ class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert single component to Elementor element
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return array|null Elementor element array.
 	 */
-	public function convert_component( WPBC_Component $component ): ?array {
+	public function convert_component( DEVTB_Component $component ): ?array {
 		$type = $component->type;
 
 		// Convert based on component type
@@ -88,10 +88,10 @@ class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert container/row to Elementor section
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return array Elementor section element.
 	 */
-	private function convert_section( WPBC_Component $component ): array {
+	private function convert_section( DEVTB_Component $component ): array {
 		$settings = $this->denormalize_attributes( $component->attributes );
 
 		// Add styles to settings
@@ -139,11 +139,11 @@ class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert column component to Elementor column
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @param bool           $is_inner  Whether this is an inner column.
 	 * @return array Elementor column element.
 	 */
-	private function convert_column( WPBC_Component $component, bool $is_inner = false ): array {
+	private function convert_column( DEVTB_Component $component, bool $is_inner = false ): array {
 		$settings = $this->denormalize_attributes( $component->attributes );
 
 		// Convert width to Elementor column size with responsive breakpoints
@@ -193,10 +193,10 @@ class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
 	 *
 	 * Elementor structure: section > column > inner_section > column > widget
 	 *
-	 * @param WPBC_Component $component Layout component to wrap.
+	 * @param DEVTB_Component $component Layout component to wrap.
 	 * @return array Elementor inner section element.
 	 */
-	private function create_inner_section( WPBC_Component $component ): array {
+	private function create_inner_section( DEVTB_Component $component ): array {
 		$section = [
 			'id'       => $this->generate_id(),
 			'elType'   => 'section',
@@ -238,10 +238,10 @@ class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
 	 * IMPORTANT: Widgets cannot contain other widgets in Elementor.
 	 * Nested items (for tabs/accordions) go in settings, not elements.
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return array|null Elementor widget element.
 	 */
-	private function convert_widget( WPBC_Component $component ): ?array {
+	private function convert_widget( DEVTB_Component $component ): ?array {
 		$widget_type = $this->map_to_widget_type( $component->type );
 
 		// Use fallback for unmapped types instead of returning null
@@ -658,7 +658,7 @@ class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
 		];
 
 		foreach ( $widgets as $widget ) {
-			if ( $widget instanceof WPBC_Component ) {
+			if ( $widget instanceof DEVTB_Component ) {
 				$converted = $this->convert_widget( $widget );
 				if ( $converted ) {
 					$element['elements'][] = $converted;
@@ -695,7 +695,7 @@ class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
 	 */
 	private function generate_id(): string {
 		$this->id_counter++;
-		return WPBC_JSON_Helper::generate_elementor_id();
+		return DEVTB_JSON_Helper::generate_elementor_id();
 	}
 
 	/**
@@ -753,10 +753,10 @@ class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Validate component can be converted
 	 *
-	 * @param WPBC_Component $component Component to validate.
+	 * @param DEVTB_Component $component Component to validate.
 	 * @return bool True if can be converted.
 	 */
-	public function can_convert( WPBC_Component $component ): bool {
+	public function can_convert( DEVTB_Component $component ): bool {
 		$supported = $this->get_supported_types();
 		return in_array( $component->type, $supported, true );
 	}
@@ -764,10 +764,10 @@ class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Get conversion confidence score
 	 *
-	 * @param WPBC_Component $component Component to evaluate.
+	 * @param DEVTB_Component $component Component to evaluate.
 	 * @return float Confidence score (0.0-1.0).
 	 */
-	public function get_confidence( WPBC_Component $component ): float {
+	public function get_confidence( DEVTB_Component $component ): float {
 		if ( ! $this->can_convert( $component ) ) {
 			return 0.0;
 		}
@@ -801,10 +801,10 @@ class WPBC_Elementor_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Get fallback conversion for unsupported component types
 	 *
-	 * @param WPBC_Component $component Unsupported component.
+	 * @param DEVTB_Component $component Unsupported component.
 	 * @return array Fallback Elementor element.
 	 */
-	public function get_fallback( WPBC_Component $component ) {
+	public function get_fallback( DEVTB_Component $component ) {
 		// Create a basic text widget as fallback
 		$settings = [
 			'editor' => $component->content ? $component->content : 'Unsupported component type: ' . $component->type,

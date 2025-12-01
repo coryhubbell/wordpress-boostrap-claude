@@ -9,24 +9,24 @@
  * - Style extraction from 'original' property
  * - Content extraction from ct_content
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.2.0
  */
 
-namespace WPBC\TranslationBridge\Parsers;
+namespace DEVTB\TranslationBridge\Parsers;
 
-use WPBC\TranslationBridge\Core\WPBC_Parser_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_JSON_Helper;
-use WPBC\TranslationBridge\Utils\WPBC_CSS_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Parser_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_JSON_Helper;
+use DEVTB\TranslationBridge\Utils\DEVTB_CSS_Helper;
 
 /**
- * Class WPBC_Oxygen_Parser
+ * Class DEVTB_Oxygen_Parser
  *
  * Parse Oxygen Builder JSON into universal components.
  */
-class WPBC_Oxygen_Parser implements WPBC_Parser_Interface {
+class DEVTB_Oxygen_Parser implements DEVTB_Parser_Interface {
 
 	/**
 	 * Supported Oxygen element types
@@ -71,7 +71,7 @@ class WPBC_Oxygen_Parser implements WPBC_Parser_Interface {
 	 * Parse Oxygen JSON into universal components
 	 *
 	 * @param string|array $content Oxygen JSON content.
-	 * @return WPBC_Component[] Array of parsed components.
+	 * @return DEVTB_Component[] Array of parsed components.
 	 */
 	public function parse( $content ): array {
 		// Handle string JSON
@@ -165,9 +165,9 @@ class WPBC_Oxygen_Parser implements WPBC_Parser_Interface {
 	 *
 	 * @param array $element Element data.
 	 * @param array $all_elements All elements indexed by ID.
-	 * @return WPBC_Component|null Parsed component or null.
+	 * @return DEVTB_Component|null Parsed component or null.
 	 */
-	private function parse_oxygen_element( array $element, array $all_elements ): ?WPBC_Component {
+	private function parse_oxygen_element( array $element, array $all_elements ): ?DEVTB_Component {
 		$element_name = $element['name'] ?? '';
 
 		if ( empty( $element_name ) ) {
@@ -186,7 +186,7 @@ class WPBC_Oxygen_Parser implements WPBC_Parser_Interface {
 		// Normalize attributes
 		$attributes = $this->normalize_options( $options );
 
-		$component = new WPBC_Component([
+		$component = new DEVTB_Component([
 			'type'       => $universal_type,
 			'category'   => $this->get_category( $universal_type ),
 			'attributes' => $attributes,
@@ -499,9 +499,9 @@ class WPBC_Oxygen_Parser implements WPBC_Parser_Interface {
 	 * Parse single element (public interface method)
 	 *
 	 * @param mixed $element Element to parse.
-	 * @return WPBC_Component|null Parsed component or null.
+	 * @return DEVTB_Component|null Parsed component or null.
 	 */
-	public function parse_element( $element ): ?WPBC_Component {
+	public function parse_element( $element ): ?DEVTB_Component {
 		if ( is_string( $element ) ) {
 			$components = $this->parse( $element );
 			return $components[0] ?? null;

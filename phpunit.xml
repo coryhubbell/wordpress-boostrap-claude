@@ -10,7 +10,7 @@
     stopOnFailure="false">
 
     <testsuites>
-        <testsuite name="WordPress Bootstrap Claude Test Suite">
+        <testsuite name="DevelopmentTranslation Bridge Test Suite">
             <directory>tests</directory>
         </testsuite>
         <testsuite name="Unit">
@@ -40,7 +40,7 @@
     </coverage>
 
     <php>
-        <const name="WPBC_TESTING" value="true"/>
-        <const name="WPBC_TEST_DATA_DIR" value="tests/fixtures"/>
+        <const name="DEVTB_TESTING" value="true"/>
+        <const name="DEVTB_TEST_DATA_DIR" value="tests/fixtures"/>
     </php>
 </phpunit>

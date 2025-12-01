@@ -2,11 +2,11 @@
 /**
  * API v2 Unit Tests
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Tests
  */
 
-namespace WPBC\Tests\Unit;
+namespace DEVTB\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
@@ -18,22 +18,22 @@ class APIv2Test extends TestCase {
         parent::setUp();
 
         // Load the API class
-        require_once WPBC_INCLUDES . '/class-wpbc-api-v2.php';
-        $this->api = new \WPBC_API_V2();
+        require_once DEVTB_INCLUDES . '/class-devtb-api-v2.php';
+        $this->api = new \DEVTB_API_V2();
     }
 
     /**
      * Test API instance is created
      */
     public function test_api_instance_is_created() {
-        $this->assertInstanceOf(\WPBC_API_V2::class, $this->api);
+        $this->assertInstanceOf(\DEVTB_API_V2::class, $this->api);
     }
 
     /**
      * Test translate endpoint validates source framework
      */
     public function test_translate_endpoint_validates_source_framework() {
-        $request = new \WP_REST_Request('POST', '/wpbc/v2/translate');
+        $request = new \WP_REST_Request('POST', '/devtb/v2/translate');
         $request->set_param('source', 'invalid_framework');
         $request->set_param('target', 'bootstrap');
         $request->set_param('content', '<div>Test</div>');
@@ -47,7 +47,7 @@ class APIv2Test extends TestCase {
      * Test translate endpoint validates target framework
      */
     public function test_translate_endpoint_validates_target_framework() {
-        $request = new \WP_REST_Request('POST', '/wpbc/v2/translate');
+        $request = new \WP_REST_Request('POST', '/devtb/v2/translate');
         $request->set_param('source', 'bootstrap');
         $request->set_param('target', 'invalid_framework');
         $request->set_param('content', '<div>Test</div>');
@@ -61,7 +61,7 @@ class APIv2Test extends TestCase {
      * Test translate endpoint requires content
      */
     public function test_translate_endpoint_requires_content() {
-        $request = new \WP_REST_Request('POST', '/wpbc/v2/translate');
+        $request = new \WP_REST_Request('POST', '/devtb/v2/translate');
         $request->set_param('source', 'bootstrap');
         $request->set_param('target', 'divi');
         // No content provided
@@ -79,7 +79,7 @@ class APIv2Test extends TestCase {
      * Test batch_translate validates targets array
      */
     public function test_batch_translate_validates_targets_array() {
-        $request = new \WP_REST_Request('POST', '/wpbc/v2/batch-translate');
+        $request = new \WP_REST_Request('POST', '/devtb/v2/batch-translate');
         $request->set_param('source', 'bootstrap');
         $request->set_param('targets', 'not_an_array');
         $request->set_param('content', '<div>Test</div>');
@@ -119,7 +119,7 @@ class APIv2Test extends TestCase {
         $data = $result->get_data();
         $this->assertArrayHasKey('success', $data);
         $this->assertArrayHasKey('api', $data);
-        $this->assertEquals('wpbc', $data['api']['name']);
+        $this->assertEquals('devtb', $data['api']['name']);
         $this->assertEquals('v2', $data['api']['version']);
     }
 
@@ -127,7 +127,7 @@ class APIv2Test extends TestCase {
      * Test validate endpoint returns validation results
      */
     public function test_validate_endpoint_returns_results() {
-        $request = new \WP_REST_Request('POST', '/wpbc/v2/validate');
+        $request = new \WP_REST_Request('POST', '/devtb/v2/validate');
         $request->set_param('framework', 'bootstrap');
         $request->set_param('content', '<div class="container"><div class="row"><div class="col">Test</div></div></div>');
 
@@ -165,7 +165,7 @@ class APIv2Test extends TestCase {
      * Test translate with valid bootstrap content
      */
     public function test_translate_with_valid_bootstrap_content() {
-        $request = new \WP_REST_Request('POST', '/wpbc/v2/translate');
+        $request = new \WP_REST_Request('POST', '/devtb/v2/translate');
         $request->set_param('source', 'bootstrap');
         $request->set_param('target', 'divi');
         $request->set_param('content', '<section class="hero"><div class="container"><h1>Welcome</h1></div></section>');
@@ -185,13 +185,13 @@ class APIv2Test extends TestCase {
      * Test get_job_status returns error for unknown job
      */
     public function test_get_job_status_returns_error_for_unknown() {
-        $request = new \WP_REST_Request('GET', '/wpbc/v2/job/nonexistent_job_id');
+        $request = new \WP_REST_Request('GET', '/devtb/v2/job/nonexistent_job_id');
         $request->set_param('job_id', 'nonexistent_job_id');
 
         $result = $this->api->get_job_status($request);
 
         $this->assertInstanceOf(\WP_Error::class, $result);
-        $this->assertEquals('wpbc_job_not_found', $result->get_error_code());
+        $this->assertEquals('devtb_job_not_found', $result->get_error_code());
     }
 
     /**
@@ -221,7 +221,7 @@ class APIv2Test extends TestCase {
      * Test batch translate with async flag creates job
      */
     public function test_batch_translate_async_returns_job_id() {
-        $request = new \WP_REST_Request('POST', '/wpbc/v2/batch-translate');
+        $request = new \WP_REST_Request('POST', '/devtb/v2/batch-translate');
         $request->set_param('source', 'bootstrap');
         $request->set_param('targets', ['divi', 'elementor']);
         $request->set_param('content', '<div class="container">Test</div>');
@@ -232,7 +232,7 @@ class APIv2Test extends TestCase {
         if ($result instanceof \WP_REST_Response) {
             $data = $result->get_data();
             if ($data['success'] && isset($data['job_id'])) {
-                $this->assertStringStartsWith('wpbc_', $data['job_id']);
+                $this->assertStringStartsWith('devtb_', $data['job_id']);
             }
         }
     }

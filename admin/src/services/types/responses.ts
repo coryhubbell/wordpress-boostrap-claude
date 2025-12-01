@@ -1,6 +1,6 @@
 /**
  * API Response Type Definitions
- * WordPress Bootstrap Claude - Service Layer
+ * DevelopmentTranslation Bridge - Service Layer
  */
 
 import type { Framework, CorrectionSuggestion } from '@/types';

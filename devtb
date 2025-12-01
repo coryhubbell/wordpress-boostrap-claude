@@ -1,15 +1,15 @@
 #!/usr/bin/env php
 <?php
 /**
- * WPBC - WordPress Bootstrap Claude CLI
+ * DEVTB - DevelopmentTranslation Bridge CLI
  *
  * Command-line interface for the Translation Bridge™
  * Converts between 10 page builder frameworks with AI optimization
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage CLI
  * @version    3.1.0
- * @author     WordPress Bootstrap Claude
+ * @author     DevelopmentTranslation Bridge
  * @license    GPL-2.0+
  */
 
@@ -19,14 +19,14 @@ if (php_sapi_name() !== 'cli') {
 }
 
 // Define constants
-define('WPBC_VERSION', '3.1.0');
-define('WPBC_ROOT', __DIR__);
-define('WPBC_INCLUDES', WPBC_ROOT . '/includes');
-define('WPBC_TRANSLATION_BRIDGE', WPBC_ROOT . '/translation-bridge');
+define('DEVTB_VERSION', '3.1.0');
+define('DEVTB_ROOT', __DIR__);
+define('DEVTB_INCLUDES', DEVTB_ROOT . '/includes');
+define('DEVTB_TRANSLATION_BRIDGE', DEVTB_ROOT . '/translation-bridge');
 
 // Check PHP version
 if (version_compare(PHP_VERSION, '7.4.0', '<')) {
-    fwrite(STDERR, "\033[31mError: WPBC requires PHP 7.4.0 or higher. You are running " . PHP_VERSION . "\033[0m" . PHP_EOL);
+    fwrite(STDERR, "\033[31mError: DEVTB requires PHP 7.4.0 or higher. You are running " . PHP_VERSION . "\033[0m" . PHP_EOL);
     exit(1);
 }
 
@@ -38,12 +38,12 @@ spl_autoload_register(function ($class) {
 
     // Possible locations
     $locations = [
-        WPBC_INCLUDES . '/class-' . $class . '.php',
-        WPBC_TRANSLATION_BRIDGE . '/core/class-' . $class . '.php',
-        WPBC_TRANSLATION_BRIDGE . '/parsers/class-' . $class . '.php',
-        WPBC_TRANSLATION_BRIDGE . '/converters/class-' . $class . '.php',
-        WPBC_TRANSLATION_BRIDGE . '/models/class-' . $class . '.php',
-        WPBC_TRANSLATION_BRIDGE . '/utils/class-' . $class . '.php',
+        DEVTB_INCLUDES . '/class-' . $class . '.php',
+        DEVTB_TRANSLATION_BRIDGE . '/core/class-' . $class . '.php',
+        DEVTB_TRANSLATION_BRIDGE . '/parsers/class-' . $class . '.php',
+        DEVTB_TRANSLATION_BRIDGE . '/converters/class-' . $class . '.php',
+        DEVTB_TRANSLATION_BRIDGE . '/models/class-' . $class . '.php',
+        DEVTB_TRANSLATION_BRIDGE . '/utils/class-' . $class . '.php',
     ];
 
     foreach ($locations as $file) {
@@ -55,9 +55,9 @@ spl_autoload_register(function ($class) {
 });
 
 // Include required files
-require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-require_once WPBC_INCLUDES . '/class-wpbc-file-handler.php';
-require_once WPBC_INCLUDES . '/class-wpbc-logger.php';
+require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+require_once DEVTB_INCLUDES . '/class-devtb-file-handler.php';
+require_once DEVTB_INCLUDES . '/class-devtb-logger.php';
 
 // Main execution
 try {
@@ -65,7 +65,7 @@ try {
     $args = array_slice($argv, 1);
 
     // Initialize CLI handler
-    $cli = new WPBC_CLI($args);
+    $cli = new DEVTB_CLI($args);
 
     // Execute command
     $exit_code = $cli->execute();

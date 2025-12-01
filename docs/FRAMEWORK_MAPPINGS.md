@@ -297,16 +297,16 @@ Translation Bridge uses **30+ universal component types** that all frameworks ca
 
 ```bash
 # List what each framework supports
-wpbc list-supported-elements bootstrap
-wpbc list-supported-elements elementor
-wpbc list-supported-elements avada
+devtb list-supported-elements bootstrap
+devtb list-supported-elements elementor
+devtb list-supported-elements avada
 ```
 
 ### **Conversion with Mapping Info**
 
 ```bash
 # See how components map during conversion
-wpbc translate --show-mappings bootstrap divi component.html
+devtb translate --show-mappings bootstrap divi component.html
 ```
 
 ### **Custom Mapping Overrides**
@@ -332,7 +332,7 @@ $translator->set_custom_mapping('button', 'custom-button-type');
 
 - Review [Translation Bridge Guide](TRANSLATION_BRIDGE.md)
 - Check [Conversion Examples](CONVERSION_EXAMPLES.md)
-- Ask in [Discord](https://discord.gg/wpbc)
+- Ask in [Discord](https://discord.gg/devtb)
 
 ---
 
@@ -340,6 +340,6 @@ $translator->set_custom_mapping('button', 'custom-button-type');
 
 **Framework Mappings** - Understanding the Universal Component Model
 
-Part of WordPress Bootstrap Claude™ Translation Bridge
+Part of DevelopmentTranslation Bridge™ Translation Bridge
 
 </div>

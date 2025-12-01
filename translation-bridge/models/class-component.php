@@ -5,20 +5,20 @@
  * Intermediate representation for components across all frameworks.
  * This allows translation between any framework by converting to/from this universal format.
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Models;
+namespace DEVTB\TranslationBridge\Models;
 
 /**
- * Class WPBC_Component
+ * Class DEVTB_Component
  *
  * Universal component model that represents elements from any framework
  * (Bootstrap, DIVI, Elementor, Avada, Bricks) in a standardized format.
  */
-class WPBC_Component {
+class DEVTB_Component {
 
 	/**
 	 * Unique component identifier
@@ -58,7 +58,7 @@ class WPBC_Component {
 	/**
 	 * Child components (nested elements)
 	 *
-	 * @var WPBC_Component[]
+	 * @var DEVTB_Component[]
 	 */
 	public array $children;
 
@@ -98,16 +98,16 @@ class WPBC_Component {
 	 * @return string
 	 */
 	private function generate_id(): string {
-		return 'wpbc_' . uniqid( '', true );
+		return 'devtb_' . uniqid( '', true );
 	}
 
 	/**
 	 * Add child component
 	 *
-	 * @param WPBC_Component $component Child component to add.
+	 * @param DEVTB_Component $component Child component to add.
 	 * @return void
 	 */
-	public function add_child( WPBC_Component $component ): void {
+	public function add_child( DEVTB_Component $component ): void {
 		$this->children[] = $component;
 	}
 
@@ -189,7 +189,7 @@ class WPBC_Component {
 	/**
 	 * Get all children
 	 *
-	 * @return WPBC_Component[]
+	 * @return DEVTB_Component[]
 	 */
 	public function get_children(): array {
 		return $this->children;
@@ -217,9 +217,9 @@ class WPBC_Component {
 	 * Create component from array
 	 *
 	 * @param array<string, mixed> $data Component data.
-	 * @return WPBC_Component
+	 * @return DEVTB_Component
 	 */
-	public static function from_array( array $data ): WPBC_Component {
+	public static function from_array( array $data ): DEVTB_Component {
 		// Convert children arrays back to components
 		if ( isset( $data['children'] ) && is_array( $data['children'] ) ) {
 			$data['children'] = array_map(
@@ -244,9 +244,9 @@ class WPBC_Component {
 	 * Create component from JSON
 	 *
 	 * @param string $json JSON string.
-	 * @return WPBC_Component|null
+	 * @return DEVTB_Component|null
 	 */
-	public static function from_json( string $json ): ?WPBC_Component {
+	public static function from_json( string $json ): ?DEVTB_Component {
 		$data = json_decode( $json, true );
 
 		if ( json_last_error() !== JSON_ERROR_NONE ) {
@@ -259,9 +259,9 @@ class WPBC_Component {
 	/**
 	 * Clone component with new ID
 	 *
-	 * @return WPBC_Component
+	 * @return DEVTB_Component
 	 */
-	public function duplicate(): WPBC_Component {
+	public function duplicate(): DEVTB_Component {
 		$clone     = clone $this;
 		$clone->id = $this->generate_id();
 

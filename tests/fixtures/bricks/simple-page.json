@@ -499,7 +499,7 @@
               "name": "text",
               "parent": "container-footer",
               "settings": {
-                "text": "© 2024 WordPress Bootstrap Claude. All rights reserved.",
+                "text": "© 2024 DevelopmentTranslation Bridge. All rights reserved.",
                 "_textAlign": "center",
                 "_color": "#999999",
                 "_marginTop": "30px"

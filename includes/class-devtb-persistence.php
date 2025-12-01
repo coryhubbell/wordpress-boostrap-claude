@@ -1,11 +1,11 @@
 <?php
 /**
- * WPBC Persistence Handler
+ * DEVTB Persistence Handler
  *
  * Manages database storage for translations and provides CRUD operations
  * for saving, loading, and versioning translation data.
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage Core
  * @version    3.3.0
  */
@@ -16,21 +16,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WPBC Persistence class
+ * DEVTB Persistence class
  *
  * Handles all database operations for translation persistence.
  */
-class WPBC_Persistence {
+class DEVTB_Persistence {
 
 	/**
 	 * Table name for translations (without prefix)
 	 */
-	private const TABLE_TRANSLATIONS = 'wpbc_translations';
+	private const TABLE_TRANSLATIONS = 'devtb_translations';
 
 	/**
 	 * Table name for corrections (without prefix)
 	 */
-	private const TABLE_CORRECTIONS = 'wpbc_corrections';
+	private const TABLE_CORRECTIONS = 'devtb_corrections';
 
 	/**
 	 * Database version for migrations
@@ -40,14 +40,14 @@ class WPBC_Persistence {
 	/**
 	 * Option name for tracking DB version
 	 */
-	private const DB_VERSION_OPTION = 'wpbc_db_version';
+	private const DB_VERSION_OPTION = 'devtb_db_version';
 
 	/**
 	 * Logger instance
 	 *
-	 * @var WPBC_Logger
+	 * @var DEVTB_Logger
 	 */
-	private WPBC_Logger $logger;
+	private DEVTB_Logger $logger;
 
 	/**
 	 * Translations table name with prefix
@@ -69,7 +69,7 @@ class WPBC_Persistence {
 	public function __construct() {
 		global $wpdb;
 
-		$this->logger             = new WPBC_Logger();
+		$this->logger             = new DEVTB_Logger();
 		$this->table_translations = $wpdb->prefix . self::TABLE_TRANSLATIONS;
 		$this->table_corrections  = $wpdb->prefix . self::TABLE_CORRECTIONS;
 	}
@@ -188,10 +188,10 @@ class WPBC_Persistence {
 		}
 
 		// Validate frameworks
-		if ( ! WPBC_Config::is_valid_framework( $data['source_framework'] ) ) {
+		if ( ! DEVTB_Config::is_valid_framework( $data['source_framework'] ) ) {
 			return new WP_Error( 'invalid_framework', 'Invalid source framework.' );
 		}
-		if ( ! WPBC_Config::is_valid_framework( $data['target_framework'] ) ) {
+		if ( ! DEVTB_Config::is_valid_framework( $data['target_framework'] ) ) {
 			return new WP_Error( 'invalid_framework', 'Invalid target framework.' );
 		}
 
@@ -528,7 +528,7 @@ class WPBC_Persistence {
 			return false;
 		}
 
-		return (bool) update_user_meta( $user_id, 'wpbc_preferences', $preferences );
+		return (bool) update_user_meta( $user_id, 'devtb_preferences', $preferences );
 	}
 
 	/**
@@ -542,7 +542,7 @@ class WPBC_Persistence {
 			return array();
 		}
 
-		$preferences = get_user_meta( $user_id, 'wpbc_preferences', true );
+		$preferences = get_user_meta( $user_id, 'devtb_preferences', true );
 		return is_array( $preferences ) ? $preferences : array();
 	}
 }

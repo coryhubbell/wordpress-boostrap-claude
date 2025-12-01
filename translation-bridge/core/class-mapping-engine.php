@@ -10,21 +10,21 @@
  * - Style preservation algorithms
  * - Self-optimizing transformation rules
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Core;
+namespace DEVTB\TranslationBridge\Core;
 
-use WPBC\TranslationBridge\Models\WPBC_Component;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
 
 /**
- * Class WPBC_Mapping_Engine
+ * Class DEVTB_Mapping_Engine
  *
  * Advanced AI-like mapping engine for intelligent component transformations.
  */
-class WPBC_Mapping_Engine {
+class DEVTB_Mapping_Engine {
 
 	/**
 	 * Mapping data cache
@@ -79,12 +79,12 @@ class WPBC_Mapping_Engine {
 	 *
 	 * Uses advanced AI-like algorithms to find best match and transform attributes.
 	 *
-	 * @param WPBC_Component $component Source component.
+	 * @param DEVTB_Component $component Source component.
 	 * @param string         $source_framework Source framework name.
 	 * @param string         $target_framework Target framework name.
-	 * @return WPBC_Component Transformed component.
+	 * @return DEVTB_Component Transformed component.
 	 */
-	public function map( WPBC_Component $component, string $source_framework, string $target_framework ): WPBC_Component {
+	public function map( DEVTB_Component $component, string $source_framework, string $target_framework ): DEVTB_Component {
 		// Get mapping configuration
 		$mapping_key = $this->get_mapping_key( $source_framework, $target_framework );
 		$mapping     = $this->get_mapping( $mapping_key );
@@ -114,14 +114,14 @@ class WPBC_Mapping_Engine {
 	/**
 	 * Find best matching component type using AI-like multi-dimensional analysis
 	 *
-	 * @param WPBC_Component $component Source component.
+	 * @param DEVTB_Component $component Source component.
 	 * @param string         $source_framework Source framework.
 	 * @param string         $target_framework Target framework.
 	 * @param array          $mapping Mapping configuration.
 	 * @return array Best match with confidence score.
 	 */
 	private function find_best_match(
-		WPBC_Component $component,
+		DEVTB_Component $component,
 		string $source_framework,
 		string $target_framework,
 		array $mapping
@@ -172,14 +172,14 @@ class WPBC_Mapping_Engine {
 	 * - Visual output similarity
 	 * - Historical transformation success
 	 *
-	 * @param WPBC_Component $component Source component.
+	 * @param DEVTB_Component $component Source component.
 	 * @param array          $candidate Candidate mapping.
 	 * @param string         $source_framework Source framework.
 	 * @param string         $target_framework Target framework.
 	 * @return float Confidence score (0.0 to 1.0).
 	 */
 	private function calculate_similarity_score(
-		WPBC_Component $component,
+		DEVTB_Component $component,
 		array $candidate,
 		string $source_framework,
 		string $target_framework
@@ -370,11 +370,11 @@ class WPBC_Mapping_Engine {
 	 *
 	 * Predicts how visually similar the output will be.
 	 *
-	 * @param WPBC_Component $component Source component.
+	 * @param DEVTB_Component $component Source component.
 	 * @param array          $candidate Target mapping candidate.
 	 * @return float Visual similarity score (0.0 to 1.0).
 	 */
-	private function calculate_visual_similarity( WPBC_Component $component, array $candidate ): float {
+	private function calculate_visual_similarity( DEVTB_Component $component, array $candidate ): float {
 		$score = 0.0;
 
 		// Layout components are highly transferable
@@ -451,22 +451,22 @@ class WPBC_Mapping_Engine {
 	/**
 	 * Transform component using mapping rules
 	 *
-	 * @param WPBC_Component $component Source component.
+	 * @param DEVTB_Component $component Source component.
 	 * @param array          $match Best match mapping.
 	 * @param string         $source_framework Source framework.
 	 * @param string         $target_framework Target framework.
-	 * @return WPBC_Component Transformed component.
+	 * @return DEVTB_Component Transformed component.
 	 */
 	private function transform_component(
-		WPBC_Component $component,
+		DEVTB_Component $component,
 		array $match,
 		string $source_framework,
 		string $target_framework
-	): WPBC_Component {
+	): DEVTB_Component {
 		$mapping = $match['mapping'];
 
 		// Create new component with transformed data
-		$transformed = new WPBC_Component([
+		$transformed = new DEVTB_Component([
 			'id'       => $component->id,
 			'type'     => $mapping['universal_type'] ?? $component->type,
 			'category' => $mapping['category'] ?? $component->category,
@@ -664,11 +664,11 @@ class WPBC_Mapping_Engine {
 	/**
 	 * Get fallback match for unsupported component
 	 *
-	 * @param WPBC_Component $component Component.
+	 * @param DEVTB_Component $component Component.
 	 * @param string         $target_framework Target framework.
 	 * @return array Fallback match.
 	 */
-	private function get_fallback_match( WPBC_Component $component, string $target_framework ): array {
+	private function get_fallback_match( DEVTB_Component $component, string $target_framework ): array {
 		// When no mapping exists, preserve the original type
 		// This allows converters to handle type-specific logic
 		return [
@@ -685,11 +685,11 @@ class WPBC_Mapping_Engine {
 	 * Enhance low-confidence match with fallback strategies
 	 *
 	 * @param array          $match Current best match.
-	 * @param WPBC_Component $component Component.
+	 * @param DEVTB_Component $component Component.
 	 * @param string         $target_framework Target framework.
 	 * @return array Enhanced match.
 	 */
-	private function enhance_with_fallback( array $match, WPBC_Component $component, string $target_framework ): array {
+	private function enhance_with_fallback( array $match, DEVTB_Component $component, string $target_framework ): array {
 		// Keep the best match but add fallback metadata
 		$match['enhanced'] = true;
 		$match['fallback_suggestions'] = $this->generate_fallback_suggestions( $component, $target_framework );
@@ -700,11 +700,11 @@ class WPBC_Mapping_Engine {
 	/**
 	 * Generate fallback suggestions for manual review
 	 *
-	 * @param WPBC_Component $component Component.
+	 * @param DEVTB_Component $component Component.
 	 * @param string         $target_framework Target framework.
 	 * @return array Suggestions.
 	 */
-	private function generate_fallback_suggestions( WPBC_Component $component, string $target_framework ): array {
+	private function generate_fallback_suggestions( DEVTB_Component $component, string $target_framework ): array {
 		return [
 			'message' => sprintf(
 				'Low confidence match for %s. Consider manual review.',
@@ -728,12 +728,12 @@ class WPBC_Mapping_Engine {
 	/**
 	 * Record transformation for machine learning
 	 *
-	 * @param WPBC_Component $source Source component.
-	 * @param WPBC_Component $transformed Transformed component.
+	 * @param DEVTB_Component $source Source component.
+	 * @param DEVTB_Component $transformed Transformed component.
 	 * @param array          $match Match used.
 	 * @return void
 	 */
-	private function record_transformation( WPBC_Component $source, WPBC_Component $transformed, array $match ): void {
+	private function record_transformation( DEVTB_Component $source, DEVTB_Component $transformed, array $match ): void {
 		$source_framework = $source->get_metadata( 'source_framework' ) ?? 'unknown';
 		$target_framework = $transformed->get_metadata( 'target_framework' ) ?? 'unknown';
 

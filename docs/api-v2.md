@@ -1,9 +1,9 @@
 # REST API v2 Documentation
 
-**WordPress Bootstrap Claude Translation Bridge**
+**DevelopmentTranslation Bridge Translation Bridge**
 **Version:** 3.2.0
 **API Version:** 2.0
-**Base URL:** `/wp-json/wpbc/v2`
+**Base URL:** `/wp-json/devtb/v2`
 
 ---
 
@@ -21,7 +21,7 @@
 
 ## Overview
 
-The WordPress Bootstrap Claude REST API v2 provides programmatic access to the Translation Bridge, allowing you to:
+The DevelopmentTranslation Bridge REST API v2 provides programmatic access to the Translation Bridge, allowing you to:
 
 - Convert content between any of the 10 supported frameworks
 - Process batch translations asynchronously
@@ -56,19 +56,19 @@ The API supports multiple authentication methods:
 Include your API key in the request header:
 
 ```bash
-X-API-Key: wpbc_your_api_key_here
+X-API-Key: devtb_your_api_key_here
 ```
 
 Or as a query parameter:
 
 ```bash
-?api_key=wpbc_your_api_key_here
+?api_key=devtb_your_api_key_here
 ```
 
 Or in the Authorization header:
 
 ```bash
-Authorization: Bearer wpbc_your_api_key_here
+Authorization: Bearer devtb_your_api_key_here
 ```
 
 ### 2. WordPress Session Authentication
@@ -79,7 +79,7 @@ If you're logged into WordPress, you can use cookie-based authentication. Requir
 
 **Via REST API:**
 ```bash
-curl -X POST https://yoursite.com/wp-json/wpbc/v2/api-keys \
+curl -X POST https://yoursite.com/wp-json/devtb/v2/api-keys \
   -u username:password \
   -H "Content-Type: application/json" \
   -d '{
@@ -94,7 +94,7 @@ curl -X POST https://yoursite.com/wp-json/wpbc/v2/api-keys \
 {
   "success": true,
   "message": "API key created successfully. Store it securely - it won't be shown again.",
-  "key": "wpbc_a1b2c3d4e5f6...",
+  "key": "devtb_a1b2c3d4e5f6...",
   "name": "My Integration",
   "tier": "premium",
   "permissions": ["read", "write"],
@@ -135,7 +135,7 @@ X-RateLimit-Reset: 1705492800
 
 ```json
 {
-  "code": "wpbc_rate_limit_exceeded",
+  "code": "devtb_rate_limit_exceeded",
   "message": "Rate limit exceeded. Please retry after 45 seconds.",
   "data": {
     "status": 429,
@@ -154,12 +154,12 @@ X-RateLimit-Reset: 1705492800
 
 Get API status and available features.
 
-**Endpoint:** `GET /wp-json/wpbc/v2/status`
+**Endpoint:** `GET /wp-json/devtb/v2/status`
 **Authentication:** None required
 
 **Request:**
 ```bash
-curl https://yoursite.com/wp-json/wpbc/v2/status
+curl https://yoursite.com/wp-json/devtb/v2/status
 ```
 
 **Response:**
@@ -187,12 +187,12 @@ curl https://yoursite.com/wp-json/wpbc/v2/status
 
 Get all supported frameworks with metadata.
 
-**Endpoint:** `GET /wp-json/wpbc/v2/frameworks`
+**Endpoint:** `GET /wp-json/devtb/v2/frameworks`
 **Authentication:** None required
 
 **Request:**
 ```bash
-curl https://yoursite.com/wp-json/wpbc/v2/frameworks
+curl https://yoursite.com/wp-json/devtb/v2/frameworks
 ```
 
 **Response:**
@@ -225,7 +225,7 @@ curl https://yoursite.com/wp-json/wpbc/v2/frameworks
 
 Convert content from one framework to another.
 
-**Endpoint:** `POST /wp-json/wpbc/v2/translate`
+**Endpoint:** `POST /wp-json/devtb/v2/translate`
 **Authentication:** Required
 
 **Parameters:**
@@ -239,8 +239,8 @@ Convert content from one framework to another.
 
 **Request:**
 ```bash
-curl -X POST https://yoursite.com/wp-json/wpbc/v2/translate \
-  -H "X-API-Key: wpbc_your_key" \
+curl -X POST https://yoursite.com/wp-json/devtb/v2/translate \
+  -H "X-API-Key: devtb_your_key" \
   -H "Content-Type: application/json" \
   -d '{
     "source": "bootstrap",
@@ -271,7 +271,7 @@ curl -X POST https://yoursite.com/wp-json/wpbc/v2/translate \
 
 Translate content to multiple frameworks at once.
 
-**Endpoint:** `POST /wp-json/wpbc/v2/batch-translate`
+**Endpoint:** `POST /wp-json/devtb/v2/batch-translate`
 **Authentication:** Required
 
 **Parameters:**
@@ -285,8 +285,8 @@ Translate content to multiple frameworks at once.
 
 **Synchronous Request:**
 ```bash
-curl -X POST https://yoursite.com/wp-json/wpbc/v2/batch-translate \
-  -H "X-API-Key: wpbc_your_key" \
+curl -X POST https://yoursite.com/wp-json/devtb/v2/batch-translate \
+  -H "X-API-Key: devtb_your_key" \
   -H "Content-Type: application/json" \
   -d '{
     "source": "bootstrap",
@@ -328,8 +328,8 @@ curl -X POST https://yoursite.com/wp-json/wpbc/v2/batch-translate \
 
 **Async Request:**
 ```bash
-curl -X POST https://yoursite.com/wp-json/wpbc/v2/batch-translate \
-  -H "X-API-Key: wpbc_your_key" \
+curl -X POST https://yoursite.com/wp-json/devtb/v2/batch-translate \
+  -H "X-API-Key: devtb_your_key" \
   -H "Content-Type: application/json" \
   -d '{
     "source": "gutenberg",
@@ -343,9 +343,9 @@ curl -X POST https://yoursite.com/wp-json/wpbc/v2/batch-translate \
 ```json
 {
   "success": true,
-  "job_id": "wpbc_1705492800_abc123",
+  "job_id": "devtb_1705492800_abc123",
   "status": "queued",
-  "message": "Batch translation job created. Check status at /wp-json/wpbc/v2/job/wpbc_1705492800_abc123"
+  "message": "Batch translation job created. Check status at /wp-json/devtb/v2/job/devtb_1705492800_abc123"
 }
 ```
 
@@ -355,19 +355,19 @@ curl -X POST https://yoursite.com/wp-json/wpbc/v2/batch-translate \
 
 Get the status of an async job.
 
-**Endpoint:** `GET /wp-json/wpbc/v2/job/{job_id}`
+**Endpoint:** `GET /wp-json/devtb/v2/job/{job_id}`
 **Authentication:** Required
 
 **Request:**
 ```bash
-curl https://yoursite.com/wp-json/wpbc/v2/job/wpbc_1705492800_abc123 \
-  -H "X-API-Key: wpbc_your_key"
+curl https://yoursite.com/wp-json/devtb/v2/job/devtb_1705492800_abc123 \
+  -H "X-API-Key: devtb_your_key"
 ```
 
 **Response (Processing):**
 ```json
 {
-  "job_id": "wpbc_1705492800_abc123",
+  "job_id": "devtb_1705492800_abc123",
   "status": "processing",
   "source": "gutenberg",
   "targets": ["elementor", "divi", "bricks", "oxygen"],
@@ -393,7 +393,7 @@ curl https://yoursite.com/wp-json/wpbc/v2/job/wpbc_1705492800_abc123 \
 **Response (Completed):**
 ```json
 {
-  "job_id": "wpbc_1705492800_abc123",
+  "job_id": "devtb_1705492800_abc123",
   "status": "completed",
   "source": "gutenberg",
   "total": 4,
@@ -424,7 +424,7 @@ curl https://yoursite.com/wp-json/wpbc/v2/job/wpbc_1705492800_abc123 \
 
 Validate framework content before translation.
 
-**Endpoint:** `POST /wp-json/wpbc/v2/validate`
+**Endpoint:** `POST /wp-json/devtb/v2/validate`
 **Authentication:** Required
 
 **Parameters:**
@@ -436,8 +436,8 @@ Validate framework content before translation.
 
 **Request:**
 ```bash
-curl -X POST https://yoursite.com/wp-json/wpbc/v2/validate \
-  -H "X-API-Key: wpbc_your_key" \
+curl -X POST https://yoursite.com/wp-json/devtb/v2/validate \
+  -H "X-API-Key: devtb_your_key" \
   -H "Content-Type: application/json" \
   -d '{
     "framework": "elementor",
@@ -468,12 +468,12 @@ curl -X POST https://yoursite.com/wp-json/wpbc/v2/validate \
 
 Get all API keys for the current user.
 
-**Endpoint:** `GET /wp-json/wpbc/v2/api-keys`
+**Endpoint:** `GET /wp-json/devtb/v2/api-keys`
 **Authentication:** Required (Admin)
 
 **Request:**
 ```bash
-curl https://yoursite.com/wp-json/wpbc/v2/api-keys \
+curl https://yoursite.com/wp-json/devtb/v2/api-keys \
   -u username:password
 ```
 
@@ -483,7 +483,7 @@ curl https://yoursite.com/wp-json/wpbc/v2/api-keys \
   "success": true,
   "keys": [
     {
-      "key_preview": "wpbc_a1b2c3d4...e5f6",
+      "key_preview": "devtb_a1b2c3d4...e5f6",
       "name": "My Integration",
       "tier": "premium",
       "permissions": ["read", "write"],
@@ -502,7 +502,7 @@ curl https://yoursite.com/wp-json/wpbc/v2/api-keys \
 
 Generate a new API key.
 
-**Endpoint:** `POST /wp-json/wpbc/v2/api-keys`
+**Endpoint:** `POST /wp-json/devtb/v2/api-keys`
 **Authentication:** Required (Admin)
 
 **Parameters:**
@@ -515,7 +515,7 @@ Generate a new API key.
 
 **Request:**
 ```bash
-curl -X POST https://yoursite.com/wp-json/wpbc/v2/api-keys \
+curl -X POST https://yoursite.com/wp-json/devtb/v2/api-keys \
   -u username:password \
   -H "Content-Type: application/json" \
   -d '{
@@ -530,7 +530,7 @@ curl -X POST https://yoursite.com/wp-json/wpbc/v2/api-keys \
 {
   "success": true,
   "message": "API key created successfully. Store it securely - it won't be shown again.",
-  "key": "wpbc_a1b2c3d4e5f6g7h8i9j0...",
+  "key": "devtb_a1b2c3d4e5f6g7h8i9j0...",
   "name": "Production API",
   "tier": "premium",
   "permissions": ["read", "write"],
@@ -544,12 +544,12 @@ curl -X POST https://yoursite.com/wp-json/wpbc/v2/api-keys \
 
 Revoke an existing API key.
 
-**Endpoint:** `DELETE /wp-json/wpbc/v2/api-keys/{key}`
+**Endpoint:** `DELETE /wp-json/devtb/v2/api-keys/{key}`
 **Authentication:** Required (Admin)
 
 **Request:**
 ```bash
-curl -X DELETE https://yoursite.com/wp-json/wpbc/v2/api-keys/wpbc_a1b2c3d4... \
+curl -X DELETE https://yoursite.com/wp-json/devtb/v2/api-keys/devtb_a1b2c3d4... \
   -u username:password
 ```
 
@@ -572,7 +572,7 @@ Receive real-time notifications when jobs complete.
 Configure your webhook URL in WordPress settings:
 
 ```php
-update_option('wpbc_webhook_url', 'https://yoursite.com/webhook-endpoint');
+update_option('devtb_webhook_url', 'https://yoursite.com/webhook-endpoint');
 ```
 
 ### Webhook Events
@@ -585,15 +585,15 @@ Currently supported event:
 **Headers:**
 ```
 Content-Type: application/json
-X-WPBC-Event: job.completed
-X-WPBC-Signature: sha256=abc123...
+X-DEVTB-Event: job.completed
+X-DEVTB-Signature: sha256=abc123...
 ```
 
 **Payload:**
 ```json
 {
   "event": "job.completed",
-  "job_id": "wpbc_1705492800_abc123",
+  "job_id": "devtb_1705492800_abc123",
   "status": "completed",
   "source": "bootstrap",
   "total": 3,
@@ -611,11 +611,11 @@ X-WPBC-Signature: sha256=abc123...
 Verify webhook authenticity using HMAC-SHA256:
 
 ```php
-$secret = get_option('wpbc_webhook_secret');
+$secret = get_option('devtb_webhook_secret');
 $payload_json = file_get_contents('php://input');
 $signature = hash_hmac('sha256', $payload_json, $secret);
 
-$expected_signature = $_SERVER['HTTP_X_WPBC_SIGNATURE'];
+$expected_signature = $_SERVER['HTTP_X_DEVTB_SIGNATURE'];
 if (!hash_equals('sha256=' . $signature, $expected_signature)) {
     // Invalid signature
     http_response_code(403);
@@ -651,10 +651,10 @@ Failed webhooks are automatically retried with exponential backoff:
 
 | Code | HTTP Status | Description |
 |------|-------------|-------------|
-| `wpbc_auth_required` | 401 | Authentication required |
-| `wpbc_auth_invalid_key` | 401 | Invalid or expired API key |
-| `wpbc_forbidden` | 403 | Insufficient permissions |
-| `wpbc_rate_limit_exceeded` | 429 | Rate limit exceeded |
+| `devtb_auth_required` | 401 | Authentication required |
+| `devtb_auth_invalid_key` | 401 | Invalid or expired API key |
+| `devtb_forbidden` | 403 | Insufficient permissions |
+| `devtb_rate_limit_exceeded` | 429 | Rate limit exceeded |
 | `translation_failed` | 400 | Translation failed |
 | `invalid_targets` | 400 | Invalid target frameworks |
 | `job_not_found` | 404 | Job ID not found |
@@ -669,8 +669,8 @@ Failed webhooks are automatically retried with exponential backoff:
 ```javascript
 const axios = require('axios');
 
-const API_KEY = 'wpbc_your_api_key';
-const BASE_URL = 'https://yoursite.com/wp-json/wpbc/v2';
+const API_KEY = 'devtb_your_api_key';
+const BASE_URL = 'https://yoursite.com/wp-json/devtb/v2';
 
 async function translateContent() {
   try {
@@ -699,8 +699,8 @@ translateContent();
 ```python
 import requests
 
-API_KEY = 'wpbc_your_api_key'
-BASE_URL = 'https://yoursite.com/wp-json/wpbc/v2'
+API_KEY = 'devtb_your_api_key'
+BASE_URL = 'https://yoursite.com/wp-json/devtb/v2'
 
 def translate_content():
     headers = {
@@ -733,8 +733,8 @@ translate_content()
 
 ```php
 <?php
-$api_key = 'wpbc_your_api_key';
-$base_url = 'https://yoursite.com/wp-json/wpbc/v2';
+$api_key = 'devtb_your_api_key';
+$base_url = 'https://yoursite.com/wp-json/devtb/v2';
 
 $data = [
     'source' => 'bootstrap',
@@ -762,8 +762,8 @@ if (!is_wp_error($response)) {
 
 ```bash
 # Single Translation
-curl -X POST https://yoursite.com/wp-json/wpbc/v2/translate \
-  -H "X-API-Key: wpbc_your_key" \
+curl -X POST https://yoursite.com/wp-json/devtb/v2/translate \
+  -H "X-API-Key: devtb_your_key" \
   -H "Content-Type: application/json" \
   -d '{
     "source": "bootstrap",
@@ -772,8 +772,8 @@ curl -X POST https://yoursite.com/wp-json/wpbc/v2/translate \
   }'
 
 # Batch Translation (Async)
-curl -X POST https://yoursite.com/wp-json/wpbc/v2/batch-translate \
-  -H "X-API-Key: wpbc_your_key" \
+curl -X POST https://yoursite.com/wp-json/devtb/v2/batch-translate \
+  -H "X-API-Key: devtb_your_key" \
   -H "Content-Type: application/json" \
   -d '{
     "source": "gutenberg",
@@ -783,12 +783,12 @@ curl -X POST https://yoursite.com/wp-json/wpbc/v2/batch-translate \
   }'
 
 # Check Job Status
-curl https://yoursite.com/wp-json/wpbc/v2/job/wpbc_abc123 \
-  -H "X-API-Key: wpbc_your_key"
+curl https://yoursite.com/wp-json/devtb/v2/job/devtb_abc123 \
+  -H "X-API-Key: devtb_your_key"
 
 # Validate Content
-curl -X POST https://yoursite.com/wp-json/wpbc/v2/validate \
-  -H "X-API-Key: wpbc_your_key" \
+curl -X POST https://yoursite.com/wp-json/devtb/v2/validate \
+  -H "X-API-Key: devtb_your_key" \
   -H "Content-Type: application/json" \
   -d '{
     "framework": "elementor",
@@ -822,4 +822,4 @@ For API support and questions:
 
 **Last Updated:** January 17, 2025
 **API Version:** 2.0
-**WordPress Bootstrap Claude:** v3.2.0
+**DevelopmentTranslation Bridge:** v3.2.0

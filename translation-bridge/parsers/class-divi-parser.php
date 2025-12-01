@@ -10,24 +10,24 @@
  * - Visual Builder compatibility
  * - Content preservation
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Parsers;
+namespace DEVTB\TranslationBridge\Parsers;
 
-use WPBC\TranslationBridge\Core\WPBC_Parser_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_Shortcode_Helper;
-use WPBC\TranslationBridge\Utils\WPBC_CSS_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Parser_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_Shortcode_Helper;
+use DEVTB\TranslationBridge\Utils\DEVTB_CSS_Helper;
 
 /**
- * Class WPBC_DIVI_Parser
+ * Class DEVTB_DIVI_Parser
  *
  * Parse DIVI Builder shortcodes into universal components.
  */
-class WPBC_DIVI_Parser implements WPBC_Parser_Interface {
+class DEVTB_DIVI_Parser implements DEVTB_Parser_Interface {
 
 	/**
 	 * Supported DIVI module types
@@ -87,7 +87,7 @@ class WPBC_DIVI_Parser implements WPBC_Parser_Interface {
 	 * Parse DIVI shortcode content into universal components
 	 *
 	 * @param string|array $content DIVI shortcode content.
-	 * @return WPBC_Component[] Array of parsed components.
+	 * @return DEVTB_Component[] Array of parsed components.
 	 */
 	public function parse( $content ): array {
 		if ( is_array( $content ) ) {
@@ -99,7 +99,7 @@ class WPBC_DIVI_Parser implements WPBC_Parser_Interface {
 		}
 
 		// Parse DIVI hierarchy
-		$hierarchy = WPBC_Shortcode_Helper::parse_divi_hierarchy( $content );
+		$hierarchy = DEVTB_Shortcode_Helper::parse_divi_hierarchy( $content );
 
 		$components = [];
 
@@ -117,12 +117,12 @@ class WPBC_DIVI_Parser implements WPBC_Parser_Interface {
 	 * Parse DIVI section
 	 *
 	 * @param array $section_data Section data from hierarchy.
-	 * @return WPBC_Component|null Parsed section component.
+	 * @return DEVTB_Component|null Parsed section component.
 	 */
-	private function parse_section( array $section_data ): ?WPBC_Component {
+	private function parse_section( array $section_data ): ?DEVTB_Component {
 		$attributes = $this->normalize_attributes( $section_data['attributes'] );
 
-		$section = new WPBC_Component([
+		$section = new DEVTB_Component([
 			'type'       => 'container',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -150,12 +150,12 @@ class WPBC_DIVI_Parser implements WPBC_Parser_Interface {
 	 * Parse DIVI row
 	 *
 	 * @param array $row_data Row data from hierarchy.
-	 * @return WPBC_Component|null Parsed row component.
+	 * @return DEVTB_Component|null Parsed row component.
 	 */
-	private function parse_row( array $row_data ): ?WPBC_Component {
+	private function parse_row( array $row_data ): ?DEVTB_Component {
 		$attributes = $this->normalize_attributes( $row_data['attributes'] );
 
-		$row = new WPBC_Component([
+		$row = new DEVTB_Component([
 			'type'       => 'row',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -183,16 +183,16 @@ class WPBC_DIVI_Parser implements WPBC_Parser_Interface {
 	 * Parse DIVI column
 	 *
 	 * @param array $column_data Column data from hierarchy.
-	 * @return WPBC_Component|null Parsed column component.
+	 * @return DEVTB_Component|null Parsed column component.
 	 */
-	private function parse_column( array $column_data ): ?WPBC_Component {
+	private function parse_column( array $column_data ): ?DEVTB_Component {
 		$attributes = $this->normalize_attributes( $column_data['attributes'] );
 
 		// Extract column type (1_2, 1_3, 1_4, etc.)
 		$type = $column_data['attributes']['type'] ?? '1_1';
 		$attributes['width'] = $this->convert_divi_column_type( $type );
 
-		$column = new WPBC_Component([
+		$column = new DEVTB_Component([
 			'type'       => 'column',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -221,9 +221,9 @@ class WPBC_DIVI_Parser implements WPBC_Parser_Interface {
 	 * Parse DIVI module
 	 *
 	 * @param array $module Module data.
-	 * @return WPBC_Component|null Parsed module component.
+	 * @return DEVTB_Component|null Parsed module component.
 	 */
-	private function parse_module( array $module ): ?WPBC_Component {
+	private function parse_module( array $module ): ?DEVTB_Component {
 		$tag = $module['tag'] ?? '';
 
 		// Remove et_pb_ prefix to get module type
@@ -238,7 +238,7 @@ class WPBC_DIVI_Parser implements WPBC_Parser_Interface {
 		$content = $module['content'] ?? '';
 		$content = do_shortcode( $content ); // Process nested shortcodes
 
-		$component = new WPBC_Component([
+		$component = new DEVTB_Component([
 			'type'       => $universal_type,
 			'category'   => $this->get_category( $universal_type ),
 			'attributes' => $attributes,
@@ -438,7 +438,7 @@ class WPBC_DIVI_Parser implements WPBC_Parser_Interface {
 		}
 
 		// Check for DIVI shortcodes
-		return WPBC_Shortcode_Helper::is_divi( $content );
+		return DEVTB_Shortcode_Helper::is_divi( $content );
 	}
 
 	/**
@@ -454,9 +454,9 @@ class WPBC_DIVI_Parser implements WPBC_Parser_Interface {
 	 * Parse single element
 	 *
 	 * @param mixed $element DIVI shortcode or module data.
-	 * @return WPBC_Component|null Parsed component or null.
+	 * @return DEVTB_Component|null Parsed component or null.
 	 */
-	public function parse_element( $element ): ?WPBC_Component {
+	public function parse_element( $element ): ?DEVTB_Component {
 		if ( is_string( $element ) ) {
 			$components = $this->parse( $element );
 			return $components[0] ?? null;

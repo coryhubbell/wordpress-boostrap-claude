@@ -1,6 +1,6 @@
 # 🔄 The WordPress Loop Guide
 
-**Master WordPress's most powerful feature with WordPress Bootstrap Claude's enhanced Loop system**
+**Master WordPress's most powerful feature with DevelopmentTranslation Bridge's enhanced Loop system**
 
 ---
 
@@ -17,9 +17,9 @@ if (have_posts()) :
 endif;
 ```
 
-**WPBC Enhanced Loop:**
+**DEVTB Enhanced Loop:**
 ```php
-$loop = new WPBC_Loop(['posts_per_page' => 10]);
+$loop = new DEVTB_Loop(['posts_per_page' => 10]);
 while ($loop->have_posts()) : $loop->the_post();
     $loop->render_template('card');
 endwhile;
@@ -34,7 +34,7 @@ endwhile;
 ```php
 <?php
 // Create a new loop instance
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'posts_per_page' => 6
 ]);
 
@@ -64,19 +64,19 @@ $loop->reset(); // Always reset after custom loops
 
 ---
 
-## 🚀 WPBC_Loop Class Features
+## 🚀 DEVTB_Loop Class Features
 
 ### Enhanced Constructor Options
 
 ```php
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     // Standard WP_Query arguments
     'post_type' => 'post',
     'posts_per_page' => 10,
     'orderby' => 'date',
     'order' => 'DESC',
     
-    // WPBC enhancements
+    // DEVTB enhancements
     'cache' => true,              // Enable query caching
     'cache_time' => 3600,         // Cache for 1 hour
     'template' => 'card',         // Default template to use
@@ -116,7 +116,7 @@ $loop->reset();
 ```php
 <?php
 // Display Products
-$products = new WPBC_Loop([
+$products = new DEVTB_Loop([
     'post_type' => 'product',
     'posts_per_page' => 12,
     'orderby' => 'menu_order',
@@ -154,7 +154,7 @@ $products->reset();
 ```php
 <?php
 // Get featured posts
-$featured = new WPBC_Loop([
+$featured = new DEVTB_Loop([
     'meta_key' => 'featured',
     'meta_value' => 'yes',
     'posts_per_page' => 5
@@ -205,7 +205,7 @@ $featured->reset();
 $categories = wp_get_post_categories(get_the_ID());
 
 // Query related posts
-$related = new WPBC_Loop([
+$related = new DEVTB_Loop([
     'category__in' => $categories,
     'post__not_in' => [get_the_ID()],
     'posts_per_page' => 3,
@@ -254,7 +254,7 @@ $related->reset();
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
 // Create paginated loop
-$blog = new WPBC_Loop([
+$blog = new DEVTB_Loop([
     'posts_per_page' => 9,
     'paged' => $paged
 ]);
@@ -308,7 +308,7 @@ $blog->reset();
 ```php
 <?php
 // Get products on sale
-$sale_products = new WPBC_Loop([
+$sale_products = new DEVTB_Loop([
     'post_type' => 'product',
     'meta_query' => [
         'relation' => 'AND',
@@ -333,7 +333,7 @@ $sale_products = new WPBC_Loop([
 ```php
 <?php
 // Get posts from multiple categories
-$category_posts = new WPBC_Loop([
+$category_posts = new DEVTB_Loop([
     'post_type' => 'post',
     'tax_query' => [
         [
@@ -352,7 +352,7 @@ $category_posts = new WPBC_Loop([
 ```php
 <?php
 // Posts from last 30 days
-$recent = new WPBC_Loop([
+$recent = new DEVTB_Loop([
     'date_query' => [
         [
             'after' => '30 days ago',
@@ -369,13 +369,13 @@ $recent = new WPBC_Loop([
 ```php
 <?php
 // Posts by specific author
-$author_posts = new WPBC_Loop([
+$author_posts = new DEVTB_Loop([
     'author_name' => 'john-doe',
     'posts_per_page' => 5
 ]);
 
 // Or by author ID
-$author_posts = new WPBC_Loop([
+$author_posts = new DEVTB_Loop([
     'author' => 123,
     'posts_per_page' => 5
 ]);
@@ -387,7 +387,7 @@ $author_posts = new WPBC_Loop([
 ```php
 <?php
 // Search results
-$search = new WPBC_Loop([
+$search = new DEVTB_Loop([
     's' => get_search_query(),
     'posts_per_page' => 20,
     'post_type' => 'any'
@@ -429,7 +429,7 @@ $search->reset();
 ```php
 <?php
 // Enable caching for expensive queries
-$cached_loop = new WPBC_Loop([
+$cached_loop = new DEVTB_Loop([
     'post_type' => 'product',
     'posts_per_page' => 100,
     'meta_key' => 'featured',
@@ -445,7 +445,7 @@ $cached_loop = new WPBC_Loop([
 ```php
 <?php
 // Only get the fields you need
-$optimized = new WPBC_Loop([
+$optimized = new DEVTB_Loop([
     'fields' => 'ids',                      // Only get post IDs
     'no_found_rows' => true,                // Skip pagination count
     'update_post_meta_cache' => false,      // Skip meta cache
@@ -463,7 +463,7 @@ foreach ($optimized->posts as $post_id) {
 
 ```php
 <?php
-$lazy_loop = new WPBC_Loop(['posts_per_page' => 20]);
+$lazy_loop = new DEVTB_Loop(['posts_per_page' => 20]);
 
 while ($lazy_loop->have_posts()) : $lazy_loop->the_post(); ?>
     <div class="lazy-load-item">
@@ -506,7 +506,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <!-- Initial posts container -->
 <div id="posts-container" class="row">
     <?php
-    $ajax_loop = new WPBC_Loop(['posts_per_page' => 6]);
+    $ajax_loop = new DEVTB_Loop(['posts_per_page' => 6]);
     while ($ajax_loop->have_posts()) : $ajax_loop->the_post(); ?>
         <div class="col-md-4 mb-4">
             <?php $ajax_loop->render_template('card'); ?>
@@ -534,12 +534,12 @@ jQuery(document).ready(function($) {
         button.text('Loading...').prop('disabled', true);
         
         $.ajax({
-            url: wpbc_ajax.ajax_url,
+            url: devtb_ajax.ajax_url,
             type: 'POST',
             data: {
                 action: 'load_more_posts',
                 page: page + 1,
-                nonce: wpbc_ajax.nonce
+                nonce: devtb_ajax.nonce
             },
             success: function(response) {
                 if (response.success) {
@@ -600,7 +600,7 @@ Create template files in `/templates/loops/`:
 **Using the template:**
 ```php
 <?php
-$loop = new WPBC_Loop(['posts_per_page' => 6]);
+$loop = new DEVTB_Loop(['posts_per_page' => 6]);
 
 while ($loop->have_posts()) : $loop->the_post();
     $loop->render_template('card', [
@@ -621,7 +621,7 @@ $loop->reset();
 
 ### Blog Grid
 ```php
-$blog = new WPBC_Loop(['posts_per_page' => 9]);
+$blog = new DEVTB_Loop(['posts_per_page' => 9]);
 echo '<div class="row">';
 while ($blog->have_posts()) : $blog->the_post();
     echo '<div class="col-md-4 mb-4">';
@@ -634,7 +634,7 @@ $blog->reset();
 
 ### List View
 ```php
-$list = new WPBC_Loop(['posts_per_page' => 10]);
+$list = new DEVTB_Loop(['posts_per_page' => 10]);
 echo '<div class="list-group">';
 while ($list->have_posts()) : $list->the_post();
     echo '<a href="' . get_permalink() . '" class="list-group-item list-group-item-action">';
@@ -649,7 +649,7 @@ $list->reset();
 
 ### Masonry Grid
 ```php
-$masonry = new WPBC_Loop(['posts_per_page' => 12]);
+$masonry = new DEVTB_Loop(['posts_per_page' => 12]);
 echo '<div class="row" data-masonry=\'{"percentPosition": true }\'>';
 while ($masonry->have_posts()) : $masonry->the_post();
     echo '<div class="col-sm-6 col-lg-4 mb-4">';
@@ -684,7 +684,7 @@ endwhile;
 ### Issue: Memory Issues with Large Queries
 ```php
 // Use pagination instead of -1
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'posts_per_page' => 50,  // Not -1
     'paged' => get_query_var('paged')
 ]);
@@ -694,7 +694,7 @@ $loop = new WPBC_Loop([
 ```php
 // Exclude already shown posts
 $shown_ids = [1, 2, 3]; // Track shown post IDs
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'post__not_in' => $shown_ids
 ]);
 ```
@@ -703,23 +703,23 @@ $loop = new WPBC_Loop([
 
 ## 📚 Loop Helper Functions
 
-### wpbc_loop() - Quick Loop Helper
+### devtb_loop() - Quick Loop Helper
 ```php
 // Shorthand for simple loops
-wpbc_loop(['posts_per_page' => 5], 'card');
+devtb_loop(['posts_per_page' => 5], 'card');
 
 // Equivalent to:
-$loop = new WPBC_Loop(['posts_per_page' => 5]);
+$loop = new DEVTB_Loop(['posts_per_page' => 5]);
 while ($loop->have_posts()) : $loop->the_post();
     $loop->render_template('card');
 endwhile;
 $loop->reset();
 ```
 
-### wpbc_query_posts() - Get Posts Array
+### devtb_query_posts() - Get Posts Array
 ```php
 // Get posts as array
-$posts = wpbc_query_posts([
+$posts = devtb_query_posts([
     'post_type' => 'product',
     'posts_per_page' => 10
 ]);
@@ -776,4 +776,4 @@ foreach ($posts as $post) {
 
 **You now have mastery over The Loop - WordPress's most powerful feature! 🎉**
 
-*Part of WordPress Bootstrap Claude Framework - Optimized for Claude AI Development*
+*Part of DevelopmentTranslation Bridge Framework - Optimized for Claude AI Development*

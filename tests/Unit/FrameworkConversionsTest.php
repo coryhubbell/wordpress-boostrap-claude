@@ -5,15 +5,15 @@
  * Tests all 90 framework conversion pairs (10 frameworks × 9 targets each).
  * Uses PHPUnit data providers to test every source→target combination.
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Tests
  * @since 3.2.1
  */
 
-namespace WPBC\Tests\Unit;
+namespace DEVTB\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use WPBC\TranslationBridge\Core\WPBC_Translator;
+use DEVTB\TranslationBridge\Core\DEVTB_Translator;
 
 class FrameworkConversionsTest extends TestCase {
 
@@ -45,9 +45,9 @@ class FrameworkConversionsTest extends TestCase {
     /**
      * Translator instance
      *
-     * @var WPBC_Translator
+     * @var DEVTB_Translator
      */
-    private WPBC_Translator $translator;
+    private DEVTB_Translator $translator;
 
     /**
      * Set up test fixtures
@@ -59,7 +59,7 @@ class FrameworkConversionsTest extends TestCase {
         $this->loadTranslationBridge();
 
         // Initialize translator
-        $this->translator = new WPBC_Translator();
+        $this->translator = new DEVTB_Translator();
 
         // Initialize sample inputs
         self::initializeSampleInputs();
@@ -69,7 +69,7 @@ class FrameworkConversionsTest extends TestCase {
      * Load Translation Bridge classes
      */
     private function loadTranslationBridge(): void {
-        $bridge_path = WPBC_TRANSLATION_BRIDGE;
+        $bridge_path = DEVTB_TRANSLATION_BRIDGE;
 
         // Load models
         require_once $bridge_path . '/models/class-component.php';
@@ -528,7 +528,7 @@ HTML;
      * Test that translator reports correct supported frameworks
      */
     public function testSupportedFrameworks(): void {
-        $supported = WPBC_Translator::get_supported_frameworks();
+        $supported = DEVTB_Translator::get_supported_frameworks();
 
         foreach ( self::$frameworks as $framework ) {
             $this->assertContains(
@@ -576,17 +576,17 @@ HTML;
     public function testCanTranslate(): void {
         // Valid pairs should return true
         $this->assertTrue(
-            WPBC_Translator::can_translate( 'bootstrap', 'elementor' )
+            DEVTB_Translator::can_translate( 'bootstrap', 'elementor' )
         );
 
         // Same framework should return false
         $this->assertFalse(
-            WPBC_Translator::can_translate( 'bootstrap', 'bootstrap' )
+            DEVTB_Translator::can_translate( 'bootstrap', 'bootstrap' )
         );
 
         // Invalid framework should return false
         $this->assertFalse(
-            WPBC_Translator::can_translate( 'invalid', 'bootstrap' )
+            DEVTB_Translator::can_translate( 'invalid', 'bootstrap' )
         );
     }
 

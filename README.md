@@ -1,11 +1,11 @@
-# 🚀 WordPress Bootstrap Claude™ 3.2
+# 🚀 DevelopmentTranslation Bridge™ 3.2
 ## **Real-Time AI Page Builder with 10-Framework Translation & REST API**
 ### **Edit WordPress Pages with Natural Language • Convert to Any Framework • Full API Access**
 
 <div align="center">
 
 ![Version](https://img.shields.io/badge/version-3.2.3-blue.svg)
-![CI](https://img.shields.io/github/actions/workflow/status/coryhubbell/wordpress-bootstrap-claude/ci.yml?label=CI)
+![CI](https://img.shields.io/github/actions/workflow/status/coryhubbell/development-translation-bridge/ci.yml?label=CI)
 ![CLI](https://img.shields.io/badge/CLI-Production_Ready-success.svg)
 ![API](https://img.shields.io/badge/REST_API_v2-Live-success.svg)
 ![License](https://img.shields.io/badge/license-GPL--2.0%2B-green.svg)
@@ -27,7 +27,7 @@
 
 ### **🤖 Edit Pages in Real-Time with Claude AI • 🌉 90 Translation Pairs Across 10 Frameworks • 🔌 Full REST API • ⚡ Deploy Anywhere**
 
-**[📖 Documentation](docs/) • [🔌 API Docs](docs/api-v2.md) • [🚀 Quick Start](#-quick-start) • [🌟 Star This Repo](https://github.com/coryhubbell/wordpress-bootstrap-claude)**
+**[📖 Documentation](docs/) • [🔌 API Docs](docs/api-v2.md) • [🚀 Quick Start](#-quick-start) • [🌟 Star This Repo](https://github.com/coryhubbell/development-translation-bridge)**
 
 ---
 
@@ -44,8 +44,8 @@ Get up and running in under 5 minutes:
 
 ```bash
 # Clone the repository
-git clone https://github.com/coryhubbell/wordpress-bootstrap-claude.git
-cd wordpress-bootstrap-claude
+git clone https://github.com/coryhubbell/development-translation-bridge.git
+cd development-translation-bridge
 
 # Run setup (installs dependencies, generates security keys)
 ./setup.sh
@@ -56,7 +56,7 @@ make setup
 make test
 
 # Try a translation
-./wpbc translate bootstrap divi examples/hero-bootstrap.html
+./devtb translate bootstrap divi examples/hero-bootstrap.html
 ```
 
 **Optional: Full development stack with Docker**
@@ -73,7 +73,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contributor guide.
 
 ## 🧠 **How It Works: The Complete Picture**
 
-WordPress Bootstrap Claude solves three fundamental problems in WordPress development:
+DevelopmentTranslation Bridge solves three fundamental problems in WordPress development:
 
 1. **Framework Lock-In**: You build a site in DIVI, client wants Elementor = 40 hours of rebuilding
 2. **Tedious UI Work**: Every style change requires clicking through menus and settings
@@ -143,15 +143,15 @@ This is the key innovation. The "Claude" framework is the 10th framework—it ou
 **The workflow:**
 ```bash
 # Step 1: Convert ANY framework to Claude-optimized HTML
-./wpbc translate elementor claude landing-page.json
+./devtb translate elementor claude landing-page.json
 
 # Step 2: Edit with natural language (using Claude Code or API)
 # "Add a pricing table with 3 tiers below the features section"
 
 # Step 3: Convert back to ANY framework
-./wpbc translate claude elementor updated-page.html
-./wpbc translate claude divi updated-page.html
-./wpbc translate claude bootstrap updated-page.html
+./devtb translate claude elementor updated-page.html
+./devtb translate claude divi updated-page.html
+./devtb translate claude bootstrap updated-page.html
 ```
 
 ---
@@ -164,14 +164,14 @@ This is the key innovation. The "Claude" framework is the 10th framework—it ou
 
 ```bash
 # Prerequisites: PHP 7.4+ only
-git clone https://github.com/coryhubbell/wordpress-bootstrap-claude.git
-cd wordpress-bootstrap-claude
+git clone https://github.com/coryhubbell/development-translation-bridge.git
+cd development-translation-bridge
 ./setup.sh
 
 # Start translating immediately
-./wpbc translate bootstrap elementor my-page.html
-./wpbc translate divi wpbakery my-section.txt
-./wpbc translate-all bootstrap my-page.html  # All 9 frameworks
+./devtb translate bootstrap elementor my-page.html
+./devtb translate divi wpbakery my-section.txt
+./devtb translate-all bootstrap my-page.html  # All 9 frameworks
 ```
 
 **What you get**: Command-line tool for instant framework translations.
@@ -182,8 +182,8 @@ cd wordpress-bootstrap-claude
 
 ```bash
 # Prerequisites: PHP 7.4+, Composer 2.0+
-git clone https://github.com/coryhubbell/wordpress-bootstrap-claude.git
-cd wordpress-bootstrap-claude
+git clone https://github.com/coryhubbell/development-translation-bridge.git
+cd development-translation-bridge
 ./setup.sh  # Installs dependencies, generates keys
 
 # Run the test suite
@@ -206,13 +206,13 @@ make admin-dev
 
 ```bash
 # Get API status
-curl https://yoursite.com/wp-json/wpbc/v2/status
+curl https://yoursite.com/wp-json/devtb/v2/status
 
 # List all frameworks
-curl https://yoursite.com/wp-json/wpbc/v2/frameworks
+curl https://yoursite.com/wp-json/devtb/v2/frameworks
 
 # Translate content
-curl -X POST https://yoursite.com/wp-json/wpbc/v2/translate \
+curl -X POST https://yoursite.com/wp-json/devtb/v2/translate \
   -H "X-API-Key: your_api_key" \
   -H "Content-Type: application/json" \
   -d '{"source": "bootstrap", "target": "elementor", "content": "<div>...</div>"}'
@@ -228,7 +228,7 @@ See [API Documentation](docs/api-v2.md) for full endpoint reference.
 
 > **We're ending the era of vendor lock-in and manual page building forever.**
 
-WordPress Bootstrap Claude™ is an **AI-native page builder** that gives you complete freedom to work in ANY framework, edit with natural language, and deploy anywhere. No more clicking through endless menus. No more rebuilding sites when switching builders. No more vendor lock-in.
+DevelopmentTranslation Bridge™ is an **AI-native page builder** that gives you complete freedom to work in ANY framework, edit with natural language, and deploy anywhere. No more clicking through endless menus. No more rebuilding sites when switching builders. No more vendor lock-in.
 
 ### **The Revolution**
 
@@ -239,7 +239,7 @@ WordPress Bootstrap Claude™ is an **AI-native page builder** that gives you co
 - 🎨 Limited by UI constraints
 - ⏱️ Hours wasted clicking through menus
 
-**WordPress Bootstrap Claude:**
+**DevelopmentTranslation Bridge:**
 - 🔓 **Complete framework freedom** - 10 frameworks, 90 translation pairs
 - ⚡ **30-second conversions** - Any framework to any other
 - 💬 **Natural language editing** - "Make the button blue" (done)
@@ -322,12 +322,12 @@ The **10th framework** - Claude AI-Optimized HTML - is the game changer:
 **Professional command-line interface for developers:**
 
 #### **Core Commands:**
-- `wpbc translate <source> <target> <file>` - Convert between any two frameworks
-- `wpbc translate-all <source> <file>` - Export to all 9 frameworks at once
-- `wpbc list-frameworks` - Show all 10 supported frameworks
-- `wpbc validate <framework> <file>` - Check file format and content
-- `wpbc --help` - Complete command reference
-- `wpbc --version` - Show version info
+- `devtb translate <source> <target> <file>` - Convert between any two frameworks
+- `devtb translate-all <source> <file>` - Export to all 9 frameworks at once
+- `devtb list-frameworks` - Show all 10 supported frameworks
+- `devtb validate <framework> <file>` - Check file format and content
+- `devtb --help` - Complete command reference
+- `devtb --version` - Show version info
 
 #### **Features:**
 - ✅ **Colorized output** - Professional terminal UI with progress indicators
@@ -399,7 +399,7 @@ Significant reduction in migration time and costs compared to manual rebuilding.
 
 ### **Enterprise-Grade Security**
 
-WordPress Bootstrap Claude implements **bank-level security** with multiple layers of protection:
+DevelopmentTranslation Bridge implements **bank-level security** with multiple layers of protection:
 
 #### **🔐 API Key Encryption (AES-256-CBC)**
 - ✅ **Encrypted storage** - All API keys encrypted with AES-256-CBC before database storage
@@ -410,7 +410,7 @@ WordPress Bootstrap Claude implements **bank-level security** with multiple laye
 
 ```php
 // Migrate existing keys to encrypted format
-$auth = new WPBC_Auth();
+$auth = new DEVTB_Auth();
 $results = $auth->migrate_keys_to_encrypted();
 // Returns: ['total' => X, 'migrated' => Y, 'already_encrypted' => Z, 'errors' => 0]
 ```
@@ -464,7 +464,7 @@ $results = $auth->migrate_keys_to_encrypted();
 
 ### **Comprehensive Test Suite**
 
-WordPress Bootstrap Claude now includes **enterprise-grade testing infrastructure** with PHPUnit 9.5:
+DevelopmentTranslation Bridge now includes **enterprise-grade testing infrastructure** with PHPUnit 9.5:
 
 #### **🧪 Unit Testing Framework**
 - ✅ **PHPUnit 9.5** - Industry-standard PHP testing framework
@@ -535,12 +535,12 @@ tests/
 
 #### **🌍 Internationalization (i18n)**
 - ✅ **Translation template** - Complete `.pot` file with 78+ strings
-- ✅ **Text domain standardization** - All strings use 'wpbc' domain
+- ✅ **Text domain standardization** - All strings use 'devtb' domain
 - ✅ **Translation-ready** - Full support for Poedit and manual translation
 - ✅ **Language directory** - `/languages/` with README for translators
 
 **Supported translation workflow:**
-1. Extract strings: `wpbc.pot` template provided
+1. Extract strings: `devtb.pot` template provided
 2. Create translations: Use Poedit or manual editing
 3. Deploy: Place `.po` and `.mo` files in `/languages/`
 4. Activate: Change WordPress site language
@@ -574,10 +574,10 @@ tests/
 - **Test Fixtures** - Bootstrap HTML and Elementor JSON fixtures for realistic testing
 
 #### **🐛 Bug Fixes:**
-- Fixed namespace instantiation errors in CLI (`\WPBC\TranslationBridge\Core\WPBC_Translator`)
-- Fixed namespace instantiation in API v2 (`\WPBC\TranslationBridge\Core\WPBC_Parser_Factory`)
+- Fixed namespace instantiation errors in CLI (`\DEVTB\TranslationBridge\Core\DEVTB_Translator`)
+- Fixed namespace instantiation in API v2 (`\DEVTB\TranslationBridge\Core\DEVTB_Parser_Factory`)
 - Fixed dynamic framework count in CLI (`translate-all` now shows correct count)
-- Fixed Visual Interface version display (uses `WPBC_THEME_VERSION` constant)
+- Fixed Visual Interface version display (uses `DEVTB_THEME_VERSION` constant)
 - Fixed REST URL in Visual Interface editor store
 - Fixed save button functionality in Toolbar component
 - Removed double API class instantiation
@@ -603,7 +603,7 @@ tests/
 
 #### **🌍 Internationalization:**
 - **Translation System** - Complete `.pot` file with 78+ translatable strings
-- **Text Domain Standardization** - All strings use 'wpbc' domain consistently
+- **Text Domain Standardization** - All strings use 'devtb' domain consistently
 - **Translator Guide** - Comprehensive README for translation contributors
 - **Poedit Ready** - Full support for popular translation tools
 
@@ -681,9 +681,9 @@ Work with ANY WordPress page builder. Support ALL client preferences. Never turn
 
 ```bash
 # Step 1: Convert ANY framework to Claude-optimized HTML
-wpbc translate elementor claude my-page.json
-wpbc translate divi claude my-section.txt
-wpbc translate wpbakery claude legacy-page.txt
+devtb translate elementor claude my-page.json
+devtb translate divi claude my-section.txt
+devtb translate wpbakery claude legacy-page.txt
 
 # Step 2: Edit with Claude using natural language
 # "Make the hero section background gradient blue to purple"
@@ -691,9 +691,9 @@ wpbc translate wpbakery claude legacy-page.txt
 # "Change all buttons to rounded corners with hover effects"
 
 # Step 3: Convert back to ANY framework
-wpbc translate claude elementor my-page-claude.html
-wpbc translate claude divi my-section-claude.html
-wpbc translate claude bootstrap clean-output.html
+devtb translate claude elementor my-page-claude.html
+devtb translate claude divi my-section-claude.html
+devtb translate claude bootstrap clean-output.html
 ```
 
 ### **🎯 The AI-Powered Workflow**
@@ -790,27 +790,27 @@ The **10th framework** (Claude AI-Optimized HTML) is the breakthrough:
 **Real-World Multi-Framework Workflows:**
 ```bash
 # Scenario 1: Legacy WPBakery → Modern Framework
-wpbc translate wpbakery gutenberg legacy-site.txt
-wpbc translate wpbakery elementor legacy-site.txt
+devtb translate wpbakery gutenberg legacy-site.txt
+devtb translate wpbakery elementor legacy-site.txt
 
 # Scenario 2: Elementor → Clean Bootstrap (for AI editing)
-wpbc translate elementor bootstrap my-design.json
+devtb translate elementor bootstrap my-design.json
 # Edit with Claude AI
-wpbc translate bootstrap elementor optimized.html
+devtb translate bootstrap elementor optimized.html
 
 # Scenario 3: Gutenberg → Any Framework (client requirement)
-wpbc translate gutenberg divi blog-layout.html
-wpbc translate gutenberg bricks blog-layout.html
-wpbc translate gutenberg beaver-builder blog-layout.html
+devtb translate gutenberg divi blog-layout.html
+devtb translate gutenberg bricks blog-layout.html
+devtb translate gutenberg beaver-builder blog-layout.html
 
 # Scenario 4: Test ANY design in ALL frameworks
-wpbc translate-all elementor my-landing-page.json
+devtb translate-all elementor my-landing-page.json
 # Get 9 versions in different frameworks - compare and choose!
 
 # Scenario 5: Build in Bootstrap, Deploy Anywhere
-wpbc translate bootstrap gutenberg clean-site.html
-wpbc translate bootstrap elementor clean-site.html
-wpbc translate bootstrap oxygen clean-site.html
+devtb translate bootstrap gutenberg clean-site.html
+devtb translate bootstrap elementor clean-site.html
+devtb translate bootstrap oxygen clean-site.html
 ```
 
 > **💡 Pro Tip:** Build in **Bootstrap** (fastest, cleanest, AI-editable) → Test in **all frameworks** → Deploy in client's **required framework**. This gives you maximum flexibility and speed!
@@ -877,34 +877,34 @@ php --version
 ### **2. Install Framework**
 ```bash
 # Clone the repository
-git clone https://github.com/coryhubbell/wordpress-bootstrap-claude.git
+git clone https://github.com/coryhubbell/development-translation-bridge.git
 
 # Navigate to theme directory
-cd wordpress-bootstrap-claude
+cd development-translation-bridge
 
 # Make CLI executable
-chmod +x wpbc
+chmod +x devtb
 
 # Verify CLI works
-./wpbc --version
+./devtb --version
 ```
 
 ### **3. Start Translating**
 ```bash
 # Translate Bootstrap to DIVI
-./wpbc translate bootstrap divi examples/hero-bootstrap.html
+./devtb translate bootstrap divi examples/hero-bootstrap.html
 
 # Translate to all 9 frameworks at once
-./wpbc translate-all bootstrap examples/hero-bootstrap.html
+./devtb translate-all bootstrap examples/hero-bootstrap.html
 
 # List all supported frameworks
-./wpbc list-frameworks
+./devtb list-frameworks
 ```
 
 ### **4. Experience Real-Time AI Editing** 🤖
 ```bash
 # Convert Bootstrap to Claude-optimized HTML
-./wpbc translate bootstrap claude examples/hero-bootstrap.html
+./devtb translate bootstrap claude examples/hero-bootstrap.html
 
 # Now edit with natural language using Claude Code CLI
 # Open hero-bootstrap-claude.html and say:
@@ -913,9 +913,9 @@ chmod +x wpbc
 # "Add a newsletter signup form below the CTA"
 
 # Convert back to Bootstrap (or ANY framework!)
-./wpbc translate claude bootstrap hero-bootstrap-claude.html
-./wpbc translate claude elementor hero-bootstrap-claude.html
-./wpbc translate claude divi hero-bootstrap-claude.html
+./devtb translate claude bootstrap hero-bootstrap-claude.html
+./devtb translate claude elementor hero-bootstrap-claude.html
+./devtb translate claude divi hero-bootstrap-claude.html
 ```
 
 ---
@@ -927,9 +927,9 @@ chmod +x wpbc
 **Step 1: Convert to Claude-Optimized HTML**
 ```bash
 # Start with ANY framework
-wpbc translate elementor claude landing-page.json
-wpbc translate bootstrap claude hero.html
-wpbc translate divi claude section.txt
+devtb translate elementor claude landing-page.json
+devtb translate bootstrap claude hero.html
+devtb translate divi claude section.txt
 ```
 
 **Output:** HTML with `data-claude-editable` attributes
@@ -970,16 +970,16 @@ CLAUDE: ✅ Created feature section with icons
 **Step 3: Deploy to ANY Framework**
 ```bash
 # Deploy as clean Bootstrap
-wpbc translate claude bootstrap output.html
+devtb translate claude bootstrap output.html
 
 # Or convert to client's preferred builder
-wpbc translate claude elementor output.html
-wpbc translate claude divi output.html
-wpbc translate claude wpbakery output.html
-wpbc translate claude bricks output.html
+devtb translate claude elementor output.html
+devtb translate claude divi output.html
+devtb translate claude wpbakery output.html
+devtb translate claude bricks output.html
 
 # Or all frameworks at once!
-wpbc translate-all claude output.html
+devtb translate-all claude output.html
 ```
 
 ### **Why This Changes Everything**
@@ -1010,7 +1010,7 @@ wpbc translate-all claude output.html
 **Bootstrap → Claude Method:**
 ```bash
 # Step 1: Start with Bootstrap template
-wpbc translate bootstrap claude landing-template.html
+devtb translate bootstrap claude landing-template.html
 
 # Step 2: Tell Claude what you want
 "Create a modern landing page with:
@@ -1020,7 +1020,7 @@ wpbc translate bootstrap claude landing-template.html
 - Final CTA section with form"
 
 # Step 3: Convert to client's builder
-wpbc translate claude elementor landing-final.html
+devtb translate claude elementor landing-final.html
 
 # Total time: 5 minutes ⚡
 ```
@@ -1055,25 +1055,25 @@ claude          # Claude AI-Optimized HTML (10th framework!) 🤖
 
 **Syntax:**
 ```bash
-wpbc translate <source> <target> <input-file> [options]
+devtb translate <source> <target> <input-file> [options]
 ```
 
 **Examples:**
 ```bash
 # Bootstrap to DIVI
-wpbc translate bootstrap divi hero.html
+devtb translate bootstrap divi hero.html
 
 # Elementor to Bootstrap (escape vendor lock-in!)
-wpbc translate elementor bootstrap landing-page.json
+devtb translate elementor bootstrap landing-page.json
 
 # WPBakery to Elementor (modernize legacy sites)
-wpbc translate wpbakery elementor page.txt
+devtb translate wpbakery elementor page.txt
 
 # Any framework to Claude (AI-optimized)
-wpbc translate elementor claude page.json
+devtb translate elementor claude page.json
 
 # Claude back to original framework
-wpbc translate claude bootstrap hero-claude.html
+devtb translate claude bootstrap hero-claude.html
 ```
 
 **Options:**
@@ -1088,13 +1088,13 @@ wpbc translate claude bootstrap hero-claude.html
 
 **Syntax:**
 ```bash
-wpbc translate-all <source> <input-file> [options]
+devtb translate-all <source> <input-file> [options]
 ```
 
 **Example:**
 ```bash
 # Generate 6 versions from Bootstrap
-wpbc translate-all bootstrap hero.html
+devtb translate-all bootstrap hero.html
 
 # Creates:
 # - hero-divi.txt
@@ -1114,7 +1114,7 @@ wpbc translate-all bootstrap hero.html
 #### **3. `list-frameworks` - Show All Frameworks**
 
 ```bash
-wpbc list-frameworks
+devtb list-frameworks
 ```
 
 **Output:**
@@ -1145,16 +1145,16 @@ Translation Pairs: 90 (any framework to any other)
 
 **Syntax:**
 ```bash
-wpbc validate <framework> <input-file> [options]
+devtb validate <framework> <input-file> [options]
 ```
 
 **Examples:**
 ```bash
 # Validate Bootstrap HTML
-wpbc validate bootstrap hero.html
+devtb validate bootstrap hero.html
 
 # Validate with component details
-wpbc validate elementor page.json --verbose
+devtb validate elementor page.json --verbose
 ```
 
 **Options:**
@@ -1166,12 +1166,12 @@ wpbc validate elementor page.json --verbose
 
 ```bash
 # Show help
-wpbc --help
-wpbc -h
+devtb --help
+devtb -h
 
 # Show version
-wpbc --version
-wpbc -v
+devtb --version
+devtb -v
 ```
 
 ---
@@ -1181,20 +1181,20 @@ wpbc -v
 #### **Workflow 1: Escape WPBakery Vendor Lock-In**
 ```bash
 # Step 1: Convert to clean Bootstrap HTML
-wpbc translate wpbakery bootstrap legacy-site.txt
+devtb translate wpbakery bootstrap legacy-site.txt
 
 # Step 2: Work with Claude AI (optional)
-wpbc translate bootstrap claude legacy-site-bootstrap.html
+devtb translate bootstrap claude legacy-site-bootstrap.html
 # Edit with Claude Code CLI using natural language
 
 # Step 3: Deploy as HTML OR convert to modern builder
-wpbc translate bootstrap elementor optimized-site.html
+devtb translate bootstrap elementor optimized-site.html
 ```
 
 #### **Workflow 2: Multi-Framework Testing**
 ```bash
 # Create in Bootstrap (Claude AI friendly)
-wpbc translate-all bootstrap pricing-table.html
+devtb translate-all bootstrap pricing-table.html
 
 # Test in all 9 frameworks
 # Compare performance, choose the best
@@ -1203,17 +1203,17 @@ wpbc translate-all bootstrap pricing-table.html
 #### **Workflow 3: Framework Migration**
 ```bash
 # Migrate from Elementor to Bricks
-wpbc translate elementor bootstrap old-site.json
-wpbc translate bootstrap bricks old-site-bootstrap.html
+devtb translate elementor bootstrap old-site.json
+devtb translate bootstrap bricks old-site-bootstrap.html
 
 # Or direct (also works)
-wpbc translate elementor bricks old-site.json
+devtb translate elementor bricks old-site.json
 ```
 
 #### **Workflow 4: Claude AI Development**
 ```bash
 # Convert to Claude-optimized HTML
-wpbc translate bootstrap claude components/hero.html
+devtb translate bootstrap claude components/hero.html
 
 # Claude generates HTML with data-claude-editable attributes
 # Edit with Claude Code CLI:
@@ -1222,7 +1222,7 @@ wpbc translate bootstrap claude components/hero.html
 # "Add newsletter signup form"
 
 # Convert back to original framework
-wpbc translate claude bootstrap hero-claude.html
+devtb translate claude bootstrap hero-claude.html
 ```
 
 ---
@@ -1269,7 +1269,7 @@ wpbc translate claude bootstrap hero-claude.html
 
 ## 🔌 **REST API v2**
 
-**WordPress Bootstrap Claude v3.2** introduces a powerful REST API for programmatic access to translation features.
+**DevelopmentTranslation Bridge v3.2** introduces a powerful REST API for programmatic access to translation features.
 
 ### **✨ API Features**
 
@@ -1288,17 +1288,17 @@ wpbc translate claude bootstrap hero-claude.html
 
 **Get API Status:**
 ```bash
-curl https://yoursite.com/wp-json/wpbc/v2/status
+curl https://yoursite.com/wp-json/devtb/v2/status
 ```
 
 **List Supported Frameworks:**
 ```bash
-curl https://yoursite.com/wp-json/wpbc/v2/frameworks
+curl https://yoursite.com/wp-json/devtb/v2/frameworks
 ```
 
 **Single Translation:**
 ```bash
-curl -X POST https://yoursite.com/wp-json/wpbc/v2/translate \
+curl -X POST https://yoursite.com/wp-json/devtb/v2/translate \
   -H "X-API-Key: your_api_key_here" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1310,7 +1310,7 @@ curl -X POST https://yoursite.com/wp-json/wpbc/v2/translate \
 
 **Batch Translation (Async):**
 ```bash
-curl -X POST https://yoursite.com/wp-json/wpbc/v2/batch-translate \
+curl -X POST https://yoursite.com/wp-json/devtb/v2/batch-translate \
   -H "X-API-Key: your_api_key_here" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1323,7 +1323,7 @@ curl -X POST https://yoursite.com/wp-json/wpbc/v2/batch-translate \
 
 **Check Job Status:**
 ```bash
-curl https://yoursite.com/wp-json/wpbc/v2/job/wpbc_abc123 \
+curl https://yoursite.com/wp-json/devtb/v2/job/devtb_abc123 \
   -H "X-API-Key: your_api_key_here"
 ```
 
@@ -1332,7 +1332,7 @@ curl https://yoursite.com/wp-json/wpbc/v2/job/wpbc_abc123 \
 **Generate API Key:**
 ```bash
 # Via WordPress admin or REST API
-curl -X POST https://yoursite.com/wp-json/wpbc/v2/api-keys \
+curl -X POST https://yoursite.com/wp-json/devtb/v2/api-keys \
   -u admin:password \
   -H "Content-Type: application/json" \
   -d '{
@@ -1356,14 +1356,14 @@ curl -X POST https://yoursite.com/wp-json/wpbc/v2/api-keys \
 **Set Webhook URL:**
 ```bash
 # Configure in WordPress settings or via API
-update_option('wpbc_webhook_url', 'https://yoursite.com/webhook');
+update_option('devtb_webhook_url', 'https://yoursite.com/webhook');
 ```
 
 **Webhook Payload (Job Completed):**
 ```json
 {
   "event": "job.completed",
-  "job_id": "wpbc_abc123",
+  "job_id": "devtb_abc123",
   "status": "completed",
   "source": "bootstrap",
   "total": 3,
@@ -1386,15 +1386,15 @@ update_option('wpbc_webhook_url', 'https://yoursite.com/webhook');
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/wpbc/v2/status` | API status and features |
-| `GET` | `/wpbc/v2/frameworks` | List all 10 frameworks |
-| `POST` | `/wpbc/v2/translate` | Single translation |
-| `POST` | `/wpbc/v2/batch-translate` | Batch translation |
-| `GET` | `/wpbc/v2/job/{id}` | Get job status |
-| `POST` | `/wpbc/v2/validate` | Validate content |
-| `GET` | `/wpbc/v2/api-keys` | List your API keys |
-| `POST` | `/wpbc/v2/api-keys` | Create new API key |
-| `DELETE` | `/wpbc/v2/api-keys/{key}` | Revoke API key |
+| `GET` | `/devtb/v2/status` | API status and features |
+| `GET` | `/devtb/v2/frameworks` | List all 10 frameworks |
+| `POST` | `/devtb/v2/translate` | Single translation |
+| `POST` | `/devtb/v2/batch-translate` | Batch translation |
+| `GET` | `/devtb/v2/job/{id}` | Get job status |
+| `POST` | `/devtb/v2/validate` | Validate content |
+| `GET` | `/devtb/v2/api-keys` | List your API keys |
+| `POST` | `/devtb/v2/api-keys` | Create new API key |
+| `DELETE` | `/devtb/v2/api-keys/{key}` | Revoke API key |
 
 **Full API Documentation:** [docs/api-v2.md](docs/api-v2.md)
 
@@ -1410,19 +1410,19 @@ Copy these prompts and paste them into your terminal or Claude Code to see the m
 
 ```bash
 # Convert Bootstrap component to Elementor
-wpbc translate bootstrap elementor components/hero.html
+devtb translate bootstrap elementor components/hero.html
 
 # Convert DIVI module to Avada
-wpbc translate divi avada sections/pricing.txt
+devtb translate divi avada sections/pricing.txt
 
 # Convert Elementor widget to Bricks
-wpbc translate elementor bricks widgets/testimonial.json
+devtb translate elementor bricks widgets/testimonial.json
 
 # Convert Avada element to Bootstrap
-wpbc translate avada bootstrap elements/counter.txt
+devtb translate avada bootstrap elements/counter.txt
 
 # Convert Bricks component to DIVI
-wpbc translate bricks divi components/cta.json
+devtb translate bricks divi components/cta.json
 ```
 
 #### **🚀 Advanced Use Cases**
@@ -1430,13 +1430,13 @@ wpbc translate bricks divi components/cta.json
 **Migrate Entire Pages:**
 ```bash
 # Convert full Elementor page to Bootstrap
-wpbc translate elementor bootstrap --input pages/homepage.json --output pages/homepage.html
+devtb translate elementor bootstrap --input pages/homepage.json --output pages/homepage.html
 
 # Batch convert all DIVI sections to Avada
-wpbc batch-translate divi avada sections/
+devtb batch-translate divi avada sections/
 
 # Migrate Avada site to Bricks Builder
-wpbc convert-site avada bricks --source site-backup.xml
+devtb convert-site avada bricks --source site-backup.xml
 ```
 
 **With Claude AI Integration:**
@@ -1494,13 +1494,13 @@ wpbc convert-site avada bricks --source site-backup.xml
 
 ```bash
 # Convert entire component library
-wpbc batch-translate bootstrap elementor components/*.html
+devtb batch-translate bootstrap elementor components/*.html
 
 # Migrate all page templates
-wpbc batch-translate divi avada templates/
+devtb batch-translate divi avada templates/
 
 # Convert and organize by framework
-wpbc batch-translate elementor bootstrap pages/*.json --organize-by-framework
+devtb batch-translate elementor bootstrap pages/*.json --organize-by-framework
 ```
 
 #### **🎨 Creative Workflows**
@@ -1555,11 +1555,11 @@ wpbc batch-translate elementor bootstrap pages/*.json --organize-by-framework
 
 ```bash
 # Free yourself from WPBakery limitations
-wpbc translate wpbakery bootstrap my-site.xml
+devtb translate wpbakery bootstrap my-site.xml
 
 # Work with Claude AI on clean Bootstrap HTML
 # Then convert back to ANY framework (or deploy as pure HTML)
-wpbc translate bootstrap elementor optimized-site.html
+devtb translate bootstrap elementor optimized-site.html
 ```
 
 **Why This Matters:**
@@ -1624,10 +1624,10 @@ graph TB
 #### **1. Freedom from Vendor Lock-In**
 ```bash
 # Break free from ANY page builder
-wpbc translate divi bootstrap locked-in-site.txt      # DIVI → Freedom
-wpbc translate elementor bootstrap proprietary.json   # Elementor → Freedom
-wpbc translate avada bootstrap expensive.txt          # Avada → Freedom
-wpbc translate bricks bootstrap custom.json           # Bricks → Freedom
+devtb translate divi bootstrap locked-in-site.txt      # DIVI → Freedom
+devtb translate elementor bootstrap proprietary.json   # Elementor → Freedom
+devtb translate avada bootstrap expensive.txt          # Avada → Freedom
+devtb translate bricks bootstrap custom.json           # Bricks → Freedom
 ```
 
 **Result:** Clean, semantic Bootstrap 5.3.3 HTML/CSS you OWN and CONTROL.
@@ -1691,7 +1691,7 @@ Bootstrap HTML works in:
 
 ```bash
 # 1. Client gives you their Elementor site
-wpbc translate elementor bootstrap client-site.json
+devtb translate elementor bootstrap client-site.json
 
 # 2. Now you have clean Bootstrap HTML
 # 3. Work with Claude AI to customize
@@ -1701,7 +1701,7 @@ claude-code
 > "Make the pricing table more interactive"
 
 # 4. Deploy as pure HTML (fast!) OR convert back
-wpbc translate bootstrap elementor optimized-site.html  # If client needs Elementor
+devtb translate bootstrap elementor optimized-site.html  # If client needs Elementor
 
 # 5. You get speed of Bootstrap + flexibility to return to any framework
 ```
@@ -1745,8 +1745,8 @@ We generate **Claude-optimized HTML** with:
 **Translation Bridge approach:**
 ```bash
 # 30 seconds total
-wpbc translate divi bootstrap old-site.txt    # DIVI → Bootstrap
-wpbc translate bootstrap bricks clean-site.html # Bootstrap → Bricks
+devtb translate divi bootstrap old-site.txt    # DIVI → Bootstrap
+devtb translate bootstrap bricks clean-site.html # Bootstrap → Bricks
 ```
 
 **Bonus:** You now have the Bootstrap version as an **escape hatch** if they ever want to change again!
@@ -1854,16 +1854,16 @@ Any Framework → Claude → Edit with AI → Any Framework
 
 ```bash
 # Create components with AI
-claude-code> wpbc:create-component pricing-table
+claude-code> devtb:create-component pricing-table
 
 # Generate complete pages
-claude-code> wpbc:build-page landing-page hero,features,testimonials,cta
+claude-code> devtb:build-page landing-page hero,features,testimonials,cta
 
 # Optimize existing code
-claude-code> wpbc:optimize-all
+claude-code> devtb:optimize-all
 
 # Convert entire sites
-claude-code> wpbc:convert-site elementor bootstrap
+claude-code> devtb:convert-site elementor bootstrap
 ```
 
 ### **AI Features**
@@ -1880,7 +1880,7 @@ claude-code> wpbc:convert-site elementor bootstrap
 ## 📁 **Project Structure**
 
 ```
-wordpress-bootstrap-claude/
+development-translation-bridge/
 ├── 📂 .claude-code/              # Claude AI configuration
 │   ├── project.json              # Project settings
 │   ├── commands.json             # Custom commands
@@ -1915,7 +1915,7 @@ wordpress-bootstrap-claude/
 ├── 📂 bricks-elements/          # Bricks Builder elements
 │
 ├── 📂 includes/                  # Core PHP files
-│   ├── class-wpbc-loop.php      # Enhanced Loop
+│   ├── class-devtb-loop.php      # Enhanced Loop
 │   ├── class-translator.php     # Translation engine
 │   └── class-ai-assistant.php   # AI integration
 │
@@ -2014,16 +2014,16 @@ wordpress-bootstrap-claude/
 ### **Quick Install**
 ```bash
 # 1. Clone repository
-git clone https://github.com/coryhubbell/wordpress-bootstrap-claude.git
+git clone https://github.com/coryhubbell/development-translation-bridge.git
 
 # 2. Navigate to WordPress themes
 cd /path/to/wordpress/wp-content/themes/
 
 # 3. Copy theme
-cp -r /path/to/wordpress-bootstrap-claude .
+cp -r /path/to/development-translation-bridge .
 
 # 4. Install dependencies
-cd wordpress-bootstrap-claude
+cd development-translation-bridge
 composer install          # Required: Installs PHPUnit and testing dependencies
 
 # 5. (Optional) Install Node.js dependencies
@@ -2045,7 +2045,7 @@ composer test             # Runs PHPUnit test suite
 ```bash
 # Via WordPress admin (WP-CLI)
 wp eval "
-\$auth = new WPBC_Auth();
+\$auth = new DEVTB_Auth();
 \$results = \$auth->migrate_keys_to_encrypted();
 print_r(\$results);
 "
@@ -2053,7 +2053,7 @@ print_r(\$results);
 # Or add to your theme's functions.php temporarily:
 add_action('init', function() {
     if (current_user_can('manage_options') && isset($_GET['migrate_keys'])) {
-        $auth = new WPBC_Auth();
+        $auth = new DEVTB_Auth();
         $results = $auth->migrate_keys_to_encrypted();
         wp_die('<pre>' . print_r($results, true) . '</pre>');
     }
@@ -2063,7 +2063,7 @@ add_action('init', function() {
 
 ### **Docker Install** (Coming Soon)
 ```bash
-docker run -d -p 8080:80 wpbc/wordpress-bootstrap-claude
+docker run -d -p 8080:80 devtb/development-translation-bridge
 ```
 
 ---
@@ -2219,20 +2219,20 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## 🔗 **Links**
 
-- 🌐 **Website**: [wpbc.io](https://wpbc.io)
-- 📖 **Documentation**: [docs.wpbc.io](https://docs.wpbc.io)
-- 💬 **Discord**: [discord.gg/wpbc](https://discord.gg/wpbc)
-- 🐦 **Twitter**: [@WPBCFramework](https://twitter.com/WPBCFramework)
-- 📺 **YouTube**: [WPBC Channel](https://youtube.com/wpbc)
-- 📧 **Email**: support@wpbc.io
+- 🌐 **Website**: [devtb.io](https://devtb.io)
+- 📖 **Documentation**: [docs.devtb.io](https://docs.devtb.io)
+- 💬 **Discord**: [discord.gg/devtb](https://discord.gg/devtb)
+- 🐦 **Twitter**: [@DEVTBFramework](https://twitter.com/DEVTBFramework)
+- 📺 **YouTube**: [DEVTB Channel](https://youtube.com/devtb)
+- 📧 **Email**: support@devtb.io
 
 ---
 
 ## 📜 **License**
 
-WordPress Bootstrap Claude™ is licensed under the [GPL v2.0 or later](LICENSE).
+DevelopmentTranslation Bridge™ is licensed under the [GPL v2.0 or later](LICENSE).
 
-Translation Bridge™ is a trademark of WordPress Bootstrap Claude.
+Translation Bridge™ is a trademark of DevelopmentTranslation Bridge.
 
 ---
 
@@ -2240,13 +2240,13 @@ Translation Bridge™ is a trademark of WordPress Bootstrap Claude.
 
 ## 🚀 **Ready to Revolutionize Your WordPress Development?**
 
-### **[⭐ Star This Repo](https://github.com/coryhubbell/wordpress-bootstrap-claude) • [🔄 Fork](https://github.com/coryhubbell/wordpress-bootstrap-claude/fork) • [💰 Get Pro License](https://wpbc.io/pro)**
+### **[⭐ Star This Repo](https://github.com/coryhubbell/development-translation-bridge) • [🔄 Fork](https://github.com/coryhubbell/development-translation-bridge/fork) • [💰 Get Pro License](https://devtb.io/pro)**
 
 ### **Join 10,000+ developers building the future of WordPress**
 
 **The framework that changes everything. The bridge that connects everything. The AI that accelerates everything.**
 
-### **WordPress Bootstrap Claude™ 3.2 - Now Available**
+### **DevelopmentTranslation Bridge™ 3.2 - Now Available**
 
 </div>
 

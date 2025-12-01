@@ -1,6 +1,6 @@
 /**
  * Core TypeScript Type Definitions
- * WordPress Bootstrap Claude - Visual Interface
+ * DevelopmentTranslation Bridge - Visual Interface
  */
 
 // Framework Types

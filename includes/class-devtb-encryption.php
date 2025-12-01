@@ -1,15 +1,15 @@
 <?php
 /**
- * WPBC Encryption Utility
+ * DEVTB Encryption Utility
  *
  * Provides encryption/decryption for sensitive data using WordPress salts
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage Security
  * @version    3.2.1
  */
 
-class WPBC_Encryption {
+class DEVTB_Encryption {
 
     /**
      * Encryption cipher method
@@ -57,7 +57,7 @@ class WPBC_Encryption {
         $components = array(
             php_uname( 'n' ),           // Machine hostname
             __DIR__,                     // Installation path
-            'wpbc_encryption_v3',        // Version identifier
+            'devtb_encryption_v3',        // Version identifier
         );
 
         return implode( '|', $components );
@@ -106,7 +106,7 @@ class WPBC_Encryption {
         } catch ( Exception $e ) {
             // Log error without exposing sensitive data
             if ( function_exists( 'error_log' ) ) {
-                error_log( 'WPBC Encryption: Encrypt operation failed' );
+                error_log( 'DEVTB Encryption: Encrypt operation failed' );
             }
             return false;
         }
@@ -126,7 +126,7 @@ class WPBC_Encryption {
         self::$openssl_warning_logged = true;
 
         $message = sprintf(
-            'WPBC Security Warning: OpenSSL extension not available for %s operation. Data will not be encrypted.',
+            'DEVTB Security Warning: OpenSSL extension not available for %s operation. Data will not be encrypted.',
             $operation
         );
 
@@ -186,7 +186,7 @@ class WPBC_Encryption {
         } catch ( Exception $e ) {
             // Log error without exposing sensitive data
             if ( function_exists( 'error_log' ) ) {
-                error_log( 'WPBC Encryption: Decrypt operation failed' );
+                error_log( 'DEVTB Encryption: Decrypt operation failed' );
             }
             return false;
         }

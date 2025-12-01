@@ -78,7 +78,7 @@
                                         <?php echo get_the_date(); ?>
                                     </span>
                                     <span class="byline">
-                                        <?php _e('by', 'wpbc'); ?> <?php the_author(); ?>
+                                        <?php _e('by', 'devtb'); ?> <?php the_author(); ?>
                                     </span>
                                 </div>
                             <?php endif; ?>
@@ -90,7 +90,7 @@
                                 the_content();
 
                                 wp_link_pages([
-                                    'before' => '<div class="page-links">' . __('Pages:', 'wpbc'),
+                                    'before' => '<div class="page-links">' . __('Pages:', 'devtb'),
                                     'after'  => '</div>',
                                 ]);
                             else :
@@ -105,12 +105,12 @@
                                 // Show categories and tags
                                 $categories_list = get_the_category_list(', ');
                                 if ($categories_list) {
-                                    printf('<span class="cat-links">' . __('Posted in %s', 'wpbc') . '</span>', $categories_list);
+                                    printf('<span class="cat-links">' . __('Posted in %s', 'devtb') . '</span>', $categories_list);
                                 }
 
                                 $tags_list = get_the_tag_list('', ', ');
                                 if ($tags_list) {
-                                    printf('<span class="tags-links">' . __('Tagged %s', 'wpbc') . '</span>', $tags_list);
+                                    printf('<span class="tags-links">' . __('Tagged %s', 'devtb') . '</span>', $tags_list);
                                 }
                                 ?>
                             </footer>
@@ -122,9 +122,9 @@
                 <?php
                 // Previous/next page navigation.
                 the_posts_pagination([
-                    'prev_text'          => __('Previous', 'wpbc'),
-                    'next_text'          => __('Next', 'wpbc'),
-                    'before_page_number' => '<span class="meta-nav screen-reader-text">' . __('Page', 'wpbc') . ' </span>',
+                    'prev_text'          => __('Previous', 'devtb'),
+                    'next_text'          => __('Next', 'devtb'),
+                    'before_page_number' => '<span class="meta-nav screen-reader-text">' . __('Page', 'devtb') . ' </span>',
                 ]);
                 ?>
 
@@ -132,7 +132,7 @@
 
                 <div class="no-results not-found">
                     <header class="page-header">
-                        <h1 class="page-title"><?php _e('Nothing Found', 'wpbc'); ?></h1>
+                        <h1 class="page-title"><?php _e('Nothing Found', 'devtb'); ?></h1>
                     </header>
 
                     <div class="page-content">
@@ -140,16 +140,16 @@
                             <p>
                                 <?php
                                 printf(
-                                    __('Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'wpbc'),
+                                    __('Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'devtb'),
                                     esc_url(admin_url('post-new.php'))
                                 );
                                 ?>
                             </p>
                         <?php elseif (is_search()) : ?>
-                            <p><?php _e('Sorry, but nothing matched your search terms. Please try again with different keywords.', 'wpbc'); ?></p>
+                            <p><?php _e('Sorry, but nothing matched your search terms. Please try again with different keywords.', 'devtb'); ?></p>
                             <?php get_search_form(); ?>
                         <?php else : ?>
-                            <p><?php _e('It seems we can\'t find what you\'re looking for. Perhaps searching can help.', 'wpbc'); ?></p>
+                            <p><?php _e('It seems we can\'t find what you\'re looking for. Perhaps searching can help.', 'devtb'); ?></p>
                             <?php get_search_form(); ?>
                         <?php endif; ?>
                     </div>
@@ -176,15 +176,15 @@
                 <p>
                     <?php
                     printf(
-                        __('Powered by <a href="%s">WordPress Bootstrap Claude</a>', 'wpbc'),
-                        'https://github.com/coryhubbell/wordpress-bootstrap-claude'
+                        __('Powered by <a href="%s">DevelopmentTranslation Bridge</a>', 'devtb'),
+                        'https://github.com/coryhubbell/development-translation-bridge'
                     );
                     ?>
                     &mdash;
                     <?php
                     printf(
-                        __('Translation Bridge™ v%s', 'wpbc'),
-                        WPBC_THEME_VERSION
+                        __('Translation Bridge™ v%s', 'devtb'),
+                        DEVTB_THEME_VERSION
                     );
                     ?>
                 </p>

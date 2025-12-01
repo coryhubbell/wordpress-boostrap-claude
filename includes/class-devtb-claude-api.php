@@ -1,17 +1,17 @@
 <?php
 /**
- * WPBC Claude AI API Integration
+ * DEVTB Claude AI API Integration
  *
  * Dual-mode support for Claude AI:
  * - Mode A: Claude Code CLI (current workflow, generates AI-optimized HTML)
  * - Mode B: Claude API (future web interface, direct AI interaction)
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage Claude_Integration
  * @version    3.1.0
  */
 
-class WPBC_Claude_API {
+class DEVTB_Claude_API {
     /**
      * Claude API endpoint
      *
@@ -43,7 +43,7 @@ class WPBC_Claude_API {
     /**
      * Logger instance
      *
-     * @var WPBC_Logger
+     * @var DEVTB_Logger
      */
     private $logger;
 
@@ -55,7 +55,7 @@ class WPBC_Claude_API {
     public function __construct($config = []) {
         $this->api_key = $config['api_key'] ?? getenv('CLAUDE_API_KEY') ?? null;
         $this->mode = $config['mode'] ?? 'cli';
-        $this->logger = new WPBC_Logger();
+        $this->logger = new DEVTB_Logger();
 
         if (!empty($config['model'])) {
             $this->model = $config['model'];
@@ -79,7 +79,7 @@ class WPBC_Claude_API {
      */
     public function generate_claude_html($content, $source_framework, $options = []) {
         // Use Translation Bridge to convert to Claude format
-        require_once WPBC_TRANSLATION_BRIDGE . '/core/class-translator.php';
+        require_once DEVTB_TRANSLATION_BRIDGE . '/core/class-translator.php';
 
         $translator = new Translator();
         $claude_html = $translator->translate($content, $source_framework, 'claude');
@@ -137,7 +137,7 @@ Examples:
 
 🔄 CONVERTING BACK
 When you're done editing, convert back to the original framework:
-wpbc translate claude %SOURCE_FRAMEWORK% output.html
+devtb translate claude %SOURCE_FRAMEWORK% output.html
 
 📚 MORE EXAMPLES
 "Add padding to the container"
@@ -288,7 +288,7 @@ EOT;
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_TIMEOUT, WPBC_Config::API_TIMEOUT);
+        curl_setopt($ch, CURLOPT_TIMEOUT, DEVTB_Config::API_TIMEOUT);
 
         $response = curl_exec($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -329,7 +329,7 @@ EOT;
      * @return string Converted content
      */
     public function convert_from_claude($claude_html, $target_framework) {
-        require_once WPBC_TRANSLATION_BRIDGE . '/core/class-translator.php';
+        require_once DEVTB_TRANSLATION_BRIDGE . '/core/class-translator.php';
 
         $translator = new Translator();
         $result = $translator->translate($claude_html, 'claude', $target_framework);

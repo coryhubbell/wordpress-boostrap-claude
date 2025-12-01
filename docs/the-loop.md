@@ -1,10 +1,10 @@
 # 📙 The Loop Mastery
 
-Master WordPress's most powerful feature - The Loop - with the WordPress Bootstrap Claude framework's advanced implementation.
+Master WordPress's most powerful feature - The Loop - with the DevelopmentTranslation Bridge framework's advanced implementation.
 
 ## Table of Contents
 - [Understanding The Loop](#understanding-the-loop)
-- [WPBC_Loop Class](#wpbc_loop-class)
+- [DEVTB_Loop Class](#devtb_loop-class)
 - [Basic Loop Patterns](#basic-loop-patterns)
 - [Advanced Queries](#advanced-queries)
 - [Custom Loop Templates](#custom-loop-templates)
@@ -15,7 +15,7 @@ Master WordPress's most powerful feature - The Loop - with the WordPress Bootstr
 
 ## Understanding The Loop
 
-The Loop is WordPress's mechanism for displaying posts. WordPress Bootstrap Claude enhances this with the `WPBC_Loop` class, providing:
+The Loop is WordPress's mechanism for displaying posts. DevelopmentTranslation Bridge enhances this with the `DEVTB_Loop` class, providing:
 
 - **Cleaner syntax**
 - **Built-in optimization**
@@ -33,10 +33,10 @@ The Loop is WordPress's mechanism for displaying posts. WordPress Bootstrap Clau
 <?php endif; ?>
 ```
 
-### WPBC Enhanced Loop
+### DEVTB Enhanced Loop
 
 ```php
-$loop = new WPBC_Loop(['posts_per_page' => 10]);
+$loop = new DEVTB_Loop(['posts_per_page' => 10]);
 while ($loop->have_posts()) : $loop->the_post();
     $loop->render_template('card');
 endwhile;
@@ -44,16 +44,16 @@ endwhile;
 
 ---
 
-## WPBC_Loop Class
+## DEVTB_Loop Class
 
 ### Basic Usage
 
 ```php
 // Simple loop
-$loop = new WPBC_Loop();
+$loop = new DEVTB_Loop();
 
 // With arguments
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'post_type' => 'post',
     'posts_per_page' => 10,
     'orderby' => 'date',
@@ -88,12 +88,12 @@ $query = $loop->get_query();
 All WP_Query arguments work, plus custom ones:
 
 ```php
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     // Standard WP_Query args
     'post_type' => 'post',
     'posts_per_page' => 10,
     
-    // WPBC enhancements
+    // DEVTB enhancements
     'cache' => true,              // Enable query caching
     'cache_time' => 3600,         // Cache duration (seconds)
     'template' => 'card',         // Default template
@@ -110,7 +110,7 @@ $loop = new WPBC_Loop([
 
 ```php
 // Display recent blog posts
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'post_type' => 'post',
     'posts_per_page' => 10
 ]);
@@ -147,7 +147,7 @@ $loop->reset();
 
 ```php
 // Display custom post type
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'post_type' => 'portfolio',
     'posts_per_page' => 12,
     'orderby' => 'menu_order',
@@ -157,7 +157,7 @@ $loop = new WPBC_Loop([
 if ($loop->have_posts()) : ?>
     <div class="portfolio-grid">
         <?php while ($loop->have_posts()) : $loop->the_post(); ?>
-            <?php wpbc_component('portfolio-item', [
+            <?php devtb_component('portfolio-item', [
                 'title' => get_the_title(),
                 'image' => get_the_post_thumbnail_url('large'),
                 'category' => get_the_terms(get_the_ID(), 'portfolio_category'),
@@ -174,7 +174,7 @@ if ($loop->have_posts()) : ?>
 // Get related posts by category
 $categories = wp_get_post_categories(get_the_ID());
 
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'category__in' => $categories,
     'post__not_in' => [get_the_ID()],
     'posts_per_page' => 3,
@@ -201,7 +201,7 @@ if ($loop->have_posts()) : ?>
 
 ```php
 // Posts with specific meta values
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'post_type' => 'product',
     'meta_query' => [
         'relation' => 'AND',
@@ -224,7 +224,7 @@ $loop = new WPBC_Loop([
 
 ```php
 // Posts in specific taxonomies
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'post_type' => 'product',
     'tax_query' => [
         'relation' => 'OR',
@@ -247,7 +247,7 @@ $loop = new WPBC_Loop([
 
 ```php
 // Posts from last 30 days
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'date_query' => [
         [
             'after' => '30 days ago',
@@ -257,7 +257,7 @@ $loop = new WPBC_Loop([
 ]);
 
 // Posts from specific year/month
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'date_query' => [
         [
             'year' => 2024,
@@ -273,7 +273,7 @@ $loop = new WPBC_Loop([
 
 ```php
 // Query multiple post types
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'post_type' => ['post', 'page', 'portfolio'],
     'posts_per_page' => 20,
     'orderby' => 'modified',
@@ -285,14 +285,14 @@ $loop = new WPBC_Loop([
 
 ```php
 // Search posts
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     's' => get_search_query(),
     'post_type' => 'any',
     'posts_per_page' => 20
 ]);
 
 // Enhanced search with meta
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     's' => get_search_query(),
     'meta_query' => [
         'relation' => 'OR',
@@ -356,7 +356,7 @@ Create template files in `/templates/loops/`:
 ### Using Templates
 
 ```php
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'post_type' => 'product',
     'posts_per_page' => 12
 ]);
@@ -376,7 +376,7 @@ echo '</div>';
 
 ```php
 // Enable caching
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'post_type' => 'post',
     'posts_per_page' => 10,
     'cache' => true,
@@ -388,7 +388,7 @@ $loop = new WPBC_Loop([
 
 ```php
 // Only get what you need
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'fields' => 'ids',           // Only get post IDs
     'no_found_rows' => true,     // Skip counting total rows
     'update_post_meta_cache' => false,
@@ -402,7 +402,7 @@ $loop = new WPBC_Loop([
 // Paginated queries
 $paged = get_query_var('paged') ? get_query_var('paged') : 1;
 
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'posts_per_page' => 10,
     'paged' => $paged
 ]);
@@ -415,7 +415,7 @@ if ($loop->have_posts()) :
     endwhile;
     
     // Pagination
-    wpbc_pagination($loop->get_query());
+    devtb_pagination($loop->get_query());
 endif;
 ```
 
@@ -423,7 +423,7 @@ endif;
 
 ```php
 // Implement lazy loading
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'posts_per_page' => 6,
     'meta_key' => '_thumbnail_id' // Only posts with featured images
 ]);
@@ -443,7 +443,7 @@ while ($loop->have_posts()) : $loop->the_post(); ?>
 
 ```php
 // Get featured posts for slider
-$featured_loop = new WPBC_Loop([
+$featured_loop = new DEVTB_Loop([
     'post_type' => 'post',
     'posts_per_page' => 5,
     'meta_query' => [
@@ -485,7 +485,7 @@ $featured_loop->reset();
 
 ```php
 // Get all portfolio items
-$portfolio_loop = new WPBC_Loop([
+$portfolio_loop = new DEVTB_Loop([
     'post_type' => 'portfolio',
     'posts_per_page' => -1,
     'orderby' => 'menu_order',
@@ -515,7 +515,7 @@ $categories = get_terms('portfolio_category');
             $term_classes = wp_list_pluck($terms, 'slug');
             ?>
             <div class="portfolio-item col-md-4 mb-4 <?php echo implode(' ', $term_classes); ?>">
-                <?php wpbc_component('portfolio-card'); ?>
+                <?php devtb_component('portfolio-card'); ?>
             </div>
         <?php endwhile; ?>
     </div>
@@ -544,7 +544,7 @@ jQuery(document).ready(function($) {
 
 ```php
 // Initial posts load
-$loop = new WPBC_Loop([
+$loop = new DEVTB_Loop([
     'posts_per_page' => 6,
     'paged' => 1
 ]);
@@ -553,7 +553,7 @@ $loop = new WPBC_Loop([
 <div id="posts-container" class="row">
     <?php while ($loop->have_posts()) : $loop->the_post(); ?>
         <div class="col-md-4 mb-4">
-            <?php wpbc_component('card'); ?>
+            <?php devtb_component('card'); ?>
         </div>
     <?php endwhile; ?>
 </div>
@@ -577,12 +577,12 @@ jQuery('#load-more').on('click', function() {
     button.text('Loading...').prop('disabled', true);
     
     jQuery.ajax({
-        url: wpbc_ajax.ajax_url,
+        url: devtb_ajax.ajax_url,
         type: 'POST',
         data: {
             action: 'load_more_posts',
             page: page + 1,
-            nonce: wpbc_ajax.nonce
+            nonce: devtb_ajax.nonce
         },
         success: function(response) {
             jQuery('#posts-container').append(response);
@@ -603,27 +603,27 @@ jQuery('#load-more').on('click', function() {
 
 ## Loop Helper Functions
 
-### wpbc_loop()
+### devtb_loop()
 
 Quick loop helper:
 
 ```php
 // Shorthand loop
-wpbc_loop(['posts_per_page' => 5], 'card');
+devtb_loop(['posts_per_page' => 5], 'card');
 
 // Equivalent to:
-$loop = new WPBC_Loop(['posts_per_page' => 5]);
+$loop = new DEVTB_Loop(['posts_per_page' => 5]);
 while ($loop->have_posts()) : $loop->the_post();
     $loop->render_template('card');
 endwhile;
 ```
 
-### wpbc_query_posts()
+### devtb_query_posts()
 
 Get posts array:
 
 ```php
-$posts = wpbc_query_posts([
+$posts = devtb_query_posts([
     'post_type' => 'product',
     'posts_per_page' => 10
 ]);

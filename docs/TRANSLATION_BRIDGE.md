@@ -69,22 +69,22 @@ Generate framework-specific output:
 
 ```bash
 # Syntax
-wpbc translate [from-framework] [to-framework] [input-file]
+devtb translate [from-framework] [to-framework] [input-file]
 
 # Examples
-wpbc translate bootstrap divi hero.html
-wpbc translate elementor bootstrap page.json
-wpbc translate avada bricks design.txt
+devtb translate bootstrap divi hero.html
+devtb translate elementor bootstrap page.json
+devtb translate avada bricks design.txt
 ```
 
 ### **Batch Translation**
 
 ```bash
 # Convert entire directory
-wpbc batch-translate bootstrap elementor components/
+devtb batch-translate bootstrap elementor components/
 
 # With output directory
-wpbc batch-translate divi avada sections/ --output=converted/
+devtb batch-translate divi avada sections/ --output=converted/
 ```
 
 ### **With Claude AI**
@@ -348,7 +348,7 @@ $container->children = [
 ### **Parser Interface**
 
 ```php
-interface WPBC_Parser_Interface {
+interface DEVTB_Parser_Interface {
   public function parse($content): array;
   public function get_framework(): string;
   public function get_supported_types(): array;
@@ -359,13 +359,13 @@ interface WPBC_Parser_Interface {
 ### **Converter Interface**
 
 ```php
-interface WPBC_Converter_Interface {
+interface DEVTB_Converter_Interface {
   public function convert($component);
   public function get_framework(): string;
   public function get_supported_types(): array;
   public function supports_type(string $type): bool;
-  public function convert_component(WPBC_Component $component);
-  public function get_fallback(WPBC_Component $component);
+  public function convert_component(DEVTB_Component $component);
+  public function get_fallback(DEVTB_Component $component);
 }
 ```
 
@@ -377,7 +377,7 @@ interface WPBC_Converter_Interface {
 
 ```bash
 # Universal format for maximum flexibility
-wpbc translate elementor bootstrap input.json
+devtb translate elementor bootstrap input.json
 # Now you can go anywhere from Bootstrap
 ```
 
@@ -385,14 +385,14 @@ wpbc translate elementor bootstrap input.json
 
 ```bash
 # Convert and immediately review
-wpbc translate divi elementor page.txt --verbose
+devtb translate divi elementor page.txt --verbose
 ```
 
 ### **3. Batch Process Efficiently**
 
 ```bash
 # Use organized output directories
-wpbc batch-translate bootstrap divi src/ --output=dist/divi/
+devtb batch-translate bootstrap divi src/ --output=dist/divi/
 ```
 
 ### **4. Leverage Claude AI**
@@ -414,9 +414,9 @@ wpbc batch-translate bootstrap divi src/ --output=dist/divi/
 
 ## 📞 Support
 
-- 💬 Discord: [discord.gg/wpbc](https://discord.gg/wpbc)
-- 📧 Email: support@wpbc.io
-- 🐛 Issues: [GitHub Issues](https://github.com/coryhubbell/wordpress-bootstrap-claude/issues)
+- 💬 Discord: [discord.gg/devtb](https://discord.gg/devtb)
+- 📧 Email: support@devtb.io
+- 🐛 Issues: [GitHub Issues](https://github.com/coryhubbell/development-translation-bridge/issues)
 
 ---
 

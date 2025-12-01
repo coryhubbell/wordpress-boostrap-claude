@@ -1,6 +1,6 @@
-# 📘 Getting Started with WordPress Bootstrap Claude
+# 📘 Getting Started with DevelopmentTranslation Bridge
 
-Welcome to WordPress Bootstrap Claude! This guide will walk you through everything you need to know to start building WordPress sites 10x faster with AI assistance.
+Welcome to DevelopmentTranslation Bridge! This guide will walk you through everything you need to know to start building WordPress sites 10x faster with AI assistance.
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
@@ -35,10 +35,10 @@ Before you begin, ensure you have:
 If you just want to use the translation CLI without WordPress:
 
 ```bash
-git clone https://github.com/coryhubbell/wordpress-bootstrap-claude.git
-cd wordpress-bootstrap-claude
+git clone https://github.com/coryhubbell/development-translation-bridge.git
+cd development-translation-bridge
 ./setup.sh
-./wpbc --help
+./devtb --help
 ```
 
 ---
@@ -61,7 +61,7 @@ cd wordpress-bootstrap-claude
 
 3. **Activate the theme:**
    - Go to WordPress Admin → Appearance → Themes
-   - Find "WordPress Bootstrap Claude"
+   - Find "DevelopmentTranslation Bridge"
    - Click "Activate"
 
 ### Method 2: Git Clone (For Developers)
@@ -88,7 +88,7 @@ composer install
 ### 1. Verify Installation
 
 After activation, you should see:
-- ✅ "WordPress Bootstrap Claude" as your active theme
+- ✅ "DevelopmentTranslation Bridge" as your active theme
 - ✅ Bootstrap styling applied to your site
 - ✅ New menu locations available
 - ✅ Framework options in Customizer
@@ -98,8 +98,8 @@ After activation, you should see:
 ```php
 // In wp-config.php, add these for development:
 define('WP_DEBUG', true);
-define('WPBC_DEBUG', true);  // Framework debug mode
-define('WPBC_CACHE', false); // Disable caching during development
+define('DEVTB_DEBUG', true);  // Framework debug mode
+define('DEVTB_CACHE', false); // Disable caching during development
 ```
 
 ### 3. Configure Menus
@@ -119,7 +119,7 @@ define('WPBC_CACHE', false); // Disable caching during development
 #### Step 1: Tell Claude What You Need
 
 ```
-"Using WordPress Bootstrap Claude, create a Team Members custom post type 
+"Using DevelopmentTranslation Bridge, create a Team Members custom post type 
 with name, position, bio, and photo. Display in a Bootstrap card grid."
 ```
 
@@ -128,7 +128,7 @@ with name, position, bio, and photo. Display in a Bootstrap card grid."
 ```php
 // File: ai-patterns/custom-post-types/team-members.php
 
-class WPBC_Team_Members {
+class DEVTB_Team_Members {
     
     public function __construct() {
         add_action('init', [$this, 'register_post_type']);
@@ -150,7 +150,7 @@ class WPBC_Team_Members {
     }
     
     public function render_team_grid($atts) {
-        $loop = new WPBC_Loop([
+        $loop = new DEVTB_Loop([
             'post_type' => 'team_member',
             'posts_per_page' => -1
         ]);
@@ -160,7 +160,7 @@ class WPBC_Team_Members {
         <div class="team-grid row">
             <?php while ($loop->have_posts()) : $loop->the_post(); ?>
                 <div class="col-md-4 mb-4">
-                    <?php wpbc_component('card', [
+                    <?php devtb_component('card', [
                         'title' => get_the_title(),
                         'content' => get_the_excerpt(),
                         'image' => get_the_post_thumbnail_url()
@@ -174,7 +174,7 @@ class WPBC_Team_Members {
 }
 
 // Initialize
-new WPBC_Team_Members();
+new DEVTB_Team_Members();
 ```
 
 #### Step 3: Use It
@@ -190,7 +190,7 @@ new WPBC_Team_Members();
 
 ### Working with Claude
 
-1. **Start with a clear request** mentioning WordPress Bootstrap Claude
+1. **Start with a clear request** mentioning DevelopmentTranslation Bridge
 2. **Implement the generated code** in the appropriate location
 3. **Test and iterate** with follow-up requests
 4. **Export as a plugin** when feature is complete
@@ -217,7 +217,7 @@ wordpress-boostrap-claude/
 - Clear browser cache
 
 #### The Loop Not Working
-- Ensure WPBC_Loop class is loaded
+- Ensure DEVTB_Loop class is loaded
 - Check for PHP errors in debug.log
 - Verify WordPress query args
 

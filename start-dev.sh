@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# WordPress Bootstrap Claude - Development Startup Script
+# DevelopmentTranslation Bridge - Development Startup Script
 # =============================================================================
 # Starts the complete development environment with Docker
 # Supports: macOS, Linux, Windows (Git Bash/WSL)
@@ -29,7 +29,7 @@ cd "$SCRIPT_DIR"
 
 echo ""
 echo -e "${BLUE}========================================${NC}"
-echo -e "${BLUE}  WordPress Bootstrap Claude${NC}"
+echo -e "${BLUE}  DevelopmentTranslation Bridge${NC}"
 echo -e "${BLUE}  Development Environment${NC}"
 echo -e "${BLUE}========================================${NC}"
 echo ""
@@ -182,11 +182,11 @@ echo -e "${BLUE}Services:${NC}"
 echo "  WordPress:    http://localhost:${WORDPRESS_PORT}"
 echo "  WP Admin:     http://localhost:${WORDPRESS_PORT}/wp-admin"
 echo "  phpMyAdmin:   http://localhost:${PHPMYADMIN_PORT}"
-echo "  REST API:     http://localhost:${WORDPRESS_PORT}/wp-json/wpbc/v2/"
+echo "  REST API:     http://localhost:${WORDPRESS_PORT}/wp-json/devtb/v2/"
 echo ""
 echo -e "${BLUE}Next Steps:${NC}"
 echo "  1. Complete WordPress install: http://localhost:${WORDPRESS_PORT}"
-echo "  2. Activate 'WordPress Bootstrap Claude' theme"
+echo "  2. Activate 'DevelopmentTranslation Bridge' theme"
 echo "  3. Start Visual Interface dev server:"
 echo "     cd admin && npm run dev"
 echo "  4. Access 'Visual Interface' in WordPress admin menu"

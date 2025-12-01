@@ -127,7 +127,7 @@ Join thousands of developers who are already saving time with our translation pl
 [vc_column]
 [vc_separator color="custom" accent_color="#555555"]
 [vc_column_text css=".vc_custom{text-align:center;color:#999999;}"]
-© 2024 WordPress Bootstrap Claude. All rights reserved.
+© 2024 DevelopmentTranslation Bridge. All rights reserved.
 [/vc_column_text]
 [/vc_column]
 [/vc_row]

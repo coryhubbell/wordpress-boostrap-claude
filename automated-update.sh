@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # ============================================================================
-# WordPress Bootstrap Claude 3.0 - Automated GitHub Update Script
+# DevelopmentTranslation Bridge 3.0 - Automated GitHub Update Script
 # This script completely updates your repository with Translation Bridge™
 # ============================================================================
 
-echo "🚀 WordPress Bootstrap Claude 3.0 - Automated Update"
+echo "🚀 DevelopmentTranslation Bridge 3.0 - Automated Update"
 echo "===================================================="
 echo ""
 
@@ -20,7 +20,7 @@ NC='\033[0m' # No Color
 # Check if we're in a git repository
 if [ ! -d .git ]; then
     echo -e "${RED}Error: Not in a git repository!${NC}"
-    echo "Please run this from your wordpress-bootstrap-claude directory"
+    echo "Please run this from your development-translation-bridge directory"
     exit 1
 fi
 
@@ -63,15 +63,15 @@ echo -e "${BLUE}🌉 Creating Translation Bridge core files...${NC}"
 cat > translation-bridge/core/class-translator.php << 'EOF'
 <?php
 /**
- * WordPress Bootstrap Claude - Translation Bridge™
+ * DevelopmentTranslation Bridge - Translation Bridge™
  * Universal Framework Translator
  * 
- * @package WPBC_Translation_Bridge
+ * @package DEVTB_Translation_Bridge
  * @version 3.0.0
  * @author Cory Hubbell
  */
 
-namespace WPBC\TranslationBridge;
+namespace DEVTB\TranslationBridge;
 
 class UniversalTranslator {
     
@@ -409,7 +409,7 @@ echo -e "${BLUE}🤖 Setting up Claude AI integration...${NC}"
 # Main project configuration
 cat > .claude-code/project.json << 'EOF'
 {
-  "name": "WordPress Bootstrap Claude Ultimate",
+  "name": "DevelopmentTranslation Bridge Ultimate",
   "version": "3.0.0",
   "type": "wordpress-framework",
   "description": "The most advanced AI-powered WordPress development framework with Translation Bridge™",
@@ -493,36 +493,36 @@ fi
 cat >> functions.php << 'EOF'
 
 // ============================================================================
-// WordPress Bootstrap Claude 3.0 - Translation Bridge™ Integration
+// DevelopmentTranslation Bridge 3.0 - Translation Bridge™ Integration
 // ============================================================================
 
 // Load Translation Bridge
 require_once get_template_directory() . '/translation-bridge/core/class-translator.php';
 
 // Initialize translator
-function wpbc_init_translator() {
-    if (class_exists('\WPBC\TranslationBridge\UniversalTranslator')) {
-        $GLOBALS['wpbc_translator'] = new \WPBC\TranslationBridge\UniversalTranslator();
+function devtb_init_translator() {
+    if (class_exists('\DEVTB\TranslationBridge\UniversalTranslator')) {
+        $GLOBALS['devtb_translator'] = new \DEVTB\TranslationBridge\UniversalTranslator();
     }
 }
-add_action('init', 'wpbc_init_translator');
+add_action('init', 'devtb_init_translator');
 
 // Add Translation Bridge to admin menu
-function wpbc_translator_menu() {
+function devtb_translator_menu() {
     add_menu_page(
         '🌉 Translation Bridge',
         'Translation Bridge',
         'manage_options',
-        'wpbc-translator',
-        'wpbc_translator_page',
+        'devtb-translator',
+        'devtb_translator_page',
         'dashicons-translation',
         30
     );
 }
-add_action('admin_menu', 'wpbc_translator_menu');
+add_action('admin_menu', 'devtb_translator_menu');
 
 // Translation Bridge admin page
-function wpbc_translator_page() {
+function devtb_translator_page() {
     ?>
     <div class="wrap">
         <h1>🌉 Translation Bridge™</h1>
@@ -530,8 +530,8 @@ function wpbc_translator_page() {
         
         <div class="card" style="max-width: 800px; margin-top: 20px;">
             <h2>Quick Translation</h2>
-            <form method="post" id="wpbc-translator-form">
-                <?php wp_nonce_field('wpbc_translate', 'wpbc_nonce'); ?>
+            <form method="post" id="devtb-translator-form">
+                <?php wp_nonce_field('devtb_translate', 'devtb_nonce'); ?>
                 
                 <table class="form-table">
                     <tr>
@@ -594,18 +594,18 @@ function wpbc_translator_page() {
 
 // Register REST API endpoint
 add_action('rest_api_init', function() {
-    register_rest_route('wpbc/v1', '/translate', [
+    register_rest_route('devtb/v1', '/translate', [
         'methods' => 'POST',
-        'callback' => 'wpbc_api_translate',
+        'callback' => 'devtb_api_translate',
         'permission_callback' => '__return_true'
     ]);
 });
 
-function wpbc_api_translate($request) {
+function devtb_api_translate($request) {
     $params = $request->get_json_params();
     
-    if (isset($GLOBALS['wpbc_translator'])) {
-        $result = $GLOBALS['wpbc_translator']->translate(
+    if (isset($GLOBALS['devtb_translator'])) {
+        $result = $GLOBALS['devtb_translator']->translate(
             $params['code'],
             $params['from'],
             $params['to']
@@ -622,8 +622,8 @@ function wpbc_api_translate($request) {
 }
 
 // Add version constant
-if (!defined('WPBC_VERSION')) {
-    define('WPBC_VERSION', '3.0.0');
+if (!defined('DEVTB_VERSION')) {
+    define('DEVTB_VERSION', '3.0.0');
 }
 EOF
 
@@ -635,11 +635,11 @@ echo -e "${GREEN}✅ Functions.php updated${NC}"
 
 echo -e "${BLUE}⚙️ Creating CLI tool...${NC}"
 
-cat > wpbc << 'EOF'
+cat > devtb << 'EOF'
 #!/usr/bin/env php
 <?php
 /**
- * WordPress Bootstrap Claude CLI
+ * DevelopmentTranslation Bridge CLI
  * Version 3.0.0
  */
 
@@ -647,7 +647,7 @@ if (PHP_SAPI !== 'cli') {
     die("This script must be run from command line\n");
 }
 
-echo "\n🚀 WordPress Bootstrap Claude CLI v3.0.0\n";
+echo "\n🚀 DevelopmentTranslation Bridge CLI v3.0.0\n";
 echo "=========================================\n\n";
 
 $command = $argv[1] ?? 'help';
@@ -659,8 +659,8 @@ switch ($command) {
         $file = $argv[4] ?? null;
         
         if (!$from || !$to || !$file) {
-            echo "Usage: wpbc translate [from] [to] [file]\n";
-            echo "Example: wpbc translate bootstrap divi component.html\n";
+            echo "Usage: devtb translate [from] [to] [file]\n";
+            echo "Example: devtb translate bootstrap divi component.html\n";
             exit(1);
         }
         
@@ -688,7 +688,7 @@ switch ($command) {
         break;
         
     case 'version':
-        echo "WordPress Bootstrap Claude 3.0.0\n";
+        echo "DevelopmentTranslation Bridge 3.0.0\n";
         echo "Translation Bridge™ Enabled\n";
         echo "Claude AI Integration Active\n";
         break;
@@ -702,12 +702,12 @@ switch ($command) {
         echo "  version                       - Show version info\n";
         echo "  help                          - Show this message\n";
         echo "\nExamples:\n";
-        echo "  wpbc translate bootstrap divi hero.html\n";
-        echo "  wpbc create component pricing-table\n\n";
+        echo "  devtb translate bootstrap divi hero.html\n";
+        echo "  devtb create component pricing-table\n\n";
 }
 EOF
 
-chmod +x wpbc
+chmod +x devtb
 
 echo -e "${GREEN}✅ CLI tool created${NC}"
 
@@ -734,18 +734,18 @@ Translation Bridge™ is the world's first framework translator for WordPress, e
 
 ### Basic Translation
 ```php
-$translator = new WPBC\TranslationBridge\UniversalTranslator();
+$translator = new DEVTB\TranslationBridge\UniversalTranslator();
 $divi_code = $translator->translate($bootstrap_html, 'bootstrap', 'divi');
 ```
 
 ### CLI Usage
 ```bash
-wpbc translate bootstrap divi component.html
+devtb translate bootstrap divi component.html
 ```
 
 ### REST API
 ```javascript
-fetch('/wp-json/wpbc/v1/translate', {
+fetch('/wp-json/devtb/v1/translate', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
@@ -784,7 +784,7 @@ fi
 
 # Create new README
 cat > README.md << 'EOF'
-# 🚀 WordPress Bootstrap Claude™ 3.0
+# 🚀 DevelopmentTranslation Bridge™ 3.0
 ## **The World's First AI-Powered Multi-Framework WordPress Development System**
 
 <div align="center">
@@ -813,9 +813,9 @@ Design in Elementor → Export as Bootstrap
 
 ```bash
 # Convert any framework to any other in seconds
-wpbc translate bootstrap divi homepage.html
-wpbc translate elementor bootstrap page.json
-wpbc translate divi bootstrap section.txt
+devtb translate bootstrap divi homepage.html
+devtb translate elementor bootstrap page.json
+devtb translate divi bootstrap section.txt
 ```
 
 ---
@@ -849,16 +849,16 @@ wpbc translate divi bootstrap section.txt
 
 ```bash
 # Clone the repository
-git clone https://github.com/coryhubbell/wordpress-bootstrap-claude.git
+git clone https://github.com/coryhubbell/development-translation-bridge.git
 
 # Navigate to directory
-cd wordpress-bootstrap-claude
+cd development-translation-bridge
 
 # Activate in WordPress
 # Go to Appearance > Themes and activate
 
 # Start translating!
-wpbc translate bootstrap divi components/hero.html
+devtb translate bootstrap divi components/hero.html
 ```
 
 ---
@@ -912,7 +912,7 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## 📜 **License**
 
-WordPress Bootstrap Claude™ is licensed under [GPL v2.0 or later](LICENSE).
+DevelopmentTranslation Bridge™ is licensed under [GPL v2.0 or later](LICENSE).
 
 ---
 
@@ -920,7 +920,7 @@ WordPress Bootstrap Claude™ is licensed under [GPL v2.0 or later](LICENSE).
 
 ### **Ready to revolutionize your WordPress development?**
 
-**[⭐ Star This Repo](https://github.com/coryhubbell/wordpress-bootstrap-claude) • [🔄 Fork](https://github.com/coryhubbell/wordpress-bootstrap-claude/fork) • [💬 Discord](https://discord.gg/wpbc)**
+**[⭐ Star This Repo](https://github.com/coryhubbell/development-translation-bridge) • [🔄 Fork](https://github.com/coryhubbell/development-translation-bridge/fork) • [💬 Discord](https://discord.gg/devtb)**
 
 **The framework that changes everything.**
 
@@ -936,7 +936,7 @@ echo -e "${GREEN}✅ README created${NC}"
 echo -e "${BLUE}📝 Creating release notes...${NC}"
 
 cat > RELEASE_NOTES.md << 'EOF'
-# 🚀 WordPress Bootstrap Claude 3.0 - Release Notes
+# 🚀 DevelopmentTranslation Bridge 3.0 - Release Notes
 
 ## Release Date: November 2024
 
@@ -985,7 +985,7 @@ echo -e "${GREEN}✅ Release notes created${NC}"
 # ============================================================================
 
 echo ""
-echo -e "${PURPLE}🎉 WordPress Bootstrap Claude 3.0 Update Complete!${NC}"
+echo -e "${PURPLE}🎉 DevelopmentTranslation Bridge 3.0 Update Complete!${NC}"
 echo "=================================================="
 echo ""
 
@@ -1000,7 +1000,7 @@ echo "   git diff"
 echo ""
 echo "2. Commit this revolutionary update:"
 echo "   git add -A"
-echo "   git commit -m '🚀 Release: WordPress Bootstrap Claude 3.0 - Translation Bridge™"
+echo "   git commit -m '🚀 Release: DevelopmentTranslation Bridge 3.0 - Translation Bridge™"
 echo ""
 echo "   Revolutionary update with world'"'"'s first framework translator."
 echo "   "
@@ -1015,7 +1015,7 @@ echo "3. Push to GitHub:"
 echo "   git push origin main"
 echo ""
 echo "4. Create GitHub Release:"
-echo "   Go to: https://github.com/coryhubbell/wordpress-bootstrap-claude/releases/new"
+echo "   Go to: https://github.com/coryhubbell/development-translation-bridge/releases/new"
 echo "   Tag: v3.0.0"
 echo "   Title: Translation Bridge™ - World's First Framework Translator"
 echo ""

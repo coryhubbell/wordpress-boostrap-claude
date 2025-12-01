@@ -1,9 +1,9 @@
-# Copyright (C) 2025 WordPress Bootstrap Claude
+# Copyright (C) 2025 DevelopmentTranslation Bridge
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WordPress Bootstrap Claude 3.2.0\n"
-"Report-Msgid-Bugs-To: https://github.com/coryhubbell/wordpress-bootstrap-claude/issues\n"
+"Project-Id-Version: DevelopmentTranslation Bridge 3.3.0\n"
+"Report-Msgid-Bugs-To: https://github.com/coryhubbell/development-translation-bridge/issues\n"
 "POT-Creation-Date: 2025-01-18 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "X-Generator: Manual\n"
-"X-Domain: wpbc\n"
+"X-Domain: devtb\n"
 
 #: functions.php:45
 msgid "Primary Menu"
@@ -45,7 +45,7 @@ msgid "Translation Bridge"
 msgstr ""
 
 #: functions.php:107
-msgid "WPBC Translation"
+msgid "DEVTB Translation"
 msgstr ""
 
 #: functions.php:119
@@ -85,7 +85,7 @@ msgid "Quick Start"
 msgstr ""
 
 #: functions.php:183
-msgid "Use the wpbc CLI command to translate between frameworks:"
+msgid "Use the devtb CLI command to translate between frameworks:"
 msgstr ""
 
 #: functions.php:192
@@ -157,7 +157,7 @@ msgid "Getting Started"
 msgstr ""
 
 #: functions.php:410
-msgid "Install and activate the WordPress Bootstrap Claude theme"
+msgid "Install and activate the DevelopmentTranslation Bridge theme"
 msgstr ""
 
 #: functions.php:411
@@ -165,7 +165,7 @@ msgid "Open terminal and navigate to the theme directory"
 msgstr ""
 
 #: functions.php:412
-msgid "Use the wpbc CLI command to translate content"
+msgid "Use the devtb CLI command to translate content"
 msgstr ""
 
 #: functions.php:415

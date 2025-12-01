@@ -1,22 +1,22 @@
 <?php
 /**
- * WPBC REST API v2
+ * DEVTB REST API v2
  *
  * Provides REST API endpoints for Translation Bridge operations
  * Supports single translations, batch processing, validation, and more
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage API
  * @version    3.2.0
  */
 
-class WPBC_API_V2 {
+class DEVTB_API_V2 {
     /**
      * API namespace
      *
      * @var string
      */
-    private $namespace = 'wpbc/v2';
+    private $namespace = 'devtb/v2';
 
     /**
      * Supported frameworks
@@ -39,21 +39,21 @@ class WPBC_API_V2 {
     /**
      * Logger instance
      *
-     * @var WPBC_Logger
+     * @var DEVTB_Logger
      */
     private $logger;
 
     /**
      * Auth handler
      *
-     * @var WPBC_Auth
+     * @var DEVTB_Auth
      */
     private $auth;
 
     /**
      * Rate limiter
      *
-     * @var WPBC_Rate_Limiter
+     * @var DEVTB_Rate_Limiter
      */
     private $rate_limiter;
 
@@ -61,9 +61,9 @@ class WPBC_API_V2 {
      * Constructor
      */
     public function __construct() {
-        $this->logger = new WPBC_Logger();
-        $this->auth = new WPBC_Auth();
-        $this->rate_limiter = new WPBC_Rate_Limiter();
+        $this->logger = new DEVTB_Logger();
+        $this->auth = new DEVTB_Auth();
+        $this->rate_limiter = new DEVTB_Rate_Limiter();
 
         add_action('rest_api_init', [$this, 'register_routes']);
     }
@@ -285,7 +285,7 @@ class WPBC_API_V2 {
     /**
      * Single translation endpoint
      *
-     * POST /wp-json/wpbc/v2/translate
+     * POST /wp-json/devtb/v2/translate
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response|WP_Error Response object or error.
@@ -356,13 +356,13 @@ class WPBC_API_V2 {
     /**
      * Create and validate translator instance
      *
-     * @return \WPBC\TranslationBridge\Core\WPBC_Translator|WP_Error Translator or error.
+     * @return \DEVTB\TranslationBridge\Core\DEVTB_Translator|WP_Error Translator or error.
      */
     private function create_translator() {
-        require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php';
+        require_once DEVTB_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php';
 
         try {
-            $translator = new \WPBC\TranslationBridge\Core\WPBC_Translator();
+            $translator = new \DEVTB\TranslationBridge\Core\DEVTB_Translator();
         } catch ( \Exception $e ) {
             $this->logger->error( 'Translator initialization failed', array( 'error' => $e->getMessage() ) );
             return new WP_Error(
@@ -386,7 +386,7 @@ class WPBC_API_V2 {
     /**
      * Batch translation endpoint
      *
-     * POST /wp-json/wpbc/v2/batch-translate
+     * POST /wp-json/devtb/v2/batch-translate
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response|WP_Error Response object or error.
@@ -415,7 +415,7 @@ class WPBC_API_V2 {
                     'success' => true,
                     'job_id'  => $job_id,
                     'status'  => 'queued',
-                    'message' => 'Batch translation job created. Check status at /wp-json/wpbc/v2/job/' . $job_id,
+                    'message' => 'Batch translation job created. Check status at /wp-json/devtb/v2/job/' . $job_id,
                 ),
                 202
             );
@@ -531,7 +531,7 @@ class WPBC_API_V2 {
     /**
      * Get job status
      *
-     * GET /wp-json/wpbc/v2/job/{job_id}
+     * GET /wp-json/devtb/v2/job/{job_id}
      *
      * @param WP_REST_Request $request Request object
      * @return WP_REST_Response|WP_Error
@@ -539,7 +539,7 @@ class WPBC_API_V2 {
     public function get_job_status($request) {
         $job_id = $request->get_param('job_id');
 
-        $job = get_transient('wpbc_job_' . $job_id);
+        $job = get_transient('devtb_job_' . $job_id);
 
         if (!$job) {
             return new WP_Error(
@@ -555,7 +555,7 @@ class WPBC_API_V2 {
     /**
      * Validate content endpoint
      *
-     * POST /wp-json/wpbc/v2/validate
+     * POST /wp-json/devtb/v2/validate
      *
      * @param WP_REST_Request $request Request object
      * @return WP_REST_Response|WP_Error
@@ -565,9 +565,9 @@ class WPBC_API_V2 {
         $content = $request->get_param('content');
 
         try {
-            require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-parser-factory.php';
+            require_once DEVTB_TRANSLATION_BRIDGE_DIR . '/core/class-parser-factory.php';
 
-            $parser = \WPBC\TranslationBridge\Core\WPBC_Parser_Factory::create($framework);
+            $parser = \DEVTB\TranslationBridge\Core\DEVTB_Parser_Factory::create($framework);
             $components = $parser->parse($content);
 
             $is_valid = !empty($components);
@@ -603,7 +603,7 @@ class WPBC_API_V2 {
     /**
      * List frameworks endpoint
      *
-     * GET /wp-json/wpbc/v2/frameworks
+     * GET /wp-json/devtb/v2/frameworks
      *
      * @return WP_REST_Response
      */
@@ -682,7 +682,7 @@ class WPBC_API_V2 {
     /**
      * Get API status
      *
-     * GET /wp-json/wpbc/v2/status
+     * GET /wp-json/devtb/v2/status
      *
      * @return WP_REST_Response
      */
@@ -735,7 +735,7 @@ class WPBC_API_V2 {
                 $headers = $this->rate_limiter->get_headers($limit_check);
 
                 return new WP_Error(
-                    'wpbc_rate_limit_exceeded',
+                    'devtb_rate_limit_exceeded',
                     'Rate limit exceeded. Please retry after ' . $limit_check['retry_after'] . ' seconds.',
                     [
                         'status' => 429,
@@ -765,7 +765,7 @@ class WPBC_API_V2 {
 
         if (!$user_id) {
             return new WP_Error(
-                'wpbc_auth_required',
+                'devtb_auth_required',
                 'Authentication required. Provide an API key or log in.',
                 ['status' => 401]
             );
@@ -774,7 +774,7 @@ class WPBC_API_V2 {
         // Check capability
         if (!current_user_can('edit_posts')) {
             return new WP_Error(
-                'wpbc_forbidden',
+                'devtb_forbidden',
                 'You do not have permission to use the Translation Bridge API.',
                 ['status' => 403]
             );
@@ -790,7 +790,7 @@ class WPBC_API_V2 {
             $headers = $this->rate_limiter->get_headers($limit_check);
 
             return new WP_Error(
-                'wpbc_rate_limit_exceeded',
+                'devtb_rate_limit_exceeded',
                 'Rate limit exceeded. Please retry after ' . $limit_check['retry_after'] . ' seconds.',
                 [
                     'status' => 429,
@@ -814,7 +814,7 @@ class WPBC_API_V2 {
      * @return string Job ID
      */
     private function create_batch_job($source, $targets, $content) {
-        $job_id = 'wpbc_' . uniqid();
+        $job_id = 'devtb_' . uniqid();
 
         $job_data = [
             'job_id'     => $job_id,
@@ -829,10 +829,10 @@ class WPBC_API_V2 {
         ];
 
         // Store job (expires in 24 hours)
-        set_transient('wpbc_job_' . $job_id, $job_data, DAY_IN_SECONDS);
+        set_transient('devtb_job_' . $job_id, $job_data, DAY_IN_SECONDS);
 
         // Schedule processing
-        wp_schedule_single_event(time(), 'wpbc_process_batch_job', [$job_id]);
+        wp_schedule_single_event(time(), 'devtb_process_batch_job', [$job_id]);
 
         return $job_id;
     }
@@ -938,7 +938,7 @@ class WPBC_API_V2 {
     public function check_admin_permission() {
         if (!current_user_can('manage_options')) {
             return new WP_Error(
-                'wpbc_forbidden',
+                'devtb_forbidden',
                 'You must be an administrator to access this endpoint.',
                 ['status' => 403]
             );
@@ -950,7 +950,7 @@ class WPBC_API_V2 {
     /**
      * List API keys for current user
      *
-     * GET /wp-json/wpbc/v2/api-keys
+     * GET /wp-json/devtb/v2/api-keys
      *
      * @return WP_REST_Response
      */
@@ -968,7 +968,7 @@ class WPBC_API_V2 {
     /**
      * Create new API key
      *
-     * POST /wp-json/wpbc/v2/api-keys
+     * POST /wp-json/devtb/v2/api-keys
      *
      * @param WP_REST_Request $request Request object
      * @return WP_REST_Response
@@ -1004,7 +1004,7 @@ class WPBC_API_V2 {
         $key_data['tier'] = $tier;
 
         // Store updated key data with tier
-        $option_name = 'wpbc_api_keys';
+        $option_name = 'devtb_api_keys';
         $all_keys = get_option($option_name, []);
         $all_keys[$key_data['key']] = $key_data;
         update_option($option_name, $all_keys);
@@ -1023,7 +1023,7 @@ class WPBC_API_V2 {
     /**
      * Revoke API key
      *
-     * DELETE /wp-json/wpbc/v2/api-keys/{key}
+     * DELETE /wp-json/devtb/v2/api-keys/{key}
      *
      * @param WP_REST_Request $request Request object
      * @return WP_REST_Response|WP_Error
@@ -1054,13 +1054,13 @@ class WPBC_API_V2 {
     /**
      * Save translation endpoint
      *
-     * POST /wp-json/wpbc/v2/save
+     * POST /wp-json/devtb/v2/save
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response|WP_Error Response object or error.
      */
     public function save_translation( WP_REST_Request $request ) {
-        $persistence = new WPBC_Persistence();
+        $persistence = new DEVTB_Persistence();
 
         $data = [
             'source_framework' => $request->get_param('source_framework'),
@@ -1089,13 +1089,13 @@ class WPBC_API_V2 {
     /**
      * Get single translation
      *
-     * GET /wp-json/wpbc/v2/translations/{id}
+     * GET /wp-json/devtb/v2/translations/{id}
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response|WP_Error Response object or error.
      */
     public function get_translation( WP_REST_Request $request ) {
-        $persistence = new WPBC_Persistence();
+        $persistence = new DEVTB_Persistence();
         $id = (int) $request->get_param('id');
 
         $result = $persistence->get_translation($id);
@@ -1110,13 +1110,13 @@ class WPBC_API_V2 {
     /**
      * Update translation
      *
-     * PUT /wp-json/wpbc/v2/translations/{id}
+     * PUT /wp-json/devtb/v2/translations/{id}
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response|WP_Error Response object or error.
      */
     public function update_translation( WP_REST_Request $request ) {
-        $persistence = new WPBC_Persistence();
+        $persistence = new DEVTB_Persistence();
         $id = (int) $request->get_param('id');
 
         $data = [
@@ -1149,13 +1149,13 @@ class WPBC_API_V2 {
     /**
      * Delete translation
      *
-     * DELETE /wp-json/wpbc/v2/translations/{id}
+     * DELETE /wp-json/devtb/v2/translations/{id}
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response|WP_Error Response object or error.
      */
     public function delete_translation( WP_REST_Request $request ) {
-        $persistence = new WPBC_Persistence();
+        $persistence = new DEVTB_Persistence();
         $id = (int) $request->get_param('id');
 
         $result = $persistence->delete_translation($id);
@@ -1173,13 +1173,13 @@ class WPBC_API_V2 {
     /**
      * Get translation history
      *
-     * GET /wp-json/wpbc/v2/translations/history
+     * GET /wp-json/devtb/v2/translations/history
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response Response object.
      */
     public function get_translation_history( WP_REST_Request $request ) {
-        $persistence = new WPBC_Persistence();
+        $persistence = new DEVTB_Persistence();
 
         $args = [
             'page'             => $request->get_param('page') ?: 1,
@@ -1203,13 +1203,13 @@ class WPBC_API_V2 {
     /**
      * Get translation versions
      *
-     * GET /wp-json/wpbc/v2/translations/{id}/versions
+     * GET /wp-json/devtb/v2/translations/{id}/versions
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response Response object.
      */
     public function get_translation_versions( WP_REST_Request $request ) {
-        $persistence = new WPBC_Persistence();
+        $persistence = new DEVTB_Persistence();
         $id = (int) $request->get_param('id');
 
         $versions = $persistence->get_versions($id);
@@ -1223,13 +1223,13 @@ class WPBC_API_V2 {
     /**
      * Restore translation version
      *
-     * POST /wp-json/wpbc/v2/translations/{id}/restore
+     * POST /wp-json/devtb/v2/translations/{id}/restore
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response|WP_Error Response object or error.
      */
     public function restore_translation_version( WP_REST_Request $request ) {
-        $persistence = new WPBC_Persistence();
+        $persistence = new DEVTB_Persistence();
         $id = (int) $request->get_param('id');
         $version_id = (int) $request->get_param('version_id');
 
@@ -1249,13 +1249,13 @@ class WPBC_API_V2 {
     /**
      * Get user preferences
      *
-     * GET /wp-json/wpbc/v2/preferences
+     * GET /wp-json/devtb/v2/preferences
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response Response object.
      */
     public function get_preferences( WP_REST_Request $request ) {
-        $persistence = new WPBC_Persistence();
+        $persistence = new DEVTB_Persistence();
         $preferences = $persistence->get_preferences();
 
         return new WP_REST_Response([
@@ -1267,13 +1267,13 @@ class WPBC_API_V2 {
     /**
      * Save user preferences
      *
-     * POST /wp-json/wpbc/v2/preferences
+     * POST /wp-json/devtb/v2/preferences
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response Response object.
      */
     public function save_preferences( WP_REST_Request $request ) {
-        $persistence = new WPBC_Persistence();
+        $persistence = new DEVTB_Persistence();
         $preferences = $request->get_param('preferences');
 
         $result = $persistence->save_preferences($preferences);
@@ -1291,13 +1291,13 @@ class WPBC_API_V2 {
     /**
      * Analyze code for corrections
      *
-     * POST /wp-json/wpbc/v2/corrections/analyze
+     * POST /wp-json/devtb/v2/corrections/analyze
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response Response object.
      */
     public function analyze_corrections( WP_REST_Request $request ) {
-        $corrections_handler = new WPBC_Corrections();
+        $corrections_handler = new DEVTB_Corrections();
 
         $code = $request->get_param('code');
         $framework = $request->get_param('framework');
@@ -1318,7 +1318,7 @@ class WPBC_API_V2 {
     /**
      * Apply a correction
      *
-     * POST /wp-json/wpbc/v2/corrections/apply
+     * POST /wp-json/devtb/v2/corrections/apply
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response Response object.
@@ -1343,7 +1343,7 @@ class WPBC_API_V2 {
     /**
      * Dismiss a correction
      *
-     * POST /wp-json/wpbc/v2/corrections/dismiss
+     * POST /wp-json/devtb/v2/corrections/dismiss
      *
      * @param WP_REST_Request $request Request object.
      * @return WP_REST_Response Response object.

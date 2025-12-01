@@ -9,23 +9,23 @@
  * - Node structure generation with parent/child relationships
  * - Position management
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.2.0
  */
 
-namespace WPBC\TranslationBridge\Converters;
+namespace DEVTB\TranslationBridge\Converters;
 
-use WPBC\TranslationBridge\Core\WPBC_Converter_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_CSS_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Converter_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_CSS_Helper;
 
 /**
- * Class WPBC_Beaver_Builder_Converter
+ * Class DEVTB_Beaver_Builder_Converter
  *
  * Convert universal components to Beaver Builder serialized data.
  */
-class WPBC_Beaver_Builder_Converter implements WPBC_Converter_Interface {
+class DEVTB_Beaver_Builder_Converter implements DEVTB_Converter_Interface {
 
 	/**
 	 * Node ID counter for unique IDs
@@ -44,7 +44,7 @@ class WPBC_Beaver_Builder_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert universal component to Beaver Builder serialized data
 	 *
-	 * @param WPBC_Component|array $component Component to convert.
+	 * @param DEVTB_Component|array $component Component to convert.
 	 * @return string Beaver Builder serialized PHP data.
 	 */
 	public function convert( $component ) {
@@ -60,7 +60,7 @@ class WPBC_Beaver_Builder_Converter implements WPBC_Converter_Interface {
 
 		// Convert each component to Beaver Builder nodes
 		foreach ( $components as $index => $comp ) {
-			if ( $comp instanceof WPBC_Component ) {
+			if ( $comp instanceof DEVTB_Component ) {
 				$this->convert_component( $comp, null, $index );
 			}
 		}
@@ -72,12 +72,12 @@ class WPBC_Beaver_Builder_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert single component to Beaver Builder node(s)
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @param string|null    $parent_id Parent node ID.
 	 * @param int            $position Position within parent.
 	 * @return string Node ID of created node.
 	 */
-	public function convert_component( WPBC_Component $component, ?string $parent_id = null, int $position = 0 ) {
+	public function convert_component( DEVTB_Component $component, ?string $parent_id = null, int $position = 0 ) {
 		$type = $component->type;
 
 		// Convert based on component type
@@ -96,12 +96,12 @@ class WPBC_Beaver_Builder_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert container to Beaver Builder row
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @param string|null    $parent_id Parent node ID.
 	 * @param int            $position Position.
 	 * @return string Node ID.
 	 */
-	private function convert_row( WPBC_Component $component, ?string $parent_id, int $position ): string {
+	private function convert_row( DEVTB_Component $component, ?string $parent_id, int $position ): string {
 		$node_id = $this->generate_node_id();
 		$settings = $this->denormalize_attributes( $component->attributes );
 
@@ -183,12 +183,12 @@ class WPBC_Beaver_Builder_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert row to Beaver Builder column-group
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @param string|null    $parent_id Parent node ID.
 	 * @param int            $position Position.
 	 * @return string Node ID.
 	 */
-	private function convert_column_group( WPBC_Component $component, ?string $parent_id, int $position ): string {
+	private function convert_column_group( DEVTB_Component $component, ?string $parent_id, int $position ): string {
 		$node_id = $this->generate_node_id();
 		$settings = $this->denormalize_attributes( $component->attributes );
 
@@ -214,12 +214,12 @@ class WPBC_Beaver_Builder_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert column component to Beaver Builder column
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @param string|null    $parent_id Parent node ID.
 	 * @param int            $position Position.
 	 * @return string Node ID.
 	 */
-	private function convert_column( WPBC_Component $component, ?string $parent_id, int $position ): string {
+	private function convert_column( DEVTB_Component $component, ?string $parent_id, int $position ): string {
 		$node_id = $this->generate_node_id();
 		$settings = $this->denormalize_attributes( $component->attributes );
 
@@ -256,12 +256,12 @@ class WPBC_Beaver_Builder_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert component to Beaver Builder module
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @param string|null    $parent_id Parent node ID.
 	 * @param int            $position Position.
 	 * @return string Node ID.
 	 */
-	private function convert_module( WPBC_Component $component, ?string $parent_id, int $position ): string {
+	private function convert_module( DEVTB_Component $component, ?string $parent_id, int $position ): string {
 		$module_type = $this->map_to_module_type( $component->type );
 
 		if ( ! $module_type ) {
@@ -538,20 +538,20 @@ class WPBC_Beaver_Builder_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Validate that content can be converted
 	 *
-	 * @param WPBC_Component|array $component Component to validate.
+	 * @param DEVTB_Component|array $component Component to validate.
 	 * @return bool True if valid.
 	 */
 	public function validate( $component ): bool {
 		if ( is_array( $component ) ) {
 			foreach ( $component as $comp ) {
-				if ( ! $comp instanceof WPBC_Component ) {
+				if ( ! $comp instanceof DEVTB_Component ) {
 					return false;
 				}
 			}
 			return true;
 		}
 
-		return $component instanceof WPBC_Component;
+		return $component instanceof DEVTB_Component;
 	}
 
 	/**
@@ -578,7 +578,7 @@ class WPBC_Beaver_Builder_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Get fallback conversion
 	 */
-	public function get_fallback( WPBC_Component $component ) {
+	public function get_fallback( DEVTB_Component $component ) {
 		// Return raw HTML as fallback
 		return $component->content ?? '';
 	}

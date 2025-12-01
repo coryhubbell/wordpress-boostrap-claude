@@ -2,11 +2,11 @@
 /**
  * File Handler Unit Tests
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Tests
  */
 
-namespace WPBC\Tests\Unit;
+namespace DEVTB\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
@@ -19,14 +19,14 @@ class FileHandlerTest extends TestCase {
         parent::setUp();
 
         // Create test directory
-        $this->test_dir = WPBC_ROOT . '/tests/fixtures/temp';
+        $this->test_dir = DEVTB_ROOT . '/tests/fixtures/temp';
         if (!is_dir($this->test_dir)) {
             mkdir($this->test_dir, 0755, true);
         }
 
         // Load the File Handler class
-        require_once WPBC_INCLUDES . '/class-wpbc-file-handler.php';
-        $this->file_handler = new \WPBC_File_Handler();
+        require_once DEVTB_INCLUDES . '/class-devtb-file-handler.php';
+        $this->file_handler = new \DEVTB_File_Handler();
     }
 
     protected function tearDown(): void {

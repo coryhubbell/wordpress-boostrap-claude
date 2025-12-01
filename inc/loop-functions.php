@@ -3,7 +3,7 @@
  * WordPress Loop Functions
  */
 
-function wpbc_custom_query_loop( $args = array() ) {
+function devtb_custom_query_loop( $args = array() ) {
     $defaults = array(
         'post_type' => 'post',
         'posts_per_page' => 10,

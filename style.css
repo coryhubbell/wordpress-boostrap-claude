@@ -1,19 +1,19 @@
 /*
-Theme Name: WordPress Bootstrap Claude
-Theme URI: https://github.com/coryhubbell/wordpress-bootstrap-claude
+Theme Name: DevelopmentTranslation Bridge
+Theme URI: https://github.com/coryhubbell/development-translation-bridge
 Author: Cory Hubbell
 Author URI: https://github.com/coryhubbell
-Description: WordPress Bootstrap Claude™ - The world's first universal page builder translation system. Seamlessly convert between Bootstrap 5.3.3, DIVI, Elementor, Avada Fusion, Bricks, WPBakery, Beaver Builder, Gutenberg, Oxygen, and Claude AI-Optimized formats. Featuring the Translation Bridge™ architecture with 98% visual accuracy, 30-second conversion times, and comprehensive AI integration for modern WordPress development.
+Description: DevelopmentTranslation Bridge - The world's first universal page builder translation system. Seamlessly convert between Bootstrap 5.3.3, DIVI, Elementor, Avada Fusion, Bricks, WPBakery, Beaver Builder, Gutenberg, Oxygen, and Claude AI-Optimized formats. Featuring the Translation Bridge architecture with 98% visual accuracy, 30-second conversion times, and comprehensive AI integration for modern WordPress development.
 Version: 3.1.0
 Requires at least: 5.8
 Tested up to: 6.4
 Requires PHP: 7.4
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: wpbc
+Text Domain: devtb
 Tags: page-builder, translation, bootstrap, elementor, divi, ai, claude, conversion
 
-WordPress Bootstrap Claude is a revolutionary theme that enables seamless translation between major page builder frameworks:
+DevelopmentTranslation Bridge is a revolutionary theme that enables seamless translation between major page builder frameworks:
 - Bootstrap 5.3.3 (HTML/CSS)
 - DIVI Builder (shortcodes)
 - Elementor (JSON)
@@ -31,7 +31,7 @@ Key Features:
 - 98% visual accuracy in conversions
 - 30-second conversion times
 - Deep Claude AI integration
-- CLI tool (wpbc command)
+- CLI tool (devtb command)
 - Comprehensive documentation
 - Production-ready code quality
 
@@ -48,8 +48,8 @@ This theme is optimized for developers who work with multiple page builders and 
 
 /*
 ╔════════════════════════════════════════════════════════════════════════════╗
-║                WORDPRESS BOOTSTRAP CLAUDE™ THEME STYLES                     ║
-║                    Translation Bridge™ System v3.1.0                        ║
+║               DEVELOPMENTTRANSLATION BRIDGE THEME STYLES                    ║
+║                    Translation Bridge System v3.1.0                         ║
 ╚════════════════════════════════════════════════════════════════════════════╝
 
 This theme is primarily a framework translation system. The visual styles are
@@ -177,24 +177,24 @@ input[type="submit"]:hover {
     position: relative;
 }
 
-.wpbc-admin-notice {
+.devtb-admin-notice {
     background: #e7f3ff;
     border-left: 4px solid #0066cc;
     padding: 12px;
     margin: 20px 0;
 }
 
-.wpbc-admin-notice.success {
+.devtb-admin-notice.success {
     background: #e7ffe7;
     border-color: #00cc00;
 }
 
-.wpbc-admin-notice.error {
+.devtb-admin-notice.error {
     background: #ffe7e7;
     border-color: #cc0000;
 }
 
-.wpbc-admin-notice.warning {
+.devtb-admin-notice.warning {
     background: #fff3cd;
     border-color: #ffcc00;
 }

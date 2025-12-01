@@ -10,23 +10,23 @@
  * - AI modification history tracking
  * - Semantic structure understanding
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.1.0
  */
 
-namespace WPBC\TranslationBridge\Parsers;
+namespace DEVTB\TranslationBridge\Parsers;
 
-use WPBC\TranslationBridge\Core\WPBC_Parser_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_HTML_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Parser_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_HTML_Helper;
 
 /**
- * Class WPBC_Claude_Parser
+ * Class DEVTB_Claude_Parser
  *
  * Parse Claude AI-optimized HTML into universal components.
  */
-class WPBC_Claude_Parser implements WPBC_Parser_Interface {
+class DEVTB_Claude_Parser implements DEVTB_Parser_Interface {
 
 	/**
 	 * Supported Claude component types
@@ -69,7 +69,7 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 	 * Parse Claude-optimized HTML into universal components
 	 *
 	 * @param string|array $content Claude-optimized HTML content.
-	 * @return WPBC_Component[] Array of parsed components.
+	 * @return DEVTB_Component[] Array of parsed components.
 	 */
 	public function parse( $content ): array {
 		if ( is_array( $content ) ) {
@@ -146,9 +146,9 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 	 * Parse DOM element to component
 	 *
 	 * @param \DOMElement $element DOM element.
-	 * @return WPBC_Component|null Parsed component.
+	 * @return DEVTB_Component|null Parsed component.
 	 */
-	private function parse_dom_element( \DOMElement $element ): ?WPBC_Component {
+	private function parse_dom_element( \DOMElement $element ): ?DEVTB_Component {
 		// Check for data-claude-editable attribute
 		$editable_type = $element->getAttribute( 'data-claude-editable' );
 
@@ -242,9 +242,9 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 	 * Parse button component
 	 *
 	 * @param \DOMElement $element Button element.
-	 * @return WPBC_Component Button component.
+	 * @return DEVTB_Component Button component.
 	 */
-	private function parse_button( \DOMElement $element ): WPBC_Component {
+	private function parse_button( \DOMElement $element ): DEVTB_Component {
 		$classes = explode( ' ', $element->getAttribute( 'class' ) );
 
 		$attributes = [
@@ -265,7 +265,7 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 			}
 		}
 
-		return new WPBC_Component([
+		return new DEVTB_Component([
 			'type'       => 'button',
 			'category'   => 'interactive',
 			'attributes' => $attributes,
@@ -281,9 +281,9 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 	 * Parse heading component
 	 *
 	 * @param \DOMElement $element Heading element.
-	 * @return WPBC_Component Heading component.
+	 * @return DEVTB_Component Heading component.
 	 */
-	private function parse_heading( \DOMElement $element ): WPBC_Component {
+	private function parse_heading( \DOMElement $element ): DEVTB_Component {
 		$level = (int) substr( $element->tagName, 1 ); // h1 -> 1, h2 -> 2, etc.
 		$classes = $element->getAttribute( 'class' );
 
@@ -301,7 +301,7 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 			$attributes['alignment'] = $matches[1];
 		}
 
-		return new WPBC_Component([
+		return new DEVTB_Component([
 			'type'       => 'heading',
 			'category'   => 'content',
 			'attributes' => $attributes,
@@ -317,9 +317,9 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 	 * Parse text/paragraph component
 	 *
 	 * @param \DOMElement $element Paragraph element.
-	 * @return WPBC_Component Text component.
+	 * @return DEVTB_Component Text component.
 	 */
-	private function parse_text( \DOMElement $element ): WPBC_Component {
+	private function parse_text( \DOMElement $element ): DEVTB_Component {
 		$classes = $element->getAttribute( 'class' );
 
 		$attributes = [];
@@ -334,7 +334,7 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 			$attributes['alignment'] = $matches[1];
 		}
 
-		return new WPBC_Component([
+		return new DEVTB_Component([
 			'type'       => 'text',
 			'category'   => 'content',
 			'attributes' => $attributes,
@@ -349,16 +349,16 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 	 * Parse container component
 	 *
 	 * @param \DOMElement $element Container element.
-	 * @return WPBC_Component Container component.
+	 * @return DEVTB_Component Container component.
 	 */
-	private function parse_container( \DOMElement $element ): WPBC_Component {
+	private function parse_container( \DOMElement $element ): DEVTB_Component {
 		$classes = $element->getAttribute( 'class' );
 
 		$attributes = [
 			'fluid' => strpos( $classes, 'container-fluid' ) !== false,
 		];
 
-		$component = new WPBC_Component([
+		$component = new DEVTB_Component([
 			'type'       => 'container',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -384,10 +384,10 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 	 * Parse row component
 	 *
 	 * @param \DOMElement $element Row element.
-	 * @return WPBC_Component Row component.
+	 * @return DEVTB_Component Row component.
 	 */
-	private function parse_row( \DOMElement $element ): WPBC_Component {
-		$component = new WPBC_Component([
+	private function parse_row( \DOMElement $element ): DEVTB_Component {
+		$component = new DEVTB_Component([
 			'type'       => 'row',
 			'category'   => 'layout',
 			'attributes' => [],
@@ -413,15 +413,15 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 	 * Parse column component
 	 *
 	 * @param \DOMElement $element Column element.
-	 * @return WPBC_Component Column component.
+	 * @return DEVTB_Component Column component.
 	 */
-	private function parse_column( \DOMElement $element ): WPBC_Component {
+	private function parse_column( \DOMElement $element ): DEVTB_Component {
 		$classes = $element->getAttribute( 'class' );
 
 		// Extract column width from classes
 		$width = $this->extract_column_width( $classes );
 
-		$component = new WPBC_Component([
+		$component = new DEVTB_Component([
 			'type'       => 'column',
 			'category'   => 'layout',
 			'attributes' => [
@@ -473,10 +473,10 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 	 *
 	 * @param \DOMElement $element Element to parse.
 	 * @param string      $type Component type.
-	 * @return WPBC_Component Generic component.
+	 * @return DEVTB_Component Generic component.
 	 */
-	private function parse_generic( \DOMElement $element, string $type ): WPBC_Component {
-		$component = new WPBC_Component([
+	private function parse_generic( \DOMElement $element, string $type ): DEVTB_Component {
+		$component = new DEVTB_Component([
 			'type'       => $type,
 			'category'   => 'general',
 			'attributes' => [],
@@ -535,7 +535,7 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 		// Primary validation: Claude-specific markers (ideal case)
 		if ( strpos( $content, 'data-claude-editable' ) !== false
 			|| strpos( $content, 'CLAUDE AI-OPTIMIZED HTML' ) !== false
-			|| strpos( $content, 'Generated by WordPress Bootstrap Claude' ) !== false ) {
+			|| strpos( $content, 'Generated by DevelopmentTranslation Bridge' ) !== false ) {
 			return true;
 		}
 
@@ -557,9 +557,9 @@ class WPBC_Claude_Parser implements WPBC_Parser_Interface {
 	 * Parse single element
 	 *
 	 * @param mixed $element HTML element or string.
-	 * @return WPBC_Component|null Parsed component or null.
+	 * @return DEVTB_Component|null Parsed component or null.
 	 */
-	public function parse_element( $element ): ?WPBC_Component {
+	public function parse_element( $element ): ?DEVTB_Component {
 		if ( $element instanceof \DOMElement ) {
 			return $this->parse_dom_element( $element );
 		}

@@ -1,15 +1,15 @@
 <?php
 /**
- * WPBC Rate Limiter
+ * DEVTB Rate Limiter
  *
  * Implements rate limiting for API requests to prevent abuse
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage API
  * @version    3.2.1
  */
 
-class WPBC_Rate_Limiter {
+class DEVTB_Rate_Limiter {
 
 	/**
 	 * Transient buffer time in seconds
@@ -24,9 +24,9 @@ class WPBC_Rate_Limiter {
 	/**
 	 * Logger instance
 	 *
-	 * @var WPBC_Logger
+	 * @var DEVTB_Logger
 	 */
-	private WPBC_Logger $logger;
+	private DEVTB_Logger $logger;
 
 	/**
 	 * Rate limit tiers
@@ -39,8 +39,8 @@ class WPBC_Rate_Limiter {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->logger = new WPBC_Logger();
-		$this->tiers  = WPBC_Config::RATE_LIMIT_TIERS;
+		$this->logger = new DEVTB_Logger();
+		$this->tiers  = DEVTB_Config::RATE_LIMIT_TIERS;
 	}
 
 	/**
@@ -232,7 +232,7 @@ class WPBC_Rate_Limiter {
 	 * @return int Duration in seconds.
 	 */
 	private function get_window_duration( string $window ): int {
-		return WPBC_Config::get_time_window( $window );
+		return DEVTB_Config::get_time_window( $window );
 	}
 
 	/**
@@ -243,7 +243,7 @@ class WPBC_Rate_Limiter {
 	 * @return string Cache key.
 	 */
 	private function get_window_key( string $identifier, string $window ): string {
-		return 'wpbc_ratelimit_' . $window . '_' . md5( $identifier );
+		return 'devtb_ratelimit_' . $window . '_' . md5( $identifier );
 	}
 
 	/**
@@ -413,7 +413,7 @@ class WPBC_Rate_Limiter {
 		$this->tiers[ $tier ] = array_merge( $this->tiers[ $tier ], $limits );
 
 		// Store in options
-		update_option( 'wpbc_rate_limit_tiers', $this->tiers );
+		update_option( 'devtb_rate_limit_tiers', $this->tiers );
 
 		$this->logger->info( 'Rate limit tier updated', [
 			'tier' => $tier,
@@ -426,7 +426,7 @@ class WPBC_Rate_Limiter {
 	 * Load custom tier limits from options
 	 */
 	public function load_custom_tiers() {
-		$custom_tiers = get_option( 'wpbc_rate_limit_tiers' );
+		$custom_tiers = get_option( 'devtb_rate_limit_tiers' );
 
 		if ( $custom_tiers && is_array( $custom_tiers ) ) {
 			$this->tiers = array_merge( $this->tiers, $custom_tiers );

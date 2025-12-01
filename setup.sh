@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# WordPress Bootstrap Claude - Setup Script
+# DevelopmentTranslation Bridge - Setup Script
 # =============================================================================
 # One-command setup for new contributors
 # Supports: macOS, Linux, Windows (Git Bash/WSL)
@@ -21,7 +21,7 @@ cd "$SCRIPT_DIR"
 
 echo ""
 echo -e "${BLUE}========================================${NC}"
-echo -e "${BLUE}  WordPress Bootstrap Claude Setup${NC}"
+echo -e "${BLUE}  DevelopmentTranslation Bridge Setup${NC}"
 echo -e "${BLUE}========================================${NC}"
 echo ""
 
@@ -133,8 +133,8 @@ echo -e "${GREEN}PHP dependencies installed${NC}"
 # -----------------------------------------------------------------------------
 echo -e "${YELLOW}Setting up CLI tool...${NC}"
 
-if [ -f "wpbc" ]; then
-    chmod +x wpbc
+if [ -f "devtb" ]; then
+    chmod +x devtb
     echo -e "${GREEN}CLI tool ready${NC}"
 fi
 
@@ -178,7 +178,7 @@ echo -e "     make test"
 echo -e "     # or: composer test"
 echo ""
 echo -e "  ${BLUE}2. Try a translation:${NC}"
-echo -e "     ./wpbc translate bootstrap divi examples/hero-bootstrap.html"
+echo -e "     ./devtb translate bootstrap divi examples/hero-bootstrap.html"
 echo ""
 echo -e "  ${BLUE}3. Start Docker (optional):${NC}"
 echo -e "     make docker-up"

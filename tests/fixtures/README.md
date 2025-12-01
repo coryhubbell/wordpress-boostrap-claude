@@ -1,6 +1,6 @@
 # Test Fixtures
 
-This directory contains test fixtures for all 10 supported page builder frameworks in WordPress Bootstrap Claude.
+This directory contains test fixtures for all 10 supported page builder frameworks in DevelopmentTranslation Bridge.
 
 ## Fixture Files
 
@@ -50,16 +50,16 @@ Each fixture represents a comprehensive landing page with the following sections
 ### Loading a Fixture
 
 ```php
-$fixture_path = WPBC_ROOT . '/tests/fixtures/bootstrap/simple-page.html';
+$fixture_path = DEVTB_ROOT . '/tests/fixtures/bootstrap/simple-page.html';
 $content = file_get_contents($fixture_path);
 ```
 
 ### Using with Translation Bridge
 
 ```php
-use WPBC\TranslationBridge\Core\WPBC_Translator;
+use DEVTB\TranslationBridge\Core\DEVTB_Translator;
 
-$translator = new WPBC_Translator();
+$translator = new DEVTB_Translator();
 $bootstrap_html = file_get_contents('tests/fixtures/bootstrap/simple-page.html');
 
 // Translate Bootstrap to Elementor

@@ -4,16 +4,16 @@
  *
  * Manages FSE templates, template parts, and global styles
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage Gutenberg
  * @version    3.2.0
  */
 
-class WPBC_Gutenberg_FSE {
+class DEVTB_Gutenberg_FSE {
 	/**
 	 * Logger instance
 	 *
-	 * @var WPBC_Logger
+	 * @var DEVTB_Logger
 	 */
 	private $logger;
 
@@ -56,7 +56,7 @@ class WPBC_Gutenberg_FSE {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->logger = new WPBC_Logger();
+		$this->logger = new DEVTB_Logger();
 	}
 
 	/**

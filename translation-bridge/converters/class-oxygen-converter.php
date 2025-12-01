@@ -9,24 +9,24 @@
  * - Style generation in 'original' property
  * - Unique ID generation
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.2.0
  */
 
-namespace WPBC\TranslationBridge\Converters;
+namespace DEVTB\TranslationBridge\Converters;
 
-use WPBC\TranslationBridge\Core\WPBC_Converter_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_JSON_Helper;
-use WPBC\TranslationBridge\Utils\WPBC_CSS_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Converter_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_JSON_Helper;
+use DEVTB\TranslationBridge\Utils\DEVTB_CSS_Helper;
 
 /**
- * Class WPBC_Oxygen_Converter
+ * Class DEVTB_Oxygen_Converter
  *
  * Convert universal components to Oxygen Builder JSON.
  */
-class WPBC_Oxygen_Converter implements WPBC_Converter_Interface {
+class DEVTB_Oxygen_Converter implements DEVTB_Converter_Interface {
 
 	/**
 	 * Element ID counter
@@ -45,7 +45,7 @@ class WPBC_Oxygen_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert universal component to Oxygen Builder JSON
 	 *
-	 * @param WPBC_Component|array $component Component to convert.
+	 * @param DEVTB_Component|array $component Component to convert.
 	 * @return string Oxygen JSON string.
 	 */
 	public function convert( $component ) {
@@ -61,7 +61,7 @@ class WPBC_Oxygen_Converter implements WPBC_Converter_Interface {
 
 		// Convert each component to Oxygen elements
 		foreach ( $components as $comp ) {
-			if ( $comp instanceof WPBC_Component ) {
+			if ( $comp instanceof DEVTB_Component ) {
 				$this->convert_component( $comp, 0 );
 			}
 		}
@@ -73,11 +73,11 @@ class WPBC_Oxygen_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert single component to Oxygen element(s)
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @param int            $parent_id Parent element ID.
 	 * @return int Element ID of created element.
 	 */
-	public function convert_component( WPBC_Component $component, int $parent_id = 0 ) {
+	public function convert_component( DEVTB_Component $component, int $parent_id = 0 ) {
 		$type = $component->type;
 
 		// Map universal type to Oxygen element
@@ -158,12 +158,12 @@ class WPBC_Oxygen_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Create element options object
 	 *
-	 * @param WPBC_Component $component Component.
+	 * @param DEVTB_Component $component Component.
 	 * @param int            $element_id Element ID.
 	 * @param int            $parent_id Parent ID.
 	 * @return array Options object.
 	 */
-	private function create_element_options( WPBC_Component $component, int $element_id, int $parent_id ): array {
+	private function create_element_options( DEVTB_Component $component, int $element_id, int $parent_id ): array {
 		$options = [
 			'ct_id'     => $element_id,
 			'ct_parent' => $parent_id,
@@ -339,20 +339,20 @@ class WPBC_Oxygen_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Validate that content can be converted
 	 *
-	 * @param WPBC_Component|array $component Component to validate.
+	 * @param DEVTB_Component|array $component Component to validate.
 	 * @return bool True if valid.
 	 */
 	public function validate( $component ): bool {
 		if ( is_array( $component ) ) {
 			foreach ( $component as $comp ) {
-				if ( ! $comp instanceof WPBC_Component ) {
+				if ( ! $comp instanceof DEVTB_Component ) {
 					return false;
 				}
 			}
 			return true;
 		}
 
-		return $component instanceof WPBC_Component;
+		return $component instanceof DEVTB_Component;
 	}
 
 	/**
@@ -379,7 +379,7 @@ class WPBC_Oxygen_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Get fallback conversion
 	 */
-	public function get_fallback( WPBC_Component $component ) {
+	public function get_fallback( DEVTB_Component $component ) {
 		// Return as code block for unsupported types
 		return [
 			'id' => ++$this->current_id,

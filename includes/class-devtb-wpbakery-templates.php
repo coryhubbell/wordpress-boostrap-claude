@@ -4,16 +4,16 @@
  *
  * Manages WPBakery templates, extraction, and conversion
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage WPBakery
  * @version    3.2.0
  */
 
-class WPBC_WPBakery_Templates {
+class DEVTB_WPBakery_Templates {
 	/**
 	 * Logger instance
 	 *
-	 * @var WPBC_Logger
+	 * @var DEVTB_Logger
 	 */
 	private $logger;
 
@@ -40,7 +40,7 @@ class WPBC_WPBakery_Templates {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->logger = new WPBC_Logger();
+		$this->logger = new DEVTB_Logger();
 	}
 
 	/**
@@ -235,7 +235,7 @@ class WPBC_WPBakery_Templates {
 	 * @return int Template ID.
 	 */
 	public function save_template( string $name, array $template, array $meta = [] ): int {
-		$templates = get_option( 'wpbc_wpbakery_templates', [] );
+		$templates = get_option( 'devtb_wpbakery_templates', [] );
 
 		$template_id = count( $templates ) + 1;
 
@@ -250,7 +250,7 @@ class WPBC_WPBakery_Templates {
 			'updated_at'  => current_time( 'mysql' ),
 		];
 
-		update_option( 'wpbc_wpbakery_templates', $templates );
+		update_option( 'devtb_wpbakery_templates', $templates );
 
 		$this->logger->info( 'Template saved', [
 			'id'   => $template_id,
@@ -267,7 +267,7 @@ class WPBC_WPBakery_Templates {
 	 * @return array|null Template data or null.
 	 */
 	public function get_template( int $template_id ): ?array {
-		$templates = get_option( 'wpbc_wpbakery_templates', [] );
+		$templates = get_option( 'devtb_wpbakery_templates', [] );
 
 		return $templates[ $template_id ] ?? null;
 	}
@@ -279,7 +279,7 @@ class WPBC_WPBakery_Templates {
 	 * @return array Templates.
 	 */
 	public function get_all_templates( ?string $category = null ): array {
-		$templates = get_option( 'wpbc_wpbakery_templates', [] );
+		$templates = get_option( 'devtb_wpbakery_templates', [] );
 
 		if ( $category ) {
 			$templates = array_filter( $templates, function( $template ) use ( $category ) {
@@ -297,14 +297,14 @@ class WPBC_WPBakery_Templates {
 	 * @return bool Success.
 	 */
 	public function delete_template( int $template_id ): bool {
-		$templates = get_option( 'wpbc_wpbakery_templates', [] );
+		$templates = get_option( 'devtb_wpbakery_templates', [] );
 
 		if ( ! isset( $templates[ $template_id ] ) ) {
 			return false;
 		}
 
 		unset( $templates[ $template_id ] );
-		update_option( 'wpbc_wpbakery_templates', $templates );
+		update_option( 'devtb_wpbakery_templates', $templates );
 
 		$this->logger->info( 'Template deleted', [
 			'id' => $template_id,
@@ -328,7 +328,7 @@ class WPBC_WPBakery_Templates {
 		}
 
 		// Use translator to convert
-		require_once WPBC_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php';
+		require_once DEVTB_TRANSLATION_BRIDGE_DIR . '/core/class-translator.php';
 		$translator = new Translator();
 
 		try {

@@ -1,6 +1,6 @@
 /**
  * Main Application Component
- * WordPress Bootstrap Claude - Visual Interface
+ * DevelopmentTranslation Bridge - Visual Interface
  */
 
 import { useEffect } from 'react';

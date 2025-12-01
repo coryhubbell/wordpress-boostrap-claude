@@ -10,19 +10,19 @@
  * - Shortcode generation
  * - Performance optimization
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Utils;
+namespace DEVTB\TranslationBridge\Utils;
 
 /**
- * Class WPBC_Shortcode_Helper
+ * Class DEVTB_Shortcode_Helper
  *
  * Advanced shortcode processing and manipulation utilities.
  */
-class WPBC_Shortcode_Helper {
+class DEVTB_Shortcode_Helper {
 
 	/**
 	 * Parse shortcode string into components

@@ -118,7 +118,7 @@
 [fusion_builder_column type="1_1" layout="1_1"]
 [fusion_separator style_type="single solid" sep_color="#555555"]
 [fusion_text text_color="#999999"]
-<p style="text-align: center;">© 2024 WordPress Bootstrap Claude. All rights reserved.</p>
+<p style="text-align: center;">© 2024 DevelopmentTranslation Bridge. All rights reserved.</p>
 [/fusion_text]
 [/fusion_builder_column]
 [/fusion_builder_row]

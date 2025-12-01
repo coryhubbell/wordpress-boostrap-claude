@@ -10,28 +10,28 @@
  * - Batch processing capabilities
  * - Quality assurance validation
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Core;
+namespace DEVTB\TranslationBridge\Core;
 
-use WPBC\TranslationBridge\Models\WPBC_Component;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
 
 /**
- * Class WPBC_Translator
+ * Class DEVTB_Translator
  *
  * Main orchestrator for framework translations with AI-like intelligence.
  */
-class WPBC_Translator {
+class DEVTB_Translator {
 
 	/**
 	 * Mapping engine instance
 	 *
-	 * @var WPBC_Mapping_Engine
+	 * @var DEVTB_Mapping_Engine
 	 */
-	private WPBC_Mapping_Engine $mapping_engine;
+	private DEVTB_Mapping_Engine $mapping_engine;
 
 	/**
 	 * Translation cache
@@ -93,7 +93,7 @@ class WPBC_Translator {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->mapping_engine = new WPBC_Mapping_Engine();
+		$this->mapping_engine = new DEVTB_Mapping_Engine();
 	}
 
 	/**
@@ -239,12 +239,12 @@ class WPBC_Translator {
 	 *
 	 * @param string|array $content Source content.
 	 * @param string       $framework Framework name.
-	 * @return WPBC_Component[] Parsed components.
+	 * @return DEVTB_Component[] Parsed components.
 	 * @throws \Exception If parsing fails.
 	 */
 	private function parse_content( $content, string $framework ): array {
 		try {
-			$parser = WPBC_Parser_Factory::create( $framework );
+			$parser = DEVTB_Parser_Factory::create( $framework );
 
 			if ( ! $parser ) {
 				throw new \Exception( sprintf( 'Parser not found for framework: %s', $framework ) );
@@ -273,10 +273,10 @@ class WPBC_Translator {
 	/**
 	 * Map components using AI-like mapping engine
 	 *
-	 * @param WPBC_Component[] $components Components to map.
+	 * @param DEVTB_Component[] $components Components to map.
 	 * @param string           $source_framework Source framework.
 	 * @param string           $target_framework Target framework.
-	 * @return WPBC_Component[] Mapped components.
+	 * @return DEVTB_Component[] Mapped components.
 	 */
 	private function map_components(
 		array $components,
@@ -331,8 +331,8 @@ class WPBC_Translator {
 	/**
 	 * Validate components after mapping
 	 *
-	 * @param WPBC_Component[] $components Components to validate.
-	 * @return WPBC_Component[] Valid components.
+	 * @param DEVTB_Component[] $components Components to validate.
+	 * @return DEVTB_Component[] Valid components.
 	 */
 	private function validate_components( array $components ): array {
 		$valid = [];
@@ -355,14 +355,14 @@ class WPBC_Translator {
 	/**
 	 * Convert components to target framework format
 	 *
-	 * @param WPBC_Component[] $components Components to convert.
+	 * @param DEVTB_Component[] $components Components to convert.
 	 * @param string           $framework Target framework.
 	 * @return string|array Framework-specific output.
 	 * @throws \Exception If conversion fails.
 	 */
 	private function convert_to_framework( array $components, string $framework ) {
 		try {
-			$converter = WPBC_Converter_Factory::create( $framework );
+			$converter = DEVTB_Converter_Factory::create( $framework );
 
 			if ( ! $converter ) {
 				throw new \Exception( sprintf( 'Converter not found for framework: %s', $framework ) );
@@ -383,8 +383,8 @@ class WPBC_Translator {
 	/**
 	 * Perform quality assurance check
 	 *
-	 * @param WPBC_Component[] $source_components Source components.
-	 * @param WPBC_Component[] $mapped_components Mapped components.
+	 * @param DEVTB_Component[] $source_components Source components.
+	 * @param DEVTB_Component[] $mapped_components Mapped components.
 	 * @param string           $source_framework Source framework.
 	 * @param string           $target_framework Target framework.
 	 * @return void
@@ -441,12 +441,12 @@ class WPBC_Translator {
 		}
 
 		// Check if frameworks are supported
-		if ( ! WPBC_Parser_Factory::is_supported( $source ) ) {
+		if ( ! DEVTB_Parser_Factory::is_supported( $source ) ) {
 			$this->log_error( sprintf( 'Unsupported source framework: %s', $source ) );
 			return false;
 		}
 
-		if ( ! WPBC_Converter_Factory::is_supported( $target ) ) {
+		if ( ! DEVTB_Converter_Factory::is_supported( $target ) ) {
 			$this->log_error( sprintf( 'Unsupported target framework: %s', $target ) );
 			return false;
 		}
@@ -621,7 +621,7 @@ class WPBC_Translator {
 	 * @return array<string> Supported framework names.
 	 */
 	public static function get_supported_frameworks(): array {
-		return WPBC_Parser_Factory::get_supported_frameworks();
+		return DEVTB_Parser_Factory::get_supported_frameworks();
 	}
 
 	/**
@@ -632,8 +632,8 @@ class WPBC_Translator {
 	 * @return bool True if supported.
 	 */
 	public static function can_translate( string $source, string $target ): bool {
-		return WPBC_Parser_Factory::is_supported( $source )
-			&& WPBC_Converter_Factory::is_supported( $target )
+		return DEVTB_Parser_Factory::is_supported( $source )
+			&& DEVTB_Converter_Factory::is_supported( $target )
 			&& strtolower( $source ) !== strtolower( $target );
 	}
 }

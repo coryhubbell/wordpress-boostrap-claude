@@ -10,23 +10,23 @@
  * - Reusable block support
  * - Dynamic and static block parsing
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.2.0
  */
 
-namespace WPBC\TranslationBridge\Parsers;
+namespace DEVTB\TranslationBridge\Parsers;
 
-use WPBC\TranslationBridge\Core\WPBC_Parser_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_HTML_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Parser_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_HTML_Helper;
 
 /**
- * Class WPBC_Gutenberg_Parser
+ * Class DEVTB_Gutenberg_Parser
  *
  * Parse Gutenberg block markup into universal components.
  */
-class WPBC_Gutenberg_Parser implements WPBC_Parser_Interface {
+class DEVTB_Gutenberg_Parser implements DEVTB_Parser_Interface {
 
 	/**
 	 * Supported Gutenberg core block types
@@ -90,7 +90,7 @@ class WPBC_Gutenberg_Parser implements WPBC_Parser_Interface {
 	 * Parse Gutenberg content into universal components
 	 *
 	 * @param string $content Gutenberg block content.
-	 * @return WPBC_Component[] Array of parsed components.
+	 * @return DEVTB_Component[] Array of parsed components.
 	 */
 	public function parse( $content ): array {
 		if ( ! is_string( $content ) || empty( $content ) ) {
@@ -194,9 +194,9 @@ class WPBC_Gutenberg_Parser implements WPBC_Parser_Interface {
 	 * Parse single Gutenberg block
 	 *
 	 * @param array $block Block data.
-	 * @return WPBC_Component|null Parsed component or null.
+	 * @return DEVTB_Component|null Parsed component or null.
 	 */
-	private function parse_block( array $block ): ?WPBC_Component {
+	private function parse_block( array $block ): ?DEVTB_Component {
 		$block_name = $block['blockName'] ?? '';
 
 		// Skip null blocks (plain HTML/text between blocks)
@@ -217,7 +217,7 @@ class WPBC_Gutenberg_Parser implements WPBC_Parser_Interface {
 		// Normalize attributes
 		$normalized_attrs = $this->normalize_attributes( $attributes );
 
-		$component = new WPBC_Component([
+		$component = new DEVTB_Component([
 			'type'       => $universal_type,
 			'category'   => $this->get_category( $universal_type ),
 			'attributes' => $normalized_attrs,
@@ -654,7 +654,7 @@ class WPBC_Gutenberg_Parser implements WPBC_Parser_Interface {
 	/**
 	 * Parse single element
 	 */
-	public function parse_element( $element ): ?WPBC_Component {
+	public function parse_element( $element ): ?DEVTB_Component {
 		if ( is_string( $element ) ) {
 			$components = $this->parse( $element );
 			return $components[0] ?? null;

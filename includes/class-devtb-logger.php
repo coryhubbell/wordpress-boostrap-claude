@@ -1,15 +1,15 @@
 <?php
 /**
- * WPBC Logger
+ * DEVTB Logger
  *
  * Handles logging for CLI operations
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage CLI
  * @version    3.2.1
  */
 
-class WPBC_Logger {
+class DEVTB_Logger {
 
 	/**
 	 * Log levels
@@ -74,11 +74,11 @@ class WPBC_Logger {
 	 */
 	public function __construct( ?string $log_dir = null ) {
 		if ( null === $log_dir ) {
-			$log_dir = WPBC_ROOT . '/logs';
+			$log_dir = DEVTB_ROOT . '/logs';
 		}
 
 		$this->log_dir  = $log_dir;
-		$this->log_file = $this->log_dir . '/wpbc-' . gmdate( 'Y-m-d' ) . '.log';
+		$this->log_file = $this->log_dir . '/devtb-' . gmdate( 'Y-m-d' ) . '.log';
 
 		$this->initialize();
 	}

@@ -1,6 +1,6 @@
 # 📓 API Development Guide
 
-Build powerful REST APIs with WordPress Bootstrap Claude framework.
+Build powerful REST APIs with DevelopmentTranslation Bridge framework.
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -17,7 +17,7 @@ Build powerful REST APIs with WordPress Bootstrap Claude framework.
 
 ## Introduction
 
-WordPress Bootstrap Claude provides powerful tools for API development:
+DevelopmentTranslation Bridge provides powerful tools for API development:
 
 - **Native REST API** integration with WordPress
 - **AJAX handlers** for dynamic interactions
@@ -36,16 +36,16 @@ WordPress Bootstrap Claude provides powerful tools for API development:
 // Register custom REST API routes
 add_action('rest_api_init', function() {
     // Basic route
-    register_rest_route('wpbc/v1', '/posts', [
+    register_rest_route('devtb/v1', '/posts', [
         'methods' => 'GET',
-        'callback' => 'wpbc_get_posts',
+        'callback' => 'devtb_get_posts',
         'permission_callback' => '__return_true' // Public endpoint
     ]);
     
     // Route with parameters
-    register_rest_route('wpbc/v1', '/post/(?P<id>\d+)', [
+    register_rest_route('devtb/v1', '/post/(?P<id>\d+)', [
         'methods' => 'GET',
-        'callback' => 'wpbc_get_single_post',
+        'callback' => 'devtb_get_single_post',
         'args' => [
             'id' => [
                 'validate_callback' => function($param) {
@@ -57,9 +57,9 @@ add_action('rest_api_init', function() {
     ]);
     
     // Protected route
-    register_rest_route('wpbc/v1', '/user/profile', [
+    register_rest_route('devtb/v1', '/user/profile', [
         'methods' => 'GET',
-        'callback' => 'wpbc_get_user_profile',
+        'callback' => 'devtb_get_user_profile',
         'permission_callback' => function() {
             return is_user_logged_in();
         }
@@ -70,10 +70,10 @@ add_action('rest_api_init', function() {
 ### Using Framework Helper
 
 ```php
-// Using wpbc_api_route helper
-wpbc_api_route('/products', 'get_products_handler', 'GET');
-wpbc_api_route('/product/create', 'create_product_handler', 'POST', 'edit_posts');
-wpbc_api_route('/product/delete/{id}', 'delete_product_handler', 'DELETE', 'delete_posts');
+// Using devtb_api_route helper
+devtb_api_route('/products', 'get_products_handler', 'GET');
+devtb_api_route('/product/create', 'create_product_handler', 'POST', 'edit_posts');
+devtb_api_route('/product/delete/{id}', 'delete_product_handler', 'DELETE', 'delete_posts');
 ```
 
 ---
@@ -84,7 +84,7 @@ wpbc_api_route('/product/delete/{id}', 'delete_product_handler', 'DELETE', 'dele
 
 ```php
 // Fetch custom posts with filtering
-function wpbc_get_products($request) {
+function devtb_get_products($request) {
     $params = $request->get_params();
     
     $args = [
@@ -161,9 +161,9 @@ function wpbc_get_products($request) {
 }
 
 // Register the endpoint
-register_rest_route('wpbc/v1', '/products', [
+register_rest_route('devtb/v1', '/products', [
     'methods' => 'GET',
-    'callback' => 'wpbc_get_products',
+    'callback' => 'devtb_get_products',
     'args' => [
         'per_page' => [
             'default' => 10,
@@ -191,7 +191,7 @@ register_rest_route('wpbc/v1', '/products', [
 
 ```php
 // Create new resource
-function wpbc_create_contact($request) {
+function devtb_create_contact($request) {
     $params = $request->get_json_params();
     
     // Validate required fields
@@ -257,9 +257,9 @@ function wpbc_create_contact($request) {
 }
 
 // Register the endpoint
-register_rest_route('wpbc/v1', '/contact', [
+register_rest_route('devtb/v1', '/contact', [
     'methods' => 'POST',
-    'callback' => 'wpbc_create_contact',
+    'callback' => 'devtb_create_contact',
     'permission_callback' => function() {
         // Rate limiting
         $ip = $_SERVER['REMOTE_ADDR'];
@@ -284,7 +284,7 @@ register_rest_route('wpbc/v1', '/contact', [
 
 ```php
 // Update resource
-function wpbc_update_profile($request) {
+function devtb_update_profile($request) {
     $user_id = get_current_user_id();
     $params = $request->get_json_params();
     
@@ -336,9 +336,9 @@ function wpbc_update_profile($request) {
     ], 200);
 }
 
-register_rest_route('wpbc/v1', '/user/profile', [
+register_rest_route('devtb/v1', '/user/profile', [
     'methods' => 'PUT',
-    'callback' => 'wpbc_update_profile',
+    'callback' => 'devtb_update_profile',
     'permission_callback' => 'is_user_logged_in'
 ]);
 ```
@@ -347,7 +347,7 @@ register_rest_route('wpbc/v1', '/user/profile', [
 
 ```php
 // Delete resource
-function wpbc_delete_item($request) {
+function devtb_delete_item($request) {
     $post_id = $request->get_param('id');
     
     // Check if post exists
@@ -386,9 +386,9 @@ function wpbc_delete_item($request) {
     ], 200);
 }
 
-register_rest_route('wpbc/v1', '/item/(?P<id>\d+)', [
+register_rest_route('devtb/v1', '/item/(?P<id>\d+)', [
     'methods' => 'DELETE',
-    'callback' => 'wpbc_delete_item',
+    'callback' => 'devtb_delete_item',
     'permission_callback' => 'is_user_logged_in',
     'args' => [
         'id' => [
@@ -408,14 +408,14 @@ register_rest_route('wpbc/v1', '/item/(?P<id>\d+)', [
 
 ```php
 // Check if user is logged in
-register_rest_route('wpbc/v1', '/private', [
+register_rest_route('devtb/v1', '/private', [
     'methods' => 'GET',
     'callback' => 'private_endpoint',
     'permission_callback' => 'is_user_logged_in'
 ]);
 
 // Check specific capability
-register_rest_route('wpbc/v1', '/admin', [
+register_rest_route('devtb/v1', '/admin', [
     'methods' => 'GET',
     'callback' => 'admin_endpoint',
     'permission_callback' => function() {
@@ -428,17 +428,17 @@ register_rest_route('wpbc/v1', '/admin', [
 
 ```php
 // Generate nonce in frontend
-wp_localize_script('wpbc-api', 'wpbc_api', [
+wp_localize_script('devtb-api', 'devtb_api', [
     'nonce' => wp_create_nonce('wp_rest'),
-    'api_url' => rest_url('wpbc/v1/')
+    'api_url' => rest_url('devtb/v1/')
 ]);
 
 // JavaScript request with nonce
-fetch(wpbc_api.api_url + 'endpoint', {
+fetch(devtb_api.api_url + 'endpoint', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
-        'X-WP-Nonce': wpbc_api.nonce
+        'X-WP-Nonce': devtb_api.nonce
     },
     body: JSON.stringify(data)
 });
@@ -448,7 +448,7 @@ fetch(wpbc_api.api_url + 'endpoint', {
 
 ```php
 // Custom token authentication
-function wpbc_custom_auth($request) {
+function devtb_custom_auth($request) {
     $token = $request->get_header('X-API-Token');
     
     if (!$token) {
@@ -476,10 +476,10 @@ function wpbc_custom_auth($request) {
     return true;
 }
 
-register_rest_route('wpbc/v1', '/protected', [
+register_rest_route('devtb/v1', '/protected', [
     'methods' => 'GET',
     'callback' => 'protected_endpoint',
-    'permission_callback' => 'wpbc_custom_auth'
+    'permission_callback' => 'devtb_custom_auth'
 ]);
 ```
 
@@ -491,19 +491,19 @@ register_rest_route('wpbc/v1', '/protected', [
 
 ```php
 // Register AJAX actions
-add_action('wp_ajax_load_more_posts', 'wpbc_load_more_posts');
-add_action('wp_ajax_nopriv_load_more_posts', 'wpbc_load_more_posts');
+add_action('wp_ajax_load_more_posts', 'devtb_load_more_posts');
+add_action('wp_ajax_nopriv_load_more_posts', 'devtb_load_more_posts');
 
-function wpbc_load_more_posts() {
+function devtb_load_more_posts() {
     // Verify nonce
-    if (!wp_verify_nonce($_POST['nonce'], 'wpbc_ajax_nonce')) {
+    if (!wp_verify_nonce($_POST['nonce'], 'devtb_ajax_nonce')) {
         wp_die('Security check failed');
     }
     
     $page = isset($_POST['page']) ? absint($_POST['page']) : 1;
     $per_page = isset($_POST['per_page']) ? absint($_POST['per_page']) : 10;
     
-    $loop = new WPBC_Loop([
+    $loop = new DEVTB_Loop([
         'posts_per_page' => $per_page,
         'paged' => $page
     ]);
@@ -513,7 +513,7 @@ function wpbc_load_more_posts() {
     if ($loop->have_posts()) {
         while ($loop->have_posts()) {
             $loop->the_post();
-            wpbc_component('card');
+            devtb_component('card');
         }
     }
     
@@ -530,9 +530,9 @@ function wpbc_load_more_posts() {
 
 ```javascript
 // Localize script
-wp_localize_script('wpbc-main', 'wpbc_ajax', [
+wp_localize_script('devtb-main', 'devtb_ajax', [
     'ajax_url' => admin_url('admin-ajax.php'),
-    'nonce' => wp_create_nonce('wpbc_ajax_nonce')
+    'nonce' => wp_create_nonce('devtb_ajax_nonce')
 ]);
 
 // JavaScript AJAX call
@@ -544,12 +544,12 @@ jQuery(document).ready(function($) {
         button.prop('disabled', true).text('Loading...');
         
         $.ajax({
-            url: wpbc_ajax.ajax_url,
+            url: devtb_ajax.ajax_url,
             type: 'POST',
             data: {
                 action: 'load_more_posts',
                 page: ++page,
-                nonce: wpbc_ajax.nonce
+                nonce: devtb_ajax.nonce
             },
             success: function(response) {
                 if (response.success) {
@@ -574,7 +574,7 @@ jQuery(document).ready(function($) {
 
 ```php
 // Register AJAX action using framework helper
-wpbc_ajax('filter_products', function() {
+devtb_ajax('filter_products', function() {
     $category = sanitize_text_field($_POST['category']);
     $price_range = sanitize_text_field($_POST['price_range']);
     
@@ -610,7 +610,7 @@ wpbc_ajax('filter_products', function() {
     ob_start();
     foreach ($products as $product) {
         setup_postdata($product);
-        wpbc_component('product-card');
+        devtb_component('product-card');
     }
     wp_reset_postdata();
     
@@ -715,7 +715,7 @@ function sanitize_product_data($data) {
 
 ```php
 // Error handler class
-class WPBC_API_Error {
+class DEVTB_API_Error {
     public static function response($code, $message, $data = null, $status = 400) {
         $response = [
             'success' => false,
@@ -759,11 +759,11 @@ function get_product($request) {
     $product = get_post($id);
     
     if (!$product || $product->post_type !== 'product') {
-        return WPBC_API_Error::not_found('Product not found');
+        return DEVTB_API_Error::not_found('Product not found');
     }
     
     if (!current_user_can('read_private_posts') && $product->post_status === 'private') {
-        return WPBC_API_Error::forbidden('You cannot view this product');
+        return DEVTB_API_Error::forbidden('You cannot view this product');
     }
     
     // Return product data...
@@ -811,7 +811,7 @@ function process_payment($request) {
         // Log error
         error_log('Payment error: ' . $e->getMessage());
         
-        return WPBC_API_Error::server_error($e->getMessage());
+        return DEVTB_API_Error::server_error($e->getMessage());
     }
 }
 ```
@@ -824,7 +824,7 @@ function process_payment($request) {
 
 ```php
 // Autocomplete endpoint
-function wpbc_search_autocomplete($request) {
+function devtb_search_autocomplete($request) {
     $term = $request->get_param('term');
     
     if (strlen($term) < 2) {
@@ -858,9 +858,9 @@ function wpbc_search_autocomplete($request) {
     return new WP_REST_Response($suggestions, 200);
 }
 
-register_rest_route('wpbc/v1', '/search/autocomplete', [
+register_rest_route('devtb/v1', '/search/autocomplete', [
     'methods' => 'GET',
-    'callback' => 'wpbc_search_autocomplete',
+    'callback' => 'devtb_search_autocomplete',
     'args' => [
         'term' => [
             'required' => true,
@@ -875,11 +875,11 @@ register_rest_route('wpbc/v1', '/search/autocomplete', [
 
 ```php
 // Handle file uploads
-function wpbc_upload_file($request) {
+function devtb_upload_file($request) {
     $files = $request->get_file_params();
     
     if (empty($files['file'])) {
-        return WPBC_API_Error::validation(['file' => 'No file uploaded']);
+        return DEVTB_API_Error::validation(['file' => 'No file uploaded']);
     }
     
     $file = $files['file'];
@@ -887,12 +887,12 @@ function wpbc_upload_file($request) {
     // Validate file type
     $allowed_types = ['image/jpeg', 'image/png', 'image/gif', 'application/pdf'];
     if (!in_array($file['type'], $allowed_types)) {
-        return WPBC_API_Error::validation(['file' => 'Invalid file type']);
+        return DEVTB_API_Error::validation(['file' => 'Invalid file type']);
     }
     
     // Validate file size (5MB max)
     if ($file['size'] > 5 * 1024 * 1024) {
-        return WPBC_API_Error::validation(['file' => 'File too large (5MB max)']);
+        return DEVTB_API_Error::validation(['file' => 'File too large (5MB max)']);
     }
     
     // Upload file
@@ -903,7 +903,7 @@ function wpbc_upload_file($request) {
     $upload = wp_handle_upload($file, ['test_form' => false]);
     
     if (isset($upload['error'])) {
-        return WPBC_API_Error::server_error($upload['error']);
+        return DEVTB_API_Error::server_error($upload['error']);
     }
     
     // Create attachment
@@ -926,9 +926,9 @@ function wpbc_upload_file($request) {
     ], 201);
 }
 
-register_rest_route('wpbc/v1', '/upload', [
+register_rest_route('devtb/v1', '/upload', [
     'methods' => 'POST',
-    'callback' => 'wpbc_upload_file',
+    'callback' => 'devtb_upload_file',
     'permission_callback' => 'is_user_logged_in'
 ]);
 ```
@@ -937,11 +937,11 @@ register_rest_route('wpbc/v1', '/upload', [
 
 ```php
 // Batch update posts
-function wpbc_batch_update($request) {
+function devtb_batch_update($request) {
     $operations = $request->get_json_params();
     
     if (!is_array($operations)) {
-        return WPBC_API_Error::validation(['operations' => 'Must be an array']);
+        return DEVTB_API_Error::validation(['operations' => 'Must be an array']);
     }
     
     $results = [];
@@ -1005,9 +1005,9 @@ function wpbc_batch_update($request) {
     ], 200);
 }
 
-register_rest_route('wpbc/v1', '/batch', [
+register_rest_route('devtb/v1', '/batch', [
     'methods' => 'POST',
-    'callback' => 'wpbc_batch_update',
+    'callback' => 'devtb_batch_update',
     'permission_callback' => function() {
         return current_user_can('edit_posts');
     }
@@ -1059,7 +1059,7 @@ if (false === $products) {
 
 ```php
 // Document your endpoints
-register_rest_route('wpbc/v1', '/endpoint', [
+register_rest_route('devtb/v1', '/endpoint', [
     'methods' => 'GET',
     'callback' => 'callback_function',
     'description' => 'Retrieves list of products',
@@ -1078,14 +1078,14 @@ register_rest_route('wpbc/v1', '/endpoint', [
 
 ```php
 // Use versioned namespaces
-register_rest_route('wpbc/v1', '/posts', $args);  // Version 1
-register_rest_route('wpbc/v2', '/posts', $args);  // Version 2
+register_rest_route('devtb/v1', '/posts', $args);  // Version 1
+register_rest_route('devtb/v2', '/posts', $args);  // Version 2
 
 // Deprecation notices
 function deprecated_endpoint($request) {
     header('X-API-Deprecated: true');
     header('X-API-Deprecation-Date: 2025-01-01');
-    header('X-API-Alternative: /wpbc/v2/endpoint');
+    header('X-API-Alternative: /devtb/v2/endpoint');
     
     // Still return data for backward compatibility
     return get_data($request);
@@ -1100,18 +1100,18 @@ function deprecated_endpoint($request) {
 
 ```php
 // Test in browser
-// GET: https://yoursite.com/wp-json/wpbc/v1/posts
+// GET: https://yoursite.com/wp-json/devtb/v1/posts
 
 // Test with curl
-curl -X GET https://yoursite.com/wp-json/wpbc/v1/posts
+curl -X GET https://yoursite.com/wp-json/devtb/v1/posts
 
 // Test POST with curl
-curl -X POST https://yoursite.com/wp-json/wpbc/v1/contact \
+curl -X POST https://yoursite.com/wp-json/devtb/v1/contact \
   -H "Content-Type: application/json" \
   -d '{"name":"John","email":"john@example.com","message":"Test"}'
 
 // Test with authentication
-curl -X GET https://yoursite.com/wp-json/wpbc/v1/private \
+curl -X GET https://yoursite.com/wp-json/devtb/v1/private \
   -H "X-WP-Nonce: your_nonce_here"
 ```
 
@@ -1121,7 +1121,7 @@ curl -X GET https://yoursite.com/wp-json/wpbc/v1/private \
 class Test_API extends WP_UnitTestCase {
     
     public function test_products_endpoint() {
-        $request = new WP_REST_Request('GET', '/wpbc/v1/products');
+        $request = new WP_REST_Request('GET', '/devtb/v1/products');
         $response = rest_do_request($request);
         
         $this->assertEquals(200, $response->get_status());
@@ -1129,7 +1129,7 @@ class Test_API extends WP_UnitTestCase {
     }
     
     public function test_authentication_required() {
-        $request = new WP_REST_Request('GET', '/wpbc/v1/private');
+        $request = new WP_REST_Request('GET', '/devtb/v1/private');
         $response = rest_do_request($request);
         
         $this->assertEquals(401, $response->get_status());
@@ -1147,4 +1147,4 @@ class Test_API extends WP_UnitTestCase {
 
 ---
 
-**Build powerful, secure, and scalable APIs with WordPress Bootstrap Claude! 🚀**
+**Build powerful, secure, and scalable APIs with DevelopmentTranslation Bridge! 🚀**

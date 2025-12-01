@@ -4,35 +4,35 @@
  *
  * Creates appropriate converter instances based on framework name.
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Core;
+namespace DEVTB\TranslationBridge\Core;
 
-use WPBC\TranslationBridge\Converters\WPBC_Bootstrap_Converter;
-use WPBC\TranslationBridge\Converters\WPBC_DIVI_Converter;
-use WPBC\TranslationBridge\Converters\WPBC_Elementor_Converter;
-use WPBC\TranslationBridge\Converters\WPBC_Avada_Converter;
-use WPBC\TranslationBridge\Converters\WPBC_Bricks_Converter;
-use WPBC\TranslationBridge\Converters\WPBC_WPBakery_Converter;
-use WPBC\TranslationBridge\Converters\WPBC_Beaver_Builder_Converter;
-use WPBC\TranslationBridge\Converters\WPBC_Gutenberg_Converter;
-use WPBC\TranslationBridge\Converters\WPBC_Oxygen_Converter;
-use WPBC\TranslationBridge\Converters\WPBC_Claude_Converter;
+use DEVTB\TranslationBridge\Converters\DEVTB_Bootstrap_Converter;
+use DEVTB\TranslationBridge\Converters\DEVTB_DIVI_Converter;
+use DEVTB\TranslationBridge\Converters\DEVTB_Elementor_Converter;
+use DEVTB\TranslationBridge\Converters\DEVTB_Avada_Converter;
+use DEVTB\TranslationBridge\Converters\DEVTB_Bricks_Converter;
+use DEVTB\TranslationBridge\Converters\DEVTB_WPBakery_Converter;
+use DEVTB\TranslationBridge\Converters\DEVTB_Beaver_Builder_Converter;
+use DEVTB\TranslationBridge\Converters\DEVTB_Gutenberg_Converter;
+use DEVTB\TranslationBridge\Converters\DEVTB_Oxygen_Converter;
+use DEVTB\TranslationBridge\Converters\DEVTB_Claude_Converter;
 
 /**
- * Class WPBC_Converter_Factory
+ * Class DEVTB_Converter_Factory
  *
  * Factory for creating framework-specific converters.
  */
-class WPBC_Converter_Factory {
+class DEVTB_Converter_Factory {
 
 	/**
 	 * Registered converters
 	 *
-	 * @var array<string, WPBC_Converter_Interface>
+	 * @var array<string, DEVTB_Converter_Interface>
 	 */
 	private static array $converters = [];
 
@@ -40,10 +40,10 @@ class WPBC_Converter_Factory {
 	 * Create converter for specified framework
 	 *
 	 * @param string $framework Framework name (bootstrap, divi, elementor, avada, bricks, wpbakery, claude).
-	 * @return WPBC_Converter_Interface|null Converter instance or null if not found.
+	 * @return DEVTB_Converter_Interface|null Converter instance or null if not found.
 	 * @throws \InvalidArgumentException If framework not supported.
 	 */
-	public static function create( string $framework ): ?WPBC_Converter_Interface {
+	public static function create( string $framework ): ?DEVTB_Converter_Interface {
 		$framework = strtolower( trim( $framework ) );
 
 		// Return cached converter if exists
@@ -66,49 +66,49 @@ class WPBC_Converter_Factory {
 	 * Create converter instance for framework
 	 *
 	 * @param string $framework Framework name.
-	 * @return WPBC_Converter_Interface|null
+	 * @return DEVTB_Converter_Interface|null
 	 */
-	private static function create_converter_instance( string $framework ): ?WPBC_Converter_Interface {
+	private static function create_converter_instance( string $framework ): ?DEVTB_Converter_Interface {
 		switch ( $framework ) {
 			case 'bootstrap':
-				return new WPBC_Bootstrap_Converter();
+				return new DEVTB_Bootstrap_Converter();
 
 			case 'divi':
-				return new WPBC_DIVI_Converter();
+				return new DEVTB_DIVI_Converter();
 
 			case 'elementor':
-				return new WPBC_Elementor_Converter();
+				return new DEVTB_Elementor_Converter();
 
 			case 'avada':
 			case 'fusion':
-				return new WPBC_Avada_Converter();
+				return new DEVTB_Avada_Converter();
 
 			case 'bricks':
-				return new WPBC_Bricks_Converter();
+				return new DEVTB_Bricks_Converter();
 
 			case 'wpbakery':
 			case 'vc':
 			case 'visualcomposer':
-				return new WPBC_WPBakery_Converter();
+				return new DEVTB_WPBakery_Converter();
 
 			case 'beaver':
 			case 'beaverbuilder':
 			case 'beaver-builder':
-				return new WPBC_Beaver_Builder_Converter();
+				return new DEVTB_Beaver_Builder_Converter();
 
 			case 'gutenberg':
 			case 'blocks':
 			case 'block-editor':
-				return new WPBC_Gutenberg_Converter();
+				return new DEVTB_Gutenberg_Converter();
 
 			case 'oxygen':
 			case 'oxygen-builder':
-				return new WPBC_Oxygen_Converter();
+				return new DEVTB_Oxygen_Converter();
 
 			case 'claude':
 			case 'claude-ai':
 			case 'ai':
-				return new WPBC_Claude_Converter();
+				return new DEVTB_Claude_Converter();
 
 			default:
 				return null;
@@ -138,10 +138,10 @@ class WPBC_Converter_Factory {
 	 * Register custom converter
 	 *
 	 * @param string                    $framework Framework name.
-	 * @param WPBC_Converter_Interface $converter Converter instance.
+	 * @param DEVTB_Converter_Interface $converter Converter instance.
 	 * @return void
 	 */
-	public static function register( string $framework, WPBC_Converter_Interface $converter ): void {
+	public static function register( string $framework, DEVTB_Converter_Interface $converter ): void {
 		self::$converters[ strtolower( trim( $framework ) ) ] = $converter;
 	}
 
@@ -157,7 +157,7 @@ class WPBC_Converter_Factory {
 	/**
 	 * Get all registered converters
 	 *
-	 * @return array<string, WPBC_Converter_Interface>
+	 * @return array<string, DEVTB_Converter_Interface>
 	 */
 	public static function get_all_converters(): array {
 		// Ensure all converters are instantiated

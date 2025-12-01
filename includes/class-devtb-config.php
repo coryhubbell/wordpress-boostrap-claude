@@ -1,21 +1,21 @@
 <?php
 /**
- * WPBC Configuration
+ * DEVTB Configuration
  *
- * Centralized configuration constants and values for WordPress Bootstrap Claude.
+ * Centralized configuration constants and values for DevelopmentTranslation Bridge.
  * This class provides a single source of truth for shared configuration.
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage Core
  * @version    3.2.1
  */
 
 /**
- * WPBC Configuration class
+ * DEVTB Configuration class
  *
  * Contains all shared configuration constants used across the plugin.
  */
-class WPBC_Config {
+class DEVTB_Config {
 
 	/**
 	 * Plugin version
@@ -25,7 +25,7 @@ class WPBC_Config {
 	/**
 	 * API namespace
 	 */
-	public const API_NAMESPACE = 'wpbc/v2';
+	public const API_NAMESPACE = 'devtb/v2';
 
 	/**
 	 * Supported frameworks for translation

@@ -1,19 +1,19 @@
 <?php
 /**
- * WPBC Webhook Handler
+ * DEVTB Webhook Handler
  *
  * Manages webhook notifications for job completions and events
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage API
  * @version    3.2.0
  */
 
-class WPBC_Webhook {
+class DEVTB_Webhook {
 	/**
 	 * Logger instance
 	 *
-	 * @var WPBC_Logger
+	 * @var DEVTB_Logger
 	 */
 	private $logger;
 
@@ -28,7 +28,7 @@ class WPBC_Webhook {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->logger = new WPBC_Logger();
+		$this->logger = new DEVTB_Logger();
 	}
 
 	/**
@@ -39,7 +39,7 @@ class WPBC_Webhook {
 	 * @return bool Success.
 	 */
 	public function send( string $event, array $payload ): bool {
-		$webhook_url = get_option( 'wpbc_webhook_url' );
+		$webhook_url = get_option( 'devtb_webhook_url' );
 
 		if ( empty( $webhook_url ) ) {
 			return false;
@@ -90,8 +90,8 @@ class WPBC_Webhook {
 			'body'        => wp_json_encode( $payload ),
 			'headers'     => [
 				'Content-Type'  => 'application/json',
-				'X-WPBC-Event'  => $event,
-				'X-WPBC-Signature' => $this->generate_signature( $payload ),
+				'X-DEVTB-Event'  => $event,
+				'X-DEVTB-Signature' => $this->generate_signature( $payload ),
 			],
 			'timeout'     => 10,
 			'blocking'    => true,
@@ -108,11 +108,11 @@ class WPBC_Webhook {
 	 * @return string Signature.
 	 */
 	private function generate_signature( array $payload ): string {
-		$secret = get_option( 'wpbc_webhook_secret' );
+		$secret = get_option( 'devtb_webhook_secret' );
 
 		if ( empty( $secret ) ) {
 			$secret = wp_generate_password( 32, false );
-			update_option( 'wpbc_webhook_secret', $secret );
+			update_option( 'devtb_webhook_secret', $secret );
 		}
 
 		$payload_json = wp_json_encode( $payload );
@@ -146,7 +146,7 @@ class WPBC_Webhook {
 
 		wp_schedule_single_event(
 			time() + $delay,
-			'wpbc_retry_webhook',
+			'devtb_retry_webhook',
 			[ $url, $event, $payload ]
 		);
 
@@ -185,7 +185,7 @@ class WPBC_Webhook {
 	 * @return bool Valid signature.
 	 */
 	public static function verify_signature( string $payload_json, string $signature ): bool {
-		$secret = get_option( 'wpbc_webhook_secret' );
+		$secret = get_option( 'devtb_webhook_secret' );
 
 		if ( empty( $secret ) ) {
 			return false;
@@ -212,7 +212,7 @@ class WPBC_Webhook {
 }
 
 // Register webhook retry cron action
-add_action( 'wpbc_retry_webhook', function( $url, $event, $payload ) {
-	$webhook = new WPBC_Webhook();
+add_action( 'devtb_retry_webhook', function( $url, $event, $payload ) {
+	$webhook = new DEVTB_Webhook();
 	$webhook->retry( $url, $event, $payload );
 }, 10, 3 );

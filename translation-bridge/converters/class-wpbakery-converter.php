@@ -10,29 +10,29 @@
  * - Animation and styling support
  * - Visual Composer compatibility
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Converters;
+namespace DEVTB\TranslationBridge\Converters;
 
-use WPBC\TranslationBridge\Core\WPBC_Converter_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_Shortcode_Helper;
-use WPBC\TranslationBridge\Utils\WPBC_CSS_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Converter_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_Shortcode_Helper;
+use DEVTB\TranslationBridge\Utils\DEVTB_CSS_Helper;
 
 /**
- * Class WPBC_WPBakery_Converter
+ * Class DEVTB_WPBakery_Converter
  *
  * Convert universal components to WPBakery Page Builder shortcodes.
  */
-class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
+class DEVTB_WPBakery_Converter implements DEVTB_Converter_Interface {
 
 	/**
 	 * Convert universal component to WPBakery shortcode
 	 *
-	 * @param WPBC_Component|array $component Component to convert.
+	 * @param DEVTB_Component|array $component Component to convert.
 	 * @return string WPBakery shortcode string.
 	 */
 	public function convert( $component ): string {
@@ -45,7 +45,7 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 		$shortcodes = [];
 
 		foreach ( $components as $comp ) {
-			if ( $comp instanceof WPBC_Component ) {
+			if ( $comp instanceof DEVTB_Component ) {
 				$shortcode = $this->convert_component( $comp );
 				if ( $shortcode ) {
 					$shortcodes[] = $shortcode;
@@ -59,10 +59,10 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert single component to WPBakery shortcode
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string WPBakery shortcode.
 	 */
-	public function convert_component( WPBC_Component $component ): string {
+	public function convert_component( DEVTB_Component $component ): string {
 		$type = $component->type;
 
 		// Convert based on component type
@@ -80,10 +80,10 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert section to WPBakery vc_section
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string WPBakery section shortcode.
 	 */
-	private function convert_section( WPBC_Component $component ): string {
+	private function convert_section( DEVTB_Component $component ): string {
 		$attributes = $this->denormalize_attributes( $component->attributes );
 
 		$rows_content = '';
@@ -94,7 +94,7 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 				$rows_content .= $this->convert_row( $child ) . "\n";
 			} else {
 				// Wrap non-row children in a row
-				$row = new WPBC_Component([
+				$row = new DEVTB_Component([
 					'type'       => 'row',
 					'category'   => 'layout',
 					'attributes' => [ 'width' => '100%' ],
@@ -104,7 +104,7 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 			}
 		}
 
-		return WPBC_Shortcode_Helper::build(
+		return DEVTB_Shortcode_Helper::build(
 			'vc_section',
 			$attributes,
 			$rows_content,
@@ -115,10 +115,10 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert row to WPBakery vc_row
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string WPBakery row shortcode.
 	 */
-	private function convert_row( WPBC_Component $component ): string {
+	private function convert_row( DEVTB_Component $component ): string {
 		$attributes = $this->denormalize_attributes( $component->attributes );
 
 		$columns_content = '';
@@ -129,7 +129,7 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 				$columns_content .= $this->convert_column( $child ) . "\n";
 			} else {
 				// Wrap non-column children in a column
-				$column = new WPBC_Component([
+				$column = new DEVTB_Component([
 					'type'       => 'column',
 					'category'   => 'layout',
 					'attributes' => [ 'width' => '100%' ],
@@ -141,7 +141,7 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 
 		// If no columns, create default full-width column
 		if ( empty( $columns_content ) && ! empty( $component->content ) ) {
-			$column = new WPBC_Component([
+			$column = new DEVTB_Component([
 				'type'       => 'column',
 				'category'   => 'layout',
 				'attributes' => [ 'width' => '100%' ],
@@ -150,7 +150,7 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 			$columns_content = $this->convert_column( $column );
 		}
 
-		return WPBC_Shortcode_Helper::build(
+		return DEVTB_Shortcode_Helper::build(
 			'vc_row',
 			$attributes,
 			$columns_content,
@@ -161,10 +161,10 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert column to WPBakery vc_column
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string WPBakery column shortcode.
 	 */
-	private function convert_column( WPBC_Component $component ): string {
+	private function convert_column( DEVTB_Component $component ): string {
 		$attributes = $this->denormalize_attributes( $component->attributes );
 
 		// Convert width to WPBakery format
@@ -187,7 +187,7 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 			$elements_content = '[vc_column_text]' . $component->content . '[/vc_column_text]';
 		}
 
-		return WPBC_Shortcode_Helper::build(
+		return DEVTB_Shortcode_Helper::build(
 			'vc_column',
 			$attributes,
 			$elements_content,
@@ -198,10 +198,10 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert element to WPBakery element shortcode
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string WPBakery element shortcode.
 	 */
-	private function convert_element( WPBC_Component $component ): string {
+	private function convert_element( DEVTB_Component $component ): string {
 		// Map universal type to WPBakery element type
 		$vc_type = $this->map_to_wpbakery_type( $component->type );
 
@@ -244,17 +244,17 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 			}
 		}
 
-		return WPBC_Shortcode_Helper::build( $vc_type, $attributes, $content, $self_closing );
+		return DEVTB_Shortcode_Helper::build( $vc_type, $attributes, $content, $self_closing );
 	}
 
 	/**
 	 * Convert tab or accordion child item
 	 *
-	 * @param WPBC_Component $component Child component.
+	 * @param DEVTB_Component $component Child component.
 	 * @param string         $parent_type Parent element type.
 	 * @return string WPBakery shortcode for child.
 	 */
-	private function convert_tab_or_accordion_child( WPBC_Component $component, string $parent_type ): string {
+	private function convert_tab_or_accordion_child( DEVTB_Component $component, string $parent_type ): string {
 		// Determine child shortcode based on parent
 		$child_type = 'vc_tab';
 		if ( $parent_type === 'vc_accordion' ) {
@@ -270,7 +270,7 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 			$attributes['title'] = $component->content ? substr( strip_tags( $component->content ), 0, 50 ) : 'Tab';
 		}
 
-		return WPBC_Shortcode_Helper::build( $child_type, $attributes, $component->content, false );
+		return DEVTB_Shortcode_Helper::build( $child_type, $attributes, $component->content, false );
 	}
 
 	/**
@@ -414,10 +414,10 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 	 *
 	 * @param string         $vc_type WPBakery element type.
 	 * @param array          $attributes Current attributes.
-	 * @param WPBC_Component $component Original component.
+	 * @param DEVTB_Component $component Original component.
 	 * @return array Updated attributes.
 	 */
-	private function add_element_specific_attributes( string $vc_type, array $attributes, WPBC_Component $component ): array {
+	private function add_element_specific_attributes( string $vc_type, array $attributes, DEVTB_Component $component ): array {
 		switch ( $vc_type ) {
 			case 'vc_custom_heading':
 				// Parse heading text from content or attributes
@@ -582,10 +582,10 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Validate component can be converted
 	 *
-	 * @param WPBC_Component $component Component to validate.
+	 * @param DEVTB_Component $component Component to validate.
 	 * @return bool True if can be converted.
 	 */
-	public function can_convert( WPBC_Component $component ): bool {
+	public function can_convert( DEVTB_Component $component ): bool {
 		$supported = $this->get_supported_types();
 		return in_array( $component->type, $supported, true )
 			|| $this->map_to_wpbakery_type( $component->type ) !== null;
@@ -594,10 +594,10 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Get conversion confidence score
 	 *
-	 * @param WPBC_Component $component Component to evaluate.
+	 * @param DEVTB_Component $component Component to evaluate.
 	 * @return float Confidence score (0.0-1.0).
 	 */
-	public function get_confidence( WPBC_Component $component ): float {
+	public function get_confidence( DEVTB_Component $component ): float {
 		if ( ! $this->can_convert( $component ) ) {
 			return 0.0;
 		}
@@ -632,10 +632,10 @@ class WPBC_WPBakery_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Get fallback conversion for unsupported component types
 	 *
-	 * @param WPBC_Component $component Unsupported component.
+	 * @param DEVTB_Component $component Unsupported component.
 	 * @return string Fallback WPBakery shortcode.
 	 */
-	public function get_fallback( WPBC_Component $component ): string {
+	public function get_fallback( DEVTB_Component $component ): string {
 		// Create a basic text block as fallback
 		$content = $component->content ? $component->content : 'Unsupported component type: ' . $component->type;
 		return '[vc_column_text]' . esc_html( $content ) . '[/vc_column_text]';

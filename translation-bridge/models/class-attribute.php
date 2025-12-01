@@ -5,19 +5,19 @@
  * Represents a single attribute/property of a component with type information
  * and validation capabilities.
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Models;
+namespace DEVTB\TranslationBridge\Models;
 
 /**
- * Class WPBC_Attribute
+ * Class DEVTB_Attribute
  *
  * Represents a component attribute with type safety and validation.
  */
-class WPBC_Attribute {
+class DEVTB_Attribute {
 
 	/**
 	 * Attribute name/key
@@ -234,9 +234,9 @@ class WPBC_Attribute {
 	 * Create from array
 	 *
 	 * @param array<string, mixed> $data Attribute data.
-	 * @return WPBC_Attribute
+	 * @return DEVTB_Attribute
 	 */
-	public static function from_array( array $data ): WPBC_Attribute {
+	public static function from_array( array $data ): DEVTB_Attribute {
 		return new self(
 			$data['name'] ?? '',
 			$data['value'] ?? null,

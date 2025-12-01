@@ -4,16 +4,16 @@
  *
  * Grid Builder, Animations, Design Options CSS, and Advanced Parsing
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage WPBakery
  * @version    3.2.0
  */
 
-class WPBC_WPBakery_Advanced {
+class DEVTB_WPBakery_Advanced {
 	/**
 	 * Logger instance
 	 *
-	 * @var WPBC_Logger
+	 * @var DEVTB_Logger
 	 */
 	private $logger;
 
@@ -51,7 +51,7 @@ class WPBC_WPBakery_Advanced {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->logger = new WPBC_Logger();
+		$this->logger = new DEVTB_Logger();
 	}
 
 	/**
@@ -138,20 +138,20 @@ class WPBC_WPBakery_Advanced {
 		$gap = $grid['settings']['gap'] ?? 30;
 
 		$css = "
-.wpbc-grid-container {
+.devtb-grid-container {
     display: grid;
     grid-template-columns: repeat({$columns}, 1fr);
     gap: {$gap}px;
 }
 
 @media (max-width: 992px) {
-    .wpbc-grid-container {
+    .devtb-grid-container {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 576px) {
-    .wpbc-grid-container {
+    .devtb-grid-container {
         grid-template-columns: 1fr;
     }
 }
@@ -283,7 +283,7 @@ class WPBC_WPBakery_Advanced {
 		$animation_name = $this->map_animation_name( $animation );
 
 		$css = <<<CSS
-.wpbc-animated {
+.devtb-animated {
     animation-name: {$animation_name};
     animation-duration: {$duration};
     animation-delay: {$delay};
@@ -377,7 +377,7 @@ CSS;
 		}
 
 		$css = <<<CSS
-.wpbc-parallax {
+.devtb-parallax {
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -385,7 +385,7 @@ CSS;
 }
 
 @media (max-width: 768px) {
-    .wpbc-parallax {
+    .devtb-parallax {
         background-attachment: scroll;
     }
 }

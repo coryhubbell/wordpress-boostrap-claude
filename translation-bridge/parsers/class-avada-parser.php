@@ -10,24 +10,24 @@
  * - Responsive settings parsing
  * - Animation and styling support
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Parsers;
+namespace DEVTB\TranslationBridge\Parsers;
 
-use WPBC\TranslationBridge\Core\WPBC_Parser_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_Shortcode_Helper;
-use WPBC\TranslationBridge\Utils\WPBC_CSS_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Parser_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_Shortcode_Helper;
+use DEVTB\TranslationBridge\Utils\DEVTB_CSS_Helper;
 
 /**
- * Class WPBC_Avada_Parser
+ * Class DEVTB_Avada_Parser
  *
  * Parse Avada Fusion Builder shortcodes into universal components.
  */
-class WPBC_Avada_Parser implements WPBC_Parser_Interface {
+class DEVTB_Avada_Parser implements DEVTB_Parser_Interface {
 
 	/**
 	 * Supported Avada element types (150+ elements)
@@ -148,7 +148,7 @@ class WPBC_Avada_Parser implements WPBC_Parser_Interface {
 	 * Parse Avada shortcode content into universal components
 	 *
 	 * @param string|array $content Avada shortcode content.
-	 * @return WPBC_Component[] Array of parsed components.
+	 * @return DEVTB_Component[] Array of parsed components.
 	 */
 	public function parse( $content ): array {
 		if ( is_array( $content ) ) {
@@ -160,7 +160,7 @@ class WPBC_Avada_Parser implements WPBC_Parser_Interface {
 		}
 
 		// Parse Avada hierarchy
-		$hierarchy = WPBC_Shortcode_Helper::parse_avada_hierarchy( $content );
+		$hierarchy = DEVTB_Shortcode_Helper::parse_avada_hierarchy( $content );
 
 		$components = [];
 
@@ -178,12 +178,12 @@ class WPBC_Avada_Parser implements WPBC_Parser_Interface {
 	 * Parse Avada container
 	 *
 	 * @param array $container_data Container data from hierarchy.
-	 * @return WPBC_Component|null Parsed container component.
+	 * @return DEVTB_Component|null Parsed container component.
 	 */
-	private function parse_container( array $container_data ): ?WPBC_Component {
+	private function parse_container( array $container_data ): ?DEVTB_Component {
 		$attributes = $this->normalize_attributes( $container_data['attributes'] );
 
-		$container = new WPBC_Component([
+		$container = new DEVTB_Component([
 			'type'       => 'container',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -211,12 +211,12 @@ class WPBC_Avada_Parser implements WPBC_Parser_Interface {
 	 * Parse Avada row
 	 *
 	 * @param array $row_data Row data from hierarchy.
-	 * @return WPBC_Component|null Parsed row component.
+	 * @return DEVTB_Component|null Parsed row component.
 	 */
-	private function parse_row( array $row_data ): ?WPBC_Component {
+	private function parse_row( array $row_data ): ?DEVTB_Component {
 		$attributes = $this->normalize_attributes( $row_data['attributes'] );
 
-		$row = new WPBC_Component([
+		$row = new DEVTB_Component([
 			'type'       => 'row',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -244,16 +244,16 @@ class WPBC_Avada_Parser implements WPBC_Parser_Interface {
 	 * Parse Avada column
 	 *
 	 * @param array $column_data Column data from hierarchy.
-	 * @return WPBC_Component|null Parsed column component.
+	 * @return DEVTB_Component|null Parsed column component.
 	 */
-	private function parse_column( array $column_data ): ?WPBC_Component {
+	private function parse_column( array $column_data ): ?DEVTB_Component {
 		$attributes = $this->normalize_attributes( $column_data['attributes'] );
 
 		// Extract column spacing (1_1, 1_2, 1_3, etc.)
 		$spacing = $column_data['attributes']['spacing'] ?? '1_1';
 		$attributes['width'] = $this->convert_avada_spacing( $spacing );
 
-		$column = new WPBC_Component([
+		$column = new DEVTB_Component([
 			'type'       => 'column',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -282,9 +282,9 @@ class WPBC_Avada_Parser implements WPBC_Parser_Interface {
 	 * Parse Avada element
 	 *
 	 * @param array $element Element data.
-	 * @return WPBC_Component|null Parsed element component.
+	 * @return DEVTB_Component|null Parsed element component.
 	 */
-	public function parse_element( $element ): ?WPBC_Component {
+	public function parse_element( $element ): ?DEVTB_Component {
 		$tag = $element['tag'] ?? '';
 
 		// Remove fusion_ prefix to get element type
@@ -299,7 +299,7 @@ class WPBC_Avada_Parser implements WPBC_Parser_Interface {
 		$content = $element['content'] ?? '';
 		$content = do_shortcode( $content ); // Process nested shortcodes
 
-		$component = new WPBC_Component([
+		$component = new DEVTB_Component([
 			'type'       => $universal_type,
 			'category'   => $this->get_category( $universal_type ),
 			'attributes' => $attributes,
@@ -590,7 +590,7 @@ class WPBC_Avada_Parser implements WPBC_Parser_Interface {
 		}
 
 		// Check for Avada shortcodes
-		return WPBC_Shortcode_Helper::is_avada( $content );
+		return DEVTB_Shortcode_Helper::is_avada( $content );
 	}
 
 	/**

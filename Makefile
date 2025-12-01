@@ -1,5 +1,5 @@
 # =============================================================================
-# WordPress Bootstrap Claude - Makefile
+# DevelopmentTranslation Bridge - Makefile
 # =============================================================================
 # Standardized commands for development workflow
 # Run 'make help' to see available targets
@@ -87,13 +87,13 @@ admin-lint: ## Lint admin TypeScript/React code
 # -----------------------------------------------------------------------------
 
 cli-help: ## Show CLI tool help
-	@./wpbc --help
+	@./devtb --help
 
 cli-frameworks: ## List supported frameworks
-	@./wpbc list-frameworks
+	@./devtb list-frameworks
 
 cli-translate: ## Example translation (bootstrap to divi)
-	@./wpbc translate bootstrap divi examples/hero-bootstrap.html
+	@./devtb translate bootstrap divi examples/hero-bootstrap.html
 
 # -----------------------------------------------------------------------------
 # Utilities
@@ -108,7 +108,7 @@ clean-all: clean ## Remove all generated files including .env
 	@echo "Also removed: .env"
 
 version: ## Show version information
-	@echo "WordPress Bootstrap Claude"
+	@echo "DevelopmentTranslation Bridge"
 	@grep -m1 "Version:" style.css | sed 's/.*Version: //'
 
 # -----------------------------------------------------------------------------
@@ -117,7 +117,7 @@ version: ## Show version information
 
 help: ## Show this help message
 	@echo ""
-	@echo "WordPress Bootstrap Claude - Available Commands"
+	@echo "DevelopmentTranslation Bridge - Available Commands"
 	@echo "================================================"
 	@echo ""
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'

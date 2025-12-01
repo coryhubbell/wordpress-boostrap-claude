@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "🚀 Creating WordPress Bootstrap Claude Repository..."
+echo "🚀 Creating DevelopmentTranslation Bridge Repository..."
 
 # Initialize Git
 git init
@@ -10,7 +10,7 @@ mkdir -p core inc template-parts/loops docs examples assets/{css,js,scss}
 
 # Create README.md
 cat > README.md << 'EOF'
-# 🚀 WordPress Bootstrap Claude - AI-Powered WordPress Development Framework
+# 🚀 DevelopmentTranslation Bridge - AI-Powered WordPress Development Framework
 
 [![WordPress](https://img.shields.io/badge/WordPress-5.9%2B-blue)](https://wordpress.org/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple)](https://getbootstrap.com/)
@@ -18,7 +18,7 @@ cat > README.md << 'EOF'
 
 ## 🤖 The First Claude Agentic-Friendly WordPress Development Framework
 
-**WordPress Bootstrap Claude** is a revolutionary WordPress theme framework specifically engineered for AI-assisted development with Claude. Build WordPress themes and plugins 10x faster with AI assistance.
+**DevelopmentTranslation Bridge** is a revolutionary WordPress theme framework specifically engineered for AI-assisted development with Claude. Build WordPress themes and plugins 10x faster with AI assistance.
 
 ## ✨ Key Features
 
@@ -34,7 +34,7 @@ cat > README.md << 'EOF'
 Ask Claude to build anything using this framework:
 
 \`\`\`
-"Claude, using the wordpress-bootstrap-claude framework, 
+"Claude, using the development-translation-bridge framework, 
 create a custom post type for Products with cart functionality"
 \`\`\`
 
@@ -54,7 +54,7 @@ EOF
 # Create core files
 cat > core/style.css << 'EOF'
 /*
-Theme Name: WordPress Bootstrap Claude
+Theme Name: DevelopmentTranslation Bridge
 Description: AI-Powered WordPress Development Framework
 Version: 1.0.0
 License: GPL v2
@@ -64,28 +64,28 @@ EOF
 cat > core/functions.php << 'EOF'
 <?php
 /**
- * WordPress Bootstrap Claude Functions
+ * DevelopmentTranslation Bridge Functions
  * @package WP_Bootstrap_Claude
  */
 
-define( 'WPBC_VERSION', '1.0.0' );
+define( 'DEVTB_VERSION', '1.0.0' );
 
-function wpbc_setup() {
+function devtb_setup() {
     add_theme_support( 'title-tag' );
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'custom-logo' );
     
     register_nav_menus( array(
-        'primary' => __( 'Primary Menu', 'wpbc' ),
+        'primary' => __( 'Primary Menu', 'devtb' ),
     ) );
 }
-add_action( 'after_setup_theme', 'wpbc_setup' );
+add_action( 'after_setup_theme', 'devtb_setup' );
 
-function wpbc_scripts() {
+function devtb_scripts() {
     wp_enqueue_style( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' );
     wp_enqueue_script( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array(), null, true );
 }
-add_action( 'wp_enqueue_scripts', 'wpbc_scripts' );
+add_action( 'wp_enqueue_scripts', 'devtb_scripts' );
 EOF
 
 cat > core/index.php << 'EOF'
@@ -115,7 +115,7 @@ cat > inc/loop-functions.php << 'EOF'
  * WordPress Loop Functions
  */
 
-function wpbc_custom_query_loop( $args = array() ) {
+function devtb_custom_query_loop( $args = array() ) {
     $defaults = array(
         'post_type' => 'post',
         'posts_per_page' => 10,
@@ -143,20 +143,20 @@ echo "# Plugin Conversion Guide" > docs/PLUGIN_CONVERSION.md
 # Create examples
 cat > examples/custom-post-type.php << 'EOF'
 <?php
-function wpbc_register_cpt() {
+function devtb_register_cpt() {
     register_post_type( 'portfolio', array(
         'public' => true,
         'label' => 'Portfolio',
         'supports' => array( 'title', 'editor', 'thumbnail' ),
     ) );
 }
-add_action( 'init', 'wpbc_register_cpt' );
+add_action( 'init', 'devtb_register_cpt' );
 EOF
 
 # Create package.json
 cat > package.json << 'EOF'
 {
-  "name": "wordpress-bootstrap-claude",
+  "name": "development-translation-bridge",
   "version": "1.0.0",
   "description": "AI-Powered WordPress Development Framework",
   "keywords": ["wordpress", "bootstrap", "claude-ai"],
@@ -174,7 +174,7 @@ EOF
 
 # Git operations
 git add .
-git commit -m "🚀 Initial commit: WordPress Bootstrap Claude - AI-Powered Development Framework
+git commit -m "🚀 Initial commit: DevelopmentTranslation Bridge - AI-Powered Development Framework
 
 Revolutionary WordPress theme framework for AI-assisted development with Claude.
 

@@ -2,11 +2,11 @@
 /**
  * Encryption Utility Unit Tests
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Tests
  */
 
-namespace WPBC\Tests\Unit;
+namespace DEVTB\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
@@ -18,8 +18,8 @@ class EncryptionTest extends TestCase {
         parent::setUp();
 
         // Load the Encryption class
-        require_once WPBC_INCLUDES . '/class-wpbc-encryption.php';
-        $this->encryption = new \WPBC_Encryption();
+        require_once DEVTB_INCLUDES . '/class-devtb-encryption.php';
+        $this->encryption = new \DEVTB_Encryption();
     }
 
     /**

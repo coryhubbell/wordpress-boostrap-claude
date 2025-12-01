@@ -9,28 +9,28 @@
  * - Nested block (innerBlocks) generation
  * - Block serialization
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.2.0
  */
 
-namespace WPBC\TranslationBridge\Converters;
+namespace DEVTB\TranslationBridge\Converters;
 
-use WPBC\TranslationBridge\Core\WPBC_Converter_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_HTML_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Converter_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_HTML_Helper;
 
 /**
- * Class WPBC_Gutenberg_Converter
+ * Class DEVTB_Gutenberg_Converter
  *
  * Convert universal components to Gutenberg block markup.
  */
-class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
+class DEVTB_Gutenberg_Converter implements DEVTB_Converter_Interface {
 
 	/**
 	 * Convert universal component to Gutenberg block markup
 	 *
-	 * @param WPBC_Component|array $component Component to convert.
+	 * @param DEVTB_Component|array $component Component to convert.
 	 * @return string Gutenberg block markup.
 	 */
 	public function convert( $component ) {
@@ -43,7 +43,7 @@ class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
 		$output = '';
 
 		foreach ( $components as $comp ) {
-			if ( $comp instanceof WPBC_Component ) {
+			if ( $comp instanceof DEVTB_Component ) {
 				$output .= $this->convert_component( $comp );
 			}
 		}
@@ -54,10 +54,10 @@ class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert single component to Gutenberg block
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string Gutenberg block markup.
 	 */
-	public function convert_component( WPBC_Component $component ): string {
+	public function convert_component( DEVTB_Component $component ): string {
 		$type = $component->type;
 
 		// Convert based on component type
@@ -73,10 +73,10 @@ class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert container to Gutenberg group/columns block
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string Block markup.
 	 */
-	private function convert_container( WPBC_Component $component ): string {
+	private function convert_container( DEVTB_Component $component ): string {
 		// Check if container has columns
 		$has_columns = false;
 		foreach ( $component->children as $child ) {
@@ -98,10 +98,10 @@ class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert to Gutenberg columns block
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string Block markup.
 	 */
-	private function convert_columns( WPBC_Component $component ): string {
+	private function convert_columns( DEVTB_Component $component ): string {
 		$attributes = $this->denormalize_attributes( $component->attributes );
 
 		$opening = $this->create_block_delimiter( 'core/columns', $attributes );
@@ -123,10 +123,10 @@ class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert to Gutenberg column block
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string Block markup.
 	 */
-	private function convert_column( WPBC_Component $component ): string {
+	private function convert_column( DEVTB_Component $component ): string {
 		$attributes = $this->denormalize_attributes( $component->attributes );
 
 		// Extract width if present
@@ -152,10 +152,10 @@ class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert to Gutenberg group block
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string Block markup.
 	 */
-	private function convert_group( WPBC_Component $component ): string {
+	private function convert_group( DEVTB_Component $component ): string {
 		$attributes = $this->denormalize_attributes( $component->attributes );
 
 		$opening = $this->create_block_delimiter( 'core/group', $attributes );
@@ -175,10 +175,10 @@ class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Convert component to Gutenberg block
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string Block markup.
 	 */
-	private function convert_block( WPBC_Component $component ): string {
+	private function convert_block( DEVTB_Component $component ): string {
 		$block_name = $this->map_to_block_type( $component->type );
 
 		if ( ! $block_name ) {
@@ -241,10 +241,10 @@ class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
 	 *
 	 * @param string         $block_name Block name.
 	 * @param array          $attributes Current attributes.
-	 * @param WPBC_Component $component Component.
+	 * @param DEVTB_Component $component Component.
 	 * @return array Updated attributes.
 	 */
-	private function add_block_content( string $block_name, array $attributes, WPBC_Component $component ): array {
+	private function add_block_content( string $block_name, array $attributes, DEVTB_Component $component ): array {
 		// Extract heading level
 		if ( $block_name === 'core/heading' ) {
 			$level = $component->attributes['level'] ?? 2;
@@ -281,10 +281,10 @@ class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
 	 * Generate inner HTML for block
 	 *
 	 * @param string         $block_name Block name.
-	 * @param WPBC_Component $component Component.
+	 * @param DEVTB_Component $component Component.
 	 * @return string Inner HTML.
 	 */
-	private function generate_inner_html( string $block_name, WPBC_Component $component ): string {
+	private function generate_inner_html( string $block_name, DEVTB_Component $component ): string {
 		$content = $component->content;
 
 		switch ( $block_name ) {
@@ -507,20 +507,20 @@ class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Validate that content can be converted
 	 *
-	 * @param WPBC_Component|array $component Component to validate.
+	 * @param DEVTB_Component|array $component Component to validate.
 	 * @return bool True if valid.
 	 */
 	public function validate( $component ): bool {
 		if ( is_array( $component ) ) {
 			foreach ( $component as $comp ) {
-				if ( ! $comp instanceof WPBC_Component ) {
+				if ( ! $comp instanceof DEVTB_Component ) {
 					return false;
 				}
 			}
 			return true;
 		}
 
-		return $component instanceof WPBC_Component;
+		return $component instanceof DEVTB_Component;
 	}
 
 	/**
@@ -547,7 +547,7 @@ class WPBC_Gutenberg_Converter implements WPBC_Converter_Interface {
 	/**
 	 * Get fallback conversion
 	 */
-	public function get_fallback( WPBC_Component $component ) {
+	public function get_fallback( DEVTB_Component $component ) {
 		return '<!-- wp:html -->' . "\n" . ( $component->content ?? '' ) . "\n" . '<!-- /wp:html -->';
 	}
 }

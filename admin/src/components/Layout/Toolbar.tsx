@@ -26,7 +26,7 @@ function Toolbar() {
   const handleSaveLocal = () => {
     // Save current state to localStorage as backup
     try {
-      localStorage.setItem('wpbc_editor_state', JSON.stringify({
+      localStorage.setItem('devtb_editor_state', JSON.stringify({
         sourceCode: editor.sourceCode,
         translatedCode: editor.translatedCode,
         sourceFramework: editor.sourceFramework,
@@ -111,12 +111,12 @@ function Toolbar() {
             <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z" />
           </svg>
           <h1 className="text-lg font-bold text-gray-900 dark:text-gray-100">
-            WordPress Bootstrap Claude
+            DevelopmentTranslation Bridge
           </h1>
         </div>
 
         <span className="text-xs px-2 py-1 bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300 rounded-full font-medium">
-          v{(window as any).wpbcData?.version || '3.3.0'}
+          v{(window as any).devtbData?.version || '3.3.0'}
         </span>
 
         {/* Dirty indicator */}

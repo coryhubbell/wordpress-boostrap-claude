@@ -1,15 +1,15 @@
 <?php
 /**
- * WPBC File Handler
+ * DEVTB File Handler
  *
  * Handles file I/O operations for various framework formats
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage CLI
  * @version    3.2.1
  */
 
-class WPBC_File_Handler {
+class DEVTB_File_Handler {
 
 	/**
 	 * Framework file extensions
@@ -315,7 +315,7 @@ class WPBC_File_Handler {
 
 		// Verify the resolved path is within the expected base directory.
 		// This prevents symlink attacks and ensures files stay within project.
-		$base_dir = realpath( WPBC_ROOT );
+		$base_dir = realpath( DEVTB_ROOT );
 		if ( $base_dir && strpos( $real_path, $base_dir ) !== 0 ) {
 			return false;
 		}

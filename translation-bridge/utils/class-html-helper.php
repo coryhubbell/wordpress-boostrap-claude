@@ -10,19 +10,19 @@
  * - Security and sanitization
  * - Performance optimization
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Utils;
+namespace DEVTB\TranslationBridge\Utils;
 
 /**
- * Class WPBC_HTML_Helper
+ * Class DEVTB_HTML_Helper
  *
  * Advanced HTML processing and manipulation utilities.
  */
-class WPBC_HTML_Helper {
+class DEVTB_HTML_Helper {
 
 	/**
 	 * Parse HTML string into DOMDocument

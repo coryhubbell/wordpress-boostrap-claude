@@ -5,26 +5,26 @@
  * Contract for all framework-specific converters that transform universal
  * component models into framework-specific markup.
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Core;
+namespace DEVTB\TranslationBridge\Core;
 
-use WPBC\TranslationBridge\Models\WPBC_Component;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
 
 /**
- * Interface WPBC_Converter_Interface
+ * Interface DEVTB_Converter_Interface
  *
  * Defines methods that all framework converters must implement.
  */
-interface WPBC_Converter_Interface {
+interface DEVTB_Converter_Interface {
 
 	/**
 	 * Convert universal component(s) to framework-specific format
 	 *
-	 * @param WPBC_Component|WPBC_Component[] $component Component(s) to convert.
+	 * @param DEVTB_Component|DEVTB_Component[] $component Component(s) to convert.
 	 * @return string|array Framework-specific output (HTML, JSON, shortcodes, etc.).
 	 */
 	public function convert( $component );
@@ -54,16 +54,16 @@ interface WPBC_Converter_Interface {
 	/**
 	 * Convert single component
 	 *
-	 * @param WPBC_Component $component Component to convert.
+	 * @param DEVTB_Component $component Component to convert.
 	 * @return string|array Framework-specific output for single component.
 	 */
-	public function convert_component( WPBC_Component $component );
+	public function convert_component( DEVTB_Component $component );
 
 	/**
 	 * Get fallback conversion for unsupported component types
 	 *
-	 * @param WPBC_Component $component Unsupported component.
+	 * @param DEVTB_Component $component Unsupported component.
 	 * @return string|array Fallback output.
 	 */
-	public function get_fallback( WPBC_Component $component );
+	public function get_fallback( DEVTB_Component $component );
 }

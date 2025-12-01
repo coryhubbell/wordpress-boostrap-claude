@@ -2,24 +2,24 @@
 /**
  * PHPUnit Bootstrap File
  *
- * Sets up the testing environment for WordPress Bootstrap Claude
+ * Sets up the testing environment for DevelopmentTranslation Bridge
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Tests
  */
 
 // Define test mode
-define('WPBC_TESTING', true);
+define('DEVTB_TESTING', true);
 
 // Define root directory
-define('WPBC_ROOT', dirname(__DIR__));
-define('WPBC_INCLUDES', WPBC_ROOT . '/includes');
-define('WPBC_TRANSLATION_BRIDGE', WPBC_ROOT . '/translation-bridge');
-define('WPBC_TRANSLATION_BRIDGE_DIR', WPBC_TRANSLATION_BRIDGE);
-define('WPBC_VERSION', '3.2.0');
+define('DEVTB_ROOT', dirname(__DIR__));
+define('DEVTB_INCLUDES', DEVTB_ROOT . '/includes');
+define('DEVTB_TRANSLATION_BRIDGE', DEVTB_ROOT . '/translation-bridge');
+define('DEVTB_TRANSLATION_BRIDGE_DIR', DEVTB_TRANSLATION_BRIDGE);
+define('DEVTB_VERSION', '3.2.0');
 
 // Load Composer autoloader
-$autoloader = WPBC_ROOT . '/vendor/autoload.php';
+$autoloader = DEVTB_ROOT . '/vendor/autoload.php';
 if (file_exists($autoloader)) {
     require_once $autoloader;
 } else {

@@ -17,7 +17,7 @@ interface WpbcData {
 
 declare global {
   interface Window {
-    wpbcData?: WpbcData;
+    devtbData?: WpbcData;
   }
 }
 
@@ -45,7 +45,7 @@ export class RateLimitError extends ApiError {
   retryAfter: number;
 
   constructor(retryAfter: number, message: string = 'Rate limit exceeded') {
-    super('wpbc_rate_limit_exceeded', message, 429);
+    super('devtb_rate_limit_exceeded', message, 429);
     this.name = 'RateLimitError';
     this.retryAfter = retryAfter;
   }
@@ -53,7 +53,7 @@ export class RateLimitError extends ApiError {
 
 export class AuthenticationError extends ApiError {
   constructor(message: string = 'Authentication required') {
-    super('wpbc_auth_required', message, 401);
+    super('devtb_auth_required', message, 401);
     this.name = 'AuthenticationError';
   }
 }
@@ -65,7 +65,7 @@ export class ValidationError extends ApiError {
     message: string,
     validationErrors: Record<string, string> = {}
   ) {
-    super('wpbc_validation_error', message, 400);
+    super('devtb_validation_error', message, 400);
     this.name = 'ValidationError';
     this.validationErrors = validationErrors;
   }
@@ -87,8 +87,8 @@ class ApiClient {
   private rateLimitInfo: RateLimitInfo | null = null;
 
   constructor() {
-    this.baseUrl = window.wpbcData?.restUrl || '/wp-json/wpbc/v2/';
-    this.nonce = window.wpbcData?.nonce || '';
+    this.baseUrl = window.devtbData?.restUrl || '/wp-json/devtb/v2/';
+    this.nonce = window.devtbData?.nonce || '';
   }
 
   /**

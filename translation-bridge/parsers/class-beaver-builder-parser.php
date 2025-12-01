@@ -9,23 +9,23 @@
  * - Settings extraction and normalization
  * - Responsive controls parsing
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.2.0
  */
 
-namespace WPBC\TranslationBridge\Parsers;
+namespace DEVTB\TranslationBridge\Parsers;
 
-use WPBC\TranslationBridge\Core\WPBC_Parser_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_CSS_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Parser_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_CSS_Helper;
 
 /**
- * Class WPBC_Beaver_Builder_Parser
+ * Class DEVTB_Beaver_Builder_Parser
  *
  * Parse Beaver Builder serialized data into universal components.
  */
-class WPBC_Beaver_Builder_Parser implements WPBC_Parser_Interface {
+class DEVTB_Beaver_Builder_Parser implements DEVTB_Parser_Interface {
 
 	/**
 	 * Supported Beaver Builder module types
@@ -75,7 +75,7 @@ class WPBC_Beaver_Builder_Parser implements WPBC_Parser_Interface {
 	 * Parse Beaver Builder data into universal components
 	 *
 	 * @param string|array $content Beaver Builder serialized or array content.
-	 * @return WPBC_Component[] Array of parsed components.
+	 * @return DEVTB_Component[] Array of parsed components.
 	 */
 	public function parse( $content ): array {
 		// Handle serialized PHP string
@@ -160,9 +160,9 @@ class WPBC_Beaver_Builder_Parser implements WPBC_Parser_Interface {
 	 *
 	 * @param object $node Node data.
 	 * @param array  $all_nodes All nodes for recursive parsing.
-	 * @return WPBC_Component|null Parsed component or null.
+	 * @return DEVTB_Component|null Parsed component or null.
 	 */
-	private function parse_node( $node, array $all_nodes ): ?WPBC_Component {
+	private function parse_node( $node, array $all_nodes ): ?DEVTB_Component {
 		if ( ! is_object( $node ) ) {
 			return null;
 		}
@@ -191,13 +191,13 @@ class WPBC_Beaver_Builder_Parser implements WPBC_Parser_Interface {
 	 *
 	 * @param object $node Row node data.
 	 * @param array  $all_nodes All nodes.
-	 * @return WPBC_Component|null Parsed row component.
+	 * @return DEVTB_Component|null Parsed row component.
 	 */
-	private function parse_row( $node, array $all_nodes ): ?WPBC_Component {
+	private function parse_row( $node, array $all_nodes ): ?DEVTB_Component {
 		$settings = (array) ( $node->settings ?? new \stdClass() );
 		$attributes = $this->normalize_settings( $settings );
 
-		$row = new WPBC_Component([
+		$row = new DEVTB_Component([
 			'type'       => 'container',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -226,13 +226,13 @@ class WPBC_Beaver_Builder_Parser implements WPBC_Parser_Interface {
 	 *
 	 * @param object $node Column group node data.
 	 * @param array  $all_nodes All nodes.
-	 * @return WPBC_Component|null Parsed column group component.
+	 * @return DEVTB_Component|null Parsed column group component.
 	 */
-	private function parse_column_group( $node, array $all_nodes ): ?WPBC_Component {
+	private function parse_column_group( $node, array $all_nodes ): ?DEVTB_Component {
 		$settings = (array) ( $node->settings ?? new \stdClass() );
 		$attributes = $this->normalize_settings( $settings );
 
-		$column_group = new WPBC_Component([
+		$column_group = new DEVTB_Component([
 			'type'       => 'row',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -261,9 +261,9 @@ class WPBC_Beaver_Builder_Parser implements WPBC_Parser_Interface {
 	 *
 	 * @param object $node Column node data.
 	 * @param array  $all_nodes All nodes.
-	 * @return WPBC_Component|null Parsed column component.
+	 * @return DEVTB_Component|null Parsed column component.
 	 */
-	private function parse_column( $node, array $all_nodes ): ?WPBC_Component {
+	private function parse_column( $node, array $all_nodes ): ?DEVTB_Component {
 		$settings = (array) ( $node->settings ?? new \stdClass() );
 		$attributes = $this->normalize_settings( $settings );
 
@@ -271,7 +271,7 @@ class WPBC_Beaver_Builder_Parser implements WPBC_Parser_Interface {
 		$width = $settings['size'] ?? 100;
 		$attributes['width'] = is_numeric( $width ) ? $width . '%' : $width;
 
-		$column = new WPBC_Component([
+		$column = new DEVTB_Component([
 			'type'       => 'column',
 			'category'   => 'layout',
 			'attributes' => $attributes,
@@ -300,9 +300,9 @@ class WPBC_Beaver_Builder_Parser implements WPBC_Parser_Interface {
 	 *
 	 * @param object $node Module node data.
 	 * @param array  $all_nodes All nodes.
-	 * @return WPBC_Component|null Parsed module component.
+	 * @return DEVTB_Component|null Parsed module component.
 	 */
-	private function parse_module( $node, array $all_nodes ): ?WPBC_Component {
+	private function parse_module( $node, array $all_nodes ): ?DEVTB_Component {
 		$module_type = $node->type ?? '';
 		$settings = (array) ( $node->settings ?? new \stdClass() );
 
@@ -314,7 +314,7 @@ class WPBC_Beaver_Builder_Parser implements WPBC_Parser_Interface {
 		// Extract content based on module type
 		$content = $this->extract_module_content( $module_type, $settings );
 
-		$component = new WPBC_Component([
+		$component = new DEVTB_Component([
 			'type'       => $universal_type,
 			'category'   => $this->get_category( $universal_type ),
 			'attributes' => $attributes,
@@ -637,9 +637,9 @@ class WPBC_Beaver_Builder_Parser implements WPBC_Parser_Interface {
 	 * Parse single element
 	 *
 	 * @param mixed $element Element to parse.
-	 * @return WPBC_Component|null Parsed component or null.
+	 * @return DEVTB_Component|null Parsed component or null.
 	 */
-	public function parse_element( $element ): ?WPBC_Component {
+	public function parse_element( $element ): ?DEVTB_Component {
 		if ( is_string( $element ) ) {
 			$components = $this->parse( $element );
 			return $components[0] ?? null;

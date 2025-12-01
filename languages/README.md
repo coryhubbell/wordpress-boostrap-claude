@@ -1,35 +1,35 @@
-# WordPress Bootstrap Claude - Translation Guide
+# DevelopmentTranslation Bridge - Translation Guide
 
-Thank you for helping translate WordPress Bootstrap Claude!
+Thank you for helping translate DevelopmentTranslation Bridge!
 
 ## Translation Files
 
-This directory contains translation files for WordPress Bootstrap Claude:
+This directory contains translation files for DevelopmentTranslation Bridge:
 
-- **wpbc.pot** - Translation template file (all translatable strings)
-- **wpbc-{locale}.po** - Translation files for specific languages
-- **wpbc-{locale}.mo** - Compiled translation files (machine-readable)
+- **devtb.pot** - Translation template file (all translatable strings)
+- **devtb-{locale}.po** - Translation files for specific languages
+- **devtb-{locale}.mo** - Compiled translation files (machine-readable)
 
 ## How to Translate
 
 ### Option 1: Using Poedit (Recommended)
 
 1. Download and install [Poedit](https://poedit.net/)
-2. Open `wpbc.pot` in Poedit
+2. Open `devtb.pot` in Poedit
 3. Choose "Create New Translation" from the Catalog menu
 4. Select your language
 5. Translate all strings
-6. Save the file as `wpbc-{locale}.po` (e.g., `wpbc-es_ES.po` for Spanish)
+6. Save the file as `devtb-{locale}.po` (e.g., `devtb-es_ES.po` for Spanish)
 7. Poedit will automatically generate the `.mo` file
 
 ### Option 2: Manual Translation
 
-1. Copy `wpbc.pot` to `wpbc-{locale}.po`
+1. Copy `devtb.pot` to `devtb-{locale}.po`
 2. Edit the `.po` file with a text editor
 3. Fill in the `msgstr` values for each `msgid`
 4. Compile to `.mo` using `msgfmt`:
    ```bash
-   msgfmt wpbc-{locale}.po -o wpbc-{locale}.mo
+   msgfmt devtb-{locale}.po -o devtb-{locale}.mo
    ```
 
 ## Language Codes
@@ -49,7 +49,7 @@ Full list: https://make.wordpress.org/polyglots/teams/
 
 ## Translation Context
 
-WordPress Bootstrap Claude is a theme that translates between page builder frameworks:
+DevelopmentTranslation Bridge is a theme that translates between page builder frameworks:
 - Bootstrap, DIVI, Elementor, Avada, Bricks, WPBakery, Beaver Builder, Gutenberg, Oxygen, Claude AI
 
 When translating:
@@ -63,7 +63,7 @@ When translating:
 
 1. Place your `.po` and `.mo` files in this directory
 2. Activate your language in WordPress (Settings > General > Site Language)
-3. Visit the WordPress Bootstrap Claude admin pages
+3. Visit the DevelopmentTranslation Bridge admin pages
 4. Verify all strings display correctly
 
 ## Submitting Your Translation
@@ -75,7 +75,7 @@ When translating:
 
 ## Need Help?
 
-- **Issues**: https://github.com/coryhubbell/wordpress-bootstrap-claude/issues
+- **Issues**: https://github.com/coryhubbell/development-translation-bridge/issues
 - **Documentation**: See the main README.md
 
 ## Translation Statistics
@@ -86,6 +86,6 @@ Current translations:
 
 ---
 
-**Text Domain:** `wpbc`
+**Text Domain:** `devtb`
 **Strings to translate:** ~78
 **Last updated:** January 2025

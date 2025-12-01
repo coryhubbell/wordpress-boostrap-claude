@@ -112,7 +112,7 @@
 [et_pb_row _builder_version="4.16"]
 [et_pb_column type="4_4" _builder_version="4.16"]
 [et_pb_text _builder_version="4.16" text_text_color="#999999"]
-<p style="text-align: center;">&copy; 2024 WordPress Bootstrap Claude. All rights reserved.</p>
+<p style="text-align: center;">&copy; 2024 DevelopmentTranslation Bridge. All rights reserved.</p>
 [/et_pb_text]
 [/et_pb_column]
 [/et_pb_row]

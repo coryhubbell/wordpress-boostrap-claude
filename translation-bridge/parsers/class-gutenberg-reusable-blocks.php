@@ -4,16 +4,16 @@
  *
  * Manages reusable blocks (synced patterns)
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage Gutenberg
  * @version    3.2.0
  */
 
-class WPBC_Gutenberg_Reusable_Blocks {
+class DEVTB_Gutenberg_Reusable_Blocks {
 	/**
 	 * Logger instance
 	 *
-	 * @var WPBC_Logger
+	 * @var DEVTB_Logger
 	 */
 	private $logger;
 
@@ -21,7 +21,7 @@ class WPBC_Gutenberg_Reusable_Blocks {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->logger = new WPBC_Logger();
+		$this->logger = new DEVTB_Logger();
 	}
 
 	/**
@@ -188,7 +188,7 @@ class WPBC_Gutenberg_Reusable_Blocks {
 	public function create_from_components( array $components, string $title, array $options = [] ) {
 		// Convert components to Gutenberg blocks
 		require_once __DIR__ . '/class-gutenberg-converter.php';
-		$converter = new WPBC_Gutenberg_Converter();
+		$converter = new DEVTB_Gutenberg_Converter();
 
 		$blocks_html = '';
 		foreach ( $components as $component ) {

@@ -2,11 +2,11 @@
 /**
  * CLI Unit Tests
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Tests
  */
 
-namespace WPBC\Tests\Unit;
+namespace DEVTB\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 
@@ -16,8 +16,8 @@ class CLITest extends TestCase {
      * Test parse_arguments extracts command
      */
     public function test_parse_arguments_extracts_command() {
-        require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-        $cli = new \WPBC_CLI(['translate', 'bootstrap', 'divi', 'test.html']);
+        require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+        $cli = new \DEVTB_CLI(['translate', 'bootstrap', 'divi', 'test.html']);
 
         // Use reflection to check parsed command
         $reflection = new \ReflectionClass($cli);
@@ -31,8 +31,8 @@ class CLITest extends TestCase {
      * Test parse_arguments handles long options
      */
     public function test_parse_arguments_handles_long_options() {
-        require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-        $cli = new \WPBC_CLI(['translate', '--dry-run', '--debug']);
+        require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+        $cli = new \DEVTB_CLI(['translate', '--dry-run', '--debug']);
 
         $reflection = new \ReflectionClass($cli);
         $optionsProperty = $reflection->getProperty('options');
@@ -47,8 +47,8 @@ class CLITest extends TestCase {
      * Test parse_arguments handles short options
      */
     public function test_parse_arguments_handles_short_options() {
-        require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-        $cli = new \WPBC_CLI(['translate', '-n', '-d']);
+        require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+        $cli = new \DEVTB_CLI(['translate', '-n', '-d']);
 
         $reflection = new \ReflectionClass($cli);
         $optionsProperty = $reflection->getProperty('options');
@@ -63,8 +63,8 @@ class CLITest extends TestCase {
      * Test parse_arguments handles option equals syntax
      */
     public function test_parse_arguments_handles_option_equals_syntax() {
-        require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-        $cli = new \WPBC_CLI(['translate', '--output=/path/to/file.html']);
+        require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+        $cli = new \DEVTB_CLI(['translate', '--output=/path/to/file.html']);
 
         $reflection = new \ReflectionClass($cli);
         $optionsProperty = $reflection->getProperty('options');
@@ -78,8 +78,8 @@ class CLITest extends TestCase {
      * Test empty args defaults to help command
      */
     public function test_empty_args_defaults_to_help() {
-        require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-        $cli = new \WPBC_CLI([]);
+        require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+        $cli = new \DEVTB_CLI([]);
 
         $reflection = new \ReflectionClass($cli);
         $commandProperty = $reflection->getProperty('command');
@@ -92,8 +92,8 @@ class CLITest extends TestCase {
      * Test frameworks array contains all 10 frameworks
      */
     public function test_frameworks_array_contains_all_frameworks() {
-        require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-        $cli = new \WPBC_CLI(['list-frameworks']);
+        require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+        $cli = new \DEVTB_CLI(['list-frameworks']);
 
         $reflection = new \ReflectionClass($cli);
         $frameworksProperty = $reflection->getProperty('frameworks');
@@ -116,8 +116,8 @@ class CLITest extends TestCase {
      * Test params extraction for translate command
      */
     public function test_params_extraction_for_translate_command() {
-        require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-        $cli = new \WPBC_CLI(['translate', 'bootstrap', 'divi', 'input.html']);
+        require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+        $cli = new \DEVTB_CLI(['translate', 'bootstrap', 'divi', 'input.html']);
 
         $reflection = new \ReflectionClass($cli);
         $paramsProperty = $reflection->getProperty('params');
@@ -133,8 +133,8 @@ class CLITest extends TestCase {
      * Test translate-all params extraction
      */
     public function test_translate_all_params_extraction() {
-        require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-        $cli = new \WPBC_CLI(['translate-all', 'bootstrap', 'input.html']);
+        require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+        $cli = new \DEVTB_CLI(['translate-all', 'bootstrap', 'input.html']);
 
         $reflection = new \ReflectionClass($cli);
         $paramsProperty = $reflection->getProperty('params');
@@ -149,8 +149,8 @@ class CLITest extends TestCase {
      * Test validate command params
      */
     public function test_validate_command_params() {
-        require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-        $cli = new \WPBC_CLI(['validate', 'elementor', 'page.json']);
+        require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+        $cli = new \DEVTB_CLI(['validate', 'elementor', 'page.json']);
 
         $reflection = new \ReflectionClass($cli);
         $commandProperty = $reflection->getProperty('command');
@@ -168,8 +168,8 @@ class CLITest extends TestCase {
      * Test option with value after space
      */
     public function test_option_with_value_after_space() {
-        require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-        $cli = new \WPBC_CLI(['translate', '--target', 'elementor']);
+        require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+        $cli = new \DEVTB_CLI(['translate', '--target', 'elementor']);
 
         $reflection = new \ReflectionClass($cli);
         $optionsProperty = $reflection->getProperty('options');
@@ -183,8 +183,8 @@ class CLITest extends TestCase {
      * Test mixed positional and options parsing
      */
     public function test_mixed_positional_and_options_parsing() {
-        require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-        $cli = new \WPBC_CLI(['translate', 'bootstrap', '--dry-run', 'divi', '-o', 'output.html', 'input.html']);
+        require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+        $cli = new \DEVTB_CLI(['translate', 'bootstrap', '--dry-run', 'divi', '-o', 'output.html', 'input.html']);
 
         $reflection = new \ReflectionClass($cli);
         $paramsProperty = $reflection->getProperty('params');
@@ -204,8 +204,8 @@ class CLITest extends TestCase {
      * Test list-frameworks command detection
      */
     public function test_list_frameworks_command_detection() {
-        require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-        $cli = new \WPBC_CLI(['list-frameworks']);
+        require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+        $cli = new \DEVTB_CLI(['list-frameworks']);
 
         $reflection = new \ReflectionClass($cli);
         $commandProperty = $reflection->getProperty('command');
@@ -218,8 +218,8 @@ class CLITest extends TestCase {
      * Test help command with additional params
      */
     public function test_help_command_with_params() {
-        require_once WPBC_INCLUDES . '/class-wpbc-cli.php';
-        $cli = new \WPBC_CLI(['help', 'translate']);
+        require_once DEVTB_INCLUDES . '/class-devtb-cli.php';
+        $cli = new \DEVTB_CLI(['help', 'translate']);
 
         $reflection = new \ReflectionClass($cli);
         $commandProperty = $reflection->getProperty('command');

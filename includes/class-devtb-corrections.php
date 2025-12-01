@@ -1,10 +1,10 @@
 <?php
 /**
- * WPBC Corrections Handler
+ * DEVTB Corrections Handler
  *
  * Provides rule-based and AI-powered code analysis and correction suggestions.
  *
- * @package    WordPress_Bootstrap_Claude
+ * @package    DevelopmentTranslation_Bridge
  * @subpackage Core
  * @version    3.3.0
  */
@@ -15,36 +15,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WPBC Corrections class
+ * DEVTB Corrections class
  *
  * Handles code analysis and correction generation.
  */
-class WPBC_Corrections {
+class DEVTB_Corrections {
 
 	/**
 	 * Logger instance
 	 *
-	 * @var WPBC_Logger
+	 * @var DEVTB_Logger
 	 */
-	private WPBC_Logger $logger;
+	private DEVTB_Logger $logger;
 
 	/**
 	 * Claude API instance (optional)
 	 *
-	 * @var WPBC_Claude_API|null
+	 * @var DEVTB_Claude_API|null
 	 */
-	private ?WPBC_Claude_API $claude_api = null;
+	private ?DEVTB_Claude_API $claude_api = null;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->logger = new WPBC_Logger();
+		$this->logger = new DEVTB_Logger();
 
 		// Initialize Claude API if available
-		if ( class_exists( 'WPBC_Claude_API' ) ) {
+		if ( class_exists( 'DEVTB_Claude_API' ) ) {
 			try {
-				$this->claude_api = new WPBC_Claude_API();
+				$this->claude_api = new DEVTB_Claude_API();
 			} catch ( Exception $e ) {
 				$this->logger->warning( 'Claude API not available', array( 'error' => $e->getMessage() ) );
 			}

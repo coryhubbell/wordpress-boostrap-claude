@@ -10,19 +10,19 @@
  * - Diff and merge operations
  * - Performance optimization
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Utils;
+namespace DEVTB\TranslationBridge\Utils;
 
 /**
- * Class WPBC_JSON_Helper
+ * Class DEVTB_JSON_Helper
  *
  * Advanced JSON processing and manipulation utilities.
  */
-class WPBC_JSON_Helper {
+class DEVTB_JSON_Helper {
 
 	/**
 	 * Parse JSON with error handling

@@ -10,24 +10,24 @@
  * - Nested component support
  * - Semantic understanding
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Parsers;
+namespace DEVTB\TranslationBridge\Parsers;
 
-use WPBC\TranslationBridge\Core\WPBC_Parser_Interface;
-use WPBC\TranslationBridge\Models\WPBC_Component;
-use WPBC\TranslationBridge\Utils\WPBC_HTML_Helper;
-use WPBC\TranslationBridge\Utils\WPBC_CSS_Helper;
+use DEVTB\TranslationBridge\Core\DEVTB_Parser_Interface;
+use DEVTB\TranslationBridge\Models\DEVTB_Component;
+use DEVTB\TranslationBridge\Utils\DEVTB_HTML_Helper;
+use DEVTB\TranslationBridge\Utils\DEVTB_CSS_Helper;
 
 /**
- * Class WPBC_Bootstrap_Parser
+ * Class DEVTB_Bootstrap_Parser
  *
  * Parse Bootstrap 5.3.3 HTML into universal components.
  */
-class WPBC_Bootstrap_Parser implements WPBC_Parser_Interface {
+class DEVTB_Bootstrap_Parser implements DEVTB_Parser_Interface {
 
 	/**
 	 * Supported Bootstrap component types
@@ -68,7 +68,7 @@ class WPBC_Bootstrap_Parser implements WPBC_Parser_Interface {
 	 * Parse Bootstrap HTML into universal components
 	 *
 	 * @param string|array $content Bootstrap HTML content.
-	 * @return WPBC_Component[] Array of parsed components.
+	 * @return DEVTB_Component[] Array of parsed components.
 	 */
 	public function parse( $content ): array {
 		if ( is_array( $content ) ) {
@@ -79,7 +79,7 @@ class WPBC_Bootstrap_Parser implements WPBC_Parser_Interface {
 			return [];
 		}
 
-		$dom = WPBC_HTML_Helper::parse_html( $content );
+		$dom = DEVTB_HTML_Helper::parse_html( $content );
 
 		if ( ! $dom ) {
 			return [];
@@ -107,9 +107,9 @@ class WPBC_Bootstrap_Parser implements WPBC_Parser_Interface {
 	 *
 	 * @param \DOMNode     $node DOM node.
 	 * @param \DOMDocument $dom DOM document.
-	 * @return WPBC_Component|null Parsed component or null.
+	 * @return DEVTB_Component|null Parsed component or null.
 	 */
-	private function parse_node( \DOMNode $node, \DOMDocument $dom ): ?WPBC_Component {
+	private function parse_node( \DOMNode $node, \DOMDocument $dom ): ?DEVTB_Component {
 		if ( $node->nodeType !== XML_ELEMENT_NODE ) {
 			return null;
 		}
@@ -117,7 +117,7 @@ class WPBC_Bootstrap_Parser implements WPBC_Parser_Interface {
 		$html = $dom->saveHTML( $node );
 
 		// Extract classes
-		$classes = WPBC_HTML_Helper::extract_classes( $html );
+		$classes = DEVTB_HTML_Helper::extract_classes( $html );
 
 		// Detect component type
 		$type = $this->detect_component_type( $node->nodeName, $classes );
@@ -132,7 +132,7 @@ class WPBC_Bootstrap_Parser implements WPBC_Parser_Interface {
 		$content = $this->extract_content( $node, $dom );
 
 		// Create component
-		$component = new WPBC_Component([
+		$component = new DEVTB_Component([
 			'type'       => $type,
 			'category'   => $this->get_category( $type ),
 			'attributes' => $attributes,
@@ -167,7 +167,7 @@ class WPBC_Bootstrap_Parser implements WPBC_Parser_Interface {
 	 */
 	private function detect_component_type( string $tag_name, array $classes ): string {
 		// Try to detect from Bootstrap classes
-		$detected = WPBC_HTML_Helper::detect_bootstrap_component( $classes );
+		$detected = DEVTB_HTML_Helper::detect_bootstrap_component( $classes );
 
 		if ( $detected ) {
 			return $detected;
@@ -236,13 +236,13 @@ class WPBC_Bootstrap_Parser implements WPBC_Parser_Interface {
 		}
 
 		// Extract grid information
-		$grid = WPBC_HTML_Helper::extract_bootstrap_grid( $classes );
+		$grid = DEVTB_HTML_Helper::extract_bootstrap_grid( $classes );
 		if ( ! empty( $grid['breakpoints'] ) ) {
 			$attributes['grid'] = $grid;
 		}
 
 		// Extract utilities
-		$utilities = WPBC_HTML_Helper::extract_bootstrap_utilities( $classes );
+		$utilities = DEVTB_HTML_Helper::extract_bootstrap_utilities( $classes );
 		if ( ! empty( $utilities ) ) {
 			$attributes['utilities'] = $utilities;
 		}
@@ -289,7 +289,7 @@ class WPBC_Bootstrap_Parser implements WPBC_Parser_Interface {
 			return [];
 		}
 
-		return WPBC_CSS_Helper::parse_inline( $style_attr->value );
+		return DEVTB_CSS_Helper::parse_inline( $style_attr->value );
 	}
 
 	/**
@@ -380,7 +380,7 @@ class WPBC_Bootstrap_Parser implements WPBC_Parser_Interface {
 		}
 
 		// If no Bootstrap classes found but valid HTML, still accept
-		return WPBC_HTML_Helper::is_valid( $content );
+		return DEVTB_HTML_Helper::is_valid( $content );
 	}
 
 	/**
@@ -396,9 +396,9 @@ class WPBC_Bootstrap_Parser implements WPBC_Parser_Interface {
 	 * Parse single element
 	 *
 	 * @param mixed $element HTML element or string.
-	 * @return WPBC_Component|null Parsed component or null.
+	 * @return DEVTB_Component|null Parsed component or null.
 	 */
-	public function parse_element( $element ): ?WPBC_Component {
+	public function parse_element( $element ): ?DEVTB_Component {
 		if ( is_string( $element ) ) {
 			$components = $this->parse( $element );
 			return $components[0] ?? null;

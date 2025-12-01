@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ===================================================================
-# WordPress Bootstrap Claude 3.0 - GitHub Push Automation Script
+# DevelopmentTranslation Bridge 3.0 - GitHub Push Automation Script
 # ===================================================================
 #
 # Purpose: Automates the process of pushing your WordPress Bootstrap
@@ -19,7 +19,7 @@
 # - Handles errors gracefully
 # - Provides next steps
 #
-# Author: WordPress Bootstrap Claude Team
+# Author: DevelopmentTranslation Bridge Team
 # Version: 1.0.0
 # ===================================================================
 
@@ -45,7 +45,7 @@ SPARKLES="✨"
 # Configuration
 REPO_URL="https://github.com/coryhubbell/wordpress-boostrap-claude.git"
 DEFAULT_BRANCH="main"
-COMMIT_MESSAGE="🚀 Release: WordPress Bootstrap Claude 3.0 - Translation Bridge™
+COMMIT_MESSAGE="🚀 Release: DevelopmentTranslation Bridge 3.0 - Translation Bridge™
 
 Revolutionary WordPress development framework with Translation Bridge™
 
@@ -360,7 +360,7 @@ main() {
     # Print welcome banner
     echo ""
     echo -e "${PURPLE}${SPARKLES}════════════════════════════════════════════════════════${SPARKLES}${NC}"
-    echo -e "${WHITE}     WordPress Bootstrap Claude 3.0 - GitHub Push     ${NC}"
+    echo -e "${WHITE}     DevelopmentTranslation Bridge 3.0 - GitHub Push     ${NC}"
     echo -e "${PURPLE}${SPARKLES}════════════════════════════════════════════════════════${SPARKLES}${NC}"
     echo ""
 
@@ -400,7 +400,7 @@ main() {
         # Success!
         print_header "🎉 Success!"
         echo ""
-        echo -e "${GREEN}${ROCKET} Your WordPress Bootstrap Claude 3.0 is now on GitHub!${NC}"
+        echo -e "${GREEN}${ROCKET} Your DevelopmentTranslation Bridge 3.0 is now on GitHub!${NC}"
         echo ""
         echo "Next steps:"
         echo ""

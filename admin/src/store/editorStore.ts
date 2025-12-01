@@ -465,7 +465,7 @@ export const useEditorStore = create<EditorStoreState>()(
           }),
       }),
       {
-        name: 'wpbc-editor-storage',
+        name: 'devtb-editor-storage',
         partialize: (state) => ({
           preferences: state.preferences,
           editor: {

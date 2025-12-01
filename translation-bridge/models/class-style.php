@@ -5,19 +5,19 @@
  * Represents CSS styles and properties for components with conversion
  * and validation capabilities.
  *
- * @package WordPress_Bootstrap_Claude
+ * @package DevelopmentTranslation_Bridge
  * @subpackage Translation_Bridge
  * @since 3.0.0
  */
 
-namespace WPBC\TranslationBridge\Models;
+namespace DEVTB\TranslationBridge\Models;
 
 /**
- * Class WPBC_Style
+ * Class DEVTB_Style
  *
  * Manages CSS styles for components with cross-framework compatibility.
  */
-class WPBC_Style {
+class DEVTB_Style {
 
 	/**
 	 * CSS property name
@@ -166,9 +166,9 @@ class WPBC_Style {
 	 *
 	 * @param string $target_unit Target unit.
 	 * @param int    $base_font_size Base font size for em/rem calculations (default 16px).
-	 * @return WPBC_Style
+	 * @return DEVTB_Style
 	 */
-	public function convert_unit( string $target_unit, int $base_font_size = 16 ): WPBC_Style {
+	public function convert_unit( string $target_unit, int $base_font_size = 16 ): DEVTB_Style {
 		$current_unit = $this->get_unit();
 		$numeric      = $this->get_numeric_value();
 
@@ -295,9 +295,9 @@ class WPBC_Style {
 	 * Create from array
 	 *
 	 * @param array<string, mixed> $data Style data.
-	 * @return WPBC_Style
+	 * @return DEVTB_Style
 	 */
-	public static function from_array( array $data ): WPBC_Style {
+	public static function from_array( array $data ): DEVTB_Style {
 		return new self(
 			$data['property'] ?? '',
 			$data['value'] ?? '',
@@ -310,7 +310,7 @@ class WPBC_Style {
 	 * Parse inline CSS string to array of styles
 	 *
 	 * @param string $css Inline CSS string.
-	 * @return WPBC_Style[]
+	 * @return DEVTB_Style[]
 	 */
 	public static function parse_inline_css( string $css ): array {
 		$styles = [];
@@ -336,7 +336,7 @@ class WPBC_Style {
 	/**
 	 * Convert array of styles to inline CSS string
 	 *
-	 * @param WPBC_Style[] $styles Array of styles.
+	 * @param DEVTB_Style[] $styles Array of styles.
 	 * @return string
 	 */
 	public static function to_inline_css( array $styles ): string {
